@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>English Digest Week 1 詳解</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E7EBEE; --card:#FDFDFC;
+  --ink:#10202F; --ink-2:#56687A; --ink-3:#7C8B99;
+  --rule:#C6D0D8; --pen:#17457E; --hl:#FFE773; --miss:#A34234;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono','Cascadia Mono',Menlo,Consolas,monospace;
+  --read:'Literata',Georgia,'Times New Roman',serif;
+  --han:'PingFang TC','Microsoft JhengHei','Noto Sans TC',system-ui,sans-serif;
+  --maxw:1180px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--han);font-size:16px;line-height:1.75}
+:focus-visible{outline:2px solid var(--pen);outline-offset:3px;border-radius:2px}
+
+.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule)}
+.top-in{max-width:var(--maxw);margin:0 auto;padding:14px 24px 0}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);margin:0 0 4px}
+.title{font-size:23px;font-weight:600;margin:0;line-height:1.3}
+.meta{font-family:var(--mono);font-size:12px;color:var(--ink-2);margin:4px 0 0;letter-spacing:.04em}
+.bar{display:flex;gap:7px;align-items:center;flex-wrap:wrap;padding:12px 0 11px;margin-top:10px;border-top:1px solid var(--rule)}
+.chip{font-family:var(--mono);font-size:12px;letter-spacing:.04em;border:1px solid var(--rule);background:transparent;color:var(--ink-2);padding:5px 10px;border-radius:999px;cursor:pointer;text-decoration:none;transition:border-color .15s,color .15s,background .15s}
+.chip:hover{border-color:var(--pen);color:var(--pen)}
+.chip.solid{margin-left:auto;border-color:var(--ink);color:var(--ink);font-weight:500}
+.chip.solid:hover{background:var(--ink);color:var(--card)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:28px 24px 96px;display:grid;gap:36px;grid-template-columns:minmax(0,1fr) 288px}
+@media (max-width:1020px){.wrap{grid-template-columns:minmax(0,1fr);gap:44px}}
+
+.sec{margin:0 0 48px;scroll-margin-top:136px}
+.sec-head{display:flex;align-items:baseline;gap:12px;padding-bottom:9px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.sec-num{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--ink-3)}
+.sec-label{font-size:18px;font-weight:600;margin:0}
+.sec-score{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-left:auto}
+.sec-inst{font-size:13.5px;color:var(--ink-2);margin:9px 0 0}
+
+.bank{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:16px 0 0}
+@media (max-width:760px){.bank{grid-template-columns:repeat(2,1fr)}}
+.bank-i{background:var(--card);padding:8px 10px;font-family:var(--read);font-size:14.5px}
+.bank-i span{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-right:5px}
+.bank-i.used{background:#F2F5F6;color:var(--ink-3)}
+
+.passage{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--ink);padding:22px 26px;margin:18px 0 0;font-family:var(--read);font-size:16.5px;line-height:1.95;color:#1a2836}
+.passage p{margin:0 0 1em}
+.passage p:last-child{margin-bottom:0}
+.blank{display:inline-block;min-width:70px;text-align:center;border:0;border-bottom:1.5px solid var(--ink);font-family:var(--mono);font-size:13px;color:var(--pen);cursor:pointer;background:none;padding:0 4px;line-height:1.4}
+.blank:hover{background:rgba(23,69,126,.07)}
+.blank.filled{font-family:var(--read);font-size:16.5px;color:var(--ink);border-bottom-color:transparent;min-width:0}
+.blank sup{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-right:2px}
+.zhbtn{display:block;margin:0 0 18px;background:var(--card);border:1px solid var(--rule);border-top:0;width:100%;text-align:left;padding:8px 26px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--pen);cursor:pointer}
+.zhbtn:hover{color:var(--ink)}
+.zhbtn::after{content:' ▾'}
+.zhbtn.on::after{content:' ▴'}
+.zhbox{display:none;background:#F7F9FA;border:1px solid var(--rule);border-top:0;padding:18px 26px;margin:0 0 18px;font-size:15px;line-height:1.95;color:#22323F}
+.zhbox.on{display:block}
+.zhbox p{margin:0 0 .9em}
+.zhbox p:last-child{margin:0}
+
+.q{background:var(--card);border:1px solid var(--rule);margin:14px 0 0;scroll-margin-top:142px}
+.q-top{padding:16px 22px 14px}
+.q-tag{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.q-n{font-family:var(--mono);font-size:13px;font-weight:600}
+.q-kind{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.prompt{font-size:14.5px;line-height:1.85;color:var(--ink-2);margin:0 0 11px;padding-left:11px;border-left:2px solid var(--rule)}
+.stem{font-family:var(--read);font-size:16.5px;line-height:1.85;margin:0 0 13px;color:#1a2836}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:2px 20px}
+@media (max-width:640px){.opts{grid-template-columns:1fr}}
+.opt{display:flex;gap:9px;font-family:var(--read);font-size:15.5px;line-height:1.6;padding:3px 0;color:#243342}
+.opt-k{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);padding-top:2px;flex:none}
+.reveal{display:block;width:100%;text-align:left;margin-top:14px;background:none;border:0;border-top:1px dashed var(--rule);padding:11px 0 0;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--pen);cursor:pointer}
+.reveal:hover{color:var(--ink)}
+.reveal::after{content:' ▾'}
+.q.open .reveal::after{content:' ▴'}
+.q.open .reveal{color:var(--ink-3)}
+
+.body{display:none;border-top:1px solid var(--rule);background:#F7F9FA;padding:18px 22px 20px}
+.q.open .body{display:block}
+.ans{display:flex;align-items:baseline;gap:10px;margin:0 0 13px;flex-wrap:wrap}
+.ans-k{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--ink-3);flex:none;padding-top:2px}
+.ans-v{font-family:var(--read);font-size:18px;font-weight:600}
+.fills{list-style:none;margin:0 0 13px;padding:0}
+.fill{display:flex;gap:11px;align-items:baseline;padding:7px 0;border-bottom:1px dotted var(--rule)}
+.fill-k{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);flex:none;width:26px}
+.fill-w{font-family:var(--read);font-size:17px;font-weight:600;flex:none}
+.fill-n{font-size:13.5px;color:var(--ink-2);line-height:1.7}
+.zh{font-size:15px;line-height:1.85;margin:0 0 14px;color:#22323F}
+.why{font-size:14.5px;line-height:1.85;margin:0 0 4px;color:#22323F;border-top:1px solid var(--rule);padding-top:12px}
+.lines{margin:0;padding:0;list-style:none;border-top:1px solid var(--rule)}
+.line{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--rule);font-size:14.5px;line-height:1.75;color:var(--ink-2)}
+.line-k{font-family:var(--mono);font-size:12.5px;flex:none;width:28px;color:var(--ink-3);padding-top:2px}
+.line.right{color:var(--ink)}
+.line.right .line-k{color:var(--ink);font-weight:600}
+.line.right .line-k::after{content:'✓';display:block;font-size:12px;line-height:1.3}
+.line.wrong .line-k{color:var(--miss);opacity:.85}
+.line.wrong .line-k::after{content:'✗';display:block;font-size:12px;line-height:1.3}
+.evid{margin:15px 0 0;font-family:var(--read);font-size:14.5px;line-height:1.8;color:var(--ink-2);padding-left:13px;border-left:2px solid var(--hl)}
+.evid span{font-family:var(--han);font-size:11px;letter-spacing:.14em;color:var(--ink-3);display:block;margin-bottom:3px}
+
+.hl{background-image:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 90%,transparent 90%);background-repeat:no-repeat;background-size:0% 100%;transition:background-size .55s cubic-bezier(.2,.75,.3,1);border-radius:1px}
+.hl.on{background-size:100% 100%}
+
+.note{margin:15px 0 0;border:1px solid var(--rule);background:var(--card);padding:13px 16px}
+.note-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 9px}
+.note-i{margin:0;padding:9px 0 0;border-top:1px dotted var(--rule)}
+.note-i:first-of-type{border-top:0;padding-top:0}
+.term{font-family:var(--read);font-size:16px;font-weight:600}
+.pos{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin:0 6px}
+.gloss{font-size:14.5px}
+.ex{font-family:var(--read);font-size:14px;color:var(--ink-2);line-height:1.7;margin:3px 0 0;display:block}
+.ex i{font-family:var(--han);font-style:normal;font-size:13px;color:var(--ink-3);display:block}
+
+.side{position:sticky;top:136px;align-self:start;max-height:calc(100vh - 164px);overflow:auto;padding-right:4px}
+@media (max-width:1020px){.side{position:static;max-height:none;scroll-margin-top:136px}}
+.side-h{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin:0 0 3px}
+.side-t{font-size:16px;font-weight:600;margin:0 0 14px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.card-list{margin:0;padding:0;list-style:none}
+.card-item{border-bottom:1px solid var(--rule);padding:11px 0}
+.card-item a{display:block;text-decoration:none;color:inherit}
+.card-item a:hover .term{background:var(--hl)}
+.jump{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);float:right;padding-top:5px}
+.side-note{font-size:12.5px;color:var(--ink-3);line-height:1.7;margin:16px 0 0}
+.foot{max-width:var(--maxw);margin:0 auto;padding:0 24px 48px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+@media print{
+  body{background:#fff;font-size:10.5pt}
+  .top,.side,.reveal,.foot,.zhbtn{display:none!important}
+  .wrap{display:block;max-width:none;padding:0}
+  .q .body{display:block!important}
+  .zhbox{display:block!important}
+  .q{break-inside:avoid;border-color:#999;margin-bottom:9pt}
+  .passage{break-inside:avoid}
+  .hl{background-size:100% 100%!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <p class="eyebrow" id="brand"></p>
+    <h1 class="title" id="examTitle"></h1>
+    <p class="meta" id="examMeta"></p>
+    <nav class="bar" id="nav"></nav>
+  </div>
+</header>
+
+<div class="wrap"><main id="main"></main><aside class="side" id="side"></aside></div>
+<p class="foot" id="foot"></p>
+
+<script>
+/* ==========================================================================
+   ①  題目與詳解全部寫在下面的 EXAM 物件裡。要改題、加題、修字，只動這裡。
+
+   section（大題）：{ id, label, score, instruction, bank?, groups: [...] }
+   group（同一篇文章的題組）：{ passage?, zh?, questions: [...] }
+       passage 裡寫 __7__ 就會變成可點的空格，數字對應題號。
+       zh 是全文中譯，會做成可展開的按鈕。
+
+   question 依題型三選一：
+     選擇題   { n, kind, stem, options:{A..D}, answer:"B", translation, explain:{A..D}, evidence?, notes? }
+     單一填答 { n, kind, stem, answerText:"prejudice", why, notes? }
+     多格填答 { n, kind, prompt, stem, answers:[{k:"①", w:"字", note:"說明"}], notes? }
+   ========================================================================== */
+const EXAM = {
+  brand: "English Digest Weekly Quiz",
+  title: "Reading Test 詳解｜Week 1: Units 1–4 (Jul / Aug)",
+  meta: "Instructor: Howard Chang　·　範圍：ED 雜誌 Jul.+Aug. Week 1　·　滿分 90 分",
+  footer: "班級複習用",
+  sections: [
+  /* ===================== 一、綜合測驗 ===================== */
+  {
+    id:"cloze", label:"一、綜合測驗", score:"32% · 每題 2%",
+    instruction:"兩篇短文，共 16 題。點文章裡的空格可直接跳到該題。",
+    groups:[
+    {
+      passage:`At an open mic night, a young man steps into the light and adjusts the microphone. Ten seconds pass in silence. Not until the first laugh arrives does the room finally belong to him. Moments like this __1__ what audiences rarely consider: ease on stage is usually the product of years of quiet labor.
+
+Stand-up comedy is a solo art, and that is precisely what makes it so __2__. With no band to hide behind and no script but their own, comedians rely on material they have written, tested, and rewritten. Professionals speak of "road testing" a joke, performing it night after night to __3__ every line until the punchline lands cleanly. The more precisely a joke is written, the more reliably it works. Those willing to push through months of revision end up with a routine that sounds as if it had never been written. __4__ polished is a "tight five" that it may take a year to complete, yet bookers judge a newcomer on it alone.
+
+While the craft can be taught, the temperament behind it cannot. Bookers know this, which is why a promising __5__ is judged not only on clever writing but on grace under pressure. Every comedian eventually meets a heckler, and it is then that the audience decides whether the performer deserves the stage. A calm, good-natured reply can win the room back; hesitation loses it. Rejection is equally routine, with bookings falling through, jokes dying in silence, and income remaining unpredictable for years. A(n) __6__ belief that the next set will be better than the last is often all that carries a beginner through those empty rooms.
+
+The rewards, when they come, are __7__ real. A headliner at a major club enjoys a devoted following; a clip posted online may reach millions overnight. Many comedians now filling theaters began with one such clip; __8__ that exposure, they might still be playing to a dozen strangers. Such breakthroughs, however, are so rare that most performers measure success differently. For most, the reward is simpler: the moment when a carefully built idea meets a live audience and works, when strangers laugh at something that existed only in a notebook a week earlier.`,
+      zh:`在開放麥之夜，一個年輕人走進燈光下，調整麥克風。十秒鐘在沉默中過去。直到第一聲笑出現，這個場子才真正屬於他。這樣的時刻指向了觀眾很少想到的事：台上的從容，通常是多年安靜苦工的產物。
+
+單口喜劇是一門獨角戲，而這正是它如此吃力的原因。沒有樂團可以躲，也沒有別人寫的劇本，喜劇演員只能倚靠自己寫過、試過、又重寫過的段子。行內人把這個過程稱為替一個笑話「路測」——一晚接著一晚地演，把每一句都打磨到笑點乾淨落地為止。笑話寫得越精準，效果就越穩定。願意熬過幾個月修改的人，最後會得到一段聽起來彷彿從未被寫過的表演。一段「紮實五分鐘」被打磨得如此徹底，以至於可能要花上一年才能完成，然而選角的人卻只憑這五分鐘評斷一個新人。
+
+技藝可以傳授，但支撐技藝的性情不行。選角的人明白這點，這也是為什麼一個有潛力的新秀被評斷的不只是聰明的文本，還有臨場的沉著。每個喜劇演員終究會遇到鬧場的觀眾，而正是在那一刻，觀眾決定這個表演者配不配站在台上。一句冷靜而不失善意的回應可以把場子搶回來；遲疑則會輸掉它。被拒絕同樣是家常便飯——演出告吹、笑話死在沉默裡、收入好幾年都不穩定。一種堅定不移的信念，相信下一場會比上一場好，往往是唯一能帶著新人走過那些空蕩房間的東西。
+
+而回報來臨時，是無庸置疑地真實。大俱樂部的壓軸演員擁有死忠的追隨者；一段貼上網的影片可能一夜之間被幾百萬人看見。如今許多能坐滿劇場的喜劇演員，都是從這樣一段影片開始的；要不是因為那次曝光，他們可能還在對著十來個陌生人表演。然而這種突破太罕見，所以大多數表演者用別的方式衡量成功。對多數人而言，回報更單純：一個精心搭建的點子遇上現場觀眾並且奏效的那一刻——當陌生人為某個一週前還只存在於筆記本裡的東西發笑。`,
+      questions:[
+        { n:1, kind:"動詞片語",
+          options:{A:"lead to",B:"point to",C:"deal with",D:"aim to"}, answer:"B",
+          translation:"這樣的時刻指向了觀眾很少想到的事。",
+          explain:{
+            A:"lead to 是「導致」，後面接的必須是被造成的結果。冒號後說的是一個既存事實，不是這些時刻造成的後果。",
+            B:"point to 有「指出、顯示」之意，主詞常是現象、證據或跡象。Moments like this 正是指向冒號後那句「台上的從容來自多年苦工」。",
+            C:"deal with 是「處理、應付」，受詞須為問題或事務，語意不通。",
+            D:"aim to 後面只能接原形動詞（aim to do），不能接 what 引導的名詞子句，文法先出局。"
+          },
+          notes:[
+            {term:"Not until ... does S+V", pos:"倒裝", gloss:"第一段第三句 Not until the first laugh arrives does the room finally belong to him，否定副詞片語置句首時主要子句要倒裝。", ex:"Not until she left did I realize the truth.", exZh:"直到她離開我才明白真相。"}
+          ]},
+        { n:2, kind:"形容詞",
+          options:{A:"demanding",B:"aspiring",C:"emerging",D:"inviting"}, answer:"A",
+          translation:"單口喜劇是一門獨角戲，而這正是它如此吃力的原因。",
+          explain:{
+            A:"demanding 指「要求高的、吃力的」。後句 With no band to hide behind and no script but their own 正是在解釋為什麼吃力。",
+            B:"aspiring 是「有抱負的」，只能修飾人（an aspiring comedian），不能形容 it（＝stand-up comedy）。",
+            C:"emerging 是「新興的」，但單口喜劇並非新興藝術，與上下文毫無呼應。",
+            D:"inviting 是「誘人的、令人想參與的」，與「無處可躲」的壓力感正好相反。"
+          },
+          notes:[
+            {term:"demanding", pos:"adj.", gloss:"（工作、要求）吃力的、費心力的", ex:"Teaching is more demanding than it looks.", exZh:"教書比看起來更耗心力。"},
+            {term:"no script but their own", pos:"用法", gloss:"but 在此為介系詞「除了」，＝except。"}
+          ]},
+        { n:3, kind:"動詞",
+          options:{A:"spare",B:"pursue",C:"divide",D:"refine"}, answer:"D",
+          translation:"一晚接著一晚地演，把每一句都打磨到笑點乾淨落地為止。",
+          explain:{
+            A:"spare 當動詞是「省下、饒過」，spare every line 語意不通。",
+            B:"pursue 是「追求（目標、夢想）」，受詞應為 dream、career、goal。",
+            C:"divide 是「分割」，把每一句切開不合邏輯。",
+            D:"refine 是「精修、打磨」，正好對應 night after night 與 until the punchline lands cleanly 的反覆修整。"
+          },
+          notes:[
+            {term:"refine", pos:"vt.", gloss:"精煉、逐步改良", ex:"We refined the wording until nothing was wasted.", exZh:"我們一再修潤字句，直到沒有一個字是多餘的。"},
+            {term:"The more ..., the more ...", pos:"句型", gloss:"「越…就越…」，本段 The more precisely a joke is written, the more reliably it works 是標準用法。"}
+          ]},
+        { n:4, kind:"倒裝句",
+          options:{A:"Though thoroughly",B:"However thoroughly",C:"So thoroughly",D:"As thoroughly"}, answer:"C",
+          translation:"一段「紮實五分鐘」被打磨得如此徹底，以至於可能要花上一年才能完成。",
+          explain:{
+            A:"Though 是讓步連接詞，但句中有 that 子句在等著被接應，結構對不上。",
+            B:"However thoroughly（無論多麼徹底）引導讓步子句，後面要接完整的主要子句，不能接 that 子句。",
+            C:"還原句為 A “tight five” is so thoroughly polished that it may take a year to complete.。把 so thoroughly polished 移到句首後，be 動詞 is 必須提到主詞 a “tight five” 前面，形成倒裝。判斷關鍵：句中有 that。",
+            D:"As thoroughly 需要搭配另一個 as（as ... as ...），此處沒有第二個 as。"
+          },
+          notes:[
+            {term:"So + adj. + be + S + that ...", pos:"倒裝", gloss:"「如此…以致於…」。看到句尾有 that 子句，句首又是形容詞／副詞，幾乎就是這個句型。", ex:"So convincing was her answer that no one objected.", exZh:"她的回答太有說服力，沒有人提出異議。"}
+          ]},
+        { n:5, kind:"名詞",
+          options:{A:"resilience",B:"segment",C:"talent",D:"humanoid"}, answer:"C",
+          translation:"一個有潛力的新秀被評斷的不只是聰明的文本，還有臨場的沉著。",
+          explain:{
+            A:"resilience 是抽象名詞「韌性」，但被 judged on clever writing 的必須是「人」。",
+            B:"segment 是「片段、環節」，不是被評斷的對象。",
+            C:"talent 在此為可數名詞，指「人才、新秀」。a promising talent 是固定說法。",
+            D:"humanoid 是「人形機器人」，出現在第二大題的文章裡，是刻意跨題的干擾選項。"
+          },
+          notes:[
+            {term:"talent", pos:"n.", gloss:"可數時指「有才華的人」；不可數時指「才華」。", ex:"The agency signs three new talents a year.", exZh:"這家經紀公司一年簽三位新人。"},
+            {term:"grace under pressure", pos:"phr.", gloss:"臨場的沉著、壓力下的從容"}
+          ]},
+        { n:6, kind:"形容詞",
+          options:{A:"culinary",B:"unwavering",C:"viral",D:"domestic"}, answer:"B",
+          translation:"一種堅定不移的信念，相信下一場會比上一場好。",
+          explain:{
+            A:"culinary 是「烹飪的」，與 belief 完全不搭。",
+            B:"unwavering 是「堅定不移的」，呼應前文 Rejection is equally routine 列出的種種挫折，也呼應 carries a beginner through those empty rooms。",
+            C:"viral 指「病毒式瘋傳的」，修飾 video、clip、post。",
+            D:"domestic 是「國內的、家庭的」，語意不合。"
+          },
+          notes:[
+            {term:"unwavering", pos:"adj.", gloss:"（信念、支持）毫不動搖的", ex:"Her support for the project was unwavering.", exZh:"她對這個計畫的支持始終不曾動搖。"}
+          ]},
+        { n:7, kind:"副詞",
+          options:{A:"ambiguously",B:"jokingly",C:"eventually",D:"undeniably"}, answer:"D",
+          translation:"而回報來臨時，是無庸置疑地真實。",
+          explain:{
+            A:"ambiguously 是「含糊地」，與 real 自相矛盾。",
+            B:"jokingly 是「開玩笑地」，用來修飾說話的方式，不能修飾 real。",
+            C:"eventually 是「最終」；句中已有 when they come 表時間，語意重複，且時間副詞無法修飾 real。",
+            D:"undeniably real「無庸置疑地真實」；後面立刻用 a devoted following 與 millions overnight 兩個具體例子佐證。"
+          },
+          notes:[
+            {term:"undeniably", pos:"adv.", gloss:"不可否認地", ex:"The film is undeniably beautiful, if slow.", exZh:"這部電影雖然節奏慢，但美得無可否認。"}
+          ]},
+        { n:8, kind:"假設語氣",
+          options:{A:"had it not been for",B:"as a result of",C:"in spite of",D:"regardless of"}, answer:"A",
+          translation:"要不是因為那次曝光，他們可能還在對著十來個陌生人表演。",
+          explain:{
+            A:"原句為 If it had not been for that exposure（要不是因為那次曝光），省略 if 後把 had 提前形成倒裝。條件句指過去、主要子句 might still be playing 指現在，屬混合條件句。",
+            B:"as a result of「由於」會變成「因為那次曝光，他們可能還在對十幾個人表演」，因果完全顛倒。",
+            C:"in spite of「儘管」表讓步，無法解釋主要子句的假設語氣。",
+            D:"regardless of「不管」同樣表讓步，且與前一句「從一段影片開始」的因果關係不合。"
+          },
+          notes:[
+            {term:"Had it not been for + N", pos:"倒裝", gloss:"＝If it had not been for＝But for，「要不是因為…」。", ex:"Had it not been for your note, I would have missed it.", exZh:"要不是你那張字條，我就錯過了。"},
+            {term:"混合條件句", pos:"文法", gloss:"條件句用過去完成式（指過去），主要子句用 would/might + V（指現在），表示過去的事影響到現在。"}
+          ]}
+      ]
+    },
+    {
+      passage:`A wildlife photograph taken in Swedish Lapland in 1978 shows a pair of snowy owls guarding a nest on open tundra. Such photographs are __9__ being taken. Swedish authorities confirmed in autumn 2025 that the snowy owl is now regionally extinct, a loss unmatched by any other bird species in the past twenty years.
+
+__10__ tell a similar story. According to BirdLife International, no active nest has been confirmed since 2015, and not a single chick has hatched in over a decade. This was not always the case. During favorable years in the 1970s, several hundred pairs raised their young in the northern mountains, especially when lemmings were __11__. Numbers have declined steadily since then, and the species is now classified as vulnerable on the IUCN Red List, with a global population __12__ to be between 14,000 and 28,000.
+
+The decline does not stem from hunting; the species has been strictly protected under Swedish law, yet no law can restore snow to a warming mountain range. Conservationists __13__ identify a quieter cause: the loss of snow. Snowy owls rely almost entirely on lemmings, small rodents that survive winter in tunnels beneath the snow. As winters grow milder, precipitation increasingly falls as rain instead of snow. The ice that follows can seal those tunnels shut for months, cutting off the lemmings' access to food and sometimes wiping out an entire population. Without enough prey to feed their chicks, owls stop __14__.
+
+The snowy owl has not disappeared from Earth. Healthy populations remain across northern Canada, Greenland, and Siberia, __15__ deep snow covers the ground for most of the year. Sweden's case is nonetheless being watched closely elsewhere, since it shows how quickly a changing climate can erase a species from a landscape it once called home. Were winters there to warm at the same pace, a similar silence could follow within a generation. The 1978 photograph now __16__ a record of snowy owls breeding in Sweden—a sight no longer seen in the country's wild.`,
+      zh:`一張攝於一九七八年瑞典拉普蘭的野生動物照片，記錄了一對雪鴞在開闊苔原上守著巢。這樣的照片已經不再被拍到了。瑞典當局在二○二五年秋天證實，雪鴞在該國已區域性滅絕——這是過去二十年間任何其他鳥種都未曾出現過的損失。
+
+田野調查訴說著相同的故事。根據國際鳥盟的資料，自二○一五年起就沒有確認過任何一個活躍的巢，十多年來沒有一隻雛鳥孵化。事情並非一直如此。在一九七○年代條件較好的年份，曾有數百對雪鴞在北部山區育雛，尤其是在旅鼠數量充足的時候。此後數量穩定下滑，這個物種如今在 IUCN 紅皮書上被列為易危，全球族群估計介於一萬四千到兩萬八千隻之間。
+
+這場衰退並非源於獵捕；雪鴞在瑞典法律下受到嚴格保護，然而沒有任何法律能把雪還給一座暖化中的山脈。保育人士指出的反而是一個更安靜的原因：雪的消失。雪鴞幾乎完全依賴旅鼠——一種靠著雪底下的隧道度過冬天的小型囓齒動物。隨著冬天變得溫和，降水越來越常以雨而非雪的形式落下。隨之而來的結冰可能把那些隧道封住好幾個月，切斷旅鼠取食的路徑，有時甚至讓整個族群消失。沒有足夠的獵物餵養雛鳥，雪鴞就停止繁殖。
+
+雪鴞並未從地球上消失。加拿大北部、格陵蘭與西伯利亞仍有健康的族群，那些地方一年中大半時間都覆蓋著厚雪。儘管如此，瑞典的案例仍被其他地方密切關注，因為它顯示了氣候變遷能多快地把一個物種從它曾經稱之為家的地景上抹去。倘若那些地方的冬天以同樣的速度變暖，類似的沉默可能在一個世代之內降臨。那張一九七八年的照片如今成了雪鴞曾在瑞典繁殖的紀錄——一幅在這個國家的野外再也看不到的景象。`,
+      questions:[
+        { n:9, kind:"語意判斷",
+          options:{A:"no longer",B:"once again",C:"still regularly",D:"increasingly often"}, answer:"A",
+          translation:"這樣的照片已經不再被拍到了。",
+          explain:{
+            A:"緊接的下一句說 the snowy owl is now regionally extinct（已區域性滅絕），照片自然不可能再拍到。",
+            B:"once again 是「再度」，暗示雪鴞回來了，與滅絕矛盾。",
+            C:"still regularly 是「仍定期」，與滅絕矛盾。",
+            D:"increasingly often 是「越來越常」，方向完全相反。"
+          },
+          notes:[
+            {term:"no longer", pos:"adv.", gloss:"不再；置於 be 動詞後、一般動詞前。", ex:"He is no longer with the company.", exZh:"他已不在這家公司了。"}
+          ]},
+        { n:10, kind:"主詞",
+          options:{A:"Heated debate",B:"Media presence",C:"Tropical zones",D:"Field surveys"}, answer:"D",
+          translation:"田野調查訴說著相同的故事。",
+          explain:{
+            A:"先看動詞：tell 是原形，主詞必須是複數。Heated debate 為單數，直接刪去。",
+            B:"Media presence 同樣是單數，文法先出局。",
+            C:"Tropical zones 雖是複數，但「熱帶地區」與瑞典北部山區的雪地環境無關。",
+            D:"Field surveys（田野調查）才會產出後面「自 2015 年起未確認任何巢位、十年來無雛鳥孵化」這類調查數據。"
+          },
+          notes:[
+            {term:"從動詞形態判斷主詞單複數", pos:"解題法", gloss:"文意選填或克漏字若空格在主詞位置，先看動詞有沒有 -s，通常可以先刪掉一半選項。"}
+          ]},
+        { n:11, kind:"形容詞",
+          options:{A:"forbidding",B:"plentiful",C:"vulnerable",D:"considerate"}, answer:"B",
+          translation:"尤其是在旅鼠數量充足的時候。",
+          explain:{
+            A:"forbidding 是「令人生畏的、險惡的」，通常形容地形或神情。",
+            B:"雪鴞以旅鼠為食，旅鼠多的年份才養得起數百對繁殖鳥，plentiful（數量充足的）最合文意。",
+            C:"vulnerable 是「易受傷害的」；下一句才用它描述雪鴞的保育等級，這裡是刻意的干擾。",
+            D:"considerate 是「體貼的」，只能形容人。"
+          },
+          notes:[
+            {term:"plentiful", pos:"adj.", gloss:"大量的、充足的", ex:"Rain was plentiful that spring.", exZh:"那年春天雨水充足。"}
+          ]},
+        { n:12, kind:"分詞",
+          options:{A:"estimate",B:"estimated",C:"estimating",D:"to estimate"}, answer:"B",
+          translation:"全球族群估計介於一萬四千到兩萬八千隻之間。",
+          explain:{
+            A:"原形動詞不能單獨出現在 with 片語裡。",
+            B:"這是 with ＋ 受詞 ＋ 分詞的附帶狀況用法。population 與 estimate 是被動關係（族群「被估計」），故用過去分詞 estimated。",
+            C:"estimating 為主動，會變成「族群估計某事」，語意不通。",
+            D:"to estimate 表目的，與 with 的附帶說明用法不合。"
+          },
+          notes:[
+            {term:"with + O + 分詞", pos:"文法", gloss:"受詞與分詞為主動關係用 V-ing，被動關係用 p.p.。", ex:"She sat there with her arms folded.", exZh:"她雙臂交叉坐在那裡。"}
+          ]},
+        { n:13, kind:"轉承語",
+          options:{A:"nevertheless",B:"meanwhile",C:"likewise",D:"instead"}, answer:"D",
+          translation:"保育人士指出的反而是一個更安靜的原因：雪的消失。",
+          explain:{
+            A:"nevertheless「然而」表讓步轉折，但前後兩句並非對立立場，而是「否定一個、換上另一個」。",
+            B:"meanwhile「同時」表時間並行，此處沒有兩件同時發生的事。",
+            C:"likewise「同樣地」表相似，但獵捕與雪的消失正好相反。",
+            D:"前句 The decline does not stem from hunting 先否定一個原因，本句提出另一個原因，是「不是 A，而是 B」的替換關係，用 instead 最準。"
+          },
+          notes:[
+            {term:"instead", pos:"adv.", gloss:"取而代之地；常與前一句的否定句呼應。", ex:"He didn't apologize; he blamed us instead.", exZh:"他沒有道歉，反而怪罪我們。"}
+          ]},
+        { n:14, kind:"動詞",
+          options:{A:"provoking",B:"deploying",C:"breeding",D:"evaluating"}, answer:"C",
+          translation:"沒有足夠的獵物餵養雛鳥，雪鴞就停止繁殖。",
+          explain:{
+            A:"provoke 是「激怒、挑釁」，與鳥類育雛無關。",
+            B:"deploy 是「部署（軍隊、設備）」。",
+            C:"breed 是「繁殖」；沒有足夠獵物餵雛鳥自然停止繁殖，也呼應第二段 no active nest / not a single chick has hatched。",
+            D:"evaluate 是「評估」，主詞須為人。"
+          },
+          notes:[
+            {term:"stop + V-ing", pos:"文法", gloss:"停止正在做的事；stop to V 則是「停下來去做另一件事」，考試常考的區別。", ex:"He stopped smoking. / He stopped to smoke.", exZh:"他戒菸了。／他停下來抽根菸。"}
+          ]},
+        { n:15, kind:"關係詞",
+          options:{A:"which",B:"that",C:"when",D:"where"}, answer:"D",
+          translation:"加拿大北部、格陵蘭與西伯利亞仍有健康的族群，那些地方一年中大半時間都覆蓋著厚雪。",
+          explain:{
+            A:"which 是關係代名詞，後面的子句必須缺主詞或受詞；但 deep snow covers the ground 結構完整，不缺任何名詞。",
+            B:"that 同樣是關係代名詞，且逗號後的補述用法本來就不能用 that。",
+            C:"when 的先行詞必須是時間，這裡的先行詞是三個地名。",
+            D:"先行詞是地方、後面子句又完整，缺的是地方副詞，所以用關係副詞 where（＝in which）。"
+          },
+          notes:[
+            {term:"關係代名詞 vs. 關係副詞", pos:"解題法", gloss:"看空格後的子句完不完整：缺主詞或受詞用 who/which/that；結構完整則用 where/when/why。"},
+            {term:"Were winters there to warm ...", pos:"倒裝", gloss:"第四段句尾＝If winters there were to warm...，省略 if 後把 were 提前，表對未來的假設。", ex:"Were he to resign, the team would collapse.", exZh:"他若辭職，這個團隊就垮了。"}
+          ]},
+        { n:16, kind:"動詞片語",
+          options:{A:"wins over",B:"takes to",C:"serves as",D:"recovers from"}, answer:"C",
+          translation:"那張一九七八年的照片如今成了雪鴞曾在瑞典繁殖的紀錄。",
+          explain:{
+            A:"win over 是「贏得（某人的）支持」，受詞須為人。",
+            B:"take to 是「開始喜歡上、養成…的習慣」。",
+            C:"serve as 是「充當、作為」；照片如今「成為」一份紀錄，正合文意，也呼應全文結尾的哀悼語氣。",
+            D:"recover from 是「從…復原」，主詞須為人或組織。"
+          },
+          notes:[
+            {term:"serve as", pos:"phr. v.", gloss:"充當、作為", ex:"The old station now serves as a museum.", exZh:"那座老車站如今作為博物館使用。"}
+          ]}
+      ]
+    }]
+  },
+
+  /* ===================== 二、文意選填 ===================== */
+  {
+    id:"bank", label:"二、文意選填", score:"20% · 每題 2%",
+    instruction:"十個空格，選項不重複使用。答題時請忽略大小寫。",
+    bank:{A:"unveiled",B:"perfect",C:"initiative",D:"fixed",E:"push through",F:"scale",G:"opposed to",H:"shrinking",I:"references",J:"sequencing"},
+    groups:[{
+      passage:`A short clip of a humanoid robot lifting a box, losing its balance, and recovering has been viewed millions of times online. For Boston Dynamics, the publicity created by such videos has been almost as valuable as the engineering behind them. For Hyundai Motor Group, which acquired a controlling interest in the firm in 2021, the machine in the clip is something more practical: an answer to a(n) __17__ factory workforce.
+
+Hyundai has now announced a(n) __18__ to introduce 30,000 humanoid robots into its manufacturing facilities worldwide, one of the automotive sector's most ambitious robotics programs. The next-generation Atlas, recently __19__, is designed to move with agility and handle complex tasks in industrial environments.
+
+The plan covers roughly a decade. Atlas will first be deployed at an electric vehicle plant near Savannah, Georgia, where it will begin with __20__ tasks in 2028 and move on to component assembly by 2030. A partnership with Google DeepMind will enhance the robot's AI capabilities, and if the first results are promising, Hyundai intends to __21__ the program up across its global operations.
+
+The appeal of humanoid design lies in freedom of movement. Traditional machines are __22__ in place and work only in highly structured spaces. Atlas, by contrast, can walk, lift, and operate equipment in areas built for people. Before each task, the robot __23__ a three-dimensional map of the floor so that it can navigate around workers safely. Every unit is networked to a central system that documents each failure, allowing engineers to __24__ the machine's balance over time.
+
+Reaction has been mixed. Several labor organizations are openly __25__ the plan, and a few have demanded that humanoid machines be prohibited from roles currently filled by people. Hyundai has promised retraining, but for young workers hoping to land their first job on the line, such promises offer little comfort. Few observers expect such a ban to be imposed, and the company is likely to __26__ the plan despite the objections. Either way, the decision will have a lasting effect on how cars are built, and on who builds them.`,
+      zh:`一段人形機器人舉起箱子、失去平衡、又重新站穩的短片，已在網路上被觀看數百萬次。對波士頓動力而言，這類影片帶來的宣傳效果，幾乎和背後的工程一樣有價值。對二○二一年取得該公司控股權的現代汽車集團來說，影片裡的這台機器有更務實的意義：它是對日益萎縮的工廠勞動力的一個答案。
+
+現代如今宣布了一項計畫，要在全球製造廠導入三萬台人形機器人，這是汽車產業最具野心的機器人專案之一。最近才發表的新一代 Atlas，設計目標是能靈活移動，並在工業環境中處理複雜任務。
+
+這項計畫大約橫跨十年。Atlas 將先部署在喬治亞州薩凡納附近的一座電動車廠，二○二八年從零件排序的工作開始，二○三○年進展到組件組裝。與 Google DeepMind 的合作將強化這款機器人的人工智慧能力；若最初的成果令人期待，現代打算把這項計畫擴大到全球據點。
+
+人形設計的吸引力在於行動的自由。傳統機器固定在原地，只能在高度結構化的空間中運作。相較之下，Atlas 可以行走、搬舉，並在為人設計的區域裡操作設備。每項任務開始前，這台機器人會參照一份地面的三維地圖，以便安全地繞過工作人員。每一台機器都連上一個中央系統，記錄每一次失誤，讓工程師得以逐步讓機器的平衡更趨完善。
+
+各方反應不一。數個勞工組織公開反對這項計畫，其中少數要求禁止人形機器擔任目前由人擔任的職務。現代承諾提供再訓練，但對希望在產線上找到第一份工作的年輕勞工來說，這樣的承諾沒有太多安慰。少有觀察者認為這樣的禁令會實現，這家公司很可能不顧反對強行推動計畫。無論如何，這個決定都將對汽車如何被製造、以及由誰來製造，產生長遠的影響。`,
+      questions:[
+        { n:17, kind:"分詞形容詞", answer:"H", answerText:"shrinking",
+          why:"空格夾在 a(n) 與名詞 factory workforce 之間，需要形容詞性的字。前面 an answer to（…的解決之道）暗示後面接的是一個「問題」，因此 shrinking workforce（萎縮中的勞動力）才說得通——正是導入機器人的動機。perfect 雖也是形容詞，但「完美的勞動力」不需要被解決。",
+          notes:[{term:"shrink", pos:"vi.", gloss:"縮小、萎縮（shrink–shrank–shrunk）", ex:"The town's population has been shrinking for decades.", exZh:"這個鎮的人口已萎縮數十年。"}]},
+        { n:18, kind:"名詞", answer:"C", answerText:"initiative",
+          why:"announced a(n) ___ to introduce...，空格是 announce 的受詞，必須是名詞，後接不定詞說明內容。決定性線索在同一句句尾：one of the automotive sector's most ambitious robotics programs 用 programs 回頭指稱它，所以空格是「計畫、倡議」。",
+          notes:[{term:"initiative", pos:"n.", gloss:"（新的）計畫、倡議；take the initiative 則是「主動出擊」。", ex:"The city launched an initiative to plant 10,000 trees.", exZh:"市府推出一項植樹一萬棵的計畫。"}]},
+        { n:19, kind:"過去分詞", answer:"A", answerText:"unveiled",
+          why:"The next-generation Atlas, recently ___, is designed... 兩個逗號中間是補述主詞的分詞片語。Atlas 與「發表」是被動關係，所以用過去分詞；recently unveiled（最近才發表）也是新聞英文的固定搭配。",
+          notes:[{term:"unveil", pos:"vt.", gloss:"揭幕、正式發表（新產品、計畫）", ex:"The company unveiled its first electric truck in March.", exZh:"該公司三月發表了第一款電動卡車。"}]},
+        { n:20, kind:"動名詞當形容詞", answer:"J", answerText:"sequencing",
+          why:"begin with ___ tasks，空格修飾 tasks。sequencing tasks 指汽車廠的「零件排序作業」，是最基礎的工序，正好與 2030 年才要做的 component assembly（組件組裝）形成由簡入繁的時間順序，呼應 begin with... move on to...。",
+          notes:[{term:"move on to", pos:"phr. v.", gloss:"（做完一件事後）接著進行", ex:"Once you finish the outline, move on to the first draft.", exZh:"大綱完成後就接著寫初稿。"}]},
+        { n:21, kind:"動詞片語", answer:"F", answerText:"scale",
+          why:"intends to ___ the program up，to 後面要接原形動詞，而句中的 up 是關鍵：十個選項裡只有 scale 能與 up 組成 scale up（擴大規模）。注意這裡是可分片語，受詞 the program 放在中間。",
+          notes:[{term:"scale up / scale down", pos:"phr. v.", gloss:"擴大／縮減規模", ex:"They scaled the trial up after the first results came in.", exZh:"初步結果出爐後，他們把試驗擴大了。"}]},
+        { n:22, kind:"被動語態", answer:"D", answerText:"fixed",
+          why:"Traditional machines are ___ in place，be fixed in place 是「被固定在原地」。決定性線索是下一句的 Atlas, by contrast, can walk, lift, and operate...——by contrast 表示前後正好相反，所以空格必須表達「不能動」。",
+          notes:[{term:"fix", pos:"vt.", gloss:"除了「修理」，也常指「固定、確定（日期、價格）」。", ex:"The shelves are fixed to the wall.", exZh:"這些層架是固定在牆上的。"}]},
+        { n:23, kind:"動詞", answer:"I", answerText:"references",
+          why:"the robot ___ a three-dimensional map，空格是主要動詞，主詞 the robot 為第三人稱單數，動詞要加 -s。reference 當動詞是「參照、查閱」。注意這裡的 -s 是動詞字尾，不是名詞複數，是這題最容易誤判的地方。",
+          notes:[{term:"reference", pos:"vt. / n.", gloss:"參照、查閱；作名詞則是「參考資料、推薦函」。", ex:"The report references three earlier studies.", exZh:"這份報告參照了三項先前的研究。"}]},
+        { n:24, kind:"動詞", answer:"B", answerText:"perfect",
+          why:"allowing engineers to ___ the machine's balance over time，to 後需原形動詞。perfect 當動詞（重音在後，per-FECT）意為「使完善、逐步改良」，正好呼應前面 documents each failure（記錄每一次失誤）與 over time（隨著時間）。",
+          notes:[{term:"perfect", pos:"vt.", gloss:"使完美（動詞重音在第二音節，與形容詞不同）", ex:"She spent years perfecting her technique.", exZh:"她花了多年把技巧磨到近乎完美。"}]},
+        { n:25, kind:"形容詞片語", answer:"G", answerText:"opposed to",
+          why:"are openly ___ the plan，空格後直接接受詞，且需與 be 動詞連用。be opposed to（反對）正好。證據在下一句：a few have demanded that humanoid machines be prohibited（要求禁止），立場明確。",
+          notes:[
+            {term:"be opposed to + N/V-ing", pos:"phr.", gloss:"反對（to 是介系詞，後面不接原形動詞）", ex:"Many residents are opposed to building the plant here.", exZh:"許多居民反對在這裡建廠。"},
+            {term:"demand that S (should) + 原形V", pos:"文法", gloss:"demand/insist/suggest/require 後的 that 子句用假設語氣，should 常省略——所以文中是 machines be prohibited 而非 are prohibited。"}
+          ]},
+        { n:26, kind:"動詞片語", answer:"E", answerText:"push through",
+          why:"is likely to ___ the plan despite the objections，decisive 線索是 despite the objections（不顧反對）。push through 意為「（排除阻力）強行推動」，與 Few observers expect such a ban to be imposed 一起指向公司會照原計畫走。",
+          notes:[{term:"push through", pos:"phr. v.", gloss:"強行推動（法案、計畫）通過", ex:"The government pushed the bill through in a single week.", exZh:"政府在一週內就把這項法案硬推過關。"}]}
+      ]
+    }]
+  },
+
+  /* ===================== 三、閱讀測驗 ===================== */
+  {
+    id:"reading", label:"三、閱讀測驗", score:"6% · 每題 2%",
+    instruction:"改編自 107 學測。展開詳解時，文章中的依據句會被標示出來。",
+    groups:[{
+      passage:`West Nile is a tropical disease that begins in birds, which pass it on to mosquitoes that then go on to infect human beings with a bite. Most people who contract West Nile do not experience any symptoms at all, but, if they do, symptoms typically develop between 3 and 14 days after a mosquito bite. About one in five people develops a fever, headaches, and body aches, usually lasting a week or so. A far less lucky 1 in 150 experiences high fever, tremors, paralysis, and coma. Some—especially the elderly and those with weak immune systems—die.
+
+That is what made the major outbreaks of West Nile in the U.S. in the summer of 2012 so scary. The situation was particularly bad in Dallas, Texas, where the West Nile virus killed 10 people and sickened more than 200. The city declared a state of emergency and began aerial spraying of a pesticide to kill the mosquitoes, even though residents argued that the pesticide could be more dangerous than the disease.
+
+Why was the summer of 2012 so hospitable to the West Nile virus and the mosquitoes that carry it? Blame the weather. An extremely mild winter allowed more mosquitoes than usual to survive, while the unusually high temperatures in that scorching summer further increased their number by speeding up their life cycle. The economic crisis may have also played a role: Homeowners who were not able to pay their bank loans were forced to abandon their properties, sometimes leaving behind swimming pools that made excellent mosquito breeding grounds.
+
+The severity of tropical diseases is also a matter of whether governments are capable—and willing—to defend their populations against infections. Dallas County was not doing some of the key things to slow the spread of West Nile, such as testing dead birds and setting mosquito traps to test for the presence of the disease. Tropical infections are thus as much related to government inaction as they are to climate.`,
+      zh:`西尼羅河熱是一種源自鳥類的熱帶疾病，鳥把病毒傳給蚊子，蚊子再透過叮咬感染人類。大多數感染者完全不會出現症狀；若有症狀，通常在被蚊子叮咬後三到十四天內出現。大約每五人中會有一人出現發燒、頭痛與全身痠痛，一般持續一週左右。運氣差得多的一百五十分之一則會出現高燒、顫抖、癱瘓與昏迷。有些人——特別是年長者與免疫系統較弱的人——會死亡。
+
+這正是二○一二年夏天美國西尼羅河熱大規模爆發如此駭人的原因。德州達拉斯的情況尤其嚴重，該病毒在當地奪走十條人命，超過兩百人染病。市府宣布進入緊急狀態，並開始空中噴灑殺蟲劑滅蚊，儘管居民主張殺蟲劑可能比疾病本身更危險。
+
+為什麼二○一二年的夏天對西尼羅河病毒與帶原蚊子如此友善？要怪天氣。異常溫和的冬天讓比往年更多的蚊子存活下來，而那個酷熱夏季的異常高溫又加快了蚊子的生命週期，使數量進一步增加。經濟危機可能也扮演了角色：付不出銀行貸款的屋主被迫棄屋，有時留下的游泳池成了絕佳的蚊子孳生地。
+
+熱帶疾病的嚴重程度，也取決於政府是否有能力、以及是否願意保護民眾免於感染。達拉斯郡並未落實一些關鍵措施，例如檢驗死鳥、設置蚊子誘捕器以偵測疫情。因此，熱帶傳染病與政府不作為的關聯，並不亞於它與氣候的關聯。`,
+      questions:[
+        { n:27, kind:"主旨題", stem:"What is this passage mainly about?",
+          options:{A:"West Nile and methods to fight it.",B:"West Nile and governmental efficiency.",C:"West Nile and the conditions its virus thrives in.",D:"West Nile and its relation to tropical diseases."},
+          answer:"C",
+          translation:"本文主要在談什麼？",
+          explain:{
+            A:"對抗方法全文只出現「空中噴藥」一句，且立刻被居民的反對意見帶開，不是主軸。",
+            B:"政府效能只出現在最後一段，是文章的一部分，不是全部。以偏概全是主旨題最常見的陷阱。",
+            C:"全文結構就是它：第一段介紹疾病，第二段呈現 2012 年的爆發，第三段直接問 Why was the summer of 2012 so hospitable...（暖冬、酷暑、棄屋泳池），第四段補上政府不作為。通篇都在回答「什麼條件讓這個病毒壯大」。",
+            D:"文章第一句就直接說 West Nile is a tropical disease，它本身就是熱帶疾病，沒有「與熱帶疾病的關係」可談。"
+          },
+          evidence:"Why was the summer of 2012 so hospitable to the West Nile virus and the mosquitoes that carry it?",
+          notes:[{term:"thrive in", pos:"phr.", gloss:"在（某環境）中蓬勃生長", ex:"These plants thrive in poor soil.", exZh:"這些植物在貧瘠的土壤裡也長得很好。"},
+                 {term:"主旨題解法", pos:"技巧", gloss:"先確認每一段各在做什麼，再找哪個選項「涵蓋全部段落」。只對到一段的選項一定是錯的。"}]},
+        { n:28, kind:"細節題", stem:"Which of the following statements is true about West Nile?",
+          options:{A:"Its symptoms usually appear within two weeks.",B:"It is spread through air and water in tropical areas.",C:"Over 20% of people who contract it will suffer severe symptoms.",D:"It comes from direct human contact with birds infected with the virus."},
+          answer:"A",
+          translation:"關於西尼羅河熱，下列何者為真？",
+          explain:{
+            A:"對應第一段 symptoms typically develop between 3 and 14 days after a mosquito bite——14 天就是兩週內。",
+            B:"傳播途徑是鳥→蚊→人的叮咬，與空氣、水完全無關。",
+            C:"數字陷阱。about one in five（20%）出現的是發燒、頭痛、痠痛等一般症狀；真正的重症（高燒、顫抖、癱瘓、昏迷）是 1 in 150，遠低於 20%。",
+            D:"人是被蚊子叮咬而感染，並非直接接觸鳥類。文中 pass it on to mosquitoes 這個中間環節不能跳過。"
+          },
+          evidence:"symptoms typically develop between 3 and 14 days after a mosquito bite",
+          notes:[{term:"contract", pos:"vt.", gloss:"感染（疾病）；另有「合約、收縮」之意。", ex:"He contracted malaria while working abroad.", exZh:"他在國外工作時感染了瘧疾。"},
+                 {term:"one in five", pos:"用法", gloss:"五分之一的人；動詞用單數（one in five develops）。"}]},
+        { n:29, kind:"細節題", stem:"Which of the following is a reason why Dallas was hit most seriously in the U.S. in 2012?",
+          options:{A:"The increasing population in Texas raised the risk of contracting the disease.",B:"The government did not issue a warning about the disease in time.",C:"The residents worried about the county's decision and action.",D:"The weather of the previous winter was not as cold as usual."},
+          answer:"D",
+          translation:"下列何者是達拉斯在 2012 年災情最嚴重的原因之一？",
+          explain:{
+            A:"德州人口增加，文中完全沒有提及，屬憑印象作答。",
+            B:"文中批評的是達拉斯郡沒有檢驗死鳥、沒有設置誘捕器，並沒有說政府「未及時發布警告」。相近但不等於。",
+            C:"居民擔憂的是殺蟲劑的安全，那是市府採取行動之後的反應，不是疫情變嚴重的原因，因果順序顛倒。",
+            D:"對應第三段 An extremely mild winter allowed more mosquitoes than usual to survive——溫和的冬天就是「沒有往年那麼冷」。"
+          },
+          evidence:"An extremely mild winter allowed more mosquitoes than usual to survive",
+          notes:[{term:"mild", pos:"adj.", gloss:"（天氣）溫和的；（口味）清淡的；（症狀）輕微的", ex:"We had an unusually mild winter last year.", exZh:"去年冬天異常溫暖。"},
+                 {term:"hospitable", pos:"adj.", gloss:"（環境）適宜生存的；（人）好客的", ex:"The desert is hardly hospitable to crops.", exZh:"沙漠幾乎不適合作物生長。"}]}
+      ]
+    }]
+  },
+
+  /* ===================== 四、混合題 ===================== */
+  {
+    id:"mixed", label:"四、混合題", score:"6%",
+    instruction:"六位受訪者對甜鹹料理的意見。第 30 題要注意字形變化。",
+    groups:[{
+      passage:`Sweet-and-savory foods appear in many cultures, from Hawaiian pizza to pork with fruit sauce and chocolate-covered snacks. Some people love the surprise of opposite flavors, while others believe certain combinations go too far. Here are six opinions from food lovers around the world.
+
+A. Wonwoo — I love sweet-and-savory dishes because they keep meals exciting. In my country, people often eat meat with fruit sauces, and the contrast works beautifully. A little sweetness can bring out the flavor of salty food. For me, pineapple on pizza is not strange at all. It is simply a match made in heaven.
+
+B. James — I understand why people enjoy mixing sweet and salty flavors, but I think some foods should stay simple. Pizza already has cheese, tomato sauce, and meat, so adding fruit feels unnecessary. I once tried Hawaiian pizza because I was curious, but honestly, it was not my cup of tea.
+
+C. Daesung — Sweet-and-savory food is common in many Asian dishes, so I don't find the idea shocking. Teriyaki chicken, sweet soy sauce, and fruit-based sauces all show how sugar and salt can balance each other. The key is control. If one flavor takes over, the whole dish can easily miss the mark.
+
+D. Jaehyun — As someone who grew up with traditional Italian food, I have mixed feelings about Hawaiian pizza. I do not hate creative cooking, but some combinations seem to violate the spirit of the original dish. Food can change over time, of course, but not every experiment deserves a place on the menu.
+
+E. Felix — I think people take food debates too seriously. If someone enjoys pineapple on pizza, let them enjoy it. Sweet-and-savory combinations are everywhere, from salted caramel to cheese with fruit jam. Taste is personal, and arguing about it too much feels like making a mountain out of a molehill.
+
+F. Jung Kook — To me, sweet-and-savory food depends on the situation. I like salted chocolate and honey-glazed ham, but I do not enjoy sweet toppings on pizza. Maybe it is because pizza feels like comfort food to me. When the flavor changes too much, it no longer gives me the same feeling.`,
+      questions:[
+        { n:30, kind:"字形變化填空",
+          prompt:"請根據選文內容，從文章中選出兩個單詞填入空格，並視句型結構需要作適當的字形變化。每格限填一個單詞。（每格 2%）",
+          stem:`Sweet-and-savory foods have always been controversial. Some people really enjoy them, especially in Asian countries, where dishes such as teriyaki chicken, sweet soy sauce, and fruit-based sauces are quite common. Out of ①______, some people are willing to give them a try. However, others feel that this way of cooking is a ②______ of culinary tradition.`,
+          answers:[
+            {k:"①", w:"curiosity", note:"線索在 B. James：I once tried Hawaiian pizza because I was curious。空格前有介系詞 Out of，後面必須是名詞，所以 curious 要變成 curiosity。out of curiosity 是固定用法，意為「出於好奇」。"},
+            {k:"②", w:"violation", note:"線索在 D. Jaehyun：some combinations seem to violate the spirit of the original dish。空格前有冠詞 a，後有 of，必須是單數名詞，所以 violate 要變成 violation。a violation of ...「對…的違背」。"}
+          ],
+          why:"這題真正在考的是「找到出處」＋「詞性轉換」兩件事。直接照抄 curious、violate 會零分——題目已經明講「視句型結構需要作適當的字形變化」。作答前先看空格前後：前面是介系詞或冠詞，就一定要填名詞。",
+          notes:[
+            {term:"out of curiosity", pos:"phr.", gloss:"出於好奇（out of ＋ 抽象名詞表動機）", ex:"Out of habit, she checked the lock twice.", exZh:"出於習慣，她把鎖檢查了兩次。"},
+            {term:"violation", pos:"n.", gloss:"違反、侵犯（動詞 violate）", ex:"The ruling was a clear violation of the agreement.", exZh:"這項裁決明顯違反了協議。"}
+          ]},
+        { n:31, kind:"歸納題",
+          stem:"Which respondents, from (A) to (F), show a negative or doubtful attitude toward putting sweet toppings, such as pineapple, on pizza?",
+          answerText:"(B)、(D)、(F)",
+          why:"題目限定的是「對披薩加甜味配料」的態度，不是對甜鹹料理的整體看法——這是本題的分水嶺。(B) James：adding fruit feels unnecessary、not my cup of tea，明確否定。(D) Jaehyun：mixed feelings、seem to violate the spirit of the original dish，屬懷疑。(F) Jung Kook：I do not enjoy sweet toppings on pizza，直接否定。至於 (A) Wonwoo 說 a match made in heaven 是正面；(C) Daesung 說 I don't find the idea shocking，且通篇只談亞洲料理的平衡，沒有針對披薩表示反對；(E) Felix 主張 let them enjoy it，是包容立場。把 (C) 選進來是最常見的失分點。",
+          notes:[
+            {term:"not one's cup of tea", pos:"idiom", gloss:"不合某人的胃口／喜好", ex:"Jazz isn't really my cup of tea.", exZh:"爵士樂不太合我的口味。"},
+            {term:"make a mountain out of a molehill", pos:"idiom", gloss:"小題大作", ex:"It was one typo—don't make a mountain out of a molehill.", exZh:"不過一個錯字，別小題大作。"},
+            {term:"miss the mark", pos:"idiom", gloss:"沒有達到目標、失準"}
+          ]}
+      ]
+    }]
+  },
+
+  /* ===================== 五、文意字彙 ===================== */
+  {
+    id:"vocab", label:"五、文意字彙", score:"12% · 每題 2%",
+    instruction:"依句意及提示字母填入正確單字，注意詞性與單複數。",
+    groups:[{
+      questions:[
+        { n:32, kind:"pr___e",
+          stem:"She walked into the club with an open mind, but the members' pr______e against newcomers was obvious from their cold stares.",
+          answerText:"prejudice",
+          why:"兩條線索夾出答案：前半的 an open mind（開放的心態）與 but 形成對比，後半的 cold stares（冷眼）說明對方的態度。prejudice against sb.「對某人的偏見」是固定搭配。注意空格後是 was，所以要填單數名詞，不能寫 prejudices。",
+          notes:[{term:"prejudice", pos:"n. / vt.", gloss:"偏見；使有偏見。形容詞為 prejudiced。", ex:"He was accused of prejudice against older applicants.", exZh:"他被指控對年長的應徵者懷有偏見。"}]},
+        { n:33, kind:"re___e",
+          stem:"Bacteria can re______e by simply splitting into two identical cells, allowing their numbers to double in a very short time.",
+          answerText:"reproduce",
+          why:"splitting into two identical cells（分裂成兩個相同的細胞）與 numbers to double（數量加倍）都指向「繁殖」。can 後面要接原形動詞，所以填 reproduce，不能寫 reproduces 或 reproduction。",
+          notes:[{term:"reproduce", pos:"vi. / vt.", gloss:"繁殖；複製、重現。名詞 reproduction。", ex:"Some plants reproduce without seeds.", exZh:"有些植物不靠種子就能繁殖。"}]},
+        { n:34, kind:"f___ties",
+          stem:"The new library offers not only books but also study rooms, computers, and printing f______ties for students.",
+          answerText:"facilities",
+          why:"與 books、study rooms、computers 並列，指圖書館提供的「設施」。提示字尾已經給了 -ties，加上前面是列舉的並列結構，必須用複數 facilities。單數為 facility。",
+          notes:[{term:"facility", pos:"n.", gloss:"設施（常用複數）；另有「才能、熟練」之意。", ex:"The school has excellent sports facilities.", exZh:"這所學校有很好的運動設施。"}]},
+        { n:35, kind:"n___k",
+          stem:"She attended the conference last night not just to hear the talks, but to n______k with other professionals in her field and exchange business cards.",
+          answerText:"network",
+          why:"exchange business cards（交換名片）就是答案的解釋。句子用的是 not just to hear... but to ______... 的對稱結構，to 後面要接原形動詞，所以 network 在這裡當動詞用，意為「拓展人脈」。",
+          notes:[{term:"network", pos:"vi.", gloss:"建立人脈、與同行往來（動名詞 networking 常見）", ex:"Conferences are as much about networking as about research.", exZh:"研討會的重點在建立人脈，不亞於研究本身。"}]},
+        { n:36, kind:"ma___e",
+          stem:"Viewers rarely notice how skillfully an advertisement can ma______e their emotions until they stop to analyze it.",
+          answerText:"manipulate",
+          why:"skillfully（巧妙地）＋ rarely notice（很少察覺）＋ until they stop to analyze it（直到停下來分析）都在描寫一種不易察覺的操控。can 後接原形動詞，故填 manipulate。",
+          notes:[{term:"manipulate", pos:"vt.", gloss:"操縱、擺佈（人、情緒、數據）；名詞 manipulation。", ex:"The data had been manipulated to fit the conclusion.", exZh:"數據被操弄過，好配合既定的結論。"},
+                 {term:"stop to V vs. stop V-ing", pos:"文法", gloss:"stop to analyze 是「停下來去分析」；stop analyzing 才是「停止分析」。"}]},
+        { n:37, kind:"de___e",
+          stem:"She spoke in a slow, de______e tone during the presentation, choosing each word carefully so the audience wouldn't misunderstand her.",
+          answerText:"deliberate",
+          why:"slow 與 choosing each word carefully 把語意鎖死了：從容而審慎。空格在 a slow, ______ tone 之間，需要形容詞。deliberate 當形容詞有兩義——「刻意的」與「從容審慎的」，此處取後者。",
+          notes:[{term:"deliberate", pos:"adj. / vi.", gloss:"審慎從容的、刻意的；當動詞時（重音不同）意為「仔細考慮」。副詞 deliberately＝故意地。", ex:"He gave a deliberate, unhurried answer.", exZh:"他給了一個從容不迫的回答。"}]}
+      ]
+    }]
+  },
+
+  /* ===================== 六、填空 ===================== */
+  {
+    id:"fill", label:"六、填空", score:"14% · 每格 1%",
+    instruction:"依中文語意完成英文句子，每格限填一字。",
+    groups:[{
+      questions:[
+        { n:38, kind:"中譯填空（9 格）",
+          prompt:"當他與唱片公司的合作關係破裂後，這位歌手宣布展開單飛生涯——媒體立刻暗示此舉是因為積欠版稅。他說：「我的決定和錢毫無關係。它關乎的是我的職業，關乎音樂本身。」然後出乎眾人意料地放聲大哭。",
+          stem:`When his ①______ with the label collapsed, the singer announced a ②______ career — a move the press was quick to ③______ was driven by unpaid royalties. "My final decision ④______ ⑤______ ⑥______ ⑦______ with money. It has to do with my profession and the music itself," he said, and then, to everyone's astonishment, ⑧______ ⑨______ tears.`,
+          answers:[
+            {k:"①", w:"partnership", note:"「合作關係」。提示為 p___p，與 collapse（破裂、垮掉）搭配。"},
+            {k:"②", w:"solo", note:"a solo career 單飛生涯。提示 s___o。"},
+            {k:"③", w:"imply", note:"暗示。這裡結構較難：a move (which) the press was quick to imply was driven by...，which 省略後 imply 與其後的 was driven 中間沒有 that，容易看不出是名詞子句。"},
+            {k:"④", w:"has", note:"主詞 My final decision 為第三人稱單數。"},
+            {k:"⑤", w:"nothing", note:"have nothing to do with 與…毫無關係。"},
+            {k:"⑥", w:"to", note:""},
+            {k:"⑦", w:"do", note:"下一句刻意用 It has to do with... 形成對照，是最好的提示。"},
+            {k:"⑧", w:"burst", note:"burst into tears 放聲大哭。burst 三態同形（burst–burst–burst），此處為過去式。"},
+            {k:"⑨", w:"into", note:"burst into ＋ 名詞：tears（大哭）／laughter（大笑）／flames（起火）。"}
+          ],
+          why:"這題的難點集中在兩處。一是 a move the press was quick to imply was driven by...：a move 是關係子句的主詞，中間插入 the press was quick to imply，所以會出現兩個動詞相連的怪異外觀。二是 has nothing to do with 與下一句 has to do with 的對照——這組對照本身就是出題者留的線索，找到一句就等於拿到另一句。",
+          notes:[
+            {term:"have nothing to do with", pos:"phr.", gloss:"與…毫無關係（反義：have a lot to do with）", ex:"The delay had nothing to do with the weather.", exZh:"這次延誤和天氣毫無關係。"},
+            {term:"burst into tears", pos:"phr.", gloss:"突然放聲大哭", ex:"She burst into tears halfway through the speech.", exZh:"她致詞到一半突然哭了出來。"},
+            {term:"go solo", pos:"phr.", gloss:"單飛、獨立發展", ex:"He went solo after the band split up.", exZh:"樂團解散後他開始單飛。"}
+          ]},
+        { n:39, kind:"中譯填空（5 格）",
+          prompt:"與許多人所想的相反，大多數表演者並不會在寂靜中有出色表現；只有當觀眾的興奮情緒達到狂熱頂點時，他們才真正活躍起來。",
+          stem:`①______ ②______ what many assume, most ③______ do not ④______ on silence; the moment the crowd's excitement reaches ⑤______ pitch, they finally come alive.`,
+          answers:[
+            {k:"①", w:"Contrary", note:"提示 C___y。"},
+            {k:"②", w:"to", note:"contrary to ＋ 名詞或名詞子句：與…相反。此處後接 what many assume 名詞子句。"},
+            {k:"③", w:"performers", note:"表演者。most 後接可數名詞複數。提示 p___rs。"},
+            {k:"④", w:"thrive", note:"thrive on 靠…而蓬勃、在…之中如魚得水。提示 t___e。"},
+            {k:"⑤", w:"fever", note:"reach fever pitch 達到狂熱的頂點。提示 f___r。"}
+          ],
+          why:"三個要注意的地方：contrary to 的 to 是介系詞，不能省；most 後面接的名詞要用複數，寫成 performer 會扣分；thrive on 的介系詞是 on，不是 in 或 with。另外 the moment 在此當連接詞用，等於 as soon as，後面直接接子句。",
+          notes:[
+            {term:"contrary to", pos:"phr.", gloss:"與…相反", ex:"Contrary to expectations, ticket sales rose.", exZh:"和預期相反，票房反而上升。"},
+            {term:"thrive on", pos:"phr. v.", gloss:"靠…而茁壯；在…之中表現出色", ex:"Some people thrive on pressure.", exZh:"有些人在壓力下反而表現得更好。"},
+            {term:"fever pitch", pos:"n.", gloss:"狂熱的頂點", ex:"Excitement reached fever pitch before the final.", exZh:"決賽前的興奮達到了最高點。"},
+            {term:"the moment (that) ...", pos:"連接詞", gloss:"一…就…（＝as soon as）", ex:"The moment he walked in, everyone fell silent.", exZh:"他一走進來，所有人都安靜了。"}
+          ]}
+      ]
+    }]
+  }
+  ]
+};
+
+/* ==========================================================================
+   ②  以下為程式碼，一般情況不需要修改。
+   ========================================================================== */
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const wordOf = q => q.options ? q.options[q.answer] : (q.answerText || '');
+const allQ = [];
+EXAM.sections.forEach(s => s.groups.forEach(g => g.questions.forEach(q => allQ.push(q))));
+const findQ = n => allQ.find(q => String(q.n) === String(n));
+
+document.getElementById('brand').textContent = EXAM.brand;
+document.getElementById('examTitle').textContent = EXAM.title;
+document.getElementById('examMeta').textContent = EXAM.meta;
+
+let noteCount = 0;
+allQ.forEach(q => noteCount += (q.notes || []).length);
+
+const nav = document.getElementById('nav');
+EXAM.sections.forEach(s => {
+  const a = document.createElement('a');
+  a.className = 'chip'; a.href = '#sec-' + s.id; a.textContent = s.label.replace(/^[一二三四五六]、/, m => m);
+  nav.appendChild(a);
+});
+const noteChip = document.createElement('a');
+noteChip.className = 'chip'; noteChip.href = '#side'; noteChip.textContent = '重點表 ' + noteCount;
+nav.appendChild(noteChip);
+const toggleAll = document.createElement('button');
+toggleAll.className = 'chip solid'; toggleAll.textContent = '全部展開';
+nav.appendChild(toggleAll);
+
+function renderPassage(g, i, sid) {
+  let html = esc(g.passage);
+  g.questions.forEach(q => {
+    if (!q.evidence) return;
+    const t = esc(q.evidence);
+    if (html.includes(t)) html = html.replace(t, `<span class="hl ev" data-ev="${q.n}">${t}</span>`);
+  });
+  html = html.replace(/__(\d+)__/g, (m, n) =>
+    `<button class="blank" data-blank="${n}" aria-label="第 ${n} 題空格">${n}</button>`);
+  const body = '<div class="passage">' +
+    html.split(/\n{2,}/).map(p => '<p>' + p.replace(/\n/g, ' ') + '</p>').join('') + '</div>';
+  if (!g.zh) return body;
+  const id = sid + '-' + i;
+  return body +
+    `<button class="zhbtn" data-zh="${id}">全文中譯</button>` +
+    `<div class="zhbox" id="zh-${id}">` +
+      g.zh.split(/\n{2,}/).map(p => '<p>' + esc(p).replace(/\n/g, ' ') + '</p>').join('') +
+    '</div>';
+}
+
+function renderQ(q) {
+  const parts = [];
+  if (q.options) {
+    const ks = Object.keys(q.options);
+    parts.push('<div class="opts">' + ks.map(k =>
+      `<div class="opt"><span class="opt-k">(${k})</span><span>${esc(q.options[k])}</span></div>`).join('') + '</div>');
+  }
+  const head = `<div class="q-tag"><span class="q-n">${String(q.n).padStart(2,'0')}</span><span class="q-kind">${esc(q.kind || '')}</span></div>` +
+    (q.prompt ? `<p class="prompt">${esc(q.prompt)}</p>` : '') +
+    (q.stem ? `<p class="stem">${esc(q.stem).replace(/\n/g,'<br>')}</p>` : '');
+
+  let ans = '';
+  if (q.answers) {
+    ans = '<ul class="fills">' + q.answers.map(a =>
+      `<li class="fill"><span class="fill-k">${esc(a.k)}</span><span class="fill-w hl" data-ansmulti>${esc(a.w)}</span><span class="fill-n">${esc(a.note || '')}</span></li>`).join('') + '</ul>';
+  } else {
+    const label = q.options ? `(${q.answer}) ${esc(wordOf(q))}` :
+      (q.answer ? `(${q.answer}) ${esc(q.answerText)}` : esc(q.answerText));
+    ans = `<p class="ans"><span class="ans-k">答案</span><span class="ans-v hl" data-ans="${q.n}">${label}</span></p>`;
+  }
+
+  let expl = '';
+  if (q.explain) {
+    expl = '<ul class="lines">' + Object.keys(q.options).map(k => {
+      const right = k === q.answer;
+      return `<li class="line ${right ? 'right' : 'wrong'}"><span class="line-k">(${k})</span><span>${esc(q.explain[k] || '')}</span></li>`;
+    }).join('') + '</ul>';
+  }
+  const why = q.why ? `<p class="why">${esc(q.why)}</p>` : '';
+  const evid = q.evidence ? `<p class="evid"><span>文中依據</span>${esc(q.evidence)}</p>` : '';
+  const notes = (q.notes || []).length ? `<div class="note"><p class="note-h">重點整理</p>` +
+    q.notes.map(nt => `<p class="note-i"><span class="term">${esc(nt.term)}</span><span class="pos">${esc(nt.pos || '')}</span><span class="gloss">${esc(nt.gloss || '')}</span>` +
+      (nt.ex ? `<span class="ex">${esc(nt.ex)}<i>${esc(nt.exZh || '')}</i></span>` : '') + '</p>').join('') + '</div>' : '';
+
+  return `<article class="q" id="q-${q.n}" data-n="${q.n}">
+    <div class="q-top">${head}${parts.join('')}
+      <button class="reveal" aria-expanded="false" aria-controls="body-${q.n}">看詳解</button>
+    </div>
+    <div class="body" id="body-${q.n}">
+      ${ans}${q.translation ? `<p class="zh">${esc(q.translation)}</p>` : ''}${expl}${why}${evid}${notes}
+    </div>
+  </article>`;
+}
+
+document.getElementById('main').innerHTML = EXAM.sections.map((s, i) => `
+  <section class="sec" id="sec-${s.id}">
+    <div class="sec-head">
+      <span class="sec-num">${String(i+1).padStart(2,'0')}</span>
+      <h2 class="sec-label">${esc(s.label)}</h2>
+      <span class="sec-score">${esc(s.score || '')}</span>
+    </div>
+    ${s.instruction ? `<p class="sec-inst">${esc(s.instruction)}</p>` : ''}
+    ${s.bank ? `<div class="bank">${Object.keys(s.bank).map(k =>
+      `<div class="bank-i" data-bank="${k}"><span>(${k})</span>${esc(s.bank[k])}</div>`).join('')}</div>` : ''}
+    ${s.groups.map((g, gi) => (g.passage ? renderPassage(g, gi, s.id) : '') + g.questions.map(renderQ).join('')).join('')}
+  </section>`).join('');
+
+const items = [];
+allQ.forEach(q => (q.notes || []).forEach(nt => items.push({ ...nt, n: q.n })));
+document.getElementById('side').innerHTML = `
+  <p class="side-h">Notes</p>
+  <p class="side-t">本卷重點 ${items.length} 則</p>
+  <ul class="card-list">${items.map(nt => `
+    <li class="card-item"><a href="#q-${nt.n}">
+      <span class="jump">第 ${nt.n} 題</span>
+      <span class="term">${esc(nt.term)}</span><span class="pos">${esc(nt.pos || '')}</span>
+      <div class="gloss">${esc(nt.gloss || '')}</div>
+    </a></li>`).join('')}</ul>
+  <p class="side-note">點任一則可跳到出處題目。用瀏覽器列印（Ctrl／⌘ + P）會自動展開全部詳解與中譯，可直接印成講義。</p>`;
+
+document.getElementById('foot').textContent = `共 ${allQ.length} 題 · ${EXAM.footer}`;
+
+function setOpen(card, open) {
+  card.classList.toggle('open', open);
+  const btn = card.querySelector('.reveal');
+  btn.setAttribute('aria-expanded', open);
+  btn.firstChild.nodeValue = open ? '收合詳解' : '看詳解';
+  const n = card.dataset.n;
+  card.querySelectorAll('.hl').forEach(h => h.classList.toggle('on', open));
+  const ev = document.querySelector(`[data-ev="${n}"]`);
+  if (ev) ev.classList.toggle('on', open);
+  const q = findQ(n);
+  if (q && q.answer && q.answerText) {
+    const bi = document.querySelector(`[data-bank="${q.answer}"]`);
+    if (bi) bi.classList.toggle('used', open);
+  }
+  const bl = document.querySelector(`[data-blank="${n}"]`);
+  if (bl) {
+    if (open) {
+      bl.classList.add('filled');
+      bl.innerHTML = `<sup>${n}</sup><span class="hl">${esc(wordOf(q))}</span>`;
+      requestAnimationFrame(() => bl.querySelector('.hl').classList.add('on'));
+    } else {
+      bl.classList.remove('filled');
+      bl.textContent = n;
+    }
+  }
+}
+document.addEventListener('click', e => {
+  const rv = e.target.closest('.reveal');
+  if (rv) { const c = rv.closest('.q'); setOpen(c, !c.classList.contains('open')); return; }
+  const zb = e.target.closest('.zhbtn');
+  if (zb) { zb.classList.toggle('on'); document.getElementById('zh-' + zb.dataset.zh).classList.toggle('on'); return; }
+  const bl = e.target.closest('.blank');
+  if (bl) {
+    const c = document.getElementById('q-' + bl.dataset.blank);
+    if (!c.classList.contains('open')) setOpen(c, true);
+    c.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
+toggleAll.addEventListener('click', () => {
+  const open = toggleAll.textContent === '全部展開';
+  document.querySelectorAll('.q').forEach(c => setOpen(c, open));
+  toggleAll.textContent = open ? '全部收合' : '全部展開';
+});
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('.q').forEach(c => setOpen(c, true));
+  document.querySelectorAll('.zhbox').forEach(b => b.classList.add('on'));
+  toggleAll.textContent = '全部收合';
+});
+</script>
+</body>
+</html>

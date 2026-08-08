@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ED Week 2+3 詳解</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E7EBEE; --card:#FDFDFC;
+  --ink:#10202F; --ink-2:#56687A; --ink-3:#7C8B99;
+  --rule:#C6D0D8; --pen:#17457E; --hl:#FFE773; --miss:#A34234;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono','Cascadia Mono',Menlo,Consolas,monospace;
+  --read:'Literata',Georgia,'Times New Roman',serif;
+  --han:'PingFang TC','Microsoft JhengHei','Noto Sans TC',system-ui,sans-serif;
+  --maxw:1180px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--han);font-size:16px;line-height:1.75}
+:focus-visible{outline:2px solid var(--pen);outline-offset:3px;border-radius:2px}
+
+.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule)}
+.top-in{max-width:var(--maxw);margin:0 auto;padding:14px 24px 0}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);margin:0 0 4px}
+.title{font-size:23px;font-weight:600;margin:0;line-height:1.3}
+.meta{font-family:var(--mono);font-size:12px;color:var(--ink-2);margin:4px 0 0;letter-spacing:.04em}
+.bar{display:flex;gap:7px;align-items:center;flex-wrap:wrap;padding:12px 0 11px;margin-top:10px;border-top:1px solid var(--rule)}
+.chip{font-family:var(--mono);font-size:12px;letter-spacing:.04em;border:1px solid var(--rule);background:transparent;color:var(--ink-2);padding:5px 10px;border-radius:999px;cursor:pointer;text-decoration:none;transition:border-color .15s,color .15s,background .15s}
+.chip:hover{border-color:var(--pen);color:var(--pen)}
+.chip.solid{margin-left:auto;border-color:var(--ink);color:var(--ink);font-weight:500}
+.chip.solid:hover{background:var(--ink);color:var(--card)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:28px 24px 96px;display:grid;gap:36px;grid-template-columns:minmax(0,1fr) 288px}
+@media (max-width:1020px){.wrap{grid-template-columns:minmax(0,1fr);gap:44px}}
+
+.sec{margin:0 0 48px;scroll-margin-top:136px}
+.sec-head{display:flex;align-items:baseline;gap:12px;padding-bottom:9px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.sec-num{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--ink-3)}
+.sec-label{font-size:18px;font-weight:600;margin:0}
+.sec-score{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-left:auto}
+.sec-inst{font-size:13.5px;color:var(--ink-2);margin:9px 0 0}
+
+.bank{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:16px 0 0}
+@media (max-width:760px){.bank{grid-template-columns:repeat(2,1fr)}}
+.bank-i{background:var(--card);padding:8px 10px;font-family:var(--read);font-size:14.5px}
+.bank-i span{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-right:5px}
+.bank-i.used{background:#F2F5F6;color:var(--ink-3)}
+
+.passage{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--ink);padding:22px 26px;margin:18px 0 0;font-family:var(--read);font-size:16.5px;line-height:1.95;color:#1a2836}
+.passage p{margin:0 0 1em}
+.passage p:last-child{margin-bottom:0}
+.blank{display:inline-block;min-width:70px;text-align:center;border:0;border-bottom:1.5px solid var(--ink);font-family:var(--mono);font-size:13px;color:var(--pen);cursor:pointer;background:none;padding:0 4px;line-height:1.4}
+.blank:hover{background:rgba(23,69,126,.07)}
+.blank.filled{font-family:var(--read);font-size:16.5px;color:var(--ink);border-bottom-color:transparent;min-width:0}
+.blank sup{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-right:2px}
+.zhbtn{display:block;margin:0 0 18px;background:var(--card);border:1px solid var(--rule);border-top:0;width:100%;text-align:left;padding:8px 26px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--pen);cursor:pointer}
+.zhbtn:hover{color:var(--ink)}
+.zhbtn::after{content:' ▾'}
+.zhbtn.on::after{content:' ▴'}
+.zhbox{display:none;background:#F7F9FA;border:1px solid var(--rule);border-top:0;padding:18px 26px;margin:0 0 18px;font-size:15px;line-height:1.95;color:#22323F}
+.zhbox.on{display:block}
+.zhbox p{margin:0 0 .9em}
+.zhbox p:last-child{margin:0}
+
+.q{background:var(--card);border:1px solid var(--rule);margin:14px 0 0;scroll-margin-top:142px}
+.q-top{padding:16px 22px 14px}
+.q-tag{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.q-n{font-family:var(--mono);font-size:13px;font-weight:600}
+.q-kind{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.prompt{font-size:14.5px;line-height:1.85;color:var(--ink-2);margin:0 0 11px;padding-left:11px;border-left:2px solid var(--rule)}
+.stem{font-family:var(--read);font-size:16.5px;line-height:1.85;margin:0 0 13px;color:#1a2836}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:2px 20px}
+@media (max-width:640px){.opts{grid-template-columns:1fr}}
+.opt{display:flex;gap:9px;font-family:var(--read);font-size:15.5px;line-height:1.6;padding:3px 0;color:#243342}
+.opt-k{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);padding-top:2px;flex:none}
+.reveal{display:block;width:100%;text-align:left;margin-top:14px;background:none;border:0;border-top:1px dashed var(--rule);padding:11px 0 0;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--pen);cursor:pointer}
+.reveal:hover{color:var(--ink)}
+.reveal::after{content:' ▾'}
+.q.open .reveal::after{content:' ▴'}
+.q.open .reveal{color:var(--ink-3)}
+
+.body{display:none;border-top:1px solid var(--rule);background:#F7F9FA;padding:18px 22px 20px}
+.q.open .body{display:block}
+.ans{display:flex;align-items:baseline;gap:10px;margin:0 0 13px;flex-wrap:wrap}
+.ans-k{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--ink-3);flex:none;padding-top:2px}
+.ans-v{font-family:var(--read);font-size:18px;font-weight:600}
+.fills{list-style:none;margin:0 0 13px;padding:0}
+.fill{display:flex;gap:11px;align-items:baseline;padding:7px 0;border-bottom:1px dotted var(--rule)}
+.fill-k{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);flex:none;width:26px}
+.fill-w{font-family:var(--read);font-size:17px;font-weight:600;flex:none}
+.fill-n{font-size:13.5px;color:var(--ink-2);line-height:1.7}
+.zh{font-size:15px;line-height:1.85;margin:0 0 14px;color:#22323F}
+.why{font-size:14.5px;line-height:1.85;margin:0 0 4px;color:#22323F;border-top:1px solid var(--rule);padding-top:12px}
+.lines{margin:0;padding:0;list-style:none;border-top:1px solid var(--rule)}
+.line{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--rule);font-size:14.5px;line-height:1.75;color:var(--ink-2)}
+.line-k{font-family:var(--mono);font-size:12.5px;flex:none;width:28px;color:var(--ink-3);padding-top:2px}
+.line.right{color:var(--ink)}
+.line.right .line-k{color:var(--ink);font-weight:600}
+.line.right .line-k::after{content:'✓';display:block;font-size:12px;line-height:1.3}
+.line.wrong .line-k{color:var(--miss);opacity:.85}
+.line.wrong .line-k::after{content:'✗';display:block;font-size:12px;line-height:1.3}
+.evid{margin:15px 0 0;font-family:var(--read);font-size:14.5px;line-height:1.8;color:var(--ink-2);padding-left:13px;border-left:2px solid var(--hl)}
+.evid span{font-family:var(--han);font-size:11px;letter-spacing:.14em;color:var(--ink-3);display:block;margin-bottom:3px}
+
+.hl{background-image:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 90%,transparent 90%);background-repeat:no-repeat;background-size:0% 100%;transition:background-size .55s cubic-bezier(.2,.75,.3,1);border-radius:1px}
+.hl.on{background-size:100% 100%}
+
+.sample{margin:15px 0 0;border:1px solid var(--rule);border-left:3px solid var(--ink);background:var(--card);padding:16px 20px}
+.sample p:not(.note-h){font-family:var(--read);font-size:15.5px;line-height:1.9;color:#1a2836;margin:0 0 1em}
+.sample p:last-child{margin-bottom:0}
+.bank.wide{grid-template-columns:1fr}
+.bank.wide .bank-i{font-size:15px;line-height:1.7;padding:10px 14px}
+.note{margin:15px 0 0;border:1px solid var(--rule);background:var(--card);padding:13px 16px}
+.note-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 9px}
+.note-i{margin:0;padding:9px 0 0;border-top:1px dotted var(--rule)}
+.note-i:first-of-type{border-top:0;padding-top:0}
+.term{font-family:var(--read);font-size:16px;font-weight:600}
+.pos{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin:0 6px}
+.gloss{font-size:14.5px}
+.ex{font-family:var(--read);font-size:14px;color:var(--ink-2);line-height:1.7;margin:3px 0 0;display:block}
+.ex i{font-family:var(--han);font-style:normal;font-size:13px;color:var(--ink-3);display:block}
+
+.side{position:sticky;top:136px;align-self:start;max-height:calc(100vh - 164px);overflow:auto;padding-right:4px}
+@media (max-width:1020px){.side{position:static;max-height:none;scroll-margin-top:136px}}
+.side-h{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin:0 0 3px}
+.side-t{font-size:16px;font-weight:600;margin:0 0 14px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.card-list{margin:0;padding:0;list-style:none}
+.card-item{border-bottom:1px solid var(--rule);padding:11px 0}
+.card-item a{display:block;text-decoration:none;color:inherit}
+.card-item a:hover .term{background:var(--hl)}
+.jump{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);float:right;padding-top:5px}
+.side-note{font-size:12.5px;color:var(--ink-3);line-height:1.7;margin:16px 0 0}
+.foot{max-width:var(--maxw);margin:0 auto;padding:0 24px 48px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+@media print{
+  body{background:#fff;font-size:10.5pt}
+  .top,.side,.reveal,.foot,.zhbtn{display:none!important}
+  .wrap{display:block;max-width:none;padding:0}
+  .q .body{display:block!important}
+  .zhbox{display:block!important}
+  .q{break-inside:avoid;border-color:#999;margin-bottom:9pt}
+  .passage{break-inside:avoid}
+  .hl{background-size:100% 100%!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <p class="eyebrow" id="brand"></p>
+    <h1 class="title" id="examTitle"></h1>
+    <p class="meta" id="examMeta"></p>
+    <nav class="bar" id="nav"></nav>
+  </div>
+</header>
+
+<div class="wrap"><main id="main"></main><aside class="side" id="side"></aside></div>
+<p class="foot" id="foot"></p>
+
+<script>
+/* ==========================================================================
+   ①  題目與詳解全部寫在下面的 EXAM 物件裡。要改題、加題、修字，只動這裡。
+
+   section（大題）：{ id, label, score, instruction, bank?, groups: [...] }
+   group（同一篇文章的題組）：{ passage?, zh?, questions: [...] }
+       passage 裡寫 __7__ 就會變成可點的空格，數字對應題號。
+       zh 是全文中譯，會做成可展開的按鈕。
+
+   question 依題型三選一：
+     選擇題   { n, kind, stem, options:{A..D}, answer:"B", translation, explain:{A..D}, evidence?, notes? }
+     單一填答 { n, kind, stem, answerText:"prejudice", why, notes? }
+     多格填答 { n, kind, prompt, stem, answers:[{k:"①", w:"字", note:"說明"}], notes? }
+   ========================================================================== */
+const EXAM = {
+  brand: "English Digest Weekly Quiz",
+  title: "Reading Test 詳解｜Week 2+3: Units 5–12 (Jul / Aug)",
+  meta: "Instructor: Howard Chang　·　範圍：ED 雜誌 Jul.+Aug. Week 2+3　·　滿分 90 分",
+  footer: "班級複習用",
+  sections: [
+  /* ===================== 一、綜合測驗 ===================== */
+  {
+    id:"cloze", label:"一、綜合測驗", score:"32% · 每題 2%",
+    instruction:"兩篇短文，共 16 題。點文章裡的空格可直接跳到該題。答案：CADBC DAB ／ DBACB DCA",
+    groups:[
+    {
+      passage:`When a heat wave arrives, most of us simply switch on a fan or an air conditioner. Wild animals enjoy no such convenience, yet the heat that __1__ inside a body must escape somehow, or the animal will not last the afternoon. Millions of years of evolution have therefore equipped desert and grassland species with cooling systems built into their own bodies. __2__, these systems rest on one of two principles: some animals throw off the heat they have already absorbed, while others prevent it from reaching them at all.
+
+The first group turns the body itself into a radiator. Fennec foxes and jackrabbits, both of which live in burning deserts, are famous for their enormous ears. Because those ears are so large __3__ the rest of the body, blood vessels lying just beneath the skin can release warmth straight into the surrounding air. The hotter the day becomes, the more blood __4__ through these vessels, and the faster the animal cools down. The giraffe applies the same principle in a far less obvious way. Beneath each dark patch on its coat lies a network of blood vessels, so a coat that looks purely decorative may in fact be a set of tiny windows through which __5__ heat quietly escapes.
+
+__6__, the second group never lets the heat arrive in the first place. Saharan silver ants are coated in tiny hairs that reflect sunlight away from their bodies and speed up the loss of warmth. __7__ their tiny size, these ants can hunt on sand hot enough to kill almost any other insect, though without that silver coat they would overheat within seconds. The Cape ground squirrel solves the problem with a far simpler tool: it flips its bushy tail forward over its head and carries a patch of portable shade wherever it goes.
+
+Neither strategy is better than the other; each suits a particular body in a particular landscape. Engineers have begun to take notes. Roof paints modeled on the silver ant's coat bounce much of the sunlight that strikes them back into the __8__, and architects are studying the fennec fox's ear. The desert, it seems, solved our summer problem long before we did.`,
+      zh:`熱浪來襲時，我們大多數人只要打開電扇或冷氣就好。野生動物沒有這種便利，然而在體內累積的熱必須以某種方式排出，否則這隻動物撐不過那個下午。因此，數百萬年的演化為沙漠與草原物種配備了內建於身體之中的降溫系統。整體而言，這些系統都建立在兩種原理之一：有些動物把已經吸收的熱排掉，另一些則根本不讓熱抵達身上。
+
+第一類動物把身體本身變成一具散熱器。耳廓狐與長耳大野兔都棲息在酷熱的沙漠中，兩者都以牠們碩大的耳朵聞名。正因為那雙耳朵相對於身體其餘部分是如此之大，位於皮膚下方的血管便能把熱直接釋放到周圍的空氣中。天氣越熱，湧過這些血管的血液就越多，動物也降溫得越快。長頸鹿以一種遠不那麼明顯的方式運用了同樣的原理。在牠皮毛上每一塊深色斑紋的下方，都藏著一整片血管網絡，因此一身看似純粹裝飾的皮毛，實際上可能是一組小小的窗口，多餘的熱就從這些窗口悄悄逸散出去。
+
+相對地，第二類動物根本不讓熱有機會抵達。撒哈拉銀蟻全身覆滿細毛，能把陽光從身上反射開，並加速熱的散失。儘管體型微小，這些螞蟻卻能在足以殺死幾乎任何其他昆蟲的滾燙沙地上獵食——但若沒有那身銀色外衣，牠們幾秒之內就會過熱。開普地松鼠則以更簡單的工具解決問題：牠把蓬鬆的尾巴往前翻到頭頂上，隨身帶著一小片可攜式的陰影。
+
+兩種策略並無優劣之分；各自適合特定景觀中的特定身體。工程師已經開始向牠們取經。仿照銀蟻外衣所研發的屋頂塗料，能把大部分照射其上的陽光反彈回大氣中，而建築師則正在研究耳廓狐的耳朵。看來，沙漠早在我們之前就已經解決了我們的夏天難題。`,
+      questions:[
+        { n:1, kind:"動詞",
+          options:{A:"overflows 溢出",B:"modifies 修改",C:"accumulates 累積",D:"calculates 計算"}, answer:"C",
+          translation:"然而在體內累積的熱必須以某種方式排出。",
+          explain:{
+            A:"overflow 是「溢出（液體滿出容器）」，為不及物動詞，主詞須為容器或液體；熱不會「溢出」身體，它是被排掉的。",
+            B:"modify 是「修改、調整」，受詞應為計畫、設計、行為。",
+            C:"the heat that ______ inside a body 描述熱在體內「越積越多」的狀態，這正是後面 must escape somehow（必須設法排出）的前提——先有累積，才需要排出。",
+            D:"calculate 是「計算」，主詞須為人或電腦。"
+          },
+          notes:[
+            {term:"accumulate", pos:"vi. / vt.", gloss:"累積、堆積（n. accumulation）", ex:"Dust accumulates quickly in an empty house.", exZh:"空屋裡灰塵累積得很快。"},
+            {term:"last", pos:"vi.", gloss:"撐得住、持續。will not last the afternoon 意為「撐不過那個下午」，此處為及物用法。"}
+          ]},
+
+        { n:2, kind:"轉承語",
+          options:{A:"Overall 整體而言",B:"Besides 此外",C:"Otherwise 否則",D:"Meanwhile 同時"}, answer:"A",
+          translation:"整體而言，這些系統都建立在兩種原理之一。",
+          explain:{
+            A:"空格後的句子把所有降溫系統歸納成 one of two principles（兩種原理之一），是一個「總括性」的陳述。Overall 正是用來帶出通則或總結。",
+            B:"Besides 是「此外」，用於補充新的一項；但這句不是補充，而是把前面說的東西收攏歸類。",
+            C:"Otherwise 是「否則」，須有一個條件在前面；前句只是陳述事實，沒有條件。",
+            D:"Meanwhile 是「同時」，表兩件事並行發生，但此處沒有時間上的並列關係。"
+          },
+          notes:[
+            {term:"Overall", pos:"adv.", gloss:"整體而言、大致上（＝In general／On the whole）", ex:"Overall, the response has been positive.", exZh:"整體而言，反應是正面的。"},
+            {term:"rest on", pos:"phr. v.", gloss:"以…為基礎、取決於（＝be based on）", ex:"The whole case rests on one witness.", exZh:"整起案件都建立在一位證人身上。"}
+          ]},
+
+        { n:3, kind:"介系詞片語",
+          options:{A:"in the face of 面對",B:"in contrast to 與…形成對比",C:"in terms of 就…而言",D:"in proportion to 相對於…的比例"}, answer:"D",
+          translation:"正因為那雙耳朵相對於身體其餘部分是如此之大。",
+          explain:{
+            A:"in the face of 是「面對（困境、危險）」，後接的應是威脅或阻力，不是身體部位。",
+            B:"in contrast to 是「與…相反」，強調兩者性質對立；但耳朵和身體不是對立的東西，這裡談的是大小比例。",
+            C:"in terms of 是「就…方面而言」，用來限定討論的範圍，但句中已用 so large 說明程度，需要的是比較的基準。",
+            D:"耳廓狐的耳朵之所以引人注目，是因為它「相對於身體比例」極大。in proportion to 正是表達這種比例關係，也解釋了為什麼散熱效率高——表面積相對於體積越大，散熱越快。"
+          },
+          notes:[
+            {term:"in proportion to", pos:"phr.", gloss:"與…成比例、相對於…（反義 out of proportion to 與…不成比例）", ex:"Pay should rise in proportion to experience.", exZh:"薪資應與年資成比例調升。"},
+            {term:"both of which", pos:"關係代名詞", gloss:"第二段的 Fennec foxes and jackrabbits, both of which live in... 是「介系詞＋關係代名詞」的補述用法，不可用 that。"}
+          ]},
+
+        { n:4, kind:"動詞",
+          options:{A:"slams 猛力關上、猛撞",B:"surges 洶湧奔流",C:"dominates 支配",D:"fastens 繫緊"}, answer:"B",
+          translation:"天氣越熱，湧過這些血管的血液就越多。",
+          explain:{
+            A:"slam 是「猛力關上（門）」或「猛撞」，帶有撞擊聲的意象，不能描述血液在血管中流動。",
+            B:"surge 指液體、人群「大量而迅速地湧動」。The hotter..., the more blood surges through... 描述血流量隨溫度上升而急遽增加，語意與畫面都合。",
+            C:"dominate 是「支配、主宰」，主詞通常是人、國家或某種因素。",
+            D:"fasten 是「繫緊、扣上」（fasten your seatbelt），與流動無關。"
+          },
+          notes:[
+            {term:"surge", pos:"vi. / n.", gloss:"洶湧、激增；名詞為「激增、浪湧」", ex:"Demand surged after the announcement.", exZh:"消息宣布後需求激增。"},
+            {term:"The + 比較級..., the + 比較級...", pos:"句型", gloss:"越…就越…。本段連用兩次（The hotter... the more blood... and the faster...），是全文最明顯的句型線索。"}
+          ]},
+
+        { n:5, kind:"形容詞",
+          options:{A:"noticeable 明顯的",B:"permanent 永久的",C:"excess 多餘的",D:"coarse 粗糙的"}, answer:"C",
+          translation:"多餘的熱就從這些窗口悄悄逸散出去。",
+          explain:{
+            A:"noticeable 是「明顯可察覺的」，但同一句用了 quietly escapes（悄悄逸散），語氣正好相反。",
+            B:"permanent 是「永久的」，熱是不斷產生又不斷排掉的，不會是永久的。",
+            C:"全文主題是「把體內多出來的熱排掉」，第一段的 the heat that accumulates inside a body must escape 已經定調。excess heat（多餘的熱）正是要被排出的那一部分。注意 excess 在此為形容詞。",
+            D:"coarse 是「（質地）粗糙的」，形容布料、沙、頭髮，不能形容熱。"
+          },
+          notes:[
+            {term:"excess", pos:"adj. / n.", gloss:"多餘的、過量的；名詞為「過量」。形容詞 excessive 則帶「過度而有害」的貶意。", ex:"Drain off any excess oil.", exZh:"把多餘的油瀝掉。"},
+            {term:"through which", pos:"關係詞", gloss:"介系詞＋關係代名詞，先行詞為 tiny windows；還原後為 heat quietly escapes through the windows。"}
+          ]},
+
+        { n:6, kind:"轉承語",
+          options:{A:"For example 舉例來說",B:"Therefore 因此",C:"Besides 此外",D:"In contrast 相對地"}, answer:"D",
+          translation:"相對地，第二類動物根本不讓熱有機會抵達。",
+          explain:{
+            A:"For example 用來舉例說明前面的通則，但這一段開啟的是「另一類」動物，不是前一類的例子。",
+            B:"Therefore 表因果，但第二類的策略並非第一類造成的結果。",
+            C:"Besides 是「此外」，語氣為並列補充，無法凸顯兩種策略的對立。",
+            D:"第一段已經把動物分成兩組：some animals throw off the heat they have already absorbed, while others prevent it from reaching them at all。第二段講第一組，這一段講「相反做法」的第二組，因此要用表對比的轉承語。"
+          },
+          notes:[
+            {term:"In contrast", pos:"phr.", gloss:"相對地、對比之下（in contrast to sth 則後接名詞）", ex:"In contrast, sales fell in Europe.", exZh:"相對地，歐洲的銷售下滑了。"},
+            {term:"in the first place", pos:"phr.", gloss:"一開始、根本（never lets the heat arrive in the first place ＝根本不讓熱抵達）"}
+          ]},
+
+        { n:7, kind:"介系詞／連接詞",
+          options:{A:"Despite 儘管（介系詞）",B:"However 然而（副詞）",C:"Even though 儘管（連接詞）",D:"Through 透過、藉由（介系詞）"}, answer:"A",
+          translation:"儘管體型微小，這些螞蟻卻能在滾燙的沙地上獵食。",
+          explain:{
+            A:"這題要分兩步。先看結構：空格後是 their tiny size 這個名詞片語，因此需要介系詞，(B)(C) 先出局。再比語意：螞蟻能在燙沙上活動是「雖然體型小卻辦得到」的讓步關係，Despite 正合。",
+            B:"However 是副詞，不能引導名詞片語；若要用它，須寫成 However, these ants can...，且前後都要是完整句子。",
+            C:"Even though 是連接詞，後面必須接「主詞＋動詞」的完整子句，不能只接名詞片語。",
+            D:"Through 雖然也是介系詞、文法上接得住名詞片語，但語意是「透過、藉由」，會變成「螞蟻靠著體型微小才能在燙沙上獵食」。文中說牠們靠的是反射陽光的銀色細毛（without that silver coat they would overheat within seconds），體型小反而是不利條件，因果完全相反。"
+          },
+          notes:[
+            {term:"Despite / In spite of + N", pos:"介系詞", gloss:"儘管…；後面只能接名詞或動名詞。要接子句得用 Although／Though／Even though。", ex:"Despite the heat, they kept working.", exZh:"儘管天熱，他們仍持續工作。"},
+            {term:"看空格後面決定詞性", pos:"技巧", gloss:"後接名詞→介系詞；後接子句→連接詞；前後皆為完整句且有逗號→副詞。刪完詞性不合的選項後，若還剩一個以上，再回頭比語意。"},
+            {term:"讓步 vs. 手段", pos:"辨析", gloss:"Despite 表「儘管有這個不利條件」，Through 表「藉由這個有利條件」。兩者都接名詞，差別全在因果方向。"}
+          ]},
+
+        { n:8, kind:"名詞",
+          options:{A:"blend 混合物",B:"atmosphere 大氣層；氣氛",C:"setting 環境；背景",D:"capital 首都；資金"}, answer:"B",
+          translation:"能把大部分照射其上的陽光反彈回大氣中。",
+          explain:{
+            A:"blend 是「混合物」（a blend of coffee），陽光不會被反彈回一個「混合物」裡。",
+            B:"這句在講仿生屋頂塗料把陽光反射回去。陽光從天空來，被反彈回去的地方就是大氣層。bounce ... back into the atmosphere 是描述輻射散熱的固定說法。",
+            C:"setting 是「環境、場景」，過於籠統，且不與 bounce back into 搭配。",
+            D:"capital 是「首都、資金、大寫字母」，語意完全不合。"
+          },
+          notes:[
+            {term:"atmosphere", pos:"n.", gloss:"大氣層；也指「氣氛」（a relaxed atmosphere）", ex:"The gas is released into the atmosphere.", exZh:"這種氣體被排放到大氣中。"},
+            {term:"take notes", pos:"phr.", gloss:"做筆記；本文 Engineers have begun to take notes 是「工程師開始向牠們取經」的雙關用法。"}
+          ]}
+      ]
+    },
+    {
+      passage:`Greenland is easier to admire than to imagine. It is the largest island on Earth, big enough to hold Taiwan more than fifty times over, and yet almost none of it is available for people to live on. More than eighty percent of the land __9__ in ice and snow, settlement is squeezed onto a narrow ribbon of coast. Yet the entire territory is home to fewer than 60,000 __10__. Denmark still handles foreign affairs, but Greenlanders govern themselves, and Inuit tradition, not Danish administration, sets the rhythm of daily life. What visitors soon discover is that the calendar matters here as much as the map: Greenland is really two countries sharing one coastline.
+
+The first arrives in June. North of the Arctic Circle, the sun may remain above the horizon around the clock for weeks, and the landscape still glows gold at two in the morning, while hikers, kayakers, and whale watchers keep hours that would look absurd anywhere else. __11__, this endless brightness is harder to live with than it sounds. Travelers accustomed to normal day-night cycles often __12__ how heavily it presses on the body, and sleep becomes something that has to be scheduled rather than simply taken.
+
+By late summer in the far north, the midnight sun gradually __13__ real darkness. Evenings turn long and starry, the Northern Lights move overhead in slow green sheets, and dog sledding and skiing replace kayaks and hiking boots. __14__, a landscape this powerful is not always gentle. Weather closes in without warning, small planes stay on the ground, and visitors can find themselves __15__ in a village of two hundred people, waiting days for the sky to clear.
+
+What finally makes the island memorable, though, is smaller than any glacier. In Nuuk, the capital, brightly painted houses climb above the fjord, the National Museum tells the Inuit story in an Inuit voice, and kitchens serve seafood caught that morning beside musk ox. The community is tightly bound, and its respect for the land is deep enough to shape architecture, diet, and conversation alike. Greenland is __16__ worth seeing at least once in a lifetime, not because it is beautiful, though it is, but because it quietly rearranges your sense of scale.`,
+      zh:`格陵蘭是一個讚嘆起來容易、想像起來困難的地方。它是地球上最大的島嶼，大到足以裝下五十多個台灣，然而其中幾乎沒有一處適合人居住。八成以上的土地覆蓋在冰雪之下，聚落被擠壓在一條狹窄的海岸線上。然而整個領地的居民不到六萬人。丹麥仍掌管外交事務，但格陵蘭人自治，且主導日常生活節奏的是因紐特傳統，而非丹麥的行政體系。訪客很快就會發現，在這裡日曆和地圖同樣重要：格陵蘭其實是共用一條海岸線的兩個國家。
+
+第一個格陵蘭在六月到來。在北極圈以北，太陽可能連續數週整天不落，凌晨兩點的地景依然閃著金光，而健行者、獨木舟愛好者與賞鯨客所遵循的作息，在其他任何地方看來都會顯得荒謬。事實上，這種無盡的明亮遠比聽起來更難以適應。習慣了正常日夜循環的旅人往往低估了它對身體的壓迫有多沉重，而睡眠變成一件必須刻意安排、而非自然發生的事。
+
+到了遠北地區的夏末，午夜太陽逐漸讓位給真正的黑暗。夜晚變得漫長而星光燦爛，北極光以緩慢的綠色簾幕在頭頂流動，狗拉雪橇與滑雪取代了獨木舟與登山靴。然而，如此壯闊的地景並不總是溫柔的。天氣說變就變，小型飛機停飛，訪客可能發現自己受困在一個兩百人的村莊裡，等上好幾天才等到天空放晴。
+
+不過，最終讓這座島嶼令人難忘的，卻是比任何冰河都更小的東西。在首府努克，色彩鮮豔的房屋沿著峽灣層層攀升，國家博物館以因紐特人自己的聲音訴說因紐特的故事，廚房裡端出的是當天早上捕獲的海鮮，配上麝香牛肉。這個社群緊密相繫，而它對土地的敬意深到足以形塑建築、飲食與談話的方式。格陵蘭無疑值得一生至少造訪一次——不是因為它美（雖然它確實美），而是因為它會悄悄地重新排列你對「尺度」的感受。`,
+      questions:[
+        { n:9, kind:"分詞構句",
+          options:{A:"is blanketed",B:"blankets",C:"to blanket",D:"blanketed"}, answer:"D",
+          translation:"八成以上的土地覆蓋在冰雪之下，聚落被擠壓在狹窄的海岸線上。",
+          explain:{
+            A:"is blanketed 是完整的被動語態動詞。填進去之後，逗號前後會變成兩個各自獨立的完整子句（the land is blanketed... , settlement is squeezed...），中間卻只有一個逗號、沒有連接詞——這就是英文寫作大忌的「逗號連接」（comma splice）。要用它，逗號必須改成分號或補上 and。",
+            B:"blankets 為主動，主詞會變成「土地覆蓋別的東西」，方向顛倒——土地是「被」冰雪覆蓋的。且同樣會造成逗號連接的問題。",
+            C:"to blanket 為不定詞，表目的或未來，與句意及結構皆不合。",
+            D:"這是「獨立分詞構句」：More than eighty percent of the land blanketed in ice and snow ＝ With more than eighty percent of the land blanketed in ice and snow。它不是主要子句，只是用來補述背景，因此逗號後接主要子句 settlement is squeezed... 完全合法。因為 land 與 blanket 是被動關係，所以用過去分詞。"
+          },
+          notes:[
+            {term:"獨立分詞構句", pos:"文法", gloss:"分詞片語有自己的主詞（與主要子句主詞不同），用來補述背景。主動用 V-ing，被動用 p.p.，前面可加 with。", ex:"The work finished, we all went home.", exZh:"工作完成後，我們就都回家了。"},
+            {term:"comma splice 逗號連接", pos:"寫作", gloss:"兩個完整子句之間只用逗號相連是錯誤的。正確做法有四：改用分號、加上對等連接詞、拆成兩句，或把其中一句降級為分詞構句。本題考的正是最後一種。", ex:"誤：It rained, we stayed home.／正：It rained, so we stayed home."},
+            {term:"blanket", pos:"vt.", gloss:"覆蓋（如毯子般整片蓋住）；名詞為「毯子」", ex:"Snow blanketed the whole valley.", exZh:"白雪覆蓋了整座山谷。"}
+          ]},
+
+        { n:10, kind:"名詞",
+          options:{A:"luxuries 奢侈品",B:"inhabitants 居民",C:"infrastructure 基礎建設",D:"impressions 印象"}, answer:"B",
+          translation:"然而整個領地的居民不到六萬人。",
+          explain:{
+            A:"luxuries 是「奢侈品」，與前文談的人口與聚落無關。",
+            B:"兩個線索都指向它。第一，句型是 is home to（是…的家園），後面接的必須是「居住在此的人或生物」。第二，數量詞用的是 fewer（修飾可數名詞複數），空格必為可數複數。前一句剛說聚落被擠在狹窄海岸線上，接著講人口總數也順理成章。",
+            C:"infrastructure 為不可數名詞，不能用 fewer 修飾，也不能加 s。這是文法上的直接排除。",
+            D:"impressions 是「印象」，與人口數的語境不合。"
+          },
+          notes:[
+            {term:"fewer vs. less", pos:"辨析", gloss:"fewer 修飾可數名詞複數（fewer people），less 修飾不可數名詞（less water）。看到 fewer 就知道空格是可數複數。", ex:"Fewer than ten students signed up.", exZh:"報名的學生不到十人。"},
+            {term:"inhabitant", pos:"n.", gloss:"居民（v. inhabit 居住於，為及物動詞，不加 in）"},
+            {term:"be home to", pos:"phr.", gloss:"是…的所在地／家園；主詞為地方，後接居住其中的人、動物或機構。", ex:"The island is home to over 200 bird species.", exZh:"這座島是兩百多種鳥類的棲地。"}
+          ]},
+
+        { n:11, kind:"轉承語",
+          options:{A:"In reality 事實上",B:"To sum up 總而言之",C:"In this way 用這種方式",D:"Generally speaking 一般而言"}, answer:"A",
+          translation:"事實上，這種無盡的明亮遠比聽起來更難以適應。",
+          explain:{
+            A:"前文把永晝寫得浪漫（凌晨兩點仍閃著金光、人們作息自由），空格後卻說 harder to live with than it sounds（比聽起來更難以忍受）。In reality 正是用來戳破表象、帶出實情。",
+            B:"To sum up 是「總結」，但這段才剛開始鋪陳，後面還有整段在談身體的負擔。",
+            C:"In this way 表方法，但空格後講的是感受，不是做法。",
+            D:"Generally speaking 是「一般而言」，用來帶出通則；但這裡是「表象 vs. 實情」的轉折，不是通則。"
+          },
+          notes:[
+            {term:"In reality", pos:"phr.", gloss:"事實上（常用來推翻前面的印象或說法）", ex:"It looks simple; in reality it takes years.", exZh:"它看似簡單，實際上要花好幾年。"},
+            {term:"around the clock", pos:"phr.", gloss:"日夜不停、二十四小時"}
+          ]},
+
+        { n:12, kind:"動詞",
+          options:{A:"enhance 提升",B:"dissipate 驅散、消散",C:"underestimate 低估",D:"involve 涉及"}, answer:"C",
+          translation:"習慣了正常日夜循環的旅人往往低估了它對身體的壓迫有多沉重。",
+          explain:{
+            A:"enhance 是「提升、增強」，受詞應為品質、效果、能力，且語意上旅人不會「提升壓迫感」。",
+            B:"dissipate 是「（使）消散」，主詞多為霧、熱、疑慮，旅人無法讓永晝的壓迫消散。",
+            C:"這句呼應前一句的 harder to live with than it sounds——因為「聽起來沒那麼難」，所以旅人才會「低估」它的影響。前後兩句是同一個意思的兩種說法。",
+            D:"involve 是「涉及、牽涉」，主詞應為事件或工作，接在旅人後面語意不通。"
+          },
+          notes:[
+            {term:"underestimate ↔ overestimate", pos:"辨析", gloss:"低估／高估。under- 與 over- 是最常考的一組反義字首。", ex:"Never underestimate a quiet opponent.", exZh:"千萬別低估一個安靜的對手。"},
+            {term:"be accustomed to + N/V-ing", pos:"phr.", gloss:"習慣於…；to 是介系詞，後面不接原形動詞。"}
+          ]},
+
+        { n:13, kind:"片語動詞",
+          options:{A:"beats down 曝曬；擊倒",B:"gives way to 讓位給",C:"sets apart 使有所區別",D:"makes up for 彌補"}, answer:"B",
+          translation:"午夜太陽逐漸讓位給真正的黑暗。",
+          explain:{
+            A:"beat down 指陽光「無情曝曬」（The sun beat down on us），但那是強調持續照射，與 gradually 和後文的黑暗相反。",
+            B:"這一段寫的是季節交替：永晝結束，黑夜回來。give way to 意為「被…取代、讓位給」，與 gradually 搭配正好描寫這種漸進的更替，也呼應下一句 dog sledding and skiing replace kayaks and hiking boots 的 replace。",
+            C:"set apart 是「使與眾不同」，須有比較對象，且與時序更替無關。",
+            D:"make up for 是「彌補（損失、不足）」，黑暗不是用來彌補什麼的。"
+          },
+          notes:[
+            {term:"give way to", pos:"phr. v.", gloss:"被…取代；也指「讓路、屈服」", ex:"Anger gave way to sadness.", exZh:"憤怒轉為悲傷。"},
+            {term:"文章結構是最好的線索", pos:"技巧", gloss:"這題不必逐一分析片語意思——只要看出整段在寫「永晝→永夜」的更替，答案就只剩一個。"}
+          ]},
+
+        { n:14, kind:"轉承語",
+          options:{A:"In other words 換句話說",B:"In that case 那樣的話",C:"Hence 因此",D:"Nevertheless 然而"}, answer:"D",
+          translation:"然而，如此壯闊的地景並不總是溫柔的。",
+          explain:{
+            A:"In other words 用來換句話說、重述前意；但空格後是新的、相反的訊息，不是重述。",
+            B:"In that case 是「那樣的話」，須承接一個假設或條件，前文並無條件。",
+            C:"Hence 表因果（因此），但「地景不溫柔」不是前面美景描述的結果。",
+            D:"前文剛寫完北極光、星空、狗拉雪橇這些美好畫面，空格後立刻轉為天氣驟變、班機停飛、旅客受困。前後語意相反，需要強烈的轉折語。"
+          },
+          notes:[
+            {term:"Nevertheless", pos:"adv.", gloss:"儘管如此、然而（＝Nonetheless）", ex:"The plan is risky; nevertheless, we will try.", exZh:"這個計畫有風險，但我們仍要一試。"},
+            {term:"close in", pos:"phr. v.", gloss:"（天氣、夜色）逼近、籠罩；也指「包圍」"}
+          ]},
+
+        { n:15, kind:"形容詞",
+          options:{A:"fatal 致命的",B:"entitled 有權享有的",C:"stranded 受困的、進退不得的",D:"remarkable 卓越的"}, answer:"C",
+          translation:"訪客可能發現自己受困在一個兩百人的村莊裡。",
+          explain:{
+            A:"fatal 是「致命的」，通常修飾事故、疾病或錯誤，且文中只說旅客受困，沒有生命危險。",
+            B:"entitled 是「有資格獲得…」，須搭配 to（be entitled to sth），語意也完全不合。",
+            C:"前一句說天氣驟變、小型飛機停飛，後面又說 waiting days for the sky to clear（等好幾天等天空放晴）——這正是「因交通中斷而被困住」。find oneself stranded 是常見搭配。",
+            D:"remarkable 是「非凡的」，屬正面評價，與受困的處境不合。"
+          },
+          notes:[
+            {term:"stranded", pos:"adj.", gloss:"（因交通中斷等）受困的、滯留的", ex:"Hundreds of passengers were stranded at the airport.", exZh:"數百名乘客滯留機場。"},
+            {term:"find oneself + adj./V-ing", pos:"句型", gloss:"（不自覺地）發現自己處於某種狀態", ex:"She found herself agreeing with him.", exZh:"她發覺自己竟同意了他的看法。"}
+          ]},
+
+        { n:16, kind:"副詞",
+          options:{A:"undoubtedly 無疑地",B:"annually 每年地",C:"rapidly 迅速地",D:"inevitably 不可避免地"}, answer:"A",
+          translation:"格陵蘭無疑值得一生至少造訪一次。",
+          explain:{
+            A:"這是全文的結論句。整篇文章從地理、季節寫到人文，最後給出肯定的推薦，undoubtedly 正是用來強化這個判斷的語氣。",
+            B:"annually 是「每年」，但句中已有 at least once in a lifetime（一生至少一次），時間頻率互相矛盾。",
+            C:"rapidly 是「迅速地」，無法修飾 worth seeing 這種價值判斷。",
+            D:"inevitably 是「不可避免地」，帶有「無可奈何」的意味；但作者的語氣是推薦，不是無奈。"
+          },
+          notes:[
+            {term:"undoubtedly", pos:"adv.", gloss:"無疑地、肯定地（＝without doubt）", ex:"She is undoubtedly the best candidate.", exZh:"她無疑是最佳人選。"},
+            {term:"not because A, but because B", pos:"句型", gloss:"不是因為 A，而是因為 B。全文最後一句用它做結，是很值得學起來的收尾寫法。"}
+          ]}
+      ]
+    }]
+  },
+
+  /* ===================== 二、文意選填 ===================== */
+  {
+    id:"bank", label:"二、文意選填", score:"20% · 每題 2%",
+    instruction:"十個空格，選項不重複使用。答題時請忽略大小寫。答案：FCIHB DEJAG",
+    bank:{A:"staged 舉辦、籌辦",B:"once 一旦",C:"sponges 海綿",D:"investing in 投資於",E:"parties 當事方",F:"while 雖然",G:"calculated 經過計算的",H:"play a role 起作用",I:"compact 緊實的",J:"issuing 發布"},
+    groups:[{
+      passage:`__17__ concrete keeps a modern city clean in ordinary weather, it also removes almost every surface that once drank the rain. Before the pavement arrived, roots and leaf litter worked as natural __18__, holding water and releasing it slowly; today the soil beneath the road is __19__ enough to shed rain as efficiently as a roof does. So when the sky opens, the rain does not sink; it runs, gathering speed until narrow streets carry torrents powerful enough to lift a parked car. This is the flash flood: not the patient rise of a seasonal river, but an ambush that arrives within six hours of the first drop and leaves as suddenly.
+
+The sky has changed as well. Warmer air holds more moisture and releases it faster, so a storm that once lasted an afternoon can now empty itself in an hour. Floods appear in places that rarely flooded before, from mountain valleys to dry creek beds. Deforestation upstream and unplanned building on hillsides __20__ too, sending water toward the city long before anyone downstream has been warned. __21__ the drains are full, there is nowhere left for the volume to go. Engineers therefore argue that __22__ ever-larger pipes is a losing race, since storm intensity is increasing faster than drainage systems can be expanded.
+
+The alternative being engineered across East Asia is softer ground: permeable pavements, rooftop gardens, and restored wetlands that hold rain where it falls. But green infrastructure only works if someone tends it, and rooftop gardens that are poorly maintained become little more than expensive roofs. Because a city rarely builds these schemes alone, both __23__ to the contract must agree from the outset which of them repairs what. Public preparedness matters just as much. Within minutes of the city __24__ a warning, families should already be moving toward higher ground, and the drills __25__ by city governments each summer repeat one rule: never drive into moving water. Knee-deep water can sweep a car away, so entering a flooded underpass is never a(n) __26__ risk; it is simply a gamble.
+
+Urban flooding is becoming a universal problem, but a prepared city and an alert public can turn catastrophe into inconvenience.`,
+      zh:`雖然混凝土讓現代城市在一般天氣下保持整潔，它同時也移除了幾乎所有曾經吸收雨水的表面。在鋪面出現之前，樹根與落葉層像天然的海綿一樣運作，把水留住再慢慢釋放；如今道路底下的土壤已經緊實到能像屋頂一樣有效地把雨水排開。因此當天空一開，雨水不再下滲，而是奔流，一路加速，直到狹窄的街道承載著足以掀起一輛停放車輛的急流。這就是暴洪：它不是季節性河川那種耐心的水位上升，而是在第一滴雨落下後六小時內就到來、又同樣突然離去的一場伏擊。
+
+天空本身也變了。較溫暖的空氣能容納更多水氣，並且釋放得更快，因此一場過去要下一整個下午的暴雨，如今可能在一小時內就傾瀉而盡。洪水出現在以往鮮少淹水的地方，從山谷到乾涸的河床都是。上游的濫伐與山坡地的無序開發也起了作用，在下游任何人收到警告之前，就把水送往城市。一旦排水道滿了，這麼大的水量就無處可去。因此工程師主張，投資於越來越大的管線是一場注定落敗的競賽，因為暴雨強度增加的速度，比排水系統能夠擴建的速度更快。
+
+東亞各地正在打造的替代方案是更柔軟的地面：透水鋪面、屋頂花園，以及讓雨水就地留存的復育濕地。但綠色基礎建設唯有在有人照料的前提下才有效，疏於維護的屋頂花園不過是昂貴的屋頂罷了。由於城市很少獨力興建這類設施，合約的雙方當事人必須從一開始就講清楚誰負責維修什麼。公眾的整備同樣重要。在城市發布警報後的幾分鐘內，家庭就應該已經在往高處移動，而各地市政府每年夏天舉辦的演習都在重複一條規則：絕對不要開車駛入流動的水中。及膝的水就能把一輛車沖走，所以駛入淹水的地下道從來不是一種經過計算的風險，那只是一場豪賭。
+
+都市洪災正在成為一個普世問題，但一座有準備的城市與一群警覺的民眾，能夠把災難變成不便。`,
+      questions:[
+        { n:17, kind:"連接詞", answer:"F", answerText:"while",
+          why:"空格在句首，後面接的是完整子句（concrete keeps a modern city clean），逗號後又是另一個完整子句，因此需要連接詞——選項中的連接詞只有 while 與 once。語意上，前半句講混凝土的好處（保持城市整潔），後半句用 also removes 帶出壞處，兩者形成讓步關係，所以是 while（雖然）。once（一旦）表條件，語意不合。",
+          notes:[{term:"while", pos:"conj.", gloss:"雖然（讓步）；當…的時候；然而（對比）。一字三義，須看上下文判斷。", ex:"While the price is high, the quality justifies it.", exZh:"雖然價格偏高，品質對得起這個價錢。"}]},
+
+        { n:18, kind:"名詞", answer:"C", answerText:"sponges",
+          why:"worked as natural ______ 需要名詞，且 as 前的 natural 是形容詞在修飾它。關鍵線索在緊接的分詞片語 holding water and releasing it slowly（把水留住再慢慢釋放）——這正是海綿的功能。此外空格前沒有冠詞，所以要用複數 sponges。",
+          notes:[{term:"work as", pos:"phr.", gloss:"起…的作用、充當…（＝serve as／function as）", ex:"The scarf works as a mask in a pinch.", exZh:"必要時這條圍巾可以當口罩用。"},
+                 {term:"leaf litter", pos:"n.", gloss:"落葉層（森林地表由枯枝落葉堆積而成的一層）"}]},
+
+        { n:19, kind:"形容詞", answer:"I", answerText:"compact",
+          why:"is ______ enough to shed rain 的結構是「be ＋ 形容詞 ＋ enough to V」，所以空格必須是形容詞。語意上，土壤要能像屋頂一樣把雨水排開，代表它已經被壓得很密實、水滲不進去。compact 正是「緊實、密實」。注意分號前的 Before the pavement arrived 與這裡形成古今對比：以前鬆軟能吸水，現在緊實不吸水。",
+          notes:[{term:"compact", pos:"adj. / vt.", gloss:"緊實的、密實的；也指「小巧的」（a compact car）。當動詞時為「壓實」。", ex:"Heavy machinery compacts the soil.", exZh:"重型機具會把土壤壓實。"},
+                 {term:"adj. + enough to V", pos:"句型", gloss:"夠…足以…；注意 enough 修飾形容詞時要放在形容詞「後面」。"}]},
+
+        { n:20, kind:"動詞片語", answer:"H", answerText:"play a role",
+          why:"主詞是 Deforestation upstream and unplanned building on hillsides（兩個並列的名詞片語），後面接 too，需要一個主要動詞。選項中能當動詞用且主詞為複數的，只有 play a role。語意上，這句在說濫伐與開發「也是造成洪災的原因之一」，play a role（起作用、扮演角色）正合。",
+          notes:[{term:"play a role / part in", pos:"phr.", gloss:"在…中起作用、扮演角色", ex:"Diet plays a key role in recovery.", exZh:"飲食在康復過程中扮演關鍵角色。"},
+                 {term:"deforestation", pos:"n.", gloss:"濫伐森林（de- 去除 ＋ forest 森林 ＋ -ation）"}]},
+
+        { n:21, kind:"連接詞", answer:"B", answerText:"once",
+          why:"空格在句首，後接完整子句 the drains are full，逗號後又是另一個完整子句，所以需要連接詞——while 已用於第 17 題，剩下 once。語意上，「排水道一滿，水就無處可去」是條件與結果的關係，once（一旦…就…）完全吻合。",
+          notes:[{term:"once", pos:"conj.", gloss:"一旦…就…（＝as soon as）。當連接詞時後接子句，不可與副詞的 once「曾經、一次」混淆。", ex:"Once you start, you can't stop.", exZh:"你一旦開始就停不下來了。"}]},
+
+        { n:22, kind:"動名詞", answer:"D", answerText:"investing in",
+          why:"argue that ______ ever-larger pipes is a losing race——that 子句需要一個主詞，而後面的動詞是單數 is，所以主詞必須是動名詞片語。investing in ever-larger pipes（投資於越來越大的管線）語意與結構皆通，也呼應下一句 drainage systems can be expanded。",
+          notes:[{term:"動名詞當主詞用單數動詞", pos:"文法", gloss:"Investing in new pipes is expensive.（不是 are）。這是本題除語意外的第二層線索。"},
+                 {term:"a losing race", pos:"phr.", gloss:"注定落敗的競賽；類似說法有 a losing battle（打不贏的仗）"}]},
+
+        { n:23, kind:"名詞", answer:"E", answerText:"parties",
+          why:"both ______ to the contract 需要一個可數名詞複數（both 後接複數），且與 contract 搭配。party 除了「派對、政黨」，在法律語境中指「當事人、締約方」，both parties to the contract 是固定說法。後半句 which of them repairs what（誰負責修什麼）也印證了這是兩個立約方。",
+          notes:[{term:"party", pos:"n.", gloss:"（合約、訴訟的）當事方；也指「派對、政黨」。the parties to an agreement 為固定用法。", ex:"Both parties signed the agreement.", exZh:"雙方都簽署了這份協議。"},
+                 {term:"from the outset", pos:"phr.", gloss:"從一開始（＝from the beginning）"}]},
+
+        { n:24, kind:"動名詞", answer:"J", answerText:"issuing",
+          why:"Within minutes of the city ______ a warning——of 是介系詞，後面接 the city 作為動名詞的意義上主詞，因此空格必須是動名詞。issue a warning（發布警報）是固定搭配，且後面接受詞 a warning，符合及物用法。",
+          notes:[{term:"issue", pos:"vt.", gloss:"發布（警告、聲明、簽證）；名詞為「議題、期號」", ex:"The bureau issued a typhoon warning.", exZh:"氣象局發布了颱風警報。"},
+                 {term:"介系詞 + 名詞 + V-ing", pos:"文法", gloss:"動名詞可以有自己的意義上主詞，置於動名詞之前。"}]},
+
+        { n:25, kind:"過去分詞", answer:"A", answerText:"staged",
+          why:"the drills ______ by city governments 是「名詞＋過去分詞片語」的後位修飾（＝the drills that are staged by...），看到 by 就知道是被動，空格要填過去分詞。stage 當動詞是「舉辦、籌辦（活動）」，drills（演習）是被政府舉辦的，關係正確。",
+          notes:[{term:"stage", pos:"vt.", gloss:"舉辦、籌辦（活動、抗議）；也指「上演」。名詞為「舞台、階段」。", ex:"Workers staged a protest outside the plant.", exZh:"工人在廠外發動了一場抗議。"},
+                 {term:"drill", pos:"n.", gloss:"演習、操練（fire drill 消防演習）；也指「鑽頭」"}]},
+
+        { n:26, kind:"形容詞", answer:"G", answerText:"calculated",
+          why:"a(n) ______ risk 需要形容詞。決定性線索在分號後：it is simply a gamble（那只是一場豪賭）。作者把「經過計算的風險」與「純粹的賭博」對立起來——駛入淹水地下道不是前者，而是後者。a calculated risk 是固定說法，指「權衡利弊後才承擔的風險」。",
+          notes:[{term:"a calculated risk", pos:"phr.", gloss:"經過評估的風險（明知有風險但認為值得一試）", ex:"Launching early was a calculated risk.", exZh:"提前推出是一項經過評估的冒險。"},
+                 {term:"分號的功能", pos:"技巧", gloss:"分號連接的兩個子句在語意上關係緊密，常是「對比」或「補充說明」。看到分號就往另一邊找線索。"}]}
+      ]
+    }]
+  },
+
+  /* ===================== 三、閱讀測驗 ===================== */
+  {
+    id:"reading", label:"三、閱讀測驗", score:"12% · 每題 2%",
+    instruction:"兩個題組。展開詳解時，文章中的依據句會被標示出來。答案：BBD ABC",
+    groups:[
+    {
+      passage:`In recent years, slow jogging, or super slow running, has become increasingly popular among fitness enthusiasts. This form of exercise emphasizes low-intensity and long-duration running, aiming to improve endurance and reduce the risk of injury by slowing down the running pace. This slower pace helps runners maintain a steady heart rate and reduce cardiovascular strain, which ensures comfort and relaxation throughout the run.
+
+Slow jogging is suitable for a wide range of people, including beginners just starting to run, middle-aged and elderly individuals, and fitness enthusiasts looking to improve their endurance through low-intensity exercise. It is also a great option for those recovering from injuries or with chronic health conditions, as it places less stress on the joints and muscles. However, it is not usually recommended for athletes seeking high-intensity training or needing to quickly improve speed and strength. __28__
+
+Slow jogging requires a gentle running technique without excessive strain. You can start with a 5- to 10-minute warm-up of brisk walking or light stretching. Maintain an upright posture and jog at a pace slightly faster than walking to ensure that you can hold a conversation comfortably. Take short strides, land softly beneath your center of gravity to minimize joint impact, and focus on deep, rhythmic breathing. Before you wrap up your exercise, cool down with slow walking and stretching. If you're new to running or aiming to reduce injury risk, try incorporating it into your routine a couple of times a week. Consistency is key to enjoying its benefits, and it's never too late to start. Remember, slow and steady wins the race!
+
+People considering slow jogging should keep several important tips in mind. Runners should wear proper running shoes for support and cushioning, perform warm-ups and stretches to prevent injury, maintain good posture to reduce pressure on the back and knees, and stay hydrated, especially in hot weather. Avoid pushing yourself too hard, as this can lead to injury, too. With proper technique and preparation, super slow running can not only enhance physical fitness but also bring peace and joy to the mind.`,
+      zh:`近年來，慢跑——或稱超慢跑——在健身愛好者之間越來越受歡迎。這種運動形式強調低強度、長時間的跑步，目的是透過放慢跑步速度來提升耐力並降低受傷風險。這種較慢的節奏有助於跑者維持穩定的心率、減輕心血管的負擔，使整段跑步過程都保持舒適與放鬆。
+
+超慢跑適合各式各樣的人，包括剛開始跑步的初學者、中高齡族群，以及希望透過低強度運動提升耐力的健身愛好者。對於正在從傷勢中恢復、或患有慢性疾病的人來說，它也是很好的選擇，因為它對關節與肌肉造成的壓力較小。然而，對於追求高強度訓練、或需要快速提升速度與力量的運動員而言，通常並不建議採用。他們更適合從事短跑與肌力訓練。
+
+超慢跑需要溫和的跑步技巧，避免過度用力。你可以先用五到十分鐘的快走或輕度伸展來暖身。保持上身挺直，以略快於走路的速度慢跑，確保自己還能舒服地與人交談。步幅要小，讓腳輕柔地落在重心正下方以減少關節衝擊，並專注於深沉而規律的呼吸。結束運動之前，用慢走與伸展來緩和。如果你是跑步新手，或希望降低受傷風險，可以試著每週把它安排進日常作息兩三次。持之以恆是享受其益處的關鍵，而且什麼時候開始都不嫌晚。記住，慢而穩者得勝。
+
+考慮從事超慢跑的人應該謹記幾項重要提醒。跑者應穿著具支撐性與緩衝效果的合適跑鞋、確實暖身與伸展以預防運動傷害、維持良好姿勢以減輕背部與膝蓋的壓力，並且補充足夠水分，在炎熱天氣時尤其重要。也要避免逼自己過頭，因為這同樣可能導致受傷。只要技巧與準備得當，超慢跑不僅能增進體能，也能為心靈帶來平靜與喜悅。`,
+      questions:[
+        { n:27, kind:"細節判斷",
+          stem:"What is true according to the passage?",
+          options:{
+            A:"Slow jogging requires not only a slower pace but also a shorter length of time.　超慢跑不只需要較慢的速度，也需要較短的時間。",
+            B:"Slow jogging places less strain on runners' bodies than regular jogging does.　超慢跑對跑者身體造成的負擔比一般慢跑小。",
+            C:"Slow joggers spread their legs widely while moving at a steady pace.　超慢跑者以穩定速度前進時會把腿張得很開。",
+            D:"Slow jogging credits most of its popularity to its vital impact on weight loss.　超慢跑的人氣主要歸功於它對減重的顯著效果。"
+          }, answer:"B",
+          translation:"根據本文，下列何者為真？",
+          explain:{
+            A:"與文章相反。第一段明說 long-duration running（長時間的跑步），不是較短的時間。這個選項把「慢」偷換成「短」。",
+            B:"第一段說較慢的節奏可以 reduce cardiovascular strain（減輕心血管負擔），第二段又說 it places less stress on the joints and muscles（對關節與肌肉壓力較小）。兩處都直接支持這個敘述。",
+            C:"與文章相反。第三段明說 Take short strides（步幅要小），不是把腿張得很開。",
+            D:"減重完全沒有出現在文章中。文中提到的好處是耐力、降低受傷風險、體能與心靈的平靜。"
+          },
+          evidence:"It is also a great option for those recovering from injuries or with chronic health conditions, as it places less stress on the joints and muscles.",
+          notes:[
+            {term:"strain", pos:"n. / vt.", gloss:"負擔、拉傷；使緊繃", ex:"Running on concrete puts strain on the knees.", exZh:"在水泥地上跑步會對膝蓋造成負擔。"},
+            {term:"stride", pos:"n.", gloss:"步幅、大步。take short strides 意為「步伐要小」。"}
+          ]},
+
+        { n:28, kind:"句子插入",
+          stem:"Which of the following sentences best fits in the blank in the second paragraph?",
+          options:{
+            A:"\"Slow jogging may bore them, but the long-term rewards can leave them speechless.\"　超慢跑可能讓他們覺得無聊，但長期的回報會讓他們說不出話來。",
+            B:"\"They will do well to engage in sprinting and strength training exercises instead.\"　他們反而更適合從事短跑與肌力訓練。",
+            C:"\"Convinced of the benefits, they often advise fellow runners on how to make the most of it.\"　由於深信其益處，他們常建議其他跑者如何充分利用它。",
+            D:"\"Slow jogging is, after all, designed with their particular needs in mind.\"　畢竟超慢跑本來就是針對他們的特殊需求所設計的。"
+          }, answer:"B",
+          translation:"下列哪一個句子最適合填入第二段的空格？",
+          explain:{
+            A:"前一句說「不建議」這些運動員採用超慢跑，若接「長期回報會讓他們驚豔」，等於又推薦了，前後矛盾。",
+            B:"空格前一句是 However, it is not usually recommended for athletes seeking high-intensity training...——既然不建議，接下來自然是提出替代方案。句首的 They 正指這些運動員，句尾的 instead（改為、反而）也直接呼應「不建議 A、改做 B」的邏輯。",
+            C:"they 若指那些運動員，但前句才說不建議他們做，怎麼可能反過來向別人推薦？指涉矛盾。",
+            D:"designed with their particular needs in mind（為他們的需求量身打造）與「不建議他們」完全牴觸。這是把第二段前半「適合的族群」誤接到後半「不適合的族群」上。"
+          },
+          evidence:"However, it is not usually recommended for athletes seeking high-intensity training or needing to quickly improve speed and strength.",
+          notes:[
+            {term:"句子插入題解法", pos:"技巧", gloss:"先確認空格前一句的「立場」是正面還是負面，再看選項的代名詞（they／it）指的是誰。立場一致、指涉對得上，才可能是答案。"},
+            {term:"do well to V", pos:"phr.", gloss:"最好去做…、明智之舉是…", ex:"You would do well to apologize now.", exZh:"你最好現在就道歉。"}
+          ]},
+
+        { n:29, kind:"未提及",
+          stem:"Which of the following topics or issues is NOT covered in this passage?",
+          options:{
+            A:"How frequently beginners can do slow jogging.　初學者可以多常從事超慢跑。",
+            B:"How to stay safe when doing slow jogging.　從事超慢跑時如何確保安全。",
+            C:"Precautions before taking up slow jogging.　開始超慢跑前的注意事項。",
+            D:"Common sports injuries for slow joggers.　超慢跑者常見的運動傷害。"
+          }, answer:"D",
+          translation:"下列哪一個主題或議題「未」在本文中被提及？",
+          explain:{
+            A:"第三段有 try incorporating it into your routine a couple of times a week（每週兩三次），明確回答了頻率。",
+            B:"第四段整段都在談安全：合適的跑鞋、暖身伸展、良好姿勢、補充水分、不要逼自己過頭。",
+            C:"第三段的 5- to 10-minute warm-up 與第四段的各項提醒，都屬於開始前的準備與注意事項。",
+            D:"文章多次提到要「預防受傷」（reduce the risk of injury、prevent injury、can lead to injury），但從頭到尾沒有列舉任何一種「具體的運動傷害」。這是本題最容易誤判的地方——談「預防受傷」不等於談「有哪些傷害」。"
+          },
+          evidence:"If you're new to running or aiming to reduce injury risk, try incorporating it into your routine a couple of times a week.",
+          notes:[
+            {term:"NOT covered 題型", pos:"技巧", gloss:"逐一回文章找依據，找到就劃掉。剩下那個「文中只提到相關概念、但沒有真正展開」的選項就是答案。"},
+            {term:"take up", pos:"phr. v.", gloss:"開始從事（某項活動、嗜好）", ex:"She took up swimming last year.", exZh:"她去年開始游泳。"}
+          ]}
+      ]
+    },
+    {
+      passage:`Alongside world-famous festivals like Fuji Rock Festival and Lollapalooza, Coachella is one of the most influential music festivals in the world. Officially known as the Coachella Valley Music and Arts Festival, it was first held in 1999 and usually takes place each spring at the Empire Polo Club in Indio, California, nestled within the Coachella Valley in the Colorado Desert. The event takes place over two Friday-to-Sunday runs in April, drawing music lovers, artists, and trendsetters from across the globe. At full capacity, the festival can attract around 125,000 attendees per day, cementing its status as one of the largest and most profitable music events in the world.
+
+One of Coachella's biggest highlights is its impressive lineup, featuring international superstars across a wide range of genres, including indie, hip-hop, and electronic dance music. The festival is well known for its unforgettable performances and surprise guest appearances that make headlines around the world. Multiple stages offer diverse experiences: the Main Stage hosts major headliners, while the Sahara Tent delivers electronic performances with immersive lighting and visuals. Beyond music, the festival showcases large-scale art displays, interactive exhibits, and a wide variety of food options, creating an alternative cultural space where music and art blend seamlessly.
+
+Despite being held in a harsh desert environment, Coachella continues to transcend the idea of a typical music festival. Its influence extends far beyond the festival grounds, making it one of the most important events in global entertainment each year. It is set apart by its unique combination of music, art, and fashion. Many celebrities and influencers attend wearing free-spirited outfits, such as denim shorts, wide-brim hats, and sparkly accessories, which has helped create the iconic "Coachella style" that shapes fashion trends worldwide. In the age of social media, the festival has also become a major platform for brands and influencers, spreading its influence to audiences far beyond those who attend in person.
+
+Attending, however, requires preparation. The desert climate can be extreme, with scorching days and considerably cooler nights, making sunscreen, hydration, and layered clothing essential. Overall, Coachella offers more than just music. It delivers a rich, one-of-a-kind cultural experience that never fails to impress.`,
+      zh:`與富士搖滾音樂祭、Lollapalooza 等世界知名音樂節齊名，科切拉是全球最具影響力的音樂節之一。它的正式名稱是「科切拉山谷音樂與藝術節」，首次舉辦於一九九九年，通常在每年春天於加州印第奧的帝國馬球俱樂部舉行，該地座落於科羅拉多沙漠中的科切拉山谷。活動在四月的兩個週五至週日檔期舉行，吸引來自全球各地的樂迷、藝術家與潮流引領者。在滿場的情況下，這個音樂節每天可吸引約十二萬五千名參加者，鞏固了它作為世界上規模最大、獲利最高的音樂盛事之一的地位。
+
+科切拉最大的亮點之一是它令人矚目的演出陣容，網羅橫跨多種曲風的國際巨星，包括獨立音樂、嘻哈與電子舞曲。這個音樂節以其令人難忘的演出，以及登上全球頭條的驚喜嘉賓演出而聞名。多個舞台提供多元的體驗：主舞台由重量級壓軸藝人擔綱，而撒哈拉帳篷則以沉浸式的燈光與視覺效果呈現電子音樂演出。除了音樂之外，音樂節還展出大型藝術裝置、互動展覽與各式各樣的餐飲選擇，打造出一個音樂與藝術無縫交融的另類文化空間。
+
+儘管在嚴酷的沙漠環境中舉行，科切拉仍不斷超越一般音樂節的框架。它的影響力遠遠延伸到會場之外，使它成為每年全球娛樂界最重要的盛事之一。真正讓它與眾不同的，是音樂、藝術與時尚的獨特結合。許多名人與網紅穿著自由不羈的服飾出席，例如丹寧短褲、寬簷帽與亮片配件，這也促成了標誌性的「科切拉風格」，進而影響全球時尚潮流。在社群媒體的時代，這個音樂節也成為品牌與網紅的重要平台，把影響力擴散到遠遠超出親自到場者的廣大受眾。
+
+然而，參加是需要準備的。沙漠氣候可能相當極端，白天酷熱而夜晚明顯轉涼，因此防曬、補水與洋蔥式穿搭都不可或缺。整體而言，科切拉提供的遠不只是音樂，它帶來的是一場豐富而獨一無二、從未讓人失望的文化體驗。`,
+      questions:[
+        { n:30, kind:"標題題",
+          stem:"Which is the best title for this article?",
+          options:{
+            A:"Why Coachella Is More Than Just a Music Festival　為何科切拉不只是一個音樂節",
+            B:"The History of Famous Music Festivals Around the World　世界知名音樂節的歷史",
+            C:"How Coachella Influences the Global Economy　科切拉如何影響全球經濟",
+            D:"The Development of Fashion Trends in California　加州時尚潮流的發展"
+          }, answer:"A",
+          translation:"下列何者是本文最適合的標題？",
+          explain:{
+            A:"全文的主軸就是「它不只是音樂節」：第二段講音樂之外還有藝術裝置與餐飲，第三段講它與時尚、社群媒體的結合，最後一段直接用 Coachella offers more than just music 作結。這個標題與文章的收尾句幾乎是同一句話。",
+            B:"富士搖滾與 Lollapalooza 只在第一句被提及作為對照，文章沒有介紹任何其他音樂節的歷史。",
+            C:"文中只有 most profitable 一詞碰到獲利，並未討論它對全球經濟的影響。以偏概全。",
+            D:"時尚只是第三段的一部分，而且談的是科切拉如何影響全球時尚，不是加州時尚的發展史。"
+          },
+          evidence:"Overall, Coachella offers more than just music.",
+          notes:[
+            {term:"標題題解法", pos:"技巧", gloss:"標題必須涵蓋全文且抓住主軸。首段與末段常藏著答案——本文末段的 more than just music 幾乎就是標題本身。"},
+            {term:"transcend", pos:"vt.", gloss:"超越、超脫（transcend the idea of a typical music festival 超越一般音樂節的框架）"}
+          ]},
+
+        { n:31, kind:"字義推論",
+          stem:"What does the bold word \"cementing\" in the first paragraph most nearly mean?",
+          options:{
+            A:"Building something from physical materials.　用實體材料建造某物。",
+            B:"Making something firmly established.　使某事物穩固確立。",
+            C:"Connecting different places together.　把不同的地方連接起來。",
+            D:"Changing something into a new form.　把某物變成新的形態。"
+          }, answer:"B",
+          translation:"第一段中粗體字 cementing 最接近的意思為何？",
+          explain:{
+            A:"這是 cement 當名詞「水泥」的字面聯想。但句中 cementing its status（鞏固它的地位）的受詞是抽象的 status，不是建築物。",
+            B:"cement 由名詞「水泥」引申為動詞「鞏固、使牢固」。上下文是 can attract around 125,000 attendees per day, cementing its status as one of the largest...——每天十二萬五千人的規模「鞏固了」它的龍頭地位。",
+            C:"「連接不同地點」是把 cement 誤解為「黏合」的物理義；但這裡黏合的不是地點。",
+            D:"「改變形態」與 cement 的任何意思都無關，且 status 是被強化而非被改變。"
+          },
+          evidence:"the festival can attract around 125,000 attendees per day, cementing its status as one of the largest and most profitable music events in the world",
+          notes:[
+            {term:"cement", pos:"vt. / n.", gloss:"鞏固、使牢固；名詞為「水泥」。cement a relationship／one's reputation 皆為常見搭配。", ex:"The win cemented her place in the team.", exZh:"這場勝利鞏固了她在隊上的地位。"},
+            {term:"字義推論題解法", pos:"技巧", gloss:"不要憑對該字既有的印象作答，一定要回原文看它的「受詞」是什麼。受詞是抽象名詞，就不會是字面義。"}
+          ]},
+
+        { n:32, kind:"細節判斷",
+          stem:"Which of the following statements about Coachella is true?",
+          options:{
+            A:"It features multiple stages and presents mostly local performers.　它有多個舞台，並主要呈現在地表演者。",
+            B:"It takes place over several days and focuses mainly on pop and rock.　它為期數天，且主要聚焦於流行與搖滾樂。",
+            C:"It runs across two weekends and often includes unexpected guest appearances.　它橫跨兩個週末舉行，且經常有驚喜嘉賓演出。",
+            D:"It attracts large crowds and is held in different locations each year.　它吸引大批人潮，且每年在不同地點舉行。"
+          }, answer:"C",
+          translation:"下列關於科切拉的敘述何者為真？",
+          explain:{
+            A:"前半正確（Multiple stages offer diverse experiences），但後半錯誤：文中說的是 international superstars（國際巨星），不是在地表演者。半對半錯是最常見的陷阱。",
+            B:"前半正確，但後半錯誤：文中列出的曲風是 indie, hip-hop, and electronic dance music，並未提及流行與搖滾為主。",
+            C:"兩個部分都有依據：two Friday-to-Sunday runs in April（四月兩個週五到週日的檔期，即兩個週末）以及 surprise guest appearances that make headlines（登上頭條的驚喜嘉賓）。",
+            D:"前半正確，但後半錯誤：文中明說固定在 the Empire Polo Club in Indio, California 舉行，並非每年換地點。"
+          },
+          evidence:"The event takes place over two Friday-to-Sunday runs in April, drawing music lovers, artists, and trendsetters from across the globe.",
+          notes:[
+            {term:"複合式選項要逐半檢查", pos:"技巧", gloss:"當選項由 and 連接兩個敘述時，兩半都必須正確。本題的 (A)(B)(D) 都是「前半對、後半錯」，只檢查前半就會全部踩雷。"},
+            {term:"set apart by", pos:"phr.", gloss:"因…而與眾不同（＝be distinguished by）"}
+          ]}
+      ]
+    }]
+  },
+
+  /* ===================== 四、文意字彙 ===================== */
+  {
+    id:"vocab", label:"四、文意字彙", score:"12% · 每題 2%",
+    instruction:"依句意及提示字母填入正確單字，注意詞性與單複數。",
+    groups:[{
+      questions:[
+        { n:33, kind:"pr___g",
+          stem:"The young athlete showed pr______g talent during training, and several professional teams have already expressed interest in recruiting her.",
+          answerText:"promising",
+          why:"空格在 showed 與名詞 talent 之間，需要形容詞。後半句「多支職業球隊已表達招募意願」正是「前景可期」的證明。promising 由動詞 promise（承諾）轉為形容詞，指「有前途的、大有可為的」。注意它修飾的是「未來的可能性」，不是現在的成就。",
+          notes:[{term:"promising", pos:"adj.", gloss:"有前途的、大有可為的", ex:"He is the most promising young writer of his generation.", exZh:"他是這一代最有前途的年輕作家。"},
+                 {term:"recruit", pos:"vt.", gloss:"招募、吸收（新成員）"}]},
+
+        { n:34, kind:"s___e",
+          stem:"The research project has a broad s______e because it examines environmental, economic, and social effects across several different regions.",
+          answerText:"scope",
+          why:"空格前有冠詞 a 與形容詞 broad，必須填單數名詞。because 引導的原因子句列出「環境、經濟、社會」三個面向，又橫跨數個地區——涵蓋的範圍很廣，正是 scope（範圍、範疇）。a broad scope 是固定搭配。",
+          notes:[{term:"scope", pos:"n.", gloss:"範圍、範疇；也指「發揮的空間」（There's scope for improvement.）", ex:"That question is beyond the scope of this study.", exZh:"那個問題超出了本研究的範圍。"}]},
+
+        { n:35, kind:"m___e",
+          stem:"The old building requires constant m______e because its pipes, electrical systems, and other facilities frequently need repairs.",
+          answerText:"maintenance",
+          why:"空格前是形容詞 constant，且 requires 後面需要受詞，因此填名詞。because 子句說水管、電力系統與其他設施經常需要維修——這就是「維護」。maintenance 為不可數名詞，前面不加冠詞、也不加 s，這是本題最容易寫錯的地方（動詞為 maintain，注意名詞拼字中間是 -ten-，不是 -tain-）。",
+          notes:[{term:"maintenance", pos:"n.", gloss:"維護、保養（不可數）。動詞 maintain，注意名詞形拼作 mainten-ance。", ex:"The lift is closed for maintenance.", exZh:"電梯因保養而暫停使用。"}]},
+
+        { n:36, kind:"d___s",
+          stem:"After the powerful storm passed, roads were covered with d______s, including fallen branches, broken signs, and pieces of damaged roofs.",
+          answerText:"debris",
+          why:"including 後面列舉的斷枝、破招牌、屋頂碎片，就是風災後的殘骸瓦礫。debris 源自法文，本身即為不可數名詞（字尾雖有 s 但不是複數形，且發音為 /dəˈbriː/，s 不發音）。提示字母給了字首 d 與字尾 s，正好對應這個字的拼法。",
+          notes:[{term:"debris", pos:"n.", gloss:"殘骸、瓦礫、碎片（不可數；字尾 s 不發音）", ex:"Rescuers searched the debris for survivors.", exZh:"救難人員在瓦礫中搜尋生還者。"}]},
+
+        { n:37, kind:"re___e",
+          stem:"The government introduced new laws to re______e online businesses and ensure that companies protect customers' personal information properly.",
+          answerText:"regulate",
+          why:"to 後面要接原形動詞，且與 and ensure 並列——兩個動詞都是 new laws 的目的。政府立法「管理、規範」線上企業，用 regulate。注意它與名詞 regulation（法規）的區別，這裡需要的是動詞形。",
+          notes:[{term:"regulate", pos:"vt.", gloss:"管理、規範；也指「調節（溫度、速度）」。名詞 regulation。", ex:"The agency regulates food safety.", exZh:"該機構負責管理食品安全。"},
+                 {term:"對稱結構找詞性", pos:"技巧", gloss:"to regulate ... and ensure ...，and 後面是原形動詞，前面必然也是。"}]},
+
+        { n:38, kind:"d___t",
+          stem:"The landlord required a two-month d______t before the new tenant could move into the apartment.",
+          answerText:"deposit",
+          why:"空格前有冠詞 a 與複合形容詞 two-month，需要單數名詞。房東在租客入住前要求的「兩個月」的東西，就是押金。deposit 也可指銀行的「存款」或當動詞「存入」，此處取「押金、保證金」之意。",
+          notes:[{term:"deposit", pos:"n. / vt.", gloss:"押金、訂金；存款。當動詞為「存入、放置」。", ex:"You'll get the deposit back when you move out.", exZh:"你搬出去時押金會退還。"},
+                 {term:"two-month", pos:"複合形容詞", gloss:"數字＋名詞當形容詞時，名詞用單數且加連字號（a two-month deposit、a five-year plan）。"}]}
+      ]
+    }]
+  },
+
+  /* ===================== 五、填空 ===================== */
+  {
+    id:"fill", label:"五、填空", score:"14% · 每格 1%",
+    instruction:"依中文語意完成英文句子，每格限填一字。",
+    groups:[{
+      questions:[
+        { n:39, kind:"中譯填空（7 格）",
+          prompt:"學校闡明了一項新的支援計畫，幫助學生應對課業壓力，前提是他們願意在需要時主動尋求協助。這項計畫取得了非凡的成效，許多學生表示自己變得更有自信，壓力也減輕了。",
+          stem:`The school ①______ ②______ a new support plan to help students ③______ ④______ academic pressure, ⑤______ ⑥______ they were willing to seek assistance when needed. The program produced ⑦______ results, with many students reporting greater confidence and less stress.`,
+          answers:[
+            {k:"①", w:"set", note:"提示為 s___ f___。set forth 為「闡明、提出（計畫、主張）」。注意主詞 The school 為單數，但全句時態為過去式，set 三態同形。"},
+            {k:"②", w:"forth", note:"forth 是「向前、向外」，不可誤寫為 fourth（第四）。"},
+            {k:"③", w:"cope", note:"提示為 c___ w___。cope 為不及物動詞，必須搭配 with 才能接受詞。"},
+            {k:"④", w:"with", note:"cope with ＝deal with＝handle，「應付、處理」。"},
+            {k:"⑤", w:"provided", note:"提示為 pr___ t___。provided (that) 意為「倘若、前提是」，功能等同 if，是連接詞用法。"},
+            {k:"⑥", w:"that", note:"provided that 中的 that 在正式寫作中通常保留；口語可省略。"},
+            {k:"⑦", w:"extraordinary", note:"提示為 e___y。extraordinary 意為「非凡的、了不起的」，由 extra-（超出）＋ ordinary（普通）構成，記法直觀。"}
+          ],
+          why:"這題的難點在三個雙字片語都必須整組寫對。set forth 容易誤寫成 set forward；cope 後面的 with 常被漏掉，因為中文的「應對」聽起來像及物動詞；provided that 則容易只寫 provided 而漏掉 that。最後的 extraordinary 拼字長，注意中間是 -ordin-，別漏字母。",
+          notes:[
+            {term:"set forth", pos:"phr. v.", gloss:"闡明、提出（計畫、理論）；也指「動身出發」", ex:"The report sets forth three main proposals.", exZh:"這份報告提出了三項主要建議。"},
+            {term:"cope with", pos:"phr. v.", gloss:"應付、處理（困難、壓力）。cope 為不及物，不可寫成 cope the pressure。", ex:"She copes well with stress.", exZh:"她很能應付壓力。"},
+            {term:"provided (that)", pos:"conj.", gloss:"倘若、前提是（＝on condition that）", ex:"You may leave early, provided that the work is done.", exZh:"只要工作完成，你可以提早離開。"}
+          ]},
+
+        { n:40, kind:"中譯填空（7 格）",
+          prompt:"這位科學家指出，水源已受到放射性物質污染，並針對輻射可能造成的健康風險發表聲明。對此，地方政府決定修改緊急應變計畫，並採用一套更具彈性的動態系統，以便迅速因應不斷變化的情況。",
+          stem:`The scientist ①______ ②______ that the water had been ③______ with radioactive material and issued a statement ④______ the possible health risks from ⑤______. In response, the local government decided to ⑥______ its emergency plan and adopt a more ⑦______ system that could respond quickly to changing conditions.`,
+          answers:[
+            {k:"①", w:"pointed", note:"提示為 p___ o___。point out 意為「指出」，此處為過去式。"},
+            {k:"②", w:"out", note:"point out that + 子句是固定用法。注意 out 不可省略，否則 point 變成「指向」。"},
+            {k:"③", w:"contaminated", note:"提示為 c___。be contaminated with 意為「被…污染」，介系詞用 with 不是 by（by 用於指出污染的「行為者」）。"},
+            {k:"④", w:"regarding", note:"提示為 r___g。regarding 為介系詞，意為「關於」（＝concerning／about），後面直接接名詞片語。"},
+            {k:"⑤", w:"radiation", note:"提示為 r___n。radiation 是「輻射」，與前面的形容詞 radioactive（放射性的）同字根，題目刻意讓兩者呼應。"},
+            {k:"⑥", w:"modify", note:"提示為 m___。decided to 後接原形動詞。modify 意為「修改、調整」。"},
+            {k:"⑦", w:"dynamic", note:"提示為 d___。a more dynamic system「更具彈性的動態系統」，呼應後面的 respond quickly to changing conditions。"}
+          ],
+          why:"這題有兩組相互呼應的字要留意。第一組是 radioactive 與 radiation——題目在空格前先給了形容詞形，空格要填名詞形，是刻意的提示。第二組是 contaminated with 的介系詞：中文的「受到污染」容易讓人直覺寫 by，但 with 才是搭配「污染物」的正確用法。另外 regarding 是介系詞不是動詞，後面不接子句，這點也常被搞混。",
+          notes:[
+            {term:"point out (that)", pos:"phr. v.", gloss:"指出、提出（某項事實）", ex:"She pointed out that the data was outdated.", exZh:"她指出那些資料已經過時了。"},
+            {term:"be contaminated with", pos:"phr.", gloss:"被…污染（後接污染物）。n. contamination", ex:"The soil was contaminated with lead.", exZh:"土壤受到鉛污染。"},
+            {term:"regarding", pos:"prep.", gloss:"關於（＝concerning／with regard to）；為介系詞，後接名詞，不接子句。", ex:"I have a question regarding the schedule.", exZh:"我對時程安排有個疑問。"},
+            {term:"dynamic", pos:"adj.", gloss:"動態的、有活力的（反義 static 靜態的）"}
+          ]}
+      ]
+    }]
+  }
+  ]
+};
+
+/* ==========================================================================
+   ②  以下為程式碼，一般情況不需要修改。
+   ========================================================================== */
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const wordOf = q => q.options ? q.options[q.answer] : (q.answerText || '');
+const allQ = [];
+EXAM.sections.forEach(s => s.groups.forEach(g => g.questions.forEach(q => allQ.push(q))));
+const findQ = n => allQ.find(q => String(q.n) === String(n));
+
+document.getElementById('brand').textContent = EXAM.brand;
+document.getElementById('examTitle').textContent = EXAM.title;
+document.getElementById('examMeta').textContent = EXAM.meta;
+
+let noteCount = 0;
+allQ.forEach(q => noteCount += (q.notes || []).length);
+
+const nav = document.getElementById('nav');
+EXAM.sections.forEach(s => {
+  const a = document.createElement('a');
+  a.className = 'chip'; a.href = '#sec-' + s.id; a.textContent = s.label.replace(/^[一二三四五六]、/, m => m);
+  nav.appendChild(a);
+});
+const noteChip = document.createElement('a');
+noteChip.className = 'chip'; noteChip.href = '#side'; noteChip.textContent = '重點表 ' + noteCount;
+nav.appendChild(noteChip);
+const toggleAll = document.createElement('button');
+toggleAll.className = 'chip solid'; toggleAll.textContent = '全部展開';
+nav.appendChild(toggleAll);
+
+function renderPassage(g, i, sid) {
+  let html = esc(g.passage);
+  g.questions.forEach(q => {
+    if (!q.evidence) return;
+    const t = esc(q.evidence);
+    if (html.includes(t)) html = html.replace(t, `<span class="hl ev" data-ev="${q.n}">${t}</span>`);
+  });
+  html = html.replace(/__(\d+)__/g, (m, n) =>
+    `<button class="blank" data-blank="${n}" aria-label="第 ${n} 題空格">${n}</button>`);
+  const body = '<div class="passage">' +
+    html.split(/\n{2,}/).map(p => '<p>' + p.replace(/\n/g, ' ') + '</p>').join('') + '</div>';
+  if (!g.zh) return body;
+  const id = sid + '-' + i;
+  return body +
+    `<button class="zhbtn" data-zh="${id}">全文中譯</button>` +
+    `<div class="zhbox" id="zh-${id}">` +
+      g.zh.split(/\n{2,}/).map(p => '<p>' + esc(p).replace(/\n/g, ' ') + '</p>').join('') +
+    '</div>';
+}
+
+function renderQ(q) {
+  const parts = [];
+  if (q.options) {
+    const ks = Object.keys(q.options);
+    parts.push('<div class="opts">' + ks.map(k =>
+      `<div class="opt"><span class="opt-k">(${k})</span><span>${esc(q.options[k])}</span></div>`).join('') + '</div>');
+  }
+  const head = `<div class="q-tag"><span class="q-n">${String(q.n).padStart(2,'0')}</span><span class="q-kind">${esc(q.kind || '')}</span></div>` +
+    (q.prompt ? `<p class="prompt">${esc(q.prompt)}</p>` : '') +
+    (q.stem ? `<p class="stem">${esc(q.stem).replace(/\n/g,'<br>')}</p>` : '');
+
+  let ans = '';
+  if (q.answers) {
+    ans = '<ul class="fills">' + q.answers.map(a =>
+      `<li class="fill"><span class="fill-k">${esc(a.k)}</span><span class="fill-w hl" data-ansmulti>${esc(a.w)}</span><span class="fill-n">${esc(a.note || '')}</span></li>`).join('') + '</ul>';
+  } else {
+    const label = q.options ? `(${q.answer}) ${esc(wordOf(q))}` :
+      (q.answer ? `(${q.answer}) ${esc(q.answerText)}` : esc(q.answerText));
+    ans = `<p class="ans"><span class="ans-k">答案</span><span class="ans-v hl" data-ans="${q.n}">${label}</span></p>`;
+  }
+
+  let expl = '';
+  if (q.explain) {
+    expl = '<ul class="lines">' + Object.keys(q.options).map(k => {
+      const right = q.multi ? q.multi.includes(k) : k === q.answer;
+      return `<li class="line ${right ? 'right' : 'wrong'}"><span class="line-k">(${k})</span><span>${esc(q.explain[k] || '')}</span></li>`;
+    }).join('') + '</ul>';
+  }
+  const why = q.why ? `<p class="why">${esc(q.why)}</p>` : '';
+  const sample = q.sample ? `<div class="sample"><p class="note-h">參考範文</p>` +
+    q.sample.split(/\n{2,}/).map(p => `<p>${esc(p).replace(/\n/g,' ')}</p>`).join('') + '</div>' : '';
+  const evid = q.evidence ? `<p class="evid"><span>文中依據</span>${esc(q.evidence)}</p>` : '';
+  const notes = (q.notes || []).length ? `<div class="note"><p class="note-h">重點整理</p>` +
+    q.notes.map(nt => `<p class="note-i"><span class="term">${esc(nt.term)}</span><span class="pos">${esc(nt.pos || '')}</span><span class="gloss">${esc(nt.gloss || '')}</span>` +
+      (nt.ex ? `<span class="ex">${esc(nt.ex)}<i>${esc(nt.exZh || '')}</i></span>` : '') + '</p>').join('') + '</div>' : '';
+
+  return `<article class="q" id="q-${q.n}" data-n="${q.n}">
+    <div class="q-top">${head}${parts.join('')}
+      <button class="reveal" aria-expanded="false" aria-controls="body-${q.n}">看詳解</button>
+    </div>
+    <div class="body" id="body-${q.n}">
+      ${ans}${q.translation ? `<p class="zh">${esc(q.translation)}</p>` : ''}${expl}${why}${evid}${sample}${notes}
+    </div>
+  </article>`;
+}
+
+document.getElementById('main').innerHTML = EXAM.sections.map((s, i) => `
+  <section class="sec" id="sec-${s.id}">
+    <div class="sec-head">
+      <span class="sec-num">${String(i+1).padStart(2,'0')}</span>
+      <h2 class="sec-label">${esc(s.label)}</h2>
+      <span class="sec-score">${esc(s.score || '')}</span>
+    </div>
+    ${s.instruction ? `<p class="sec-inst">${esc(s.instruction)}</p>` : ''}
+    ${s.bank ? `<div class="bank${s.bankWide ? ' wide' : ''}">${Object.keys(s.bank).map(k =>
+      `<div class="bank-i" data-bank="${k}"><span>(${k})</span>${esc(s.bank[k])}</div>`).join('')}</div>` : ''}
+    ${s.groups.map((g, gi) => (g.passage ? renderPassage(g, gi, s.id) : '') + g.questions.map(renderQ).join('')).join('')}
+  </section>`).join('');
+
+const items = [];
+allQ.forEach(q => (q.notes || []).forEach(nt => items.push({ ...nt, n: q.n })));
+document.getElementById('side').innerHTML = `
+  <p class="side-h">Notes</p>
+  <p class="side-t">本卷重點 ${items.length} 則</p>
+  <ul class="card-list">${items.map(nt => `
+    <li class="card-item"><a href="#q-${nt.n}">
+      <span class="jump">第 ${nt.n} 題</span>
+      <span class="term">${esc(nt.term)}</span><span class="pos">${esc(nt.pos || '')}</span>
+      <div class="gloss">${esc(nt.gloss || '')}</div>
+    </a></li>`).join('')}</ul>
+  <p class="side-note">點任一則可跳到出處題目。用瀏覽器列印（Ctrl／⌘ + P）會自動展開全部詳解與中譯，可直接印成講義。</p>`;
+
+document.getElementById('foot').textContent = `共 ${allQ.length} 題 · ${EXAM.footer}`;
+
+function setOpen(card, open) {
+  card.classList.toggle('open', open);
+  const btn = card.querySelector('.reveal');
+  btn.setAttribute('aria-expanded', open);
+  btn.firstChild.nodeValue = open ? '收合詳解' : '看詳解';
+  const n = card.dataset.n;
+  card.querySelectorAll('.hl').forEach(h => h.classList.toggle('on', open));
+  const ev = document.querySelector(`[data-ev="${n}"]`);
+  if (ev) ev.classList.toggle('on', open);
+  const q = findQ(n);
+  if (q && q.answer && q.answerText) {
+    const bi = document.querySelector(`[data-bank="${q.answer}"]`);
+    if (bi) bi.classList.toggle('used', open);
+  }
+  const bl = document.querySelector(`[data-blank="${n}"]`);
+  if (bl) {
+    if (open) {
+      bl.classList.add('filled');
+      bl.innerHTML = `<sup>${n}</sup><span class="hl">${esc(wordOf(q))}</span>`;
+      requestAnimationFrame(() => bl.querySelector('.hl').classList.add('on'));
+    } else {
+      bl.classList.remove('filled');
+      bl.textContent = n;
+    }
+  }
+}
+document.addEventListener('click', e => {
+  const rv = e.target.closest('.reveal');
+  if (rv) { const c = rv.closest('.q'); setOpen(c, !c.classList.contains('open')); return; }
+  const zb = e.target.closest('.zhbtn');
+  if (zb) { zb.classList.toggle('on'); document.getElementById('zh-' + zb.dataset.zh).classList.toggle('on'); return; }
+  const bl = e.target.closest('.blank');
+  if (bl) {
+    const c = document.getElementById('q-' + bl.dataset.blank);
+    if (!c.classList.contains('open')) setOpen(c, true);
+    c.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
+toggleAll.addEventListener('click', () => {
+  const open = toggleAll.textContent === '全部展開';
+  document.querySelectorAll('.q').forEach(c => setOpen(c, open));
+  toggleAll.textContent = open ? '全部收合' : '全部展開';
+});
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('.q').forEach(c => setOpen(c, true));
+  document.querySelectorAll('.zhbox').forEach(b => b.classList.add('on'));
+  toggleAll.textContent = '全部收合';
+});
+</script>
+</body>
+</html>

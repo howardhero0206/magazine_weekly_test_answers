@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ED Sep. Week 1+2 詳解</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E7EBEE; --card:#FDFDFC;
+  --ink:#10202F; --ink-2:#56687A; --ink-3:#7C8B99;
+  --rule:#C6D0D8; --pen:#17457E; --hl:#FFE773; --miss:#A34234;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono','Cascadia Mono',Menlo,Consolas,monospace;
+  --read:'Literata',Georgia,'Times New Roman',serif;
+  --han:'PingFang TC','Microsoft JhengHei','Noto Sans TC',system-ui,sans-serif;
+  --maxw:1180px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--han);font-size:16px;line-height:1.75}
+:focus-visible{outline:2px solid var(--pen);outline-offset:3px;border-radius:2px}
+
+.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule)}
+.top-in{max-width:var(--maxw);margin:0 auto;padding:14px 24px 0}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);margin:0 0 4px}
+.title{font-size:23px;font-weight:600;margin:0;line-height:1.3}
+.meta{font-family:var(--mono);font-size:12px;color:var(--ink-2);margin:4px 0 0;letter-spacing:.04em}
+.bar{display:flex;gap:7px;align-items:center;flex-wrap:wrap;padding:12px 0 11px;margin-top:10px;border-top:1px solid var(--rule)}
+.chip{font-family:var(--mono);font-size:12px;letter-spacing:.04em;border:1px solid var(--rule);background:transparent;color:var(--ink-2);padding:5px 10px;border-radius:999px;cursor:pointer;text-decoration:none;transition:border-color .15s,color .15s,background .15s}
+.chip:hover{border-color:var(--pen);color:var(--pen)}
+.chip.solid{margin-left:auto;border-color:var(--ink);color:var(--ink);font-weight:500}
+.chip.solid:hover{background:var(--ink);color:var(--card)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:28px 24px 96px;display:grid;gap:36px;grid-template-columns:minmax(0,1fr) 288px}
+@media (max-width:1020px){.wrap{grid-template-columns:minmax(0,1fr);gap:44px}}
+
+.sec{margin:0 0 48px;scroll-margin-top:136px}
+.sec-head{display:flex;align-items:baseline;gap:12px;padding-bottom:9px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.sec-num{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--ink-3)}
+.sec-label{font-size:18px;font-weight:600;margin:0}
+.sec-score{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-left:auto}
+.sec-inst{font-size:13.5px;color:var(--ink-2);margin:9px 0 0}
+
+.bank{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:16px 0 0}
+@media (max-width:760px){.bank{grid-template-columns:repeat(2,1fr)}}
+.bank-i{background:var(--card);padding:8px 10px;font-family:var(--read);font-size:14.5px}
+.bank-i span{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-right:5px}
+.bank-i.used{background:#F2F5F6;color:var(--ink-3)}
+
+.passage{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--ink);padding:22px 26px;margin:18px 0 0;font-family:var(--read);font-size:16.5px;line-height:1.95;color:#1a2836}
+.passage p{margin:0 0 1em}
+.passage p:last-child{margin-bottom:0}
+.blank{display:inline-block;min-width:70px;text-align:center;border:0;border-bottom:1.5px solid var(--ink);font-family:var(--mono);font-size:13px;color:var(--pen);cursor:pointer;background:none;padding:0 4px;line-height:1.4}
+.blank:hover{background:rgba(23,69,126,.07)}
+.blank.filled{font-family:var(--read);font-size:16.5px;color:var(--ink);border-bottom-color:transparent;min-width:0}
+.blank sup{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-right:2px}
+.zhbtn{display:block;margin:0 0 18px;background:var(--card);border:1px solid var(--rule);border-top:0;width:100%;text-align:left;padding:8px 26px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--pen);cursor:pointer}
+.zhbtn:hover{color:var(--ink)}
+.zhbtn::after{content:' ▾'}
+.zhbtn.on::after{content:' ▴'}
+.zhbox{display:none;background:#F7F9FA;border:1px solid var(--rule);border-top:0;padding:18px 26px;margin:0 0 18px;font-size:15px;line-height:1.95;color:#22323F}
+.zhbox.on{display:block}
+.zhbox p{margin:0 0 .9em}
+.zhbox p:last-child{margin:0}
+
+.q{background:var(--card);border:1px solid var(--rule);margin:14px 0 0;scroll-margin-top:142px}
+.q-top{padding:16px 22px 14px}
+.q-tag{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.q-n{font-family:var(--mono);font-size:13px;font-weight:600}
+.q-kind{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.prompt{font-size:14.5px;line-height:1.85;color:var(--ink-2);margin:0 0 11px;padding-left:11px;border-left:2px solid var(--rule)}
+.stem{font-family:var(--read);font-size:16.5px;line-height:1.85;margin:0 0 13px;color:#1a2836}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:2px 20px}
+@media (max-width:640px){.opts{grid-template-columns:1fr}}
+.opt{display:flex;gap:9px;font-family:var(--read);font-size:15.5px;line-height:1.6;padding:3px 0;color:#243342}
+.opt-k{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);padding-top:2px;flex:none}
+.reveal{display:block;width:100%;text-align:left;margin-top:14px;background:none;border:0;border-top:1px dashed var(--rule);padding:11px 0 0;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--pen);cursor:pointer}
+.reveal:hover{color:var(--ink)}
+.reveal::after{content:' ▾'}
+.q.open .reveal::after{content:' ▴'}
+.q.open .reveal{color:var(--ink-3)}
+
+.body{display:none;border-top:1px solid var(--rule);background:#F7F9FA;padding:18px 22px 20px}
+.q.open .body{display:block}
+.ans{display:flex;align-items:baseline;gap:10px;margin:0 0 13px;flex-wrap:wrap}
+.ans-k{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--ink-3);flex:none;padding-top:2px}
+.ans-v{font-family:var(--read);font-size:18px;font-weight:600}
+.fills{list-style:none;margin:0 0 13px;padding:0}
+.fill{display:flex;gap:11px;align-items:baseline;padding:7px 0;border-bottom:1px dotted var(--rule)}
+.fill-k{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);flex:none;width:26px}
+.fill-w{font-family:var(--read);font-size:17px;font-weight:600;flex:none}
+.fill-n{font-size:13.5px;color:var(--ink-2);line-height:1.7}
+.zh{font-size:15px;line-height:1.85;margin:0 0 14px;color:#22323F}
+.why{font-size:14.5px;line-height:1.85;margin:0 0 4px;color:#22323F;border-top:1px solid var(--rule);padding-top:12px}
+.lines{margin:0;padding:0;list-style:none;border-top:1px solid var(--rule)}
+.line{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--rule);font-size:14.5px;line-height:1.75;color:var(--ink-2)}
+.line-k{font-family:var(--mono);font-size:12.5px;flex:none;width:28px;color:var(--ink-3);padding-top:2px}
+.line.right{color:var(--ink)}
+.line.right .line-k{color:var(--ink);font-weight:600}
+.line.right .line-k::after{content:'✓';display:block;font-size:12px;line-height:1.3}
+.line.wrong .line-k{color:var(--miss);opacity:.85}
+.line.wrong .line-k::after{content:'✗';display:block;font-size:12px;line-height:1.3}
+.evid{margin:15px 0 0;font-family:var(--read);font-size:14.5px;line-height:1.8;color:var(--ink-2);padding-left:13px;border-left:2px solid var(--hl)}
+.evid span{font-family:var(--han);font-size:11px;letter-spacing:.14em;color:var(--ink-3);display:block;margin-bottom:3px}
+
+.hl{background-image:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 90%,transparent 90%);background-repeat:no-repeat;background-size:0% 100%;transition:background-size .55s cubic-bezier(.2,.75,.3,1);border-radius:1px}
+.hl.on{background-size:100% 100%}
+
+.sample{margin:15px 0 0;border:1px solid var(--rule);border-left:3px solid var(--ink);background:var(--card);padding:16px 20px}
+.sample p:not(.note-h){font-family:var(--read);font-size:15.5px;line-height:1.9;color:#1a2836;margin:0 0 1em}
+.sample p:last-child{margin-bottom:0}
+.bank.wide{grid-template-columns:1fr}
+.bank.wide .bank-i{font-size:15px;line-height:1.7;padding:10px 14px}
+.note{margin:15px 0 0;border:1px solid var(--rule);background:var(--card);padding:13px 16px}
+.note-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 9px}
+.note-i{margin:0;padding:9px 0 0;border-top:1px dotted var(--rule)}
+.note-i:first-of-type{border-top:0;padding-top:0}
+.term{font-family:var(--read);font-size:16px;font-weight:600}
+.pos{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin:0 6px}
+.gloss{font-size:14.5px}
+.ex{font-family:var(--read);font-size:14px;color:var(--ink-2);line-height:1.7;margin:3px 0 0;display:block}
+.ex i{font-family:var(--han);font-style:normal;font-size:13px;color:var(--ink-3);display:block}
+
+.side{position:sticky;top:136px;align-self:start;max-height:calc(100vh - 164px);overflow:auto;padding-right:4px}
+@media (max-width:1020px){.side{position:static;max-height:none;scroll-margin-top:136px}}
+.side-h{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin:0 0 3px}
+.side-t{font-size:16px;font-weight:600;margin:0 0 14px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.card-list{margin:0;padding:0;list-style:none}
+.card-item{border-bottom:1px solid var(--rule);padding:11px 0}
+.card-item a{display:block;text-decoration:none;color:inherit}
+.card-item a:hover .term{background:var(--hl)}
+.jump{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);float:right;padding-top:5px}
+.side-note{font-size:12.5px;color:var(--ink-3);line-height:1.7;margin:16px 0 0}
+.foot{max-width:var(--maxw);margin:0 auto;padding:0 24px 48px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+@media print{
+  body{background:#fff;font-size:10.5pt}
+  .top,.side,.reveal,.foot,.zhbtn{display:none!important}
+  .wrap{display:block;max-width:none;padding:0}
+  .q .body{display:block!important}
+  .zhbox{display:block!important}
+  .q{break-inside:avoid;border-color:#999;margin-bottom:9pt}
+  .passage{break-inside:avoid}
+  .hl{background-size:100% 100%!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <p class="eyebrow" id="brand"></p>
+    <h1 class="title" id="examTitle"></h1>
+    <p class="meta" id="examMeta"></p>
+    <nav class="bar" id="nav"></nav>
+  </div>
+</header>
+
+<div class="wrap"><main id="main"></main><aside class="side" id="side"></aside></div>
+<p class="foot" id="foot"></p>
+
+<script>
+/* ==========================================================================
+   ①  題目與詳解全部寫在下面的 EXAM 物件裡。要改題、加題、修字，只動這裡。
+
+   section（大題）：{ id, label, score, instruction, bank?, groups: [...] }
+   group（同一篇文章的題組）：{ passage?, zh?, questions: [...] }
+       passage 裡寫 __7__ 就會變成可點的空格，數字對應題號。
+       zh 是全文中譯，會做成可展開的按鈕。
+
+   question 依題型三選一：
+     選擇題   { n, kind, stem, options:{A..D}, answer:"B", translation, explain:{A..D}, evidence?, notes? }
+     單一填答 { n, kind, stem, answerText:"prejudice", why, notes? }
+     多格填答 { n, kind, prompt, stem, answers:[{k:"①", w:"字", note:"說明"}], notes? }
+   ========================================================================== */
+const EXAM = {
+  brand: "English Digest Weekly Quiz",
+  title: "Reading Test 詳解｜Week 1+2: Units 1–7 (Sep)",
+  meta: "Instructor: Howard Chang　·　範圍：ED 雜誌 Sep. Week 1+2",
+  footer: "班級複習用",
+  sections: [
+  /* ===================== 第一部分：聽力（僅列答案） ===================== */
+  {
+    id:"listening", label:"第一部分：聽力測驗", score:"28%",
+    instruction:"本部分僅列答案，不附詳解。　一、看圖辨義 1. (A)　2. (A)(C)　｜　二、對答 3–6：B A C D　｜　三、簡短對話 7–10：A C B D　｜　四、短文聽解 11–12：C A",
+    groups:[{ questions:[] }]
+  },
+
+  /* ===================== 一、詞彙 ===================== */
+  {
+    id:"vocab", label:"二之一、詞彙", score:"15% · 每題 3%",
+    instruction:"依句意及提示字母填入正確單字，注意詞性與拼字。",
+    groups:[{
+      questions:[
+        { n:13, kind:"提示：co___e",
+          stem:"A good summary should be co______e, capturing the main points in a few sentences without copying every detail from the original text.",
+          answerText:"concise",
+          translation:"一份好的摘要應該精簡扼要，用幾句話抓住重點，而不是把原文的每個細節都抄過來。",
+          why:"空格前是 be 動詞，需要形容詞。決定性線索在後面的分詞片語：capturing the main points in a few sentences（用幾句話抓住重點）與 without copying every detail（不抄錄每個細節）——兩者都在描述「話少但講到位」，這正是 concise 的定義。注意它不只是「短」，而是「精簡而不失重點」；只是短而漏掉重點叫 incomplete，不叫 concise。",
+          notes:[
+            {term:"concise", pos:"adj.", gloss:"簡潔扼要的（n. concision／conciseness）", ex:"Keep your answer clear and concise.", exZh:"回答請保持清楚扼要。"},
+            {term:"concise vs. brief", pos:"辨析", gloss:"brief 只強調「短」；concise 強調「短而且完整達意」。學術寫作講究的是後者。"}
+          ]},
+
+        { n:14, kind:"提示：vi___d",
+          stem:"The documentary included vi______d images of coral reefs, which helped viewers understand both their beauty and their environmental importance.",
+          answerText:"vivid",
+          translation:"這部紀錄片收錄了珊瑚礁鮮明生動的影像，幫助觀眾同時理解它們的美麗與環境上的重要性。",
+          why:"空格修飾名詞 images，需要形容詞。關係子句說這些影像 helped viewers understand ... their beauty（幫助觀眾理解珊瑚礁之美）——能傳達美感的影像必然是色彩鮮明、栩栩如生的。vivid 除了形容色彩鮮豔，也可形容記憶、描述、想像力的生動。",
+          notes:[
+            {term:"vivid", pos:"adj.", gloss:"鮮明的、生動的（a vivid memory 鮮明的記憶／a vivid imagination 豐富的想像力）", ex:"She gave a vivid account of the accident.", exZh:"她對那場意外做了生動的描述。"},
+            {term:"coral reef", pos:"n.", gloss:"珊瑚礁"}
+          ]},
+
+        { n:15, kind:"提示：cr___y",
+          stem:"The newspaper lost much of its cr______y after readers discovered that several of its reports contained inaccurate information and unsupported claims.",
+          answerText:"credibility",
+          translation:"在讀者發現該報數篇報導含有不正確的資訊與缺乏根據的主張之後，這家報社失去了大部分的公信力。",
+          why:"空格前有所有格 its、前面的動詞是 lost，需要名詞。after 子句列出兩項罪狀：inaccurate information（不正確的資訊）與 unsupported claims（無根據的主張）——會因此失去的東西就是「可信度」。credibility 由形容詞 credible（可信的）加名詞字尾而來，字根 cred- 表「相信」（同源字：credit、incredible）。",
+          notes:[
+            {term:"credibility", pos:"n.", gloss:"可信度、公信力（adj. credible 可信的／credulous 輕信的）", ex:"The scandal damaged his credibility as a leader.", exZh:"這樁醜聞損害了他身為領導者的公信力。"},
+            {term:"字根 cred-", pos:"字根", gloss:"表「相信」：credit（信用）、incredible（難以置信的）、credential（資格證明）。"}
+          ]},
+
+        { n:16, kind:"提示：p___ze",
+          stem:"During exam week, students should p______ze the subjects they find most difficult instead of spending equal time on everything.",
+          answerText:"prioritize",
+          translation:"在考試週，學生應該優先處理自己覺得最困難的科目，而不是把時間平均分配在所有事情上。",
+          why:"should 後面要接原形動詞，且空格後直接接受詞 the subjects，需要及物動詞。instead of spending equal time on everything（而不是把時間平均分配）是關鍵對比——不平均分配，就是要「排優先順序」。prioritize 由名詞 priority（優先）加動詞字尾 -ize 而成。注意提示的字尾是 -ze，直接指向這個字尾。",
+          notes:[
+            {term:"prioritize", pos:"vt.", gloss:"優先處理、排定優先順序（n. priority）", ex:"You need to prioritize your tasks.", exZh:"你需要為你的工作排優先順序。"},
+            {term:"give priority to", pos:"phr.", gloss:"優先考慮…（＝prioritize 的名詞說法）"}
+          ]},
+
+        { n:17, kind:"提示：su___y",
+          stem:"Without a government su______y, many low-income families would be unable to afford the rising cost of housing in major cities.",
+          answerText:"subsidy",
+          translation:"若沒有政府補助，許多低收入家庭將無力負擔大城市中不斷上漲的住房成本。",
+          why:"空格前有冠詞 a 與形容詞 government，需要單數名詞。句子是與現在事實相反的假設（Without ... would be unable to afford），意思是「現在有這東西，所以他們負擔得起」——政府提供、能讓人負擔得起住房的，就是補助金。subsidy 為可數名詞，動詞形為 subsidize。",
+          notes:[
+            {term:"subsidy", pos:"n.", gloss:"補助金、津貼（可數；v. subsidize 補助）", ex:"Farmers receive subsidies for growing certain crops.", exZh:"農民種植特定作物可獲得補助。"},
+            {term:"Without + N, S would + V", pos:"假設語氣", gloss:"＝If it were not for...，表與現在事實相反。看到 would 就知道這是假設而非直述。"}
+          ]}
+      ]
+    }]
+  },
+
+  /* ===================== 二、綜合測驗 ===================== */
+  {
+    id:"cloze", label:"二之二、綜合測驗", score:"24% · 每題 2%",
+    instruction:"兩篇短文，共 12 題。點文章裡的空格可直接跳到該題。答案：BCCADD　DCABDB",
+    groups:[
+    {
+      passage:`Numbers are not the only things hiding inside English idioms. Animals turn up there far more often than most learners realize, and these animal idioms are a familiar source of __18__. A person who "lets the cat out of the bag" has revealed a secret, while a plan that "goes to the dogs" is falling apart. Neither the cat nor the dog has anything to do with what the speaker means, so anyone who tries to __19__ an idiom by adding up its individual words will only end up confused. Some teachers therefore advise students to skip idioms altogether and to stick to plain, literal wording in their own speech. __20__, no learner can avoid meeting them. Familiarity with them sharpens both comprehension and the ability to express oneself with precision.
+
+These phrases grew out of centuries of farm and forest life, and many are laced with humor. They are now so __21__ in casual chat, news reports, and academic discourse that most speakers no longer hear the animal at all. "A wolf in sheep's clothing" goes back to a fable in which a predator disguises itself to hunt unnoticed, and it now describes anyone whose warmth hides bad intentions. From this angle, an idiom is __22__ a puzzle to be solved as a story to be remembered. The story also shows a learner when a phrase actually fits: calling someone a wolf in sheep's clothing is an accusation, so a speaker who wants to __23__ a harsh judgment will reach for gentler wording instead. Such phrases are a reminder that English extends well beyond grammar rules and word lists.`,
+      zh:`數字並不是唯一藏在英文慣用語裡的東西。動物出現在其中的頻率遠比大多數學習者所以為的高，而這些動物慣用語是學習者熟悉的挫折來源。說某人「let the cat out of the bag」是指他洩漏了祕密，而一項「goes to the dogs」的計畫則是正在瓦解。貓和狗都與說話者的本意毫無關係，因此任何試圖把單字一個個加起來去理解慣用語的人，最後只會一頭霧水。因此有些老師建議學生乾脆跳過慣用語，在自己說話時堅持使用平實、字面的措辭。儘管如此，沒有一個學習者能避免遇到它們。熟悉這些慣用語，能同時增進理解力與精準表達自己的能力。
+
+這些片語生長自數百年的農耕與林野生活，許多還帶著幽默。它們如今在閒聊、新聞報導與學術論述中都已如此司空見慣，以致於大多數說話者根本不再聽見那隻動物。「A wolf in sheep's clothing」（披著羊皮的狼）源自一則寓言，其中一隻掠食者偽裝自己以便不被察覺地獵食；如今它用來形容任何以溫暖掩飾惡意的人。從這個角度看，與其說慣用語是一道待解的謎題，不如說是一個值得記住的故事。這個故事也告訴學習者一個片語何時真正適用：說某人是披著羊皮的狼是一種指控，因此想要緩和嚴厲評斷的人，會轉而選擇比較溫和的措辭。這類片語提醒我們，英文遠遠不只是文法規則與單字表。`,
+      questions:[
+        { n:18, kind:"名詞",
+          options:{A:"elation 極度喜悅",B:"frustration 挫折感",C:"gratitude 感激",D:"penalty 處罰"}, answer:"B",
+          translation:"這些動物慣用語是學習者熟悉的挫折來源。",
+          explain:{
+            A:"elation 是「歡欣鼓舞」，屬強烈的正面情緒；但整段在講學習者被慣用語搞得一頭霧水，語氣相反。",
+            B:"a familiar source of ______ 需要一個學習者常有的情緒。後文說 anyone who tries to make sense of an idiom by adding up its individual words will only end up confused（只會一頭霧水），甚至有老師建議乾脆跳過——這種學不會又躲不掉的狀態，正是 frustration。",
+            C:"gratitude 是「感激」，但沒有人會因為慣用語難懂而心存感激。",
+            D:"penalty 是「處罰、罰則」，屬制度性的懲罰，與學習困難無關。"
+          },
+          notes:[
+            {term:"a source of", pos:"phr.", gloss:"…的來源（a source of income／pride／frustration）", ex:"Traffic is a constant source of stress.", exZh:"交通是壓力持續不斷的來源。"},
+            {term:"turn up", pos:"phr. v.", gloss:"出現、冒出來；也指「（音量）調大」"}
+          ]},
+
+        { n:19, kind:"動詞片語",
+          options:{A:"come down to 歸結為",B:"keep track of 追蹤、掌握",C:"make sense of 理解、弄懂",D:"put up with 忍受"}, answer:"C",
+          translation:"任何試圖把單字一個個加起來去理解慣用語的人，最後只會一頭霧水。",
+          explain:{
+            A:"come down to 是「歸結為、最終取決於」，用法是 It all comes down to money，主詞是抽象議題而非人，且它是不及物片語，不能直接接 an idiom。",
+            B:"keep track of 是「持續掌握動態」，受詞多為時間、進度、開銷，不是用來「弄懂」一個詞的意思。",
+            C:"空格後接 an idiom 為受詞，且句尾說 will only end up confused（最後只會一頭霧水）——會導致困惑的，是「試圖理解卻失敗」。make sense of 意為「弄懂、理清」，正好。",
+            D:"put up with 是「忍受」，但這句談的是理解上的努力，不是情緒上的容忍。"
+          },
+          notes:[
+            {term:"make sense of", pos:"phr.", gloss:"弄懂、理解（注意與 make sense「說得通」不同：後者主詞是事物且無受詞）", ex:"I can't make sense of these instructions.", exZh:"我看不懂這些說明。"},
+            {term:"end up + adj./V-ing", pos:"句型", gloss:"最後落得…的下場", ex:"He ended up paying twice.", exZh:"他最後付了兩次錢。"}
+          ]},
+
+        { n:20, kind:"轉承語",
+          options:{A:"As a result 因此",B:"In other words 換句話說",C:"Even so 儘管如此",D:"By comparison 相較之下"}, answer:"C",
+          translation:"儘管如此，沒有一個學習者能避免遇到它們。",
+          explain:{
+            A:"As a result 表因果；但前一句說「老師建議跳過慣用語」，後一句說「躲不掉」——後者不是前者的結果，而是對它的反駁。",
+            B:"In other words 是換句話說，用來重述前意；但這兩句意思相反，不是同一件事的兩種說法。",
+            C:"前一句：Some teachers therefore advise students to skip idioms altogether（有些老師建議乾脆跳過）。後一句：no learner can avoid meeting them（沒有學習者躲得掉）。建議 vs. 現實，前後相反，需要表讓步的轉折語。Even so 正是「話雖如此、儘管這樣」。",
+            D:"By comparison 表對照比較，須有兩個並列的對象可比；但這裡是同一件事的兩種立場，不是比較。"
+          },
+          notes:[
+            {term:"Even so", pos:"phr.", gloss:"儘管如此（＝Nevertheless）；用來承認前面說法後再提出相反的重點。", ex:"It's expensive. Even so, I'd buy it again.", exZh:"它很貴。即使如此，我還是會再買一次。"},
+            {term:"轉承語先判方向", pos:"技巧", gloss:"看空格前後兩句是同向還是反向。反向就從 Even so／However／Nevertheless 中挑，一步刪掉一半選項。"}
+          ]},
+
+        { n:21, kind:"形容詞",
+          options:{A:"commonplace 司空見慣的",B:"delicate 細緻的；微妙的",C:"optional 可有可無的",D:"worthless 毫無價值的"}, answer:"A",
+          translation:"它們如今在閒聊、新聞報導與學術論述中都已如此司空見慣。",
+          explain:{
+            A:"這是 so ... that 句型，結果子句是 most speakers no longer hear the animal at all（大多數人根本不再聽見那隻動物）——聽到某個說法卻毫無感覺，正是因為它太普遍、已經內化成日常語言。commonplace 意為「習以為常的」。三個並列的場域（閒聊、新聞、學術）也在強調它無所不在。",
+            B:"delicate 是「細緻的、需要謹慎處理的」，無法解釋「不再聽見動物」這個結果。",
+            C:"optional 是「非必要的、可選的」，但前一段才說 no learner can avoid meeting them（躲不掉），前後矛盾。",
+            D:"worthless 是「毫無價值的」，與整段肯定慣用語的語氣衝突——最後一句還說它提醒我們英文不只是文法與單字。"
+          },
+          notes:[
+            {term:"commonplace", pos:"adj. / n.", gloss:"司空見慣的；名詞為「平常事」", ex:"Working from home has become commonplace.", exZh:"在家工作已成常態。"},
+            {term:"be laced with", pos:"phr.", gloss:"摻雜著…（laced with humor 帶著幽默）"}
+          ]},
+
+        { n:22, kind:"句型",
+          options:{A:"less than 少於",B:"more than 多於、不只是",C:"rather than 而不是",D:"not so much 與其說…"}, answer:"D",
+          translation:"與其說慣用語是一道待解的謎題，不如說是一個值得記住的故事。",
+          explain:{
+            A:"less than 用於數量或程度的比較（less than five），後面不會接 as。",
+            B:"more than 意為「不只是」（more than a job），但它後面同樣不接 as；若要用，句子得改寫成 an idiom is more than a puzzle。",
+            C:"rather than 語意上接近「而不是」，但它的結構是 A rather than B（兩者直接並列），中間不會出現 as。這是本題最強的干擾選項——語意對，結構錯。",
+            D:"決定性線索是空格後方的 as：not so much A as B 是固定句型，意為「與其說是 A，不如說是 B」。填進去成為 not so much a puzzle to be solved as a story to be remembered，結構完整。這題考的是「看到 as 就回頭找搭配」。"
+          },
+          notes:[
+            {term:"not so much A as B", pos:"句型", gloss:"與其說是 A，不如說是 B（重點在 B）", ex:"He is not so much lazy as unmotivated.", exZh:"與其說他懶，不如說他提不起勁。"},
+            {term:"從後面的介系詞回推", pos:"技巧", gloss:"片語題若空格後出現 as／than／to／for，先確認哪個選項需要那個搭配詞，往往一步定案。"}
+          ]},
+
+        { n:23, kind:"動詞",
+          options:{A:"distort 扭曲",B:"inherit 繼承",C:"justify 為…辯解",D:"temper 緩和、調節"}, answer:"D",
+          translation:"想要緩和嚴厲評斷的人，會轉而選擇比較溫和的措辭。",
+          explain:{
+            A:"distort 是「扭曲（事實、形象）」，帶有蓄意造假的意味；但這裡的人只是想把話說得客氣些，不是要竄改內容。",
+            B:"inherit 是「繼承（財產、特質、問題）」，語意完全不合。",
+            C:"justify 是「為…提出正當理由」，方向相反——那是要強化這個評斷的正當性，但句尾說他改用 gentler wording（更溫和的措辭），顯然是想淡化。",
+            D:"句尾的 will reach for gentler wording instead（改用較溫和的措辭）就是答案的解釋：想把嚴厲的評斷「和緩下來」。temper 當動詞正是「緩和、調節」，名詞則是「脾氣」，一字兩義要分清。"
+          },
+          notes:[
+            {term:"temper", pos:"vt. / n.", gloss:"緩和、調節（temper criticism with praise）；名詞為「脾氣」（lose one's temper 發脾氣）", ex:"She tempered her criticism with a compliment.", exZh:"她在批評中加了一句讚美以緩和語氣。"},
+            {term:"reach for", pos:"phr. v.", gloss:"伸手去拿；引申為「選用（某種說法、手段）」"}
+          ]}
+      ]
+    },
+    {
+      passage:`Romania is not the only country where the dead are sent off in color. Among the Ga people of southern Ghana, there is a strong __24__ to treat a funeral as a celebration rather than an occasion for grief. Some coffins are shaped like animals, others like the tools of a trade, and still others like the machines their owners once drove. Visitors often assume that such bright shapes make light of death. __25__, the more elaborate the coffin, the more respect it shows. Mourners arrive in printed cloth, brass bands play through the streets, and the procession can fill an entire afternoon. The whole scene is __26__ the hushed ceremonies most Europeans grow up with.
+
+These coffins take shape in small family workshops, where the craft passes from one generation to the next. Every joint and every brushstroke will be inspected by hundreds of mourners, so a finished piece has to be __27__. Since neighbors read a coffin the way visitors to Sapanta, in northern Romania, read an epitaph, a design that missed the deceased person's character would __28__ the family's standing for years. Wealthy families may wait several months and pay more than a year's wages before the workshop hands over the finished box. __29__ one craftsman named Kane Kwei, who built a boat-shaped coffin for a fisherman in the 1950s, the tradition might never have existed at all. Like the painted crosses of Sapanta, these coffins insist that a life well lived deserves not only tears but also laughter.`,
+      zh:`羅馬尼亞並不是唯一一個以色彩送別逝者的國家。在迦納南部的加族人之中，有一種強烈的傾向，把葬禮當成慶典而非哀傷的場合。有些棺木做成動物的形狀，有些做成某項行業的工具，還有些做成主人生前駕駛的機器。訪客常以為這樣鮮豔的造型是在拿死亡開玩笑。恰恰相反，棺木越是精緻，所展現的敬意就越深。弔唁者身穿印花布前來，銅管樂隊沿街演奏，送葬隊伍可以佔滿一整個下午。整個場面與大多數歐洲人從小習慣的肅穆儀式相去甚遠。
+
+這些棺木成形於小型的家庭工坊，手藝在世代之間傳承。每一處接榫、每一筆刷痕都會被數百名弔唁者檢視，因此一件完成品必須毫無瑕疵。由於鄰里閱讀一具棺木的方式，就像造訪羅馬尼亞北部薩本查的訪客閱讀墓誌銘一樣，一個沒能抓住逝者性格的設計，會在往後數年損害這個家族的聲望。富裕的家庭可能要等上好幾個月、付出超過一年工資的代價，工坊才會交出完成的木箱。要不是因為一位名叫凱恩・奎伊的工匠——他在一九五○年代為一位漁夫打造了一具船形棺木——這項傳統可能根本不會存在。就像薩本查那些彩繪的十字架一樣，這些棺木堅持著一件事：一個活得精彩的生命，值得的不只是眼淚，還有笑聲。`,
+      questions:[
+        { n:24, kind:"名詞",
+          options:{A:"alert 警報",B:"defect 缺陷",C:"reminder 提醒物",D:"tendency 傾向"}, answer:"D",
+          translation:"有一種強烈的傾向，把葬禮當成慶典而非哀傷的場合。",
+          explain:{
+            A:"alert 是「警報、警戒」，用於危險或緊急狀況，與葬禮習俗無關。",
+            B:"defect 是「瑕疵、缺陷」，帶負面評價；但作者對這個文化是欣賞的語氣，且 a strong defect 也不成搭配。",
+            C:"reminder 是「提醒的事物」，須指涉某個被提醒的內容（a reminder of/that...），此處後接的是不定詞片語，搭配不合。",
+            D:"a strong tendency to V 是固定用法，意為「有強烈的傾向做某事」。空格後正是不定詞 to treat a funeral as a celebration，結構與語意都吻合；接下來整段舉的例子也都在證明這個「傾向」。"
+          },
+          notes:[
+            {term:"a tendency to V", pos:"phr.", gloss:"有…的傾向（v. tend to）", ex:"He has a tendency to interrupt.", exZh:"他有打斷別人的傾向。"},
+            {term:"make light of", pos:"phr.", gloss:"對…輕描淡寫、不當一回事", ex:"Don't make light of her concerns.", exZh:"別把她的顧慮不當一回事。"}
+          ]},
+
+        { n:25, kind:"轉承語",
+          options:{A:"For instance 舉例來說",B:"In addition 此外",C:"On the contrary 恰恰相反",D:"To be exact 確切地說"}, answer:"C",
+          translation:"恰恰相反，棺木越是精緻，所展現的敬意就越深。",
+          explain:{
+            A:"For instance 用來為前一句舉例；但後一句並不是「拿死亡開玩笑」的例子，而是推翻這個說法。",
+            B:"In addition 表補充，語意同向；但這兩句立場相反。",
+            C:"前一句說 Visitors often assume that such bright shapes make light of death（訪客常以為鮮豔造型是在拿死亡開玩笑），後一句卻說棺木越精緻代表敬意越深——先提出一個錯誤印象，再直接否定它，這正是 On the contrary 的功能。",
+            D:"To be exact 是「確切地說」，用來把前面的說法講得更精準；但這裡不是修正精確度，而是全盤推翻。"
+          },
+          notes:[
+            {term:"On the contrary", pos:"phr.", gloss:"恰恰相反；用來否定前面剛提到的說法。注意與 In contrast（相較之下，用於兩者比較）不同。", ex:"He isn't lazy. On the contrary, he works nonstop.", exZh:"他不懶。恰恰相反，他不停地工作。"},
+            {term:"assume 是命題信號", pos:"技巧", gloss:"文中出現 Visitors often assume／Many people believe 這類句子時，下一句十之八九是要推翻它。空格若在那個位置，先想反向轉承語。"}
+          ]},
+
+        { n:26, kind:"介系詞片語",
+          options:{A:"a far cry from 與…相去甚遠",B:"in line with 與…一致",C:"on top of 在…之上；除了",D:"short of 短缺；除了"}, answer:"A",
+          translation:"整個場面與大多數歐洲人從小習慣的肅穆儀式相去甚遠。",
+          explain:{
+            A:"前文描述的是印花布、銅管樂隊、佔滿一個下午的遊行，而空格後是 the hushed ceremonies（肅穆安靜的儀式）——熱鬧 vs. 靜默，兩者天差地遠。a far cry from 正是「與…截然不同、相去甚遠」。",
+            B:"in line with 是「與…一致、符合」，方向完全相反；若成立，就等於說迦納葬禮和歐洲一樣安靜，與前文矛盾。",
+            C:"on top of 是「在…之上」或「除了…還」，表附加，無法表達差異。",
+            D:"short of 是「不足、短少」，用於數量（short of cash）或「除…之外」（short of a miracle），與場面的對比無關。"
+          },
+          notes:[
+            {term:"a far cry from", pos:"phr.", gloss:"與…相去甚遠、截然不同", ex:"The final version was a far cry from the first draft.", exZh:"定稿與初稿相去甚遠。"},
+            {term:"hushed", pos:"adj.", gloss:"寂靜的、壓低聲音的（hush 使安靜）"}
+          ]},
+
+        { n:27, kind:"形容詞",
+          options:{A:"eligible 有資格的",B:"flawless 毫無瑕疵的",C:"harsh 嚴厲的、粗糙的",D:"persistent 持續不斷的"}, answer:"B",
+          translation:"因此一件完成品必須毫無瑕疵。",
+          explain:{
+            A:"eligible 是「符合資格的」，用於人（eligible for a scholarship），且須搭配 for；棺木沒有資格問題。",
+            B:"so 引導的是結果：前面說 Every joint and every brushstroke will be inspected by hundreds of mourners（每一處接榫、每一筆刷痕都會被數百人檢視）——被這麼多雙眼睛盯著看，成品自然不能有任何瑕疵。flawless 由 flaw（瑕疵）＋ -less（無）構成。",
+            C:"harsh 是「嚴厲的、刺耳的、粗糙的」，屬負面評價，與工藝要求相反。",
+            D:"persistent 是「持之以恆的、揮之不去的」，形容人的態度或問題，不能形容成品的品質。"
+          },
+          notes:[
+            {term:"flawless", pos:"adj.", gloss:"完美無瑕的（flaw 瑕疵 ＋ -less 無）", ex:"Her performance was flawless.", exZh:"她的表現無懈可擊。"},
+            {term:"字尾 -less", pos:"構詞", gloss:"表「沒有」：flawless、endless、priceless（無價的，不是「沒價值」）。注意 priceless 與 worthless 意思相反。"}
+          ]},
+
+        { n:28, kind:"動詞",
+          options:{A:"distinguish 區別；使出眾",B:"extend 延長、擴展",C:"repurpose 重新利用",D:"undermine 損害、逐步削弱"}, answer:"D",
+          translation:"一個沒能抓住逝者性格的設計，會在往後數年損害這個家族的聲望。",
+          explain:{
+            A:"distinguish 是「區分」或「使…出眾」（distinguish oneself），後者是正面的；但主詞是 a design that missed the deceased person's character（沒抓住逝者性格的設計），這是失敗之作，不可能讓家族更出色。",
+            B:"extend 是「延長、擴展」，若成立會變成「損壞的設計延長了家族聲望」，因果荒謬。",
+            C:"repurpose 是「改作他用」，受詞須為可再利用的物品或空間，不能接 standing（聲望）。",
+            D:"主詞是一個失敗的設計，而前文說鄰里會像讀墓誌銘一樣解讀棺木——設計失手，家族的名聲自然受損。undermine 意為「從根基逐步削弱」，搭配 standing、reputation、confidence 都很常見，for years 也呼應了它「緩慢侵蝕」的語感。"
+          },
+          notes:[
+            {term:"undermine", pos:"vt.", gloss:"逐步削弱、損害（under 下方 ＋ mine 挖掘，原意為挖空地基）", ex:"The scandal undermined public trust.", exZh:"這樁醜聞侵蝕了大眾的信任。"},
+            {term:"standing", pos:"n.", gloss:"地位、聲望（social standing 社會地位）"}
+          ]},
+
+        { n:29, kind:"假設語氣",
+          options:{A:"Because of 由於",B:"Had it not been for 要不是因為（過去）",C:"In spite of 儘管",D:"Were it not for 要不是因為（現在）"}, answer:"B",
+          translation:"要不是因為一位名叫凱恩・奎伊的工匠，這項傳統可能根本不會存在。",
+          explain:{
+            A:"Because of 表直述的原因，但主要子句用的是 might never have existed（可能根本不會存在過）——這是假設語氣，不是事實陳述，兩者不搭。",
+            B:"關鍵在主要子句的動詞：might never have existed 是「與過去事實相反」的假設。與之搭配的條件必須也指向過去，即 If it had not been for...，省略 if 後倒裝為 Had it not been for。文中提到的是一九五○年代的事，時間點也吻合。",
+            C:"In spite of 表讓步（儘管），但句意是「若沒有他就不會有這個傳統」，屬因果假設而非讓步。",
+            D:"這是本題唯一真正的陷阱。Were it not for 意思確實是「要不是因為」，但它是「與現在事實相反」的用法，須搭配 would/might + 原形動詞。這裡主要子句是 might have existed（完成式），時態對不上——差別只在一個 have。"
+          },
+          notes:[
+            {term:"Had it not been for vs. Were it not for", pos:"辨析", gloss:"前者指過去（→ would/might have p.p.），後者指現在（→ would/might + V）。看主要子句有沒有 have p.p. 就能判斷。", ex:"Were it not for you, I'd be lost. / Had it not been for you, I'd have been lost.", exZh:"要不是有你，我現在會不知所措。／要不是當時有你，我早就不知所措了。"},
+            {term:"省略 if 的倒裝", pos:"文法", gloss:"if 子句中若有 were／had／should，可省略 if 並將該字提前：Had I known... ／ Should you need help..."}
+          ]}
+      ]
+    }]
+  },
+
+  /* ===================== 三、文意選填 ===================== */
+  {
+    id:"bank", label:"二之三、文意選填", score:"20% · 每題 2%",
+    instruction:"十個空格，選項不重複使用。答題時請忽略大小寫。答案：FDAIJ　GCHBE",
+    bank:{A:"prompts 促使",B:"ironic 諷刺的",C:"input 意見、投入的訊息",D:"visuals 視覺素材",E:"figuratively 比喻地",F:"passage 文章、段落",G:"cynical 憤世嫉俗的、不信任的",H:"character 特質、性格",I:"negligible 微不足道的",J:"grasp 理解、掌握"},
+    groups:[{
+      passage:`Our brains were built to notice danger first, and newsrooms worked this out long before researchers gave the habit a name. Readers get twice as far down a(n) __30__ about a failure as they do down one about a success, so editors put the bad news up front. The __31__ chosen for a story follow the same rule: a burning building holds the eye, while a repaired one does not. What __32__ most of us to open an article is not curiosity but a small warning bell. It is far more profitable to report what has gone wrong than to record what is quietly going right.
+
+Online ratings run on the same ancient alarm. A hundred warm lines can feel __33__ next to one furious sentence typed at midnight, no matter how carefully those hundred were written. Shoppers who __34__ this pattern still fall for it, since a complaint reads like evidence while approval reads like noise. Over time it is easy to grow __35__ about ratings altogether and to trust nothing the crowd says.
+
+Neither swallowing the complaints nor dismissing the whole system is much help. A wiser move is to open the three-star reviews, where the __36__ is usually fairest, and to remember that one bad evening does not define a restaurant's whole __37__. There is something __38__ about the whole business: the alarm that once kept people alive now makes us worse judges of the world around us. The goal is not to pretend that bad news is rare, but to give the good news the attention it deserves. Speaking __39__, that alarm is a smoke detector, and it still goes off when the toast burns.`,
+      zh:`我們的大腦生來就先注意到危險，而新聞編輯室早在研究者為這個習性命名之前，就已經想通了這一點。讀者讀一篇關於失敗的文章，能讀到的長度是讀一篇關於成功的文章的兩倍，所以編輯把壞消息放在最前面。為一則報導挑選的視覺素材也遵循同樣的規則：一棟燃燒中的建築抓得住目光，一棟修好的則不會。促使我們大多數人點開一篇文章的，不是好奇心，而是一記小小的警鈴。報導出了什麼差錯，遠比記錄什麼正安靜地順利進行來得有利可圖。
+
+線上評分也運作在同一套古老的警報系統上。一百行溫暖的留言，擺在半夜打出的一句怒言旁邊，可能顯得微不足道，無論那一百行寫得多麼用心。就算是看穿了這個模式的購物者，仍然會落入其中，因為一則抱怨讀起來像證據，而讚美讀起來像雜訊。久而久之，人很容易對評分整體變得憤世嫉俗，什麼都不相信群眾說的話。
+
+無論是照單全收那些抱怨，還是全盤否定整個系統，都幫助不大。比較明智的作法，是去打開三星評論——那裡的意見通常最公允——並且記得，一個糟糕的夜晚並不能定義一家餐廳的全部特質。這整件事有某種諷刺之處：那個曾經讓人活下來的警報，如今卻讓我們對周遭世界的判斷變得更差。目標不是假裝壞消息很罕見，而是給好消息應得的注意力。打個比方，那個警報是一個煙霧偵測器，而它在吐司烤焦時仍然會響。`,
+      questions:[
+        { n:30, kind:"名詞", answer:"F", answerText:"passage",
+          why:"空格前有冠詞 a(n)，後面接 about a failure，需要單數可數名詞。整句在講「讀者往下讀的距離」（get twice as far down），能讓人「往下讀」的東西就是一篇文章。passage 指「一段文字、一篇文章」。同一句後半用 one 回指它（one about a success），one 只能代替可數單數名詞，這也是驗證。",
+          notes:[{term:"passage", pos:"n.", gloss:"（文章的）一段、一篇；也指「通道」", ex:"Read the passage and answer the questions.", exZh:"閱讀本文並回答問題。"},
+                 {term:"twice as ... as", pos:"句型", gloss:"是…的兩倍；倍數詞放在 as ... as 之前。"}]},
+
+        { n:31, kind:"名詞", answer:"D", answerText:"visuals",
+          why:"空格是主詞，動詞是複數的 follow，所以要填可數複數名詞。冒號後的說明是決定性線索：a burning building holds the eye, while a repaired one does not（燃燒中的建築抓得住目光）——談的是「看的東西」。visuals 指報導所搭配的圖片、影像等視覺素材。",
+          notes:[{term:"visuals", pos:"n.", gloss:"視覺素材（圖片、影片、圖表等，常用複數）", ex:"The talk needs stronger visuals.", exZh:"這場演講需要更有力的視覺素材。"},
+                 {term:"hold the eye", pos:"phr.", gloss:"吸引住目光、留住視線"}]},
+
+        { n:32, kind:"動詞", answer:"A", answerText:"prompts",
+          why:"句型是 What ______ most of us to open an article is not curiosity but...，空格是名詞子句 What... 裡的動詞，主詞 What 視為單數，所以要用第三人稱單數 -s。且空格後是 us to open 的結構，需要能接「受詞＋不定詞」的動詞。prompt sb to V 意為「促使某人做某事」，完全吻合。",
+          notes:[{term:"prompt sb to V", pos:"句型", gloss:"促使某人做…（n. 提示；adj. 迅速的）", ex:"The report prompted the city to act.", exZh:"這份報告促使市府採取行動。"},
+                 {term:"not A but B", pos:"句型", gloss:"不是 A 而是 B；重點在 B。本句的 B 是 a small warning bell（一記小小的警鈴）。"}]},
+
+        { n:33, kind:"形容詞", answer:"I", answerText:"negligible",
+          why:"feel ______ 中的 feel 是連綴動詞，後面接形容詞當主詞補語。語意上，一百行好評擺在一句怒言旁邊會「顯得微不足道」——negligible 意為「小到可以忽略」，由動詞 neglect（忽略）而來。句尾的 no matter how carefully those hundred were written（無論那一百行寫得多用心）更凸顯這種落差之不合理。",
+          notes:[{term:"negligible", pos:"adj.", gloss:"微不足道的、可忽略的（v. neglect 忽視）", ex:"The difference in price is negligible.", exZh:"價差微乎其微。"},
+                 {term:"連綴動詞 + 形容詞", pos:"文法", gloss:"feel／look／sound／seem／taste 後面接形容詞不接副詞（It feels strange，不是 strangely）。"}]},
+
+        { n:34, kind:"動詞", answer:"J", answerText:"grasp",
+          why:"Shoppers who ______ this pattern 是關係子句，先行詞 Shoppers 為複數，動詞用原形；空格後有受詞 this pattern，需要及物動詞。grasp 意為「理解、領會」。這句的重點在轉折 still fall for it（仍然會上當）——即使「懂」了這個模式，還是躲不掉，正好與 grasp 形成張力。",
+          notes:[{term:"grasp", pos:"vt. / n.", gloss:"理解、掌握；也指「緊握」。名詞為「理解力」（a firm grasp of the subject）", ex:"She quickly grasped the main idea.", exZh:"她很快就抓到了重點。"},
+                 {term:"fall for", pos:"phr. v.", gloss:"上…的當、受騙；也指「愛上」"}]},
+
+        { n:35, kind:"形容詞", answer:"G", answerText:"cynical",
+          why:"grow ______ about ratings 中的 grow 是連綴動詞（＝become），後接形容詞；且搭配介系詞 about。and 後面的 to trust nothing the crowd says（什麼都不相信群眾說的話）就是答案的解釋——對一切抱持懷疑、不再相信，正是 cynical。",
+          notes:[{term:"cynical", pos:"adj.", gloss:"憤世嫉俗的、對他人動機抱持懷疑的（n. cynicism）", ex:"He has grown cynical about politics.", exZh:"他對政治已經變得憤世嫉俗。"},
+                 {term:"grow + adj.", pos:"用法", gloss:"逐漸變得…（＝become，但強調緩慢的變化）"}]},
+
+        { n:36, kind:"名詞", answer:"C", answerText:"input",
+          why:"where the ______ is usually fairest 是關係子句，先行詞是 the three-star reviews。空格是主詞，動詞為單數 is，需要不可數名詞。input 指「所提供的意見、回饋」，正好指稱三星評論裡的那些聲音；形容詞 fairest（最公允）也只能修飾意見，不能修飾星等本身。",
+          notes:[{term:"input", pos:"n.", gloss:"意見投入、提供的資訊（不可數；反義 output 產出）", ex:"We welcome input from all members.", exZh:"我們歡迎所有成員提供意見。"},
+                 {term:"Neither A nor B + 單數動詞", pos:"文法", gloss:"本段首句 Neither swallowing... nor dismissing... is much help，動詞用單數 is。"}]},
+
+        { n:37, kind:"名詞", answer:"H", answerText:"character",
+          why:"a restaurant's whole ______ 中，空格前有所有格與 whole，需要不可數名詞。語意上，一個糟糕的夜晚不能定義一家餐廳的「整體特質」。character 除了「角色、文字」，也指「（人或事物的）性格、特質」，此義為不可數。",
+          notes:[{term:"character", pos:"n.", gloss:"特質、性格（不可數）；也指「角色」與「（書寫）字元」（可數）", ex:"The old town has real character.", exZh:"這座老城很有特色。"},
+                 {term:"define", pos:"vt.", gloss:"定義、界定；此處為「代表…的全貌」"}]},
+
+        { n:38, kind:"形容詞", answer:"B", answerText:"ironic",
+          why:"There is something ______ about... 的結構中，形容詞要放在 something 後面（形容詞後位修飾不定代名詞）。冒號後解釋了諷刺何在：the alarm that once kept people alive now makes us worse judges（曾經保命的警報，如今卻讓我們判斷變差）——好處變成壞處，正是 ironic。",
+          notes:[{term:"ironic", pos:"adj.", gloss:"諷刺的（結果與預期或初衷相反；n. irony）", ex:"It's ironic that the fire station burned down.", exZh:"消防局竟然被燒毀，實在諷刺。"},
+                 {term:"something + 形容詞", pos:"文法", gloss:"修飾 something／anything／nothing 的形容詞要放在後面：something new、nothing important。"}]},
+
+        { n:39, kind:"副詞", answer:"E", answerText:"figuratively",
+          why:"Speaking ______ 是獨立分詞構句的固定形式（Speaking frankly／generally／figuratively），空格必須是副詞。語意上，後面說「那個警報是一個煙霧偵測器」——這顯然不是字面事實，而是比喻，所以要先聲明「打個比方」。figuratively 的反義字正是 literally（照字面地）。",
+          notes:[{term:"figuratively speaking", pos:"phr.", gloss:"打個比方說（反義 literally speaking 就字面而言）", ex:"Figuratively speaking, the project is on life support.", exZh:"打個比方，這個案子已經在靠呼吸器維生了。"},
+                 {term:"go off", pos:"phr. v.", gloss:"（警報）響起；也指「爆炸」或「（食物）壞掉」"}]}
+      ]
+    }]
+  },
+
+  /* ===================== 四、閱讀測驗 ===================== */
+  {
+    id:"reading", label:"二之四、閱讀測驗", score:"6% · 每題 2%",
+    instruction:"展開詳解時，文章中的依據句會被標示出來。答案：A A C",
+    groups:[{
+      passage:`As populations age, many countries are facing the challenge of ensuring road safety while respecting older adults' independence. Advances in healthcare have allowed people to live longer and remain active well into old age, which means that more senior citizens continue to drive. However, concerns arise when age-related changes affect a person's ability to drive safely. Several high-profile traffic incidents, widely covered by the media, have prompted governments to review their policies regarding elderly drivers. As a result, countries around the world have developed different approaches to managing this issue, each reflecting its own social values and transportation needs.
+
+Some countries have adopted stricter regulations for older drivers. In Taiwan and Japan, for example, elderly drivers are required to undergo mandatory renewal of their licenses from a certain age—in Taiwan from age 70, and in Japan from age 75. During the renewal process, they may need to complete health examinations and attend safety courses. They may also take tests that evaluate their ability to think, remember, and process information. Singapore has also introduced measures that require older drivers aged 65 and above to meet certain medical standards before renewing their licenses. Supporters of these policies argue that they help identify individuals whose driving abilities have declined due to aging and thereby reduce potential risks on the road.
+
+Other countries prefer a more flexible, self-regulated system. In the US, regulations vary by state, with some requiring vision tests or more frequent renewals for senior drivers. Australia follows a similar state-by-state approach, with requirements ranging from annual medical assessments in some states to no age-based requirements at all in others, such as Victoria and Tasmania. Rather than imposing uniform age-based rules, these countries generally believe that driving ability should be evaluated individually based on each person's health and functional condition.
+
+Public opinion often changes after authorities announce details of a fatal accident involving an elderly driver. Such events may lead to calls for stricter regulations, but many experts believe that limiting elderly drivers is only part of the solution. They argue that governments should also improve public transportation, community shuttle services, and other alternatives so that older adults can remain independent without relying entirely on cars. Ultimately, the goal is to create a system that protects public safety while preserving the mobility and dignity of an aging population.`,
+      zh:`隨著人口老化，許多國家正面臨一項挑戰：既要確保道路安全，又要尊重高齡者的獨立自主。醫療的進步讓人活得更久，並在步入老年後仍保持活躍，這意味著更多長者持續開車上路。然而，當與年齡相關的變化影響到一個人安全駕駛的能力時，疑慮便隨之而生。數起受媒體廣泛報導、備受矚目的交通事故，促使各國政府重新檢視關於高齡駕駛的政策。因此，世界各地發展出不同的因應方式，各自反映了自身的社會價值與運輸需求。
+
+有些國家對高齡駕駛採取了較嚴格的規範。以台灣和日本為例，高齡駕駛人從某個年齡起必須強制換發駕照——台灣是七十歲，日本是七十五歲。在換照過程中，他們可能需要完成健康檢查並參加安全課程，也可能要接受評估思考、記憶與資訊處理能力的測驗。新加坡同樣推出措施，要求六十五歲以上的駕駛人在換照前須符合特定的醫療標準。支持這些政策的人主張，這有助於找出因老化而駕駛能力衰退的人，從而降低道路上的潛在風險。
+
+其他國家則偏好較有彈性的自律制度。在美國，規定因州而異，有些州要求高齡駕駛做視力檢查或更頻繁地換照。澳洲採取類似的各州自訂方式，要求從某些州的年度健康評估，到維多利亞州與塔斯馬尼亞州等地完全沒有年齡門檻，各不相同。這些國家普遍認為，與其強加一致的年齡規定，不如依每個人的健康與身體機能狀況個別評估其駕駛能力。
+
+在主管機關公布涉及高齡駕駛的死亡事故細節之後，輿論往往會轉向。這類事件可能引發對更嚴格法規的呼聲，但許多專家認為，限制高齡駕駛只是解方的一部分。他們主張政府也應改善大眾運輸、社區接駁服務與其他替代方案，好讓長者不必完全依賴汽車也能維持獨立。歸根究柢，目標是建立一套既保障公共安全、又能維護高齡人口行動能力與尊嚴的制度。`,
+      questions:[
+        { n:40, kind:"標題題",
+          stem:"Which is the best title for this article?",
+          options:{
+            A:"Balancing Safety and Independence for Elderly Drivers　在高齡駕駛的安全與獨立之間求取平衡",
+            B:"The Impact of Aging on Driving Skills and Health　老化對駕駛技能與健康的影響",
+            C:"Differences in Transportation Systems around the World　世界各地運輸系統的差異",
+            D:"The Causes and Effects of Traffic Accidents among Seniors　高齡者交通事故的成因與影響"
+          }, answer:"A",
+          translation:"下列何者是本文最適合的標題？",
+          explain:{
+            A:"全文的骨架就是這個「平衡」：首段開宗明義說 ensuring road safety while respecting older adults' independence（確保安全同時尊重獨立），末段又以 protects public safety while preserving the mobility and dignity（保障安全同時維護行動力與尊嚴）收尾。首尾兩句用的是同一組對立概念，標題自然要涵蓋兩端。",
+            B:"老化如何影響駕駛能力只在首段被帶過一句（age-related changes affect a person's ability to drive safely），文章真正著墨的是「各國政策怎麼因應」，不是生理機制。",
+            C:"文中比較的是「高齡駕駛的管理政策」，不是各國的運輸系統。範圍偏掉了。",
+            D:"事故只是引發政策檢討的導火線（第一段與第四段各提一次），文章並未分析事故的成因與影響。"
+          },
+          evidence:"Ultimately, the goal is to create a system that protects public safety while preserving the mobility and dignity of an aging population.",
+          notes:[
+            {term:"標題題看首尾", pos:"技巧", gloss:"標題必須涵蓋全文。首段的主題句與末段的總結句常是同一個概念的兩次陳述，對得上的選項就是答案。"},
+            {term:"while", pos:"conj.", gloss:"此處表「同時、然而」，用來並置兩個需要兼顧或彼此拉扯的面向。"}
+          ]},
+
+        { n:41, kind:"字義推論",
+          stem:"Which of the following is closest in meaning to the bold phrase \"high-profile\"?",
+          options:{
+            A:"Well known and attracting public attention.　廣為人知且引起大眾關注的。",
+            B:"Highly detailed and showing physical features.　高度詳盡且顯示外貌特徵的。",
+            C:"Socially ranked and reflecting personal status.　具社會排序且反映個人地位的。",
+            D:"Connected to finances and involving economic issues.　與財務相關並涉及經濟議題的。"
+          }, answer:"A",
+          translation:"下列何者與粗體片語 high-profile 的意思最接近？",
+          explain:{
+            A:"上下文是最好的字典：Several high-profile traffic incidents, widely covered by the media, have prompted governments to review their policies——緊接其後的 widely covered by the media（受媒體廣泛報導）就是這個字的同位解釋，而能促使政府檢討政策的事件，必然是引起輿論關注的。",
+            B:"這是把 profile 誤解為「側臉、輪廓」的字面義。profile 確實有這個意思，但 high-profile 是固定的複合形容詞，指「高曝光度的」。",
+            C:"這是把 high 誤讀成「地位高」。high-profile 講的是能見度，不是社會階級。",
+            D:"與財務完全無關，屬憑空聯想。"
+          },
+          evidence:"Several high-profile traffic incidents, widely covered by the media, have prompted governments to review their policies regarding elderly drivers.",
+          notes:[
+            {term:"high-profile", pos:"adj.", gloss:"高曝光度的、備受矚目的（反義 low-profile 低調的；keep a low profile 保持低調）", ex:"She took a high-profile role in the campaign.", exZh:"她在這場活動中擔任了引人注目的角色。"},
+            {term:"同位語就是答案", pos:"技巧", gloss:"字義題若該字後面緊跟一個逗號加分詞片語或同位語，那多半就是命題者留的解釋。先看緊鄰的句子，不要急著回想單字。"}
+          ]},
+
+        { n:42, kind:"細節判斷",
+          stem:"Which of the following statements is true according to the article?",
+          options:{
+            A:"Older drivers in both Taiwan and Australia are assessed based on personal health rather than age.　台灣與澳洲的高齡駕駛都依個人健康而非年齡受評估。",
+            B:"Elderly drivers in both Taiwan and Japan must pass health tests once they turn 70.　台灣與日本的高齡駕駛都必須在滿七十歲後通過健康檢查。",
+            C:"Senior drivers in the US face different renewal requirements depending on where they live.　美國的高齡駕駛依居住地不同而面對不同的換照要求。",
+            D:"Drivers in both Singapore and Japan are only required to renew their licenses after turning 75.　新加坡與日本的駕駛都只需在滿七十五歲後換照。"
+          }, answer:"C",
+          translation:"根據本文，下列敘述何者為真？",
+          explain:{
+            A:"台灣被歸在第二段的「嚴格規範」一組，明確採用年齡門檻（from age 70）；澳洲才是第三段的個別評估。把兩個不同陣營的國家綁在一起，是本題的典型陷阱。",
+            B:"數字錯誤。文中寫得很清楚：in Taiwan from age 70, and in Japan from age 75——兩國門檻不同，日本是七十五歲。看到 both ... 就要把每一國分開回原文核對。",
+            C:"第三段直接支持：In the US, regulations vary by state, with some requiring vision tests or more frequent renewals for senior drivers。vary by state（因州而異）正是選項中 depending on where they live 的同義改寫。",
+            D:"新加坡的門檻是六十五歲（aged 65 and above），不是七十五歲。同樣是把兩國的數字混為一談。"
+          },
+          evidence:"In the US, regulations vary by state, with some requiring vision tests or more frequent renewals for senior drivers.",
+          notes:[
+            {term:"both A and B 的陷阱", pos:"技巧", gloss:"選項若用 both／all 把兩個以上的對象綁在一起，就要逐一回原文核對——只要其中一個對不上，整個選項就是錯的。本題的 (A)(B)(D) 全是這種錯法。"},
+            {term:"vary by", pos:"phr.", gloss:"因…而異（vary by state／season／region）", ex:"Prices vary by region.", exZh:"價格因地區而異。"}
+          ]}
+      ]
+    }]
+  },
+
+  /* ===================== 五、翻譯 ===================== */
+  {
+    id:"translation", label:"二之五、翻譯", score:"6% · 每題 3%",
+    instruction:"將下列中文句子譯成正確、通順、達意的英文。斜線為評分斷點。",
+    groups:[{
+      questions:[
+        { n:43, kind:"中譯英　第 1 題（3%）",
+          prompt:"如果教育制度只重視考試成績，可能會面臨越來越多的輿論批評。",
+          answerText:"If the education system // focuses only on test scores //, it may face growing public criticism.",
+          why:"評分分成三段，每段各佔一分。三個要留意的地方：第一，主詞 the education system 是單數，條件句用現在簡單式，動詞要加 -s（focuses），這是最常見的失分點。第二，「只重視」用 focus only on 或 places emphasis only on；副詞 only 要緊貼被限定的成分，放在 on 前面。第三，「越來越多的輿論批評」用 growing public criticism——criticism 是不可數名詞，不可寫成 criticisms 或加 a。另外主要子句用 may face 表推測，不要寫成 will face，中文的「可能」是關鍵。",
+          notes:[
+            {term:"criticism", pos:"n.", gloss:"批評（不可數；v. criticize／n. critic 批評者）", ex:"The plan drew heavy criticism.", exZh:"這項計畫招致嚴厲批評。"},
+            {term:"if 條件句的時態", pos:"文法", gloss:"表未來的可能：if ＋ 現在式，主要子句 will／may ＋ 原形。條件句裡不可用 will。"},
+            {term:"growing", pos:"adj.", gloss:"日益增加的（a growing number of／growing concern）"}
+          ]},
+
+        { n:44, kind:"中譯英　第 2 題（3%）",
+          prompt:"為了在數位時代更好地保護消費者，新的網路廣告規則應該盡快生效。",
+          answerText:"To better protect consumers in the digital age //, new rules on online advertising // should take effect as soon as possible.",
+          why:"同樣分三段計分。第一段的「為了…」用不定詞片語 To better protect... 置於句首表目的；注意副詞 better 放在 to 與原形動詞之間（分裂不定詞），這在現代英文中完全可接受，寫成 To protect consumers better 也對。第二段「網路廣告規則」的介系詞用 on（rules on／about），不是 of。第三段「生效」是 take effect，也可用 come into effect／force；「盡快」是 as soon as possible。整句主詞是 new rules（複數），助動詞 should 後接原形，沒有單複數問題。",
+          notes:[
+            {term:"take effect", pos:"phr.", gloss:"（法規、藥物）生效、開始起作用（＝come into effect）", ex:"The new law takes effect on January 1.", exZh:"新法於一月一日生效。"},
+            {term:"rules on / regulations on", pos:"用法", gloss:"關於…的規定；介系詞用 on 或 governing，不用 of。"},
+            {term:"分裂不定詞", pos:"文法", gloss:"to ＋ 副詞 ＋ 原形動詞（to better understand）。傳統文法反對，現代英文已普遍接受。"}
+          ]}
+      ]
+    }]
+  }
+  ]
+};
+
+/* ==========================================================================
+   ②  以下為程式碼，一般情況不需要修改。
+   ========================================================================== */
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const wordOf = q => q.options ? q.options[q.answer] : (q.answerText || '');
+const allQ = [];
+EXAM.sections.forEach(s => s.groups.forEach(g => g.questions.forEach(q => allQ.push(q))));
+const findQ = n => allQ.find(q => String(q.n) === String(n));
+
+document.getElementById('brand').textContent = EXAM.brand;
+document.getElementById('examTitle').textContent = EXAM.title;
+document.getElementById('examMeta').textContent = EXAM.meta;
+
+let noteCount = 0;
+allQ.forEach(q => noteCount += (q.notes || []).length);
+
+const nav = document.getElementById('nav');
+EXAM.sections.forEach(s => {
+  const a = document.createElement('a');
+  a.className = 'chip'; a.href = '#sec-' + s.id; a.textContent = s.label.replace(/^[一二三四五六]、/, m => m);
+  nav.appendChild(a);
+});
+const noteChip = document.createElement('a');
+noteChip.className = 'chip'; noteChip.href = '#side'; noteChip.textContent = '重點表 ' + noteCount;
+nav.appendChild(noteChip);
+const toggleAll = document.createElement('button');
+toggleAll.className = 'chip solid'; toggleAll.textContent = '全部展開';
+nav.appendChild(toggleAll);
+
+function renderPassage(g, i, sid) {
+  let html = esc(g.passage);
+  g.questions.forEach(q => {
+    if (!q.evidence) return;
+    const t = esc(q.evidence);
+    if (html.includes(t)) html = html.replace(t, `<span class="hl ev" data-ev="${q.n}">${t}</span>`);
+  });
+  html = html.replace(/__(\d+)__/g, (m, n) =>
+    `<button class="blank" data-blank="${n}" aria-label="第 ${n} 題空格">${n}</button>`);
+  const body = '<div class="passage">' +
+    html.split(/\n{2,}/).map(p => '<p>' + p.replace(/\n/g, ' ') + '</p>').join('') + '</div>';
+  if (!g.zh) return body;
+  const id = sid + '-' + i;
+  return body +
+    `<button class="zhbtn" data-zh="${id}">全文中譯</button>` +
+    `<div class="zhbox" id="zh-${id}">` +
+      g.zh.split(/\n{2,}/).map(p => '<p>' + esc(p).replace(/\n/g, ' ') + '</p>').join('') +
+    '</div>';
+}
+
+function renderQ(q) {
+  const parts = [];
+  if (q.options) {
+    const ks = Object.keys(q.options);
+    parts.push('<div class="opts">' + ks.map(k =>
+      `<div class="opt"><span class="opt-k">(${k})</span><span>${esc(q.options[k])}</span></div>`).join('') + '</div>');
+  }
+  const head = `<div class="q-tag"><span class="q-n">${String(q.n).padStart(2,'0')}</span><span class="q-kind">${esc(q.kind || '')}</span></div>` +
+    (q.prompt ? `<p class="prompt">${esc(q.prompt)}</p>` : '') +
+    (q.stem ? `<p class="stem">${esc(q.stem).replace(/\n/g,'<br>')}</p>` : '');
+
+  let ans = '';
+  if (q.answers) {
+    ans = '<ul class="fills">' + q.answers.map(a =>
+      `<li class="fill"><span class="fill-k">${esc(a.k)}</span><span class="fill-w hl" data-ansmulti>${esc(a.w)}</span><span class="fill-n">${esc(a.note || '')}</span></li>`).join('') + '</ul>';
+  } else {
+    const label = q.options ? `(${q.answer}) ${esc(wordOf(q))}` :
+      (q.answer ? `(${q.answer}) ${esc(q.answerText)}` : esc(q.answerText));
+    ans = `<p class="ans"><span class="ans-k">答案</span><span class="ans-v hl" data-ans="${q.n}">${label}</span></p>`;
+  }
+
+  let expl = '';
+  if (q.explain) {
+    expl = '<ul class="lines">' + Object.keys(q.options).map(k => {
+      const right = q.multi ? q.multi.includes(k) : k === q.answer;
+      return `<li class="line ${right ? 'right' : 'wrong'}"><span class="line-k">(${k})</span><span>${esc(q.explain[k] || '')}</span></li>`;
+    }).join('') + '</ul>';
+  }
+  const why = q.why ? `<p class="why">${esc(q.why)}</p>` : '';
+  const sample = q.sample ? `<div class="sample"><p class="note-h">參考範文</p>` +
+    q.sample.split(/\n{2,}/).map(p => `<p>${esc(p).replace(/\n/g,' ')}</p>`).join('') + '</div>' : '';
+  const evid = q.evidence ? `<p class="evid"><span>文中依據</span>${esc(q.evidence)}</p>` : '';
+  const notes = (q.notes || []).length ? `<div class="note"><p class="note-h">重點整理</p>` +
+    q.notes.map(nt => `<p class="note-i"><span class="term">${esc(nt.term)}</span><span class="pos">${esc(nt.pos || '')}</span><span class="gloss">${esc(nt.gloss || '')}</span>` +
+      (nt.ex ? `<span class="ex">${esc(nt.ex)}<i>${esc(nt.exZh || '')}</i></span>` : '') + '</p>').join('') + '</div>' : '';
+
+  return `<article class="q" id="q-${q.n}" data-n="${q.n}">
+    <div class="q-top">${head}${parts.join('')}
+      <button class="reveal" aria-expanded="false" aria-controls="body-${q.n}">看詳解</button>
+    </div>
+    <div class="body" id="body-${q.n}">
+      ${ans}${q.translation ? `<p class="zh">${esc(q.translation)}</p>` : ''}${expl}${why}${evid}${sample}${notes}
+    </div>
+  </article>`;
+}
+
+document.getElementById('main').innerHTML = EXAM.sections.map((s, i) => `
+  <section class="sec" id="sec-${s.id}">
+    <div class="sec-head">
+      <span class="sec-num">${String(i+1).padStart(2,'0')}</span>
+      <h2 class="sec-label">${esc(s.label)}</h2>
+      <span class="sec-score">${esc(s.score || '')}</span>
+    </div>
+    ${s.instruction ? `<p class="sec-inst">${esc(s.instruction)}</p>` : ''}
+    ${s.bank ? `<div class="bank${s.bankWide ? ' wide' : ''}">${Object.keys(s.bank).map(k =>
+      `<div class="bank-i" data-bank="${k}"><span>(${k})</span>${esc(s.bank[k])}</div>`).join('')}</div>` : ''}
+    ${s.groups.map((g, gi) => (g.passage ? renderPassage(g, gi, s.id) : '') + g.questions.map(renderQ).join('')).join('')}
+  </section>`).join('');
+
+const items = [];
+allQ.forEach(q => (q.notes || []).forEach(nt => items.push({ ...nt, n: q.n })));
+document.getElementById('side').innerHTML = `
+  <p class="side-h">Notes</p>
+  <p class="side-t">本卷重點 ${items.length} 則</p>
+  <ul class="card-list">${items.map(nt => `
+    <li class="card-item"><a href="#q-${nt.n}">
+      <span class="jump">第 ${nt.n} 題</span>
+      <span class="term">${esc(nt.term)}</span><span class="pos">${esc(nt.pos || '')}</span>
+      <div class="gloss">${esc(nt.gloss || '')}</div>
+    </a></li>`).join('')}</ul>
+  <p class="side-note">點任一則可跳到出處題目。用瀏覽器列印（Ctrl／⌘ + P）會自動展開全部詳解與中譯，可直接印成講義。</p>`;
+
+document.getElementById('foot').textContent = `共 ${allQ.length} 題 · ${EXAM.footer}`;
+
+function setOpen(card, open) {
+  card.classList.toggle('open', open);
+  const btn = card.querySelector('.reveal');
+  btn.setAttribute('aria-expanded', open);
+  btn.firstChild.nodeValue = open ? '收合詳解' : '看詳解';
+  const n = card.dataset.n;
+  card.querySelectorAll('.hl').forEach(h => h.classList.toggle('on', open));
+  const ev = document.querySelector(`[data-ev="${n}"]`);
+  if (ev) ev.classList.toggle('on', open);
+  const q = findQ(n);
+  if (q && q.answer && q.answerText) {
+    const bi = document.querySelector(`[data-bank="${q.answer}"]`);
+    if (bi) bi.classList.toggle('used', open);
+  }
+  const bl = document.querySelector(`[data-blank="${n}"]`);
+  if (bl) {
+    if (open) {
+      bl.classList.add('filled');
+      bl.innerHTML = `<sup>${n}</sup><span class="hl">${esc(wordOf(q))}</span>`;
+      requestAnimationFrame(() => bl.querySelector('.hl').classList.add('on'));
+    } else {
+      bl.classList.remove('filled');
+      bl.textContent = n;
+    }
+  }
+}
+document.addEventListener('click', e => {
+  const rv = e.target.closest('.reveal');
+  if (rv) { const c = rv.closest('.q'); setOpen(c, !c.classList.contains('open')); return; }
+  const zb = e.target.closest('.zhbtn');
+  if (zb) { zb.classList.toggle('on'); document.getElementById('zh-' + zb.dataset.zh).classList.toggle('on'); return; }
+  const bl = e.target.closest('.blank');
+  if (bl) {
+    const c = document.getElementById('q-' + bl.dataset.blank);
+    if (!c.classList.contains('open')) setOpen(c, true);
+    c.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
+toggleAll.addEventListener('click', () => {
+  const open = toggleAll.textContent === '全部展開';
+  document.querySelectorAll('.q').forEach(c => setOpen(c, open));
+  toggleAll.textContent = open ? '全部收合' : '全部展開';
+});
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('.q').forEach(c => setOpen(c, true));
+  document.querySelectorAll('.zhbox').forEach(b => b.classList.add('on'));
+  toggleAll.textContent = '全部收合';
+});
+</script>
+</body>
+</html>

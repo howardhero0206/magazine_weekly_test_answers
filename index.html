@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ED Sep. Week 3 詳解</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E7EBEE; --card:#FDFDFC;
+  --ink:#10202F; --ink-2:#56687A; --ink-3:#7C8B99;
+  --rule:#C6D0D8; --pen:#17457E; --hl:#FFE773; --miss:#A34234;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono','Cascadia Mono',Menlo,Consolas,monospace;
+  --read:'Literata',Georgia,'Times New Roman',serif;
+  --han:'PingFang TC','Microsoft JhengHei','Noto Sans TC',system-ui,sans-serif;
+  --maxw:1180px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--han);font-size:16px;line-height:1.75}
+:focus-visible{outline:2px solid var(--pen);outline-offset:3px;border-radius:2px}
+
+.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule)}
+.top-in{max-width:var(--maxw);margin:0 auto;padding:14px 24px 0}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);margin:0 0 4px}
+.title{font-size:23px;font-weight:600;margin:0;line-height:1.3}
+.meta{font-family:var(--mono);font-size:12px;color:var(--ink-2);margin:4px 0 0;letter-spacing:.04em}
+.bar{display:flex;gap:7px;align-items:center;flex-wrap:wrap;padding:12px 0 11px;margin-top:10px;border-top:1px solid var(--rule)}
+.chip{font-family:var(--mono);font-size:12px;letter-spacing:.04em;border:1px solid var(--rule);background:transparent;color:var(--ink-2);padding:5px 10px;border-radius:999px;cursor:pointer;text-decoration:none;transition:border-color .15s,color .15s,background .15s}
+.chip:hover{border-color:var(--pen);color:var(--pen)}
+.chip.solid{margin-left:auto;border-color:var(--ink);color:var(--ink);font-weight:500}
+.chip.solid:hover{background:var(--ink);color:var(--card)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:28px 24px 96px;display:grid;gap:36px;grid-template-columns:minmax(0,1fr) 288px}
+@media (max-width:1020px){.wrap{grid-template-columns:minmax(0,1fr);gap:44px}}
+
+.sec{margin:0 0 48px;scroll-margin-top:136px}
+.sec-head{display:flex;align-items:baseline;gap:12px;padding-bottom:9px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.sec-num{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--ink-3)}
+.sec-label{font-size:18px;font-weight:600;margin:0}
+.sec-score{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-left:auto}
+.sec-inst{font-size:13.5px;color:var(--ink-2);margin:9px 0 0}
+
+.bank{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:16px 0 0}
+@media (max-width:760px){.bank{grid-template-columns:repeat(2,1fr)}}
+.bank-i{background:var(--card);padding:8px 10px;font-family:var(--read);font-size:14.5px}
+.bank-i span{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-right:5px}
+.bank-i.used{background:#F2F5F6;color:var(--ink-3)}
+
+.passage{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--ink);padding:22px 26px;margin:18px 0 0;font-family:var(--read);font-size:16.5px;line-height:1.95;color:#1a2836}
+.passage p{margin:0 0 1em}
+.passage p:last-child{margin-bottom:0}
+.blank{display:inline-block;min-width:70px;text-align:center;border:0;border-bottom:1.5px solid var(--ink);font-family:var(--mono);font-size:13px;color:var(--pen);cursor:pointer;background:none;padding:0 4px;line-height:1.4}
+.blank:hover{background:rgba(23,69,126,.07)}
+.blank.filled{font-family:var(--read);font-size:16.5px;color:var(--ink);border-bottom-color:transparent;min-width:0}
+.blank sup{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-right:2px}
+.zhbtn{display:block;margin:0 0 18px;background:var(--card);border:1px solid var(--rule);border-top:0;width:100%;text-align:left;padding:8px 26px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--pen);cursor:pointer}
+.zhbtn:hover{color:var(--ink)}
+.zhbtn::after{content:' ▾'}
+.zhbtn.on::after{content:' ▴'}
+.zhbox{display:none;background:#F7F9FA;border:1px solid var(--rule);border-top:0;padding:18px 26px;margin:0 0 18px;font-size:15px;line-height:1.95;color:#22323F}
+.zhbox.on{display:block}
+.zhbox p{margin:0 0 .9em}
+.zhbox p:last-child{margin:0}
+
+.q{background:var(--card);border:1px solid var(--rule);margin:14px 0 0;scroll-margin-top:142px}
+.q-top{padding:16px 22px 14px}
+.q-tag{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.q-n{font-family:var(--mono);font-size:13px;font-weight:600}
+.q-kind{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.prompt{font-size:14.5px;line-height:1.85;color:var(--ink-2);margin:0 0 11px;padding-left:11px;border-left:2px solid var(--rule)}
+.stem{font-family:var(--read);font-size:16.5px;line-height:1.85;margin:0 0 13px;color:#1a2836}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:2px 20px}
+@media (max-width:640px){.opts{grid-template-columns:1fr}}
+.opt{display:flex;gap:9px;font-family:var(--read);font-size:15.5px;line-height:1.6;padding:3px 0;color:#243342}
+.opt-k{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);padding-top:2px;flex:none}
+.reveal{display:block;width:100%;text-align:left;margin-top:14px;background:none;border:0;border-top:1px dashed var(--rule);padding:11px 0 0;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--pen);cursor:pointer}
+.reveal:hover{color:var(--ink)}
+.reveal::after{content:' ▾'}
+.q.open .reveal::after{content:' ▴'}
+.q.open .reveal{color:var(--ink-3)}
+
+.body{display:none;border-top:1px solid var(--rule);background:#F7F9FA;padding:18px 22px 20px}
+.q.open .body{display:block}
+.ans{display:flex;align-items:baseline;gap:10px;margin:0 0 13px;flex-wrap:wrap}
+.ans-k{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--ink-3);flex:none;padding-top:2px}
+.ans-v{font-family:var(--read);font-size:18px;font-weight:600}
+.fills{list-style:none;margin:0 0 13px;padding:0}
+.fill{display:flex;gap:11px;align-items:baseline;padding:7px 0;border-bottom:1px dotted var(--rule)}
+.fill-k{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);flex:none;width:26px}
+.fill-w{font-family:var(--read);font-size:17px;font-weight:600;flex:none}
+.fill-n{font-size:13.5px;color:var(--ink-2);line-height:1.7}
+.zh{font-size:15px;line-height:1.85;margin:0 0 14px;color:#22323F}
+.why{font-size:14.5px;line-height:1.85;margin:0 0 4px;color:#22323F;border-top:1px solid var(--rule);padding-top:12px}
+.lines{margin:0;padding:0;list-style:none;border-top:1px solid var(--rule)}
+.line{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--rule);font-size:14.5px;line-height:1.75;color:var(--ink-2)}
+.line-k{font-family:var(--mono);font-size:12.5px;flex:none;width:28px;color:var(--ink-3);padding-top:2px}
+.line.right{color:var(--ink)}
+.line.right .line-k{color:var(--ink);font-weight:600}
+.line.right .line-k::after{content:'✓';display:block;font-size:12px;line-height:1.3}
+.line.wrong .line-k{color:var(--miss);opacity:.85}
+.line.wrong .line-k::after{content:'✗';display:block;font-size:12px;line-height:1.3}
+.evid{margin:15px 0 0;font-family:var(--read);font-size:14.5px;line-height:1.8;color:var(--ink-2);padding-left:13px;border-left:2px solid var(--hl)}
+.evid span{font-family:var(--han);font-size:11px;letter-spacing:.14em;color:var(--ink-3);display:block;margin-bottom:3px}
+
+.hl{background-image:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 90%,transparent 90%);background-repeat:no-repeat;background-size:0% 100%;transition:background-size .55s cubic-bezier(.2,.75,.3,1);border-radius:1px}
+.hl.on{background-size:100% 100%}
+
+.sample{margin:15px 0 0;border:1px solid var(--rule);border-left:3px solid var(--ink);background:var(--card);padding:16px 20px}
+.sample p:not(.note-h){font-family:var(--read);font-size:15.5px;line-height:1.9;color:#1a2836;margin:0 0 1em}
+.sample p:last-child{margin-bottom:0}
+.bank.wide{grid-template-columns:1fr}
+.bank.wide .bank-i{font-size:15px;line-height:1.7;padding:10px 14px}
+.note{margin:15px 0 0;border:1px solid var(--rule);background:var(--card);padding:13px 16px}
+.note-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 9px}
+.note-i{margin:0;padding:9px 0 0;border-top:1px dotted var(--rule)}
+.note-i:first-of-type{border-top:0;padding-top:0}
+.term{font-family:var(--read);font-size:16px;font-weight:600}
+.pos{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin:0 6px}
+.gloss{font-size:14.5px}
+.ex{font-family:var(--read);font-size:14px;color:var(--ink-2);line-height:1.7;margin:3px 0 0;display:block}
+.ex i{font-family:var(--han);font-style:normal;font-size:13px;color:var(--ink-3);display:block}
+
+.side{position:sticky;top:136px;align-self:start;max-height:calc(100vh - 164px);overflow:auto;padding-right:4px}
+@media (max-width:1020px){.side{position:static;max-height:none;scroll-margin-top:136px}}
+.side-h{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin:0 0 3px}
+.side-t{font-size:16px;font-weight:600;margin:0 0 14px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.card-list{margin:0;padding:0;list-style:none}
+.card-item{border-bottom:1px solid var(--rule);padding:11px 0}
+.card-item a{display:block;text-decoration:none;color:inherit}
+.card-item a:hover .term{background:var(--hl)}
+.jump{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);float:right;padding-top:5px}
+.side-note{font-size:12.5px;color:var(--ink-3);line-height:1.7;margin:16px 0 0}
+.foot{max-width:var(--maxw);margin:0 auto;padding:0 24px 48px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+@media print{
+  body{background:#fff;font-size:10.5pt}
+  .top,.side,.reveal,.foot,.zhbtn{display:none!important}
+  .wrap{display:block;max-width:none;padding:0}
+  .q .body{display:block!important}
+  .zhbox{display:block!important}
+  .q{break-inside:avoid;border-color:#999;margin-bottom:9pt}
+  .passage{break-inside:avoid}
+  .hl{background-size:100% 100%!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <p class="eyebrow" id="brand"></p>
+    <h1 class="title" id="examTitle"></h1>
+    <p class="meta" id="examMeta"></p>
+    <nav class="bar" id="nav"></nav>
+  </div>
+</header>
+
+<div class="wrap"><main id="main"></main><aside class="side" id="side"></aside></div>
+<p class="foot" id="foot"></p>
+
+<script>
+/* ==========================================================================
+   ①  題目與詳解全部寫在下面的 EXAM 物件裡。要改題、加題、修字，只動這裡。
+
+   section（大題）：{ id, label, score, instruction, bank?, groups: [...] }
+   group（同一篇文章的題組）：{ passage?, zh?, questions: [...] }
+       passage 裡寫 __7__ 就會變成可點的空格，數字對應題號。
+       zh 是全文中譯，會做成可展開的按鈕。
+
+   question 依題型三選一：
+     選擇題   { n, kind, stem, options:{A..D}, answer:"B", translation, explain:{A..D}, evidence?, notes? }
+     單一填答 { n, kind, stem, answerText:"prejudice", why, notes? }
+     多格填答 { n, kind, prompt, stem, answers:[{k:"①", w:"字", note:"說明"}], notes? }
+   ========================================================================== */
+const EXAM = {
+  brand: "English Digest Weekly Quiz",
+  title: "Reading Test 詳解｜Week 3: Units 8-11 (Sep)",
+  meta: "Instructor: Howard Chang　·　範圍：ED 雜誌 Sep. Week 3",
+  footer: "班級複習用",
+  sections: [
+  /* ===================== 第一部分：聽力（僅列答案） ===================== */
+  {
+    id:"listening", label:"第一部分：聽力測驗", score:"28%",
+    instruction:"本部分僅列答案，不附詳解。　一、看圖辨義 1. (A)　2. (B)(C)　｜　二、對答 3–6：A D C B　｜　三、簡短對話 7–10：C A A C　｜　四、短文聽解 11–12：C C",
+    groups:[{ questions:[] }]
+  },
+
+  /* ===================== 一、詞彙 ===================== */
+  {
+    id:"vocab", label:"一、詞彙", score:"10% · 每題 2%",
+    instruction:"依句意及提示字母填入正確單字，注意詞性與拼字。",
+    groups:[{
+      questions:[
+        { n:13, kind:"提示：et___y",
+          stem:"Although the people of the two villages are et______y similar and speak the same language, they have developed very different customs because of the mountains separating them.",
+          answerText:"ethnically",
+          translation:"雖然這兩個村莊的人在族裔上相近、講同樣的語言，他們卻因為分隔兩地的山脈而發展出非常不同的習俗。",
+          why:"空格夾在 are 與形容詞 similar 之間，修飾的是形容詞，因此要填副詞。語意上，and 後面接的是 speak the same language（講同樣語言），兩者並列，都在描述「本來相近」的面向；再加上 Although 的讓步與後半的 very different customs 形成對比，可知空格講的是血緣族裔上的相似。名詞為 ethnicity，形容詞為 ethnic。",
+          notes:[
+            {term:"ethnically", pos:"adv.", gloss:"在族裔上（adj. ethnic 族裔的／n. ethnicity 族裔）", ex:"The region is ethnically diverse.", exZh:"這個地區族裔多元。"},
+            {term:"副詞修飾形容詞", pos:"文法", gloss:"be ＋ 副詞 ＋ 形容詞的結構中，空格必為副詞（be politically active、be culturally rich）。"}
+          ]},
+
+        { n:14, kind:"提示：i___e",
+          stem:"Water is i______e for survival, since the human body cannot last more than a few days without it, no matter how much food is available.",
+          answerText:"indispensable",
+          translation:"水對生存而言不可或缺，因為人體沒有水就撐不過幾天，無論有多少食物都一樣。",
+          why:"空格在 be 動詞後面，需要形容詞。since 子句把理由講得很死：cannot last more than a few days without it（沒有它撐不過幾天），而 no matter how much food is available（不管有多少食物）更排除了其他替代品——缺它不可，正是 indispensable。注意它搭配的介系詞是 for 或 to，句中的 for survival 也是提示。",
+          notes:[
+            {term:"indispensable", pos:"adj.", gloss:"不可或缺的（to／for sb-sth）；反義 dispensable 可有可無的", ex:"A good dictionary is indispensable to a translator.", exZh:"一本好字典對譯者不可或缺。"},
+            {term:"no matter how + adj./adv.", pos:"讓步", gloss:"無論多麼…（＝however）"}
+          ]},
+
+        { n:15, kind:"提示：co___ed",
+          stem:"The new transportation system was co______ed as a way to reduce traffic congestion and provide residents with a cleaner travel option.",
+          answerText:"conceived",
+          translation:"這套新的運輸系統當初的構想，是作為減少交通壅塞並為居民提供更潔淨移動選項的一種方式。",
+          why:"was ______ed 是被動語態，需要過去分詞；後面接 as a way to...，正是 conceive of sth as...（把某物構想為…）的被動形式。語意上，空格談的是這套系統「最初被設想出來」的目的。conceive 除了「構思、想出」，也有「懷孕」之意，名詞為 conception。提示字尾的 -ed 直接指向過去分詞。",
+          notes:[
+            {term:"conceive", pos:"vt. / vi.", gloss:"構想、設想（be conceived as 被設想為…）；也指「受孕」。n. conception", ex:"The festival was originally conceived as a small local event.", exZh:"這個節慶最初的構想只是一場小型地方活動。"},
+            {term:"provide sb with sth", pos:"句型", gloss:"提供某人某物（＝provide sth for sb）"}
+          ]},
+
+        { n:16, kind:"提示：le___e",
+          stem:"Before entering your credit card details, make sure the shopping website is le______e; fake sites often have strange addresses and prices that seem too good to be true.",
+          answerText:"legitimate",
+          translation:"在輸入信用卡資料之前，先確認這個購物網站是合法正當的；假網站常有奇怪的網址，以及好到不真實的價格。",
+          why:"空格在 is 後面，需要形容詞。分號後面就是答案的反面說明：fake sites（假網站）如何如何——與 fake 相對的，正是「正當、合法、真實」。legitimate 兼有「合法的」與「正當合理的」兩層意思，此處取前者。字根 leg- 表「法律」，同源字有 legal、legislation。",
+          notes:[
+            {term:"legitimate", pos:"adj.", gloss:"合法的、正當的（n. legitimacy 正當性）", ex:"Is this a legitimate business?", exZh:"這是一家合法的公司嗎？"},
+            {term:"too good to be true", pos:"phr.", gloss:"好得不像真的（暗示可能有詐）"}
+          ]},
+
+        { n:17, kind:"提示：t___l",
+          stem:"Hundreds of passengers were waiting in the ferry t______l when the storm warning was announced, and all sailings to the island were immediately canceled.",
+          answerText:"terminal",
+          translation:"風暴警報發布時，數百名乘客正在渡輪航站裡等候，所有前往該島的航班隨即全部取消。",
+          why:"空格前有 the 與名詞 ferry 修飾，需要名詞；且介系詞是 in（在…裡面），可知是一個可以容納數百人等候的空間。ferry terminal 即「渡輪航站、碼頭大廳」。terminal 另有形容詞義「末期的、致命的」（a terminal illness），以及名詞「電腦終端機」，是一字多義的常考字。",
+          notes:[
+            {term:"terminal", pos:"n. / adj.", gloss:"航站、總站；電腦終端機。當形容詞為「末期的、致命的」。", ex:"We'll meet at Terminal 2.", exZh:"我們在第二航廈碰面。"},
+            {term:"sailing", pos:"n.", gloss:"（船班的）航次、開航；此處為可數名詞複數。"}
+          ]}
+      ]
+    }]
+  },
+
+  /* ===================== 二、綜合測驗 ===================== */
+  {
+    id:"cloze", label:"二、綜合測驗", score:"12% · 每題 2%",
+    instruction:"點文章裡的空格可直接跳到該題。答案：B C D A B C",
+    groups:[{
+      passage:`The bus from Da Nang pulls into Hoi An late in the afternoon, when the heat has thinned but the lanterns are not yet lit. Vehicles are restricted in much of the old quarter, so it is best explored on foot. Low shophouses line the lanes, their shutters folded back and their yellow walls faded by river damp. Behind the shops, rooms of dark timber __18__ a courtyard where families once dried herbs and kept their altars away from customers. Chinese assembly halls, Japanese rooflines, French balconies, and Vietnamese tiles stand __19__ along the same lane, and none of them looks out of place. The best-known __20__ of all is the Japanese Covered Bridge, a roofed crossing built by merchants in the 1590s and printed on every postcard sold here.
+
+For centuries, the town was a major trading port in Southeast Asia. Merchants from Fujian, Japan, and later Portugal waited here for the monsoon winds to turn, and many never sailed home. Not until the river filled with sand and mud in the 1800s __21__ the town lose its trade to deeper harbors. Poverty then protected what wealth had built: no one could afford to pull the old houses down. In 1999 UNESCO added the quarter to its World Heritage list. __22__, the crowds that the listing attracted now threaten the very thing it was meant to protect. Rents have become so __23__ that old families rent out their ground floors to lantern shops and move to the suburbs, while their children leave in search of work. What visitors come for is not so much the buildings as the lives inside them, and those are the hardest to keep.`,
+      zh:`從峴港開來的巴士在午後稍晚駛進會安，那時暑氣已散，燈籠還沒點上。老城區大部分路段管制車輛，所以最好的探索方式是步行。低矮的店屋沿著巷弄排開，木製百葉窗向外折起，黃色的牆面被河上的濕氣褪去了顏色。店面後方，深色木料砌成的房間圍住一座天井——從前家家戶戶在這裡曬藥草，也把祖先牌位安置在客人看不到的地方。中式會館、日式屋脊、法式陽台與越南瓦片並肩立在同一條巷子裡，卻沒有一樣顯得格格不入。其中最負盛名的地標，是日本廊橋：一座由商人在一五九○年代興建的有頂橋樑，印在這裡賣的每一張明信片上。
+
+數百年來，這座小鎮是東南亞重要的貿易港。來自福建、日本，以及後來葡萄牙的商人在此等候季風轉向，許多人再也沒有回航。直到一八○○年代河道淤積泥沙，這座小鎮才把貿易拱手讓給更深的港口。隨之而來的貧窮反而保護了昔日財富所建造的一切：沒有人負擔得起把老屋拆掉。一九九九年，聯合國教科文組織把這個街區列入世界遺產名錄。儘管如此，這份名錄所吸引來的人潮，如今卻威脅著它原本要保護的東西。租金變得如此高昂，以致於老住戶把一樓租給燈籠店、自己搬到郊區，而他們的孩子則為了工作離開。訪客前來所為的，與其說是那些建築，不如說是建築裡的生活——而那才是最難留住的。`,
+      questions:[
+        { n:18, kind:"動詞",
+          options:{A:"confine 限制、監禁",B:"enclose 圍住、環繞",C:"heighten 加高；加劇",D:"occupy 佔據、佔用"}, answer:"B",
+          translation:"深色木料砌成的房間圍住一座天井。",
+          explain:{
+            A:"confine 是「限制、關住」，受詞須為人或動物（be confined to bed 臥床不起），把天井「關起來」語意不通。",
+            B:"主詞是 rooms of dark timber（木造房間，複數），受詞是 a courtyard（天井）。傳統合院式店屋的格局正是房間繞著中庭而建，enclose 意為「圍繞、環住」，正合。後面的關係子句描述家人在天井曬藥草、安放牌位，也印證這是個被建築包圍的內部空間。",
+            C:"heighten 是「使升高、使加劇」，受詞多為抽象的 tension、awareness、risk，不能接天井。",
+            D:"occupy 是「佔據（空間）」，若成立會變成「房間佔據了天井」，但天井本身就是房間之間留出的空地，兩者不是佔用關係。"
+          },
+          notes:[
+            {term:"enclose", pos:"vt.", gloss:"圍住、環繞；也指「隨函附上」（enclosed please find...）。n. enclosure", ex:"A high wall encloses the garden.", exZh:"一道高牆圍著這座花園。"},
+            {term:"courtyard", pos:"n.", gloss:"中庭、天井（合院建築中央的露天空間）"}
+          ]},
+
+        { n:19, kind:"副詞片語",
+          options:{A:"hand in hand 密切相關、手牽手",B:"one by one 一個接一個",C:"side by side 並肩地、並排地",D:"face to face 面對面地"}, answer:"C",
+          translation:"中式會館、日式屋脊、法式陽台與越南瓦片並肩立在同一條巷子裡。",
+          explain:{
+            A:"hand in hand 雖然字面是「手牽手」，慣用義是「兩件事相伴而生」（Poverty and disease go hand in hand），主詞通常是抽象概念，不用來描述建築物的實際排列。",
+            B:"one by one 是「一個接一個」，強調依序發生或逐一處理，含有時間先後；但句中說的是四種風格「同時」並存於一條巷子。",
+            C:"主詞是四種不同國家風格的建築元素，動詞是 stand（矗立），後面接 along the same lane（沿著同一條巷子）——描述的是空間上的並排。side by side 意為「並肩地、一個挨著一個」，且句尾 none of them looks out of place（沒有一樣格格不入）也呼應這種和諧共存。",
+            D:"face to face 是「面對面」，指兩方相對而立；但這裡是多種建築沿街並列，不是兩兩相對。"
+          },
+          notes:[
+            {term:"side by side", pos:"phr.", gloss:"並肩地、並排地（stand／work／live side by side）", ex:"The two churches stand side by side.", exZh:"這兩座教堂並肩而立。"},
+            {term:"out of place", pos:"phr.", gloss:"格格不入、不合適宜", ex:"I felt out of place at the party.", exZh:"在那場派對上我覺得格格不入。"}
+          ]},
+
+        { n:20, kind:"名詞",
+          options:{A:"shutter 百葉窗",B:"forgery 偽造品",C:"architecture 建築（學）",D:"landmark 地標"}, answer:"D",
+          translation:"其中最負盛名的地標，是日本廊橋。",
+          explain:{
+            A:"shutter 是「百葉窗」，前文確實提過（their shutters folded back），但一座橋不是百葉窗，這是刻意用前文出現過的字來設陷阱。",
+            B:"forgery 是「偽造品」，與本文毫無關係（它屬於本卷第三大題的主題，是跨大題的干擾字）。",
+            C:"architecture 當「建築風格、建築學」時為不可數名詞，前面不能加 The best-known ... of all 這種指涉單一事物的說法；而且後面接的是一座具體的橋，不是一種風格。",
+            D:"空格後的同位語說明它是 a roofed crossing built by merchants in the 1590s and printed on every postcard sold here（印在每張明信片上的有頂橋樑）——一個代表性的、人人都會去看的建築物，正是 landmark（地標）。"
+          },
+          notes:[
+            {term:"landmark", pos:"n.", gloss:"地標；也指「里程碑（事件）」（a landmark ruling 指標性判決）", ex:"The tower is the city's best-known landmark.", exZh:"這座塔是該市最知名的地標。"},
+            {term:"the best-known ... of all", pos:"用法", gloss:"其中最著名的…；of all 用來限定範圍，後面接的必須是可數單數名詞。"}
+          ]},
+
+        { n:21, kind:"倒裝句",
+          options:{A:"did",B:"had",C:"was",D:"should"}, answer:"A",
+          translation:"直到一八○○年代河道淤積泥沙，這座小鎮才把貿易拱手讓給更深的港口。",
+          explain:{
+            A:"這題考的是 Not until 置於句首的倒裝。原句為 The town did not lose its trade ... until the river filled with sand and mud。把 Not until 子句提到句首後，主要子句必須做「助動詞倒裝」：空格後是原形動詞 lose，前面又是主詞 the town，因此要補一個助動詞——時態為過去式，故用 did。",
+            B:"had 會構成過去完成式 had lost，但空格後是原形 lose 不是過去分詞 lost，形式不合。",
+            C:"was 會構成被動 was lost 或進行式 was losing，同樣接不了原形動詞 lose。",
+            D:"should 文法上可以接原形動詞，但語意變成「這座小鎮才應該失去貿易」，與這段敘述客觀史實的語氣不合，且 Not until 倒裝要求的是與原句時態相符的助動詞。"
+          },
+          notes:[
+            {term:"Not until ... + 助動詞 + S + 原形V", pos:"倒裝", gloss:"直到…才…。否定副詞片語置句首，主要子句要倒裝。判斷助動詞：看原句的時態與動詞型態。", ex:"Not until she spoke did I recognize her.", exZh:"直到她開口我才認出她。"},
+            {term:"否定副詞開頭的倒裝家族", pos:"整理", gloss:"Not until／Hardly／Seldom／Never／Little／No sooner 置句首時，後面都要倒裝。"}
+          ]},
+
+        { n:22, kind:"轉承語",
+          options:{A:"In short 簡言之",B:"Even so 儘管如此",C:"That is 也就是說",D:"For instance 舉例來說"}, answer:"B",
+          translation:"儘管如此，這份名錄所吸引來的人潮，如今卻威脅著它原本要保護的東西。",
+          explain:{
+            A:"In short 用來總結前面已說過的內容；但空格後是全新的資訊（觀光人潮帶來的反效果），不是歸納。",
+            B:"前一句是正面的：In 1999 UNESCO added the quarter to its World Heritage list（列入世界遺產）。後一句卻是負面的：人潮反而威脅了它原本要保護的東西。前後語意相反，需要表讓步轉折的字。Even so 意為「話雖如此」，正好承認前面的好事、再帶出隨之而來的問題。",
+            C:"That is（也就是說）用來換句話說、把前句講得更清楚；但這兩句不是同一件事的重述，而是正反兩面。",
+            D:"For instance 用來舉例證明前一句；但「人潮造成威脅」不是「列入世界遺產」的例子，反而是它的副作用。"
+          },
+          notes:[
+            {term:"Even so", pos:"phr.", gloss:"儘管如此（＝Nevertheless）；承認前面的說法之後仍提出相反的重點。", ex:"The plan is risky. Even so, it's worth trying.", exZh:"這計畫有風險。即便如此，仍值得一試。"},
+            {term:"the very + 名詞", pos:"強調用法", gloss:"正是那個…；the very thing it was meant to protect ＝它原本要保護的正是那樣東西。"}
+          ]},
+
+        { n:23, kind:"形容詞",
+          options:{A:"decorative 裝飾性的",B:"pastel 粉彩色的",C:"steep 高昂的；陡峭的",D:"genuine 真正的、真誠的"}, answer:"C",
+          translation:"租金變得如此高昂，以致於老住戶把一樓租給燈籠店、自己搬到郊區。",
+          explain:{
+            A:"decorative 是「裝飾用的」，形容物品或圖案（decorative tiles），不能形容租金。",
+            B:"pastel 是「粉彩色調的」，形容顏色；文中雖然提到黃牆與燈籠，但租金沒有顏色。這是被文章的視覺意象誤導的選項。",
+            C:"這是 so ... that 句型，結果子句是老住戶把一樓租出去、自己搬到郊區——負擔不起才會被迫離開，可知租金高得離譜。steep 除了「陡峭的」，也常用來形容價格、費用「高得驚人」。",
+            D:"genuine 是「真正的、貨真價實的」，用於形容人的誠意或物品的真偽，與金額高低無關。"
+          },
+          notes:[
+            {term:"steep", pos:"adj.", gloss:"（價格、費用）高昂的；（坡度）陡峭的", ex:"The rent here is pretty steep.", exZh:"這裡的租金相當高。"},
+            {term:"not so much A as B", pos:"句型", gloss:"與其說是 A，不如說是 B。本段最後一句 not so much the buildings as the lives inside them，值得一併記住。"}
+          ]}
+      ]
+    }]
+  },
+
+  /* ===================== 三、文意選填 ===================== */
+  {
+    id:"bank", label:"三、文意選填", score:"20% · 每題 2%",
+    instruction:"十個空格，選項不重複使用。答案：D G J F B　A H E I C",
+    bank:{A:"dismissed 駁回、不予理會",B:"tell apart 分辨",C:"mark 印記、痕跡",D:"aged 陳舊的、經過老化的",E:"reflecting 反映",F:"acquired 購入、取得",G:"on behalf of 代表",H:"intensifying 加劇中的",I:"establishment 體制、權威圈",J:"celebrated 著名的、備受推崇的"},
+    groups:[{
+      passage:`Han van Meegeren painted his fakes in a French villa; Pei-Shen Qian painted his in a garage in Queens. A Chinese immigrant who had hoped for a career of his own, he was paid a few thousand dollars for pictures that later sold for millions. He worked on __24__ canvas from flea markets and stained his surfaces with tea and dust so that nothing looked new. A dealer named Glafira Rosales carried the results into Manhattan, saying she sold them __25__ a collector who insisted on staying anonymous. One of her buyers was Knoedler, founded in 1846 and one of the most __26__ galleries in the city.
+
+For fifteen years the arrangement worked. Collectors and museums __27__ more than thirty Rothkos, Pollocks, and Motherwells that had never left Queens. Scholars invited to examine them found the paintings impossible to __28__ from the real thing. When a few specialists raised doubts, the gallery __29__ them as jealousy or ignorance. Eighty million dollars changed hands, and not one buyer asked to meet the collector. What ended it was a laboratory: one canvas carried a pigment that did not exist in the year the painting was said to have been made.
+
+With lawsuits __30__ and its name in every headline, Knoedler closed in 2011 after a hundred and sixty-five years. Rosales pleaded guilty, while Qian flew home to Shanghai and has never come back. The case is still argued in law schools, the questions it raises __31__ how hard authenticity is to define. For the American art __32__, the damage went far beyond the money. A gallery older than the Civil War had left its __33__ on every serious collection in America, and its word had helped decide what was real. That word was the thing Qian, working quietly in his garage, actually forged.`,
+      zh:`范米格倫在一棟法國別墅裡畫他的贗品；錢培琛則在皇后區的一間車庫裡畫他的。他是一名曾經懷抱自己藝術生涯的華裔移民，為那些日後賣出數百萬美元的畫作，只拿到幾千美元。他在跳蚤市場買來的陳舊畫布上作畫，並用茶漬與灰塵把畫面染舊，好讓一切看起來都不新。一位名叫葛拉菲拉・羅薩萊斯的畫商把成品帶進曼哈頓，聲稱自己是代表一位堅持匿名的收藏家出售這些作品。她的買家之一是諾德勒畫廊——創立於一八四六年，是這座城市裡最負盛名的畫廊之一。
+
+這套安排運作了十五年。收藏家與博物館買下了三十多幅從未離開過皇后區的羅斯科、波拉克與馬瑟韋爾。受邀鑑定的學者發現，這些畫作根本無法與真跡區分開來。當少數幾位專家提出質疑時，畫廊把他們的意見斥為嫉妒或無知。八千萬美元易手，卻沒有一位買家要求見那位收藏家一面。終結這一切的是一間實驗室：有一幅畫布上驗出了一種顏料，那種顏料在該畫據稱完成的那一年根本還不存在。
+
+在訴訟不斷加劇、名字登上每一則頭條的情況下，諾德勒於二○一一年結束營業，走完一百六十五年。羅薩萊斯認罪，錢培琛則飛回上海，再也沒有回來。這個案子至今仍在法學院被辯論著，它所引發的問題反映出「真實性」有多難定義。對美國藝術體制而言，損害遠遠超過金錢。一間比南北戰爭還老的畫廊，曾在美國每一份重要的收藏上留下自己的印記，它的一句話曾協助決定什麼是真的。而錢培琛在他的車庫裡安靜工作時，真正偽造的，其實就是那句話。`,
+      questions:[
+        { n:24, kind:"形容詞", answer:"D", answerText:"aged",
+          why:"空格夾在介系詞 on 與名詞 canvas 之間，需要形容詞。語意上，後半句說他用茶與灰塵把畫面染舊 so that nothing looked new（好讓一切看起來都不新）——這個目的說明了他連畫布本身都要用舊的。aged 意為「陳舊的、經過時間或人為老化的」，from flea markets（來自跳蚤市場）也支持。",
+          notes:[{term:"aged", pos:"adj.", gloss:"陳舊的、熟成的（aged cheese 熟成起司）；讀作 /eɪdʒd/。另一義「年老的」讀作 /ˈeɪdʒɪd/。", ex:"The wine is aged in oak barrels.", exZh:"這款酒在橡木桶中熟成。"},
+                 {term:"so that + S + V", pos:"句型", gloss:"以便…（表目的）"}]},
+
+        { n:25, kind:"介系詞片語", answer:"G", answerText:"on behalf of",
+          why:"she sold them ______ a collector 的空格後直接接名詞，需要介系詞片語。語意上，羅薩萊斯不是把畫賣「給」收藏家，而是聲稱自己「代表」一位匿名收藏家在賣——這也是整個騙局的關鍵設定：有一個永遠見不到面的貨主。on behalf of 意為「代表、代替」。注意 behalf 只能用在這個片語裡，不能單獨使用。",
+          notes:[{term:"on behalf of", pos:"phr.", gloss:"代表…（＝on one's behalf）", ex:"She accepted the award on behalf of the team.", exZh:"她代表團隊領獎。"},
+                 {term:"anonymous", pos:"adj.", gloss:"匿名的（n. anonymity）"}]},
+
+        { n:26, kind:"形容詞", answer:"J", answerText:"celebrated",
+          why:"one of the most ______ galleries 的結構是「one of the most ＋ 形容詞 ＋ 複數名詞」，空格需要可用 most 構成最高級的形容詞。語意上，前面補充 founded in 1846（創立於一八四六年）強調它的悠久，最後一段更說它 had left its mark on every serious collection in America（在美國每份重要收藏上留下印記）——這是一間地位崇高的畫廊。celebrated 當形容詞意為「著名的、備受推崇的」，與動詞「慶祝」的意思分開記。",
+          notes:[{term:"celebrated", pos:"adj.", gloss:"著名的、享有盛譽的（＝renowned／acclaimed）", ex:"He is a celebrated violinist.", exZh:"他是一位享譽盛名的小提琴家。"},
+                 {term:"one of the + 最高級 + 複數名詞", pos:"句型", gloss:"最…之一；名詞必須用複數。"}]},
+
+        { n:27, kind:"動詞", answer:"F", answerText:"acquired",
+          why:"主詞是 Collectors and museums（複數），空格是主要動詞，後接受詞 more than thirty Rothkos...，因此需要及物動詞的過去式。acquire 意為「購入、取得（藝術品、公司）」，是藝術與收藏領域的專用動詞，比 buy 更正式。後一段提到 Eighty million dollars changed hands（八千萬美元易手），也印證這是大量的收購行為。",
+          notes:[{term:"acquire", pos:"vt.", gloss:"取得、購入（n. acquisition）；也指「習得（技能、語言）」", ex:"The museum acquired the painting in 1998.", exZh:"這間博物館於一九九八年購入這幅畫。"},
+                 {term:"change hands", pos:"phr.", gloss:"（金錢、財產）易手、轉手"}]},
+
+        { n:28, kind:"動詞片語", answer:"B", answerText:"tell apart",
+          why:"impossible to ______ from the real thing 中，to 後面需要原形動詞，且句尾有介系詞 from。tell A apart from B 意為「把 A 與 B 分辨開來」，正好能接 from。語意上，學者鑑定後發現這些贗品與真跡無法區分——這正是整起事件能持續十五年的原因。注意 tell 在此是「分辨」不是「告訴」。",
+          notes:[{term:"tell A apart (from B)", pos:"phr.", gloss:"分辨 A（與 B 的差別）；tell 此處意為「辨別」。", ex:"I can't tell the twins apart.", exZh:"我分不出這對雙胞胎誰是誰。"},
+                 {term:"tell 的「辨別」義", pos:"用法", gloss:"tell the difference between／tell right from wrong／can't tell them apart，都是這個意思。"}]},
+
+        { n:29, kind:"動詞", answer:"A", answerText:"dismissed",
+          why:"the gallery ______ them as jealousy or ignorance 需要及物動詞的過去式，且後接介系詞 as。dismiss A as B 意為「把 A 斥為 B、不予理會」。語意上，前半句說幾位專家提出質疑（raised doubts），畫廊的反應是把這些質疑歸因於嫉妒或無知——也就是不當一回事。這個動作也解釋了為何騙局能拖這麼久。",
+          notes:[{term:"dismiss A as B", pos:"phr.", gloss:"把 A 斥為 B、對 A 不予理會（n. dismissal）", ex:"He dismissed the rumor as nonsense.", exZh:"他把那則謠言斥為無稽之談。"},
+                 {term:"raise doubts", pos:"phr.", gloss:"提出質疑、引發疑慮"}]},
+
+        { n:30, kind:"現在分詞", answer:"H", answerText:"intensifying",
+          why:"With lawsuits ______ and its name in every headline 是「with ＋ 受詞 ＋ 分詞」的附帶狀況結構。lawsuits（訴訟）與 intensify（加劇）是主動關係——訴訟自己在增加、變激烈——因此用現在分詞。若要用被動就得改成過去分詞，但訴訟不是被誰加劇的。這與 and 後面的名詞片語 its name in every headline 並列，共同說明畫廊倒閉時的處境。",
+          notes:[{term:"with + O + 分詞", pos:"文法", gloss:"表附帶狀況。受詞與分詞為主動關係用 V-ing，被動關係用 p.p.。", ex:"With the deadline approaching, we worked overtime.", exZh:"隨著期限逼近，我們加班趕工。"},
+                 {term:"intensify", pos:"vi. / vt.", gloss:"（使）加劇、增強（adj. intense／intensive）"}]},
+
+        { n:31, kind:"現在分詞", answer:"E", answerText:"reflecting",
+          why:"The case is still argued in law schools, the questions it raises ______ how hard authenticity is to define——逗號後是一個獨立分詞構句，主詞是 the questions it raises（它引發的那些問題），與 reflect 是主動關係，所以用現在分詞。語意上，這些問題「反映出」真實性有多難定義。注意這裡不能填動詞原形或過去式，否則會造成兩個主要子句只用逗號相連的 comma splice。",
+          notes:[{term:"獨立分詞構句", pos:"文法", gloss:"分詞片語有自己的主詞（與主要子句不同），用來補述。主動用 V-ing，被動用 p.p.。"},
+                 {term:"authenticity", pos:"n.", gloss:"真實性、真跡的確認（adj. authentic 真正的）"}]},
+
+        { n:32, kind:"名詞", answer:"I", answerText:"establishment",
+          why:"For the American art ______ 中，空格前有 the 與形容詞 art 修飾，需要名詞；且 For the ... 是指「對某個群體而言」。establishment 加上定冠詞時指「體制、權威圈、當權的主流集團」——美國藝術圈的權威體系。下一句說 its word had helped decide what was real（它的一句話曾協助決定什麼是真的），正是在描述這種話語權，也呼應了 establishment 的含義。",
+          notes:[{term:"the establishment", pos:"n.", gloss:"（社會、領域中的）建制派、權威體制", ex:"He has always been critical of the political establishment.", exZh:"他一向對政治建制派持批判態度。"},
+                 {term:"establishment 的另一義", pos:"用法", gloss:"也可指「機構、店家」（a dining establishment）或「設立」這個動作。"}]},
+
+        { n:33, kind:"名詞", answer:"C", answerText:"mark",
+          why:"had left its ______ on every serious collection 中，leave one's mark on sth 是固定用法，意為「在…上留下印記、產生深遠影響」。空格前有所有格 its、後接介系詞 on，符合這個片語的結構。語意上，這間比南北戰爭還老的畫廊影響了美國每一份重要收藏。最後一句用 That word 收尾，也與這裡的影響力相互呼應。",
+          notes:[{term:"leave one's mark on", pos:"phr.", gloss:"在…上留下深刻影響／印記", ex:"The war left its mark on a whole generation.", exZh:"那場戰爭在整個世代身上留下了印記。"},
+                 {term:"forge", pos:"vt.", gloss:"偽造（文件、簽名、畫作）；也指「鍛造、建立（關係）」。全文結尾的 forged 是一語雙關。"}]}
+      ]
+    }]
+  },
+
+  /* ===================== 四、篇章結構 ===================== */
+  {
+    id:"structure", label:"四、篇章結構", score:"8% · 每題 2%",
+    instruction:"五個選項選四個。答案：B A C E（未使用：D）",
+    bankWide:true,
+    bank:{
+      A:"In other words, the environmental cost of processing rare earths can be high.　換句話說，處理稀土的環境代價可能很高。",
+      B:"Despite these difficulties, these materials play a quiet but essential role in modern technology.　儘管有這些困難，這些材料在現代科技中扮演著低調卻不可或缺的角色。",
+      C:"This heavy dependence has raised concerns about supply security.　這種高度依賴引發了對供應安全的疑慮。",
+      D:"The name came from the unusual minerals where the elements were first found.　這個名稱來自最早發現這些元素的那些不尋常礦物。（未使用）",
+      E:"Rare earths are therefore both a valuable resource and a heavy responsibility.　因此稀土既是寶貴的資源，也是沉重的責任。"
+    },
+    groups:[{
+      passage:`When people hear the term "rare earths," they may picture tiny amounts of mysterious metals hidden deep underground. In fact, rare earth elements are not always rare in the usual sense. Some of them are about as common as copper in Earth's crust. Yet these elements are difficult to mine and process because they are usually mixed together in small amounts. Since they share similar chemical properties, they are also hard to separate from one another.
+
+__34__ Rare earths are used in powerful magnets, smartphone screens, electric cars, wind turbines, and many military technologies. Without them, many modern devices would become less efficient, heavier, or much more expensive to produce. For this reason, countries around the world have begun to see rare earths not simply as raw materials, but as resources of strategic importance.
+
+However, turning these elements into useful materials is not easy. After rare earth ores are dug out of the ground, companies must refine them through a long and complex process. This process often creates environmental problems that cannot be ignored. Some methods require large amounts of water and chemicals, and the waste may damage soil and rivers if it is not carefully managed. __35__
+
+Another challenge is where rare earth production takes place. For years, one country has produced the lion's share of the world's refined rare earth materials. __36__ As a result, many governments and companies are trying to develop new mines, build processing plants, and recycle rare earths from old electronics. Still, these efforts take time, money, and technical skill.
+
+__37__ The real question, then, is not whether the world should use rare earths, but how it can use them more wisely. If countries can reduce waste, improve recycling, and minimize pollution through carefully controlled processes, rare earths may continue to support modern life without causing unnecessary harm to the planet.`,
+      zh:`當人們聽到「稀土」這個詞時，可能會想像地底深處藏著少量神祕的金屬。事實上，稀土元素在一般意義上並不總是稀少的。其中有些在地殼中的含量大約與銅相當。然而這些元素難以開採與處理，因為它們通常以少量混雜在一起。由於彼此的化學性質相近，它們也很難互相分離。
+
+儘管有這些困難，這些材料在現代科技中扮演著低調卻不可或缺的角色。稀土被用於強力磁鐵、智慧型手機螢幕、電動車、風力發電機，以及許多軍事技術之中。少了它們，許多現代裝置會變得效率更低、更重，或製造成本高出許多。因此，世界各國已開始把稀土視為具有戰略重要性的資源，而不只是原物料。
+
+然而，要把這些元素變成有用的材料並不容易。稀土礦石從地下開採出來之後，企業必須透過漫長而複雜的程序加以提煉。這個過程往往製造出不容忽視的環境問題。有些方法需要大量的水與化學藥劑，而廢棄物若未經妥善管理，可能損害土壤與河川。換句話說，處理稀土的環境代價可能很高。
+
+另一項挑戰在於稀土生產的所在地。多年來，有一個國家生產了全球絕大部分的精煉稀土材料。這種高度依賴引發了對供應安全的疑慮。因此，許多政府與企業正試圖開發新礦場、興建加工廠，並從舊電子產品中回收稀土。不過，這些努力都需要時間、金錢與技術能力。
+
+因此稀土既是寶貴的資源，也是沉重的責任。於是真正的問題不在於世界該不該使用稀土，而在於如何更明智地使用它們。如果各國能減少廢棄物、改善回收，並透過審慎控管的程序把污染降到最低，稀土或許能繼續支撐現代生活，而不對地球造成不必要的傷害。`,
+      questions:[
+        { n:34, kind:"段落銜接", answer:"B",
+          answerText:"Despite these difficulties, these materials play a quiet but essential role in modern technology.",
+          why:"空格在第二段開頭，是承上啟下的主題句。前一段整段在講稀土「難以開採、難以分離」的困難，而這一段接著列舉磁鐵、手機螢幕、電動車等用途——方向從「缺點」轉到「重要性」。(B) 的 Despite these difficulties 正好回指前段的困難，後半的 play a quiet but essential role in modern technology 則開啟本段的用途清單。兩頭都接得上，是典型的過渡句。",
+          notes:[{term:"承上啟下的主題句", pos:"技巧", gloss:"空格若在段落開頭，優先找同時含有「前段關鍵字」與「本段方向」的選項。Despite these difficulties 就是回指前段的標記。"},
+                 {term:"play a role in", pos:"phr.", gloss:"在…中扮演角色、發揮作用"}]},
+
+        { n:35, kind:"段落銜接", answer:"A",
+          answerText:"In other words, the environmental cost of processing rare earths can be high.",
+          why:"空格在第三段結尾。前兩句具體描述：有些方法需要大量的水與化學藥劑，廢棄物可能損害土壤與河川。(A) 用 In other words 把這些具體描述收攏成一句概括——處理稀土的環境代價很高。這一段的結構是「先舉例、後總結」，空格正落在總結的位置。另外 (A) 出現了 environmental 一字，也直接呼應本段的 environmental problems。",
+          notes:[{term:"In other words", pos:"phr.", gloss:"換句話說；用來把前面說過的內容改用更概括或更清楚的方式重述一次。", ex:"He's not qualified—in other words, we can't hire him.", exZh:"他不符資格，也就是說我們不能錄用他。"},
+                 {term:"段落收尾的位置", pos:"技巧", gloss:"空格若在段末，通常要填「總結句」或「結果句」。看前面是不是連續的具體細節，就能判斷。"}]},
+
+        { n:36, kind:"段落銜接", answer:"C",
+          answerText:"This heavy dependence has raised concerns about supply security.",
+          why:"這題的線索有兩層。前一句說 one country has produced the lion's share of the world's refined rare earth materials（一個國家生產了全球絕大部分的精煉稀土）——這正是 (C) 開頭 This heavy dependence（這種高度依賴）所回指的對象。後一句用 As a result 帶出各國開發新礦場、興建工廠、回收稀土的行動，而這些行動的動機必須先被說明——(C) 的 concerns about supply security（供應安全的疑慮）就是那個動機。前後都對得上。",
+          notes:[{term:"the lion's share", pos:"phr.", gloss:"最大的一份、絕大部分（源自伊索寓言）", ex:"The lion's share of the budget went to research.", exZh:"預算的絕大部分用於研究。"},
+                 {term:"This + 名詞的回指", pos:"技巧", gloss:"選項開頭若是 This heavy dependence／This process／This concentration，就表示前一句必須提供那個被指稱的東西。"}]},
+
+        { n:37, kind:"段落銜接", answer:"E",
+          answerText:"Rare earths are therefore both a valuable resource and a heavy responsibility.",
+          why:"空格在最後一段開頭，功能是全文的總收束。前面四段分別談了：稀土並不真的稀少但難以分離、它在科技中不可或缺、提煉會造成環境代價、生產高度集中於單一國家。(E) 用 both a valuable resource and a heavy responsibility（既是寶貴資源、也是沉重責任）把「價值」與「代價」兩條線收在一起，句中的 therefore 也標示這是推論出來的結論。接著下一句 The real question, then, is not whether... but how... 順勢提出全文的核心主張。未使用的 (D) 談的是「稀土這個名稱的由來」，雖然與第一段的 not always rare 有字面關聯，但那一段是在澄清「稀不稀少」的事實，不是在追溯詞源，插進去會岔開論述。",
+          notes:[{term:"both A and B", pos:"句型", gloss:"既是 A 又是 B；用來並置兩個看似衝突的面向，是議論文收尾常見的手法。"},
+                 {term:"為什麼 (D) 是錯誤選項", pos:"補充", gloss:"(D) 的內容本身正確，也與第一段的 rare 一字有關聯，但它談的是「名稱的來源」，而全文從頭到尾討論的是開採難度、用途與環境代價，沒有任何一處在追溯命名。這是「關鍵字相關、主題無關」型的干擾選項。"}]}
+      ]
+    }]
+  },
+
+  /* ===================== 五、閱讀測驗 ===================== */
+  {
+    id:"reading", label:"五、閱讀測驗", score:"6% · 每題 2%",
+    instruction:"改編自 110 指考。展開詳解時，文章中的依據句會被標示出來。答案：A C B",
+    groups:[{
+      passage:`Located in Black Canyon straddling the border between Nevada and Arizona in the southwestern region of the United States, Hoover Dam has been named one of the top construction achievements of the 20th century. The dam, constructed between 1931 and 1936, was the largest of its kind at the time. Its construction was the result of a massive effort involving thousands of workers and cost over one hundred lives.
+
+Beginning around 1900, Black Canyon and nearby Boulder Canyon were investigated as possible sites for a dam that would control floods, provide irrigation water, and produce hydroelectric power. In 1928, the US Congress authorized the project. The winning bid to build the dam was submitted by Six Companies, Inc. However, such a large concrete structure had never been built before, and some of the techniques were unproven. The extreme summer heat and lack of facilities near the site also presented tremendous difficulties. Nevertheless, Six Companies turned over the finished dam to the federal government on March 1, 1936, more than two years ahead of schedule.
+
+The initial design of the dam, which was more concerned with the dam's functionality than its exterior, was criticized by many as being too plain and unremarkable for a project of such immense scale. So Gordon B. Kaufmann, the architect who was brought in to redesign the exterior, greatly streamlined the design and applied an elegant Art Deco style to the entire project. Allen Tupper True, an American illustrator, was also hired to handle the design and decoration of the walls and floors of the new dam. He integrated into his design the images and colors based on Native American visions of rain, lightning, clouds, and animals, thereby creating symbolic patterns which appear both ancient and modern.
+
+Today, Hoover Dam has become a national historic landmark. Standing at more than 725 feet above the Colorado River, the highest concrete dam in the Western Hemisphere continues to draw crowds 85 years after its creation, attracting more than a million visitors a year.`,
+      zh:`胡佛水壩位於美國西南部、橫跨內華達州與亞利桑那州邊界的黑峽谷，被譽為二十世紀最頂尖的建築成就之一。這座水壩興建於一九三一至一九三六年間，在當時是同類型中規模最大的。它的興建動員了數千名工人，並付出了超過一百條人命的代價。
+
+大約從一九○○年開始，黑峽谷與鄰近的博爾德峽谷就被評估為水壩的可能選址，這座水壩將能控制洪水、提供灌溉用水並產生水力發電。一九二八年，美國國會核准了這項工程。得標承建的是「六大公司」。然而，如此龐大的混凝土結構前所未見，部分工法也未經驗證。夏季的酷熱與工地附近設施的匱乏，同樣造成了極大的困難。儘管如此，六大公司仍在一九三六年三月一日把完工的水壩移交給聯邦政府，比預定進度提早了兩年多。
+
+水壩最初的設計較重視功能而非外觀，因而被許多人批評為對於如此宏大的工程而言過於平淡無奇。因此，被請來重新設計外觀的建築師高登・考夫曼大幅簡化了線條，並為整座工程套上了優雅的裝飾藝術風格。美國插畫家艾倫・塔波・特魯也受聘處理新水壩牆面與地面的設計與裝飾。他把取材自美洲原住民對雨、閃電、雲與動物之想像的圖像與色彩融入設計，從而創造出既古老又現代的象徵性紋樣。
+
+如今，胡佛水壩已成為國家歷史地標。它高聳於科羅拉多河上方超過七百二十五英尺，是西半球最高的混凝土水壩，在建成八十五年後仍持續吸引人潮，每年招來超過一百萬名訪客。`,
+      questions:[
+        { n:38, kind:"未提及",
+          stem:"Which of the following is NOT mentioned as a reason for building the dam in the beginning?",
+          options:{
+            A:"To promote tourism.　促進觀光。",
+            B:"To support agriculture.　支持農業。",
+            C:"To generate electricity.　發電。",
+            D:"To prevent natural disasters.　預防天然災害。"
+          }, answer:"A",
+          translation:"下列何者「未」被提及為當初興建水壩的理由？",
+          explain:{
+            A:"觀光確實出現在文章裡，但位置在最後一段——那是水壩建成八十五年後的現況（attracting more than a million visitors a year），不是當初的興建動機。這是典型的「有提到但時間點錯了」的陷阱：題目問的是 in the beginning。",
+            B:"第二段的 provide irrigation water（提供灌溉用水）就是支持農業，敘述有依據。",
+            C:"第二段的 produce hydroelectric power（產生水力發電）直接對應發電。",
+            D:"第二段的 control floods（控制洪水）就是預防天然災害。"
+          },
+          evidence:"Black Canyon and nearby Boulder Canyon were investigated as possible sites for a dam that would control floods, provide irrigation water, and produce hydroelectric power.",
+          notes:[
+            {term:"in the beginning 這三個字是關鍵", pos:"技巧", gloss:"NOT 題若在題幹加了時間限定（in the beginning／originally／at first），就要確認選項的內容出現在文章的哪個時間點。內容正確但時期不對，一樣是錯的。"},
+            {term:"irrigation", pos:"n.", gloss:"灌溉（v. irrigate）"}
+          ]},
+
+        { n:39, kind:"是非判斷",
+          stem:"Which of the following statements is true about Hoover Dam?",
+          options:{
+            A:"Its construction lasted for more than a decade.　它的興建持續了十年以上。",
+            B:"It is strong in functionality, but plain in design.　它功能強大，但設計平淡。",
+            C:"Its site stretches over two states in the United States.　它的所在地橫跨美國兩個州。",
+            D:"It became famous because it led to the discovery of Black Canyon.　它出名是因為促成了黑峽谷的發現。"
+          }, answer:"C",
+          translation:"下列關於胡佛水壩的敘述何者為真？",
+          explain:{
+            A:"數字錯誤。文中說 constructed between 1931 and 1936，前後五年，不到十年。",
+            B:"時間點錯誤。「設計平淡」指的是 the initial design（最初的設計），但同一段立刻說後來請了考夫曼重新設計外觀、套上裝飾藝術風格。用一個被推翻的舊狀態來描述現況，是很常見的陷阱。",
+            C:"第一句就寫明：straddling the border between Nevada and Arizona（橫跨內華達與亞利桑那的邊界）。straddle 意為「跨坐、橫跨」，正對應選項的 stretches over two states。",
+            D:"因果顛倒。黑峽谷早在一九○○年左右就已被評估為選址，是先有峽谷才有水壩；而且水壩出名是因為工程成就與建築設計，不是因為讓人「發現」了峽谷。"
+          },
+          evidence:"Located in Black Canyon straddling the border between Nevada and Arizona in the southwestern region of the United States",
+          notes:[
+            {term:"straddle", pos:"vt.", gloss:"橫跨、跨坐於…之上", ex:"The town straddles the river.", exZh:"這座小鎮橫跨河流兩岸。"},
+            {term:"initial 是時間標記", pos:"技巧", gloss:"文中出現 initial／original／at first 時，後面往往接著「但後來改了」。選項若照抄那個舊狀態，通常就是錯的。"}
+          ]},
+
+        { n:40, kind:"細節題",
+          stem:"According to the passage, what did Six Companies, Inc. experience in the process of building the dam?",
+          options:{
+            A:"It was defeated by the harsh working conditions.　它被嚴苛的工作環境擊敗了。",
+            B:"It lost some workers in the construction of the dam.　它在興建過程中折損了一些工人。",
+            C:"It benefited from prior experience of building dams of similar scale.　它受益於興建同等規模水壩的先前經驗。",
+            D:"It gave up the project authorized by the government before the deadline.　它在期限前放棄了政府核准的工程。"
+          }, answer:"B",
+          translation:"根據本文，六大公司在興建水壩的過程中經歷了什麼？",
+          explain:{
+            A:"與文章相反。第二段確實提到酷熱與設施匱乏造成極大困難，但緊接著用 Nevertheless（儘管如此）轉折，說他們提早兩年多完工——不但沒被打敗，還超前進度。看到 Nevertheless 就該知道後面要翻盤。",
+            B:"第一段的 cost over one hundred lives（付出超過一百條人命的代價）就是依據。選項用 lost some workers 改寫，語氣較委婉但意思相同。",
+            C:"與文章直接牴觸。第二段明說 such a large concrete structure had never been built before, and some of the techniques were unproven（這麼大的混凝土結構前所未見，部分工法未經驗證）——沒有前例可循，何來經驗。",
+            D:"與文章相反。他們不但沒放棄，還在一九三六年三月一日把完工的水壩移交政府，比預定進度提早兩年多。"
+          },
+          evidence:"Its construction was the result of a massive effort involving thousands of workers and cost over one hundred lives.",
+          notes:[
+            {term:"cost + 代價", pos:"用法", gloss:"cost 可直接接「付出的代價」：cost lives（造成人命損失）／cost him his job（害他丟了工作）。", ex:"The mistake cost the company millions.", exZh:"這個錯誤讓公司損失數百萬。"},
+            {term:"Nevertheless 是翻盤信號", pos:"技巧", gloss:"文中列出一堆困難後若接 Nevertheless／However，結果通常是「克服了」。選項若說「被困難打敗」，多半就是錯的。"}
+          ]}
+      ]
+    }]
+  },
+
+  /* ===================== 六、翻譯 ===================== */
+  {
+    id:"translation", label:"六、翻譯", score:"6% · 每題 3%",
+    instruction:"將下列中文句子譯成正確、通順、達意的英文。斜線為評分斷點。",
+    groups:[{
+      questions:[
+        { n:41, kind:"中譯英　第 1 題（3%）",
+          prompt:"在真相尚未明朗之前，任何人都不應該被對待得彷彿有罪。",
+          answerText:"Before the truth is fully known, // no one should be treated // as though they were guilty.",
+          why:"評分分三段，每段一分。三個要留意的地方。第一，「尚未明朗」用 Before the truth is fully known 的被動式；表未來的時間副詞子句要用現在式，不可寫成 will be known。第二，「不應該被對待」用 no one should be treated——主詞用 no one 直接表達否定，比 anyone should not be treated 自然得多（英文習慣把否定放在主詞）。第三，「彷彿有罪」用 as though／as if 引導的假設語氣，be 動詞用 were，這是與現在事實相反的用法；寫成 as though they are guilty 語氣較弱，正式寫作以 were 為佳。",
+          notes:[
+            {term:"as though / as if + 假設語氣", pos:"文法", gloss:"彷彿…；與現在事實相反時 be 動詞用 were（不分人稱）。", ex:"He talks as though he were the boss.", exZh:"他講話彷彿自己是老闆。"},
+            {term:"否定放在主詞", pos:"用法", gloss:"英文偏好 No one should...／Nothing can... 而非 Anyone should not...。這是中英文語序的重要差異。"},
+            {term:"guilty", pos:"adj.", gloss:"有罪的（be guilty of a crime）；也指「內疚的」。n. guilt"}
+          ]},
+
+        { n:42, kind:"中譯英　第 2 題（3%）",
+          prompt:"唯有依法被判定有罪的人，才應受到法律制裁。",
+          answerText:"Only those who are lawfully // convicted of a crime // should face legal punishment.",
+          why:"同樣分三段計分。第一，「唯有…的人」用 Only those who...；those 後接關係子句表「…的那些人」，比 only people who 更正式。要注意的是：當 Only 修飾的是主詞時，句子不需要倒裝（倒裝只發生在 Only 修飾副詞片語或副詞子句時，例如 Only then did I realize...）。第二，「被判定有罪」是 be convicted of a crime，介系詞用 of；convict 與 accuse 都接 of，但 convict 是「定罪」（已判決），accuse 只是「指控」（尚未判決），兩者的階段不同。第三，「受到法律制裁」用 face legal punishment 或 be subject to legal sanctions。",
+          notes:[
+            {term:"be convicted of", pos:"phr.", gloss:"被判定犯有…罪（n. conviction 定罪）", ex:"He was convicted of fraud.", exZh:"他被判詐欺罪成立。"},
+            {term:"convict vs. accuse vs. sentence", pos:"辨析", gloss:"accuse sb of（指控）→ convict sb of（定罪）→ sentence sb to（判處…刑罰）。三個動詞對應司法程序的三個階段。"},
+            {term:"Only + 主詞不倒裝", pos:"文法", gloss:"Only those who... should face...（不倒裝）；但 Only after the trial did he speak.（Only 修飾副詞片語時要倒裝）。"}
+          ]}
+      ]
+    }]
+  }
+  ]
+};
+
+/* ==========================================================================
+   ②  以下為程式碼，一般情況不需要修改。
+   ========================================================================== */
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const wordOf = q => q.options ? q.options[q.answer] : (q.answerText || '');
+const allQ = [];
+EXAM.sections.forEach(s => s.groups.forEach(g => g.questions.forEach(q => allQ.push(q))));
+const findQ = n => allQ.find(q => String(q.n) === String(n));
+
+document.getElementById('brand').textContent = EXAM.brand;
+document.getElementById('examTitle').textContent = EXAM.title;
+document.getElementById('examMeta').textContent = EXAM.meta;
+
+let noteCount = 0;
+allQ.forEach(q => noteCount += (q.notes || []).length);
+
+const nav = document.getElementById('nav');
+EXAM.sections.forEach(s => {
+  const a = document.createElement('a');
+  a.className = 'chip'; a.href = '#sec-' + s.id; a.textContent = s.label.replace(/^[一二三四五六]、/, m => m);
+  nav.appendChild(a);
+});
+const noteChip = document.createElement('a');
+noteChip.className = 'chip'; noteChip.href = '#side'; noteChip.textContent = '重點表 ' + noteCount;
+nav.appendChild(noteChip);
+const toggleAll = document.createElement('button');
+toggleAll.className = 'chip solid'; toggleAll.textContent = '全部展開';
+nav.appendChild(toggleAll);
+
+function renderPassage(g, i, sid) {
+  let html = esc(g.passage);
+  g.questions.forEach(q => {
+    if (!q.evidence) return;
+    const t = esc(q.evidence);
+    if (html.includes(t)) html = html.replace(t, `<span class="hl ev" data-ev="${q.n}">${t}</span>`);
+  });
+  html = html.replace(/__(\d+)__/g, (m, n) =>
+    `<button class="blank" data-blank="${n}" aria-label="第 ${n} 題空格">${n}</button>`);
+  const body = '<div class="passage">' +
+    html.split(/\n{2,}/).map(p => '<p>' + p.replace(/\n/g, ' ') + '</p>').join('') + '</div>';
+  if (!g.zh) return body;
+  const id = sid + '-' + i;
+  return body +
+    `<button class="zhbtn" data-zh="${id}">全文中譯</button>` +
+    `<div class="zhbox" id="zh-${id}">` +
+      g.zh.split(/\n{2,}/).map(p => '<p>' + esc(p).replace(/\n/g, ' ') + '</p>').join('') +
+    '</div>';
+}
+
+function renderQ(q) {
+  const parts = [];
+  if (q.options) {
+    const ks = Object.keys(q.options);
+    parts.push('<div class="opts">' + ks.map(k =>
+      `<div class="opt"><span class="opt-k">(${k})</span><span>${esc(q.options[k])}</span></div>`).join('') + '</div>');
+  }
+  const head = `<div class="q-tag"><span class="q-n">${String(q.n).padStart(2,'0')}</span><span class="q-kind">${esc(q.kind || '')}</span></div>` +
+    (q.prompt ? `<p class="prompt">${esc(q.prompt)}</p>` : '') +
+    (q.stem ? `<p class="stem">${esc(q.stem).replace(/\n/g,'<br>')}</p>` : '');
+
+  let ans = '';
+  if (q.answers) {
+    ans = '<ul class="fills">' + q.answers.map(a =>
+      `<li class="fill"><span class="fill-k">${esc(a.k)}</span><span class="fill-w hl" data-ansmulti>${esc(a.w)}</span><span class="fill-n">${esc(a.note || '')}</span></li>`).join('') + '</ul>';
+  } else {
+    const label = q.options ? `(${q.answer}) ${esc(wordOf(q))}` :
+      (q.answer ? `(${q.answer}) ${esc(q.answerText)}` : esc(q.answerText));
+    ans = `<p class="ans"><span class="ans-k">答案</span><span class="ans-v hl" data-ans="${q.n}">${label}</span></p>`;
+  }
+
+  let expl = '';
+  if (q.explain) {
+    expl = '<ul class="lines">' + Object.keys(q.options).map(k => {
+      const right = q.multi ? q.multi.includes(k) : k === q.answer;
+      return `<li class="line ${right ? 'right' : 'wrong'}"><span class="line-k">(${k})</span><span>${esc(q.explain[k] || '')}</span></li>`;
+    }).join('') + '</ul>';
+  }
+  const why = q.why ? `<p class="why">${esc(q.why)}</p>` : '';
+  const sample = q.sample ? `<div class="sample"><p class="note-h">參考範文</p>` +
+    q.sample.split(/\n{2,}/).map(p => `<p>${esc(p).replace(/\n/g,' ')}</p>`).join('') + '</div>' : '';
+  const evid = q.evidence ? `<p class="evid"><span>文中依據</span>${esc(q.evidence)}</p>` : '';
+  const notes = (q.notes || []).length ? `<div class="note"><p class="note-h">重點整理</p>` +
+    q.notes.map(nt => `<p class="note-i"><span class="term">${esc(nt.term)}</span><span class="pos">${esc(nt.pos || '')}</span><span class="gloss">${esc(nt.gloss || '')}</span>` +
+      (nt.ex ? `<span class="ex">${esc(nt.ex)}<i>${esc(nt.exZh || '')}</i></span>` : '') + '</p>').join('') + '</div>' : '';
+
+  return `<article class="q" id="q-${q.n}" data-n="${q.n}">
+    <div class="q-top">${head}${parts.join('')}
+      <button class="reveal" aria-expanded="false" aria-controls="body-${q.n}">看詳解</button>
+    </div>
+    <div class="body" id="body-${q.n}">
+      ${ans}${q.translation ? `<p class="zh">${esc(q.translation)}</p>` : ''}${expl}${why}${evid}${sample}${notes}
+    </div>
+  </article>`;
+}
+
+document.getElementById('main').innerHTML = EXAM.sections.map((s, i) => `
+  <section class="sec" id="sec-${s.id}">
+    <div class="sec-head">
+      <span class="sec-num">${String(i+1).padStart(2,'0')}</span>
+      <h2 class="sec-label">${esc(s.label)}</h2>
+      <span class="sec-score">${esc(s.score || '')}</span>
+    </div>
+    ${s.instruction ? `<p class="sec-inst">${esc(s.instruction)}</p>` : ''}
+    ${s.bank ? `<div class="bank${s.bankWide ? ' wide' : ''}">${Object.keys(s.bank).map(k =>
+      `<div class="bank-i" data-bank="${k}"><span>(${k})</span>${esc(s.bank[k])}</div>`).join('')}</div>` : ''}
+    ${s.groups.map((g, gi) => (g.passage ? renderPassage(g, gi, s.id) : '') + g.questions.map(renderQ).join('')).join('')}
+  </section>`).join('');
+
+const items = [];
+allQ.forEach(q => (q.notes || []).forEach(nt => items.push({ ...nt, n: q.n })));
+document.getElementById('side').innerHTML = `
+  <p class="side-h">Notes</p>
+  <p class="side-t">本卷重點 ${items.length} 則</p>
+  <ul class="card-list">${items.map(nt => `
+    <li class="card-item"><a href="#q-${nt.n}">
+      <span class="jump">第 ${nt.n} 題</span>
+      <span class="term">${esc(nt.term)}</span><span class="pos">${esc(nt.pos || '')}</span>
+      <div class="gloss">${esc(nt.gloss || '')}</div>
+    </a></li>`).join('')}</ul>
+  <p class="side-note">點任一則可跳到出處題目。用瀏覽器列印（Ctrl／⌘ + P）會自動展開全部詳解與中譯，可直接印成講義。</p>`;
+
+document.getElementById('foot').textContent = `共 ${allQ.length} 題 · ${EXAM.footer}`;
+
+function setOpen(card, open) {
+  card.classList.toggle('open', open);
+  const btn = card.querySelector('.reveal');
+  btn.setAttribute('aria-expanded', open);
+  btn.firstChild.nodeValue = open ? '收合詳解' : '看詳解';
+  const n = card.dataset.n;
+  card.querySelectorAll('.hl').forEach(h => h.classList.toggle('on', open));
+  const ev = document.querySelector(`[data-ev="${n}"]`);
+  if (ev) ev.classList.toggle('on', open);
+  const q = findQ(n);
+  if (q && q.answer && q.answerText) {
+    const bi = document.querySelector(`[data-bank="${q.answer}"]`);
+    if (bi) bi.classList.toggle('used', open);
+  }
+  const bl = document.querySelector(`[data-blank="${n}"]`);
+  if (bl) {
+    if (open) {
+      bl.classList.add('filled');
+      bl.innerHTML = `<sup>${n}</sup><span class="hl">${esc(wordOf(q))}</span>`;
+      requestAnimationFrame(() => bl.querySelector('.hl').classList.add('on'));
+    } else {
+      bl.classList.remove('filled');
+      bl.textContent = n;
+    }
+  }
+}
+document.addEventListener('click', e => {
+  const rv = e.target.closest('.reveal');
+  if (rv) { const c = rv.closest('.q'); setOpen(c, !c.classList.contains('open')); return; }
+  const zb = e.target.closest('.zhbtn');
+  if (zb) { zb.classList.toggle('on'); document.getElementById('zh-' + zb.dataset.zh).classList.toggle('on'); return; }
+  const bl = e.target.closest('.blank');
+  if (bl) {
+    const c = document.getElementById('q-' + bl.dataset.blank);
+    if (!c.classList.contains('open')) setOpen(c, true);
+    c.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
+toggleAll.addEventListener('click', () => {
+  const open = toggleAll.textContent === '全部展開';
+  document.querySelectorAll('.q').forEach(c => setOpen(c, open));
+  toggleAll.textContent = open ? '全部收合' : '全部展開';
+});
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('.q').forEach(c => setOpen(c, true));
+  document.querySelectorAll('.zhbox').forEach(b => b.classList.add('on'));
+  toggleAll.textContent = '全部收合';
+});
+</script>
+</body>
+</html>

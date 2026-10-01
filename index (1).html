@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ED Oct. Week 1 詳解</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E7EBEE; --card:#FDFDFC;
+  --ink:#10202F; --ink-2:#56687A; --ink-3:#7C8B99;
+  --rule:#C6D0D8; --pen:#17457E; --hl:#FFE773; --miss:#A34234;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono','Cascadia Mono',Menlo,Consolas,monospace;
+  --read:'Literata',Georgia,'Times New Roman',serif;
+  --han:'PingFang TC','Microsoft JhengHei','Noto Sans TC',system-ui,sans-serif;
+  --maxw:1180px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--han);font-size:16px;line-height:1.75}
+:focus-visible{outline:2px solid var(--pen);outline-offset:3px;border-radius:2px}
+
+.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule)}
+.top-in{max-width:var(--maxw);margin:0 auto;padding:14px 24px 0}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);margin:0 0 4px}
+.title{font-size:23px;font-weight:600;margin:0;line-height:1.3}
+.meta{font-family:var(--mono);font-size:12px;color:var(--ink-2);margin:4px 0 0;letter-spacing:.04em}
+.bar{display:flex;gap:7px;align-items:center;flex-wrap:wrap;padding:12px 0 11px;margin-top:10px;border-top:1px solid var(--rule)}
+.chip{font-family:var(--mono);font-size:12px;letter-spacing:.04em;border:1px solid var(--rule);background:transparent;color:var(--ink-2);padding:5px 10px;border-radius:999px;cursor:pointer;text-decoration:none;transition:border-color .15s,color .15s,background .15s}
+.chip:hover{border-color:var(--pen);color:var(--pen)}
+.chip.solid{margin-left:auto;border-color:var(--ink);color:var(--ink);font-weight:500}
+.chip.solid:hover{background:var(--ink);color:var(--card)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:28px 24px 96px;display:grid;gap:36px;grid-template-columns:minmax(0,1fr) 288px}
+@media (max-width:1020px){.wrap{grid-template-columns:minmax(0,1fr);gap:44px}}
+
+.sec{margin:0 0 48px;scroll-margin-top:136px}
+.sec-head{display:flex;align-items:baseline;gap:12px;padding-bottom:9px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.sec-num{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--ink-3)}
+.sec-label{font-size:18px;font-weight:600;margin:0}
+.sec-score{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-left:auto}
+.sec-inst{font-size:13.5px;color:var(--ink-2);margin:9px 0 0}
+
+.bank{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:16px 0 0}
+@media (max-width:760px){.bank{grid-template-columns:repeat(2,1fr)}}
+.bank-i{background:var(--card);padding:8px 10px;font-family:var(--read);font-size:14.5px}
+.bank-i span{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-right:5px}
+.bank-i.used{background:#F2F5F6;color:var(--ink-3)}
+
+.passage{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--ink);padding:22px 26px;margin:18px 0 0;font-family:var(--read);font-size:16.5px;line-height:1.95;color:#1a2836}
+.passage p{margin:0 0 1em}
+.passage p:last-child{margin-bottom:0}
+.blank{display:inline-block;min-width:70px;text-align:center;border:0;border-bottom:1.5px solid var(--ink);font-family:var(--mono);font-size:13px;color:var(--pen);cursor:pointer;background:none;padding:0 4px;line-height:1.4}
+.blank:hover{background:rgba(23,69,126,.07)}
+.blank.filled{font-family:var(--read);font-size:16.5px;color:var(--ink);border-bottom-color:transparent;min-width:0}
+.blank sup{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-right:2px}
+.zhbtn{display:block;margin:0 0 18px;background:var(--card);border:1px solid var(--rule);border-top:0;width:100%;text-align:left;padding:8px 26px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--pen);cursor:pointer}
+.zhbtn:hover{color:var(--ink)}
+.zhbtn::after{content:' ▾'}
+.zhbtn.on::after{content:' ▴'}
+.zhbox{display:none;background:#F7F9FA;border:1px solid var(--rule);border-top:0;padding:18px 26px;margin:0 0 18px;font-size:15px;line-height:1.95;color:#22323F}
+.zhbox.on{display:block}
+.zhbox p{margin:0 0 .9em}
+.zhbox p:last-child{margin:0}
+
+.q{background:var(--card);border:1px solid var(--rule);margin:14px 0 0;scroll-margin-top:142px}
+.q-top{padding:16px 22px 14px}
+.q-tag{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.q-n{font-family:var(--mono);font-size:13px;font-weight:600}
+.q-kind{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.prompt{font-size:14.5px;line-height:1.85;color:var(--ink-2);margin:0 0 11px;padding-left:11px;border-left:2px solid var(--rule)}
+.stem{font-family:var(--read);font-size:16.5px;line-height:1.85;margin:0 0 13px;color:#1a2836}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:2px 20px}
+@media (max-width:640px){.opts{grid-template-columns:1fr}}
+.opt{display:flex;gap:9px;font-family:var(--read);font-size:15.5px;line-height:1.6;padding:3px 0;color:#243342}
+.opt-k{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);padding-top:2px;flex:none}
+.reveal{display:block;width:100%;text-align:left;margin-top:14px;background:none;border:0;border-top:1px dashed var(--rule);padding:11px 0 0;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--pen);cursor:pointer}
+.reveal:hover{color:var(--ink)}
+.reveal::after{content:' ▾'}
+.q.open .reveal::after{content:' ▴'}
+.q.open .reveal{color:var(--ink-3)}
+
+.body{display:none;border-top:1px solid var(--rule);background:#F7F9FA;padding:18px 22px 20px}
+.q.open .body{display:block}
+.ans{display:flex;align-items:baseline;gap:10px;margin:0 0 13px;flex-wrap:wrap}
+.ans-k{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--ink-3);flex:none;padding-top:2px}
+.ans-v{font-family:var(--read);font-size:18px;font-weight:600}
+.fills{list-style:none;margin:0 0 13px;padding:0}
+.fill{display:flex;gap:11px;align-items:baseline;padding:7px 0;border-bottom:1px dotted var(--rule)}
+.fill-k{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);flex:none;width:26px}
+.fill-w{font-family:var(--read);font-size:17px;font-weight:600;flex:none}
+.fill-n{font-size:13.5px;color:var(--ink-2);line-height:1.7}
+.zh{font-size:15px;line-height:1.85;margin:0 0 14px;color:#22323F}
+.why{font-size:14.5px;line-height:1.85;margin:0 0 4px;color:#22323F;border-top:1px solid var(--rule);padding-top:12px}
+.lines{margin:0;padding:0;list-style:none;border-top:1px solid var(--rule)}
+.line{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--rule);font-size:14.5px;line-height:1.75;color:var(--ink-2)}
+.line-k{font-family:var(--mono);font-size:12.5px;flex:none;width:28px;color:var(--ink-3);padding-top:2px}
+.line.right{color:var(--ink)}
+.line.right .line-k{color:var(--ink);font-weight:600}
+.line.right .line-k::after{content:'✓';display:block;font-size:12px;line-height:1.3}
+.line.wrong .line-k{color:var(--miss);opacity:.85}
+.line.wrong .line-k::after{content:'✗';display:block;font-size:12px;line-height:1.3}
+.evid{margin:15px 0 0;font-family:var(--read);font-size:14.5px;line-height:1.8;color:var(--ink-2);padding-left:13px;border-left:2px solid var(--hl)}
+.evid span{font-family:var(--han);font-size:11px;letter-spacing:.14em;color:var(--ink-3);display:block;margin-bottom:3px}
+
+.hl{background-image:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 90%,transparent 90%);background-repeat:no-repeat;background-size:0% 100%;transition:background-size .55s cubic-bezier(.2,.75,.3,1);border-radius:1px}
+.hl.on{background-size:100% 100%}
+
+.sample{margin:15px 0 0;border:1px solid var(--rule);border-left:3px solid var(--ink);background:var(--card);padding:16px 20px}
+.sample p:not(.note-h){font-family:var(--read);font-size:15.5px;line-height:1.9;color:#1a2836;margin:0 0 1em}
+.sample p:last-child{margin-bottom:0}
+.bank.wide{grid-template-columns:1fr}
+.bank.wide .bank-i{font-size:15px;line-height:1.7;padding:10px 14px}
+.note{margin:15px 0 0;border:1px solid var(--rule);background:var(--card);padding:13px 16px}
+.note-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 9px}
+.note-i{margin:0;padding:9px 0 0;border-top:1px dotted var(--rule)}
+.note-i:first-of-type{border-top:0;padding-top:0}
+.term{font-family:var(--read);font-size:16px;font-weight:600}
+.pos{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin:0 6px}
+.gloss{font-size:14.5px}
+.ex{font-family:var(--read);font-size:14px;color:var(--ink-2);line-height:1.7;margin:3px 0 0;display:block}
+.ex i{font-family:var(--han);font-style:normal;font-size:13px;color:var(--ink-3);display:block}
+
+.side{position:sticky;top:136px;align-self:start;max-height:calc(100vh - 164px);overflow:auto;padding-right:4px}
+@media (max-width:1020px){.side{position:static;max-height:none;scroll-margin-top:136px}}
+.side-h{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin:0 0 3px}
+.side-t{font-size:16px;font-weight:600;margin:0 0 14px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.card-list{margin:0;padding:0;list-style:none}
+.card-item{border-bottom:1px solid var(--rule);padding:11px 0}
+.card-item a{display:block;text-decoration:none;color:inherit}
+.card-item a:hover .term{background:var(--hl)}
+.jump{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);float:right;padding-top:5px}
+.side-note{font-size:12.5px;color:var(--ink-3);line-height:1.7;margin:16px 0 0}
+.foot{max-width:var(--maxw);margin:0 auto;padding:0 24px 48px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+@media print{
+  body{background:#fff;font-size:10.5pt}
+  .top,.side,.reveal,.foot,.zhbtn{display:none!important}
+  .wrap{display:block;max-width:none;padding:0}
+  .q .body{display:block!important}
+  .zhbox{display:block!important}
+  .q{break-inside:avoid;border-color:#999;margin-bottom:9pt}
+  .passage{break-inside:avoid}
+  .hl{background-size:100% 100%!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <p class="eyebrow" id="brand"></p>
+    <h1 class="title" id="examTitle"></h1>
+    <p class="meta" id="examMeta"></p>
+    <nav class="bar" id="nav"></nav>
+  </div>
+</header>
+
+<div class="wrap"><main id="main"></main><aside class="side" id="side"></aside></div>
+<p class="foot" id="foot"></p>
+
+<script>
+/* ==========================================================================
+   ①  題目與詳解全部寫在下面的 EXAM 物件裡。要改題、加題、修字，只動這裡。
+
+   section（大題）：{ id, label, score, instruction, bank?, groups: [...] }
+   group（同一篇文章的題組）：{ passage?, zh?, questions: [...] }
+       passage 裡寫 __7__ 就會變成可點的空格，數字對應題號。
+       zh 是全文中譯，會做成可展開的按鈕。
+
+   question 依題型三選一：
+     選擇題   { n, kind, stem, options:{A..D}, answer:"B", translation, explain:{A..D}, evidence?, notes? }
+     單一填答 { n, kind, stem, answerText:"prejudice", why, notes? }
+     多格填答 { n, kind, prompt, stem, answers:[{k:"①", w:"字", note:"說明"}], notes? }
+   ========================================================================== */
+const EXAM = {
+  brand: "English Digest Weekly Quiz",
+  title: "Reading Test 詳解｜Week 1: Units 1-5 (Oct.)",
+  meta: "Instructor: Howard Chang　·　範圍：ED 雜誌 Oct. Week 1",
+  footer: "班級複習用",
+  sections: [
+  /* ===================== 第一部分：聽力（僅列答案） ===================== */
+  {
+    id:"listening", label:"第一部分：聽力測驗", score:"26%",
+    instruction:"本部分僅列答案，不附詳解。　一、看圖辨義 1. (A)　2. (C)(D)　｜　二、對答 3–6：A C A D　｜　三、簡短對話 7–10：B A C D　｜　四、短文聽解 11–12：A B",
+    groups:[{ questions:[] }]
+  },
+
+  /* ===================== 一、詞彙 ===================== */
+  {
+    id:"vocab", label:"一、詞彙", score:"10% · 每題 2%",
+    instruction:"依句意及提示字母填入正確單字，注意詞性與拼字。",
+    groups:[{
+      questions:[
+        { n:13, kind:"提示：ad___e",
+          stem:"To reduce traffic congestion, city planners ad______e expanding public transportation rather than building more roads for private vehicles.",
+          answerText:"advocate",
+          translation:"為了減少交通壅塞，都市規劃者主張擴充大眾運輸，而非為私人車輛興建更多道路。",
+          why:"主詞是 city planners（複數），空格是主要動詞，後面直接接動名詞 expanding，所以要填及物動詞的原形。advocate 意為「主張、倡導」，後面可接動名詞或 that 子句。語意上，句首的 To reduce traffic congestion（為了減少壅塞）是目的，而 rather than building more roads（而非興建更多道路）點出這是一種立場的選擇——提出主張正是 advocate。注意它當名詞時指「倡導者、擁護者」，重音位置不同。",
+          notes:[
+            {term:"advocate", pos:"vt. / n.", gloss:"主張、倡導；名詞為「倡導者」。動詞後接 V-ing 或 that 子句，不接不定詞。", ex:"Many experts advocate starting school later.", exZh:"許多專家主張延後上學時間。"},
+            {term:"A rather than B", pos:"句型", gloss:"是 A 而不是 B；前後成分必須對稱，此處是 expanding 對 building。"}
+          ]},
+
+        { n:14, kind:"提示：an___s",
+          stem:"The scientists conducted repeated an______s of the samples to determine exactly which chemicals were present and how much of each chemical the samples contained.",
+          answerText:"analyses",
+          translation:"科學家對這些樣本進行了反覆的分析，以確定究竟存在哪些化學物質，以及樣本中各含有多少。",
+          why:"空格前有形容詞 repeated（反覆的），它只能修飾可數名詞複數，加上提示字尾是 -s，可知要填複數形。這題真正的考點是拼字：analysis 的複數不是 analysises，而是把字尾 -is 改成 -es 寫成 analyses（源自希臘文的變化）。同類變化還有 crisis→crises、basis→bases、thesis→theses。注意 analyses 當名詞複數讀作 /əˈnæləsiːz/。",
+          notes:[
+            {term:"analysis / analyses", pos:"n.", gloss:"分析（單數 analysis，複數 analyses）。v. analyze／adj. analytical", ex:"Further analyses are needed to confirm the result.", exZh:"還需要進一步的分析來確認結果。"},
+            {term:"-is → -es 的複數家族", pos:"整理", gloss:"crisis→crises、basis→bases、thesis→theses、hypothesis→hypotheses。這組不規則變化很常考。"}
+          ]},
+
+        { n:15, kind:"提示：fi___e",
+          stem:"During the final minutes of the game, a fi______e battle developed as both teams tried desperately to score the winning point.",
+          answerText:"fierce",
+          translation:"在比賽的最後幾分鐘，雙方球隊都拚命想拿下致勝分，於是爆發了一場激烈的爭奪。",
+          why:"空格前有冠詞 a、後接名詞 battle，需要形容詞。as 子句說 both teams tried desperately to score the winning point（雙方都拚命想得分）——desperately（拚命地）與 the winning point（致勝分）都在描寫對抗的激烈程度。a fierce battle／competition 是固定搭配。fierce 除了形容競爭激烈，也可形容動物兇猛或風雨強烈。",
+          notes:[
+            {term:"fierce", pos:"adj.", gloss:"激烈的、兇猛的（fierce competition／a fierce storm）。adv. fiercely", ex:"The two rivals are locked in fierce competition.", exZh:"這兩個對手陷入激烈競爭。"},
+            {term:"desperately", pos:"adv.", gloss:"拚命地、迫切地（adj. desperate 孤注一擲的、絕望的）"}
+          ]},
+
+        { n:16, kind:"提示：pre___y",
+          stem:"The doctor made a pre______y diagnosis based on the patient's symptoms but ordered further tests before reaching a final conclusion.",
+          answerText:"preliminary",
+          translation:"醫師根據病人的症狀做出初步診斷，但在得出最終結論之前仍安排了進一步的檢查。",
+          why:"空格前有冠詞 a、後接名詞 diagnosis，需要形容詞。決定性線索是 but 之後的對比：ordered further tests before reaching a final conclusion（在最終結論之前還要做更多檢查）——既然後面才是 final（最終的），前面這個診斷就是「初步的、暫時的」。preliminary 意為「初步的、預備的」，由 pre-（在前）＋ limin（門檻）構成，字面是「還在門檻前」。",
+          notes:[
+            {term:"preliminary", pos:"adj. / n.", gloss:"初步的、預備的（preliminary results 初步結果／a preliminary round 預賽）", ex:"These are only preliminary findings.", exZh:"這些只是初步的研究發現。"},
+            {term:"preliminary ↔ final", pos:"辨析", gloss:"兩者在句中常成對出現。看到 final 就可以反推另一端是 preliminary。"}
+          ]},
+
+        { n:17, kind:"提示：ci___es",
+          stem:"Under normal ci______es, the library closes at nine, but it may remain open later during the final examination period.",
+          answerText:"circumstances",
+          translation:"在一般情況下，圖書館九點閉館，但在期末考期間可能會延後關閉。",
+          why:"Under ... circumstances 是固定片語，意為「在…情況下」，介系詞必須用 under（不是 in），且 circumstance 在此義恆用複數。語意上，but 之後的 during the final examination period（期末考期間）是例外狀況，與前面的 normal（一般的）形成對比。這個字由 circum-（周圍，同 circle）＋ stance（站立）構成，字面是「周遭的狀況」。",
+          notes:[
+            {term:"under ... circumstances", pos:"phr.", gloss:"在…情況下（under no circumstances 絕不／under the circumstances 在這種情況下）。介系詞用 under 不用 in。", ex:"Under no circumstances should you open the door.", exZh:"你在任何情況下都不該開門。"},
+            {term:"Under no circumstances 的倒裝", pos:"文法", gloss:"這個否定片語置句首時，主要子句要倒裝（Under no circumstances will we agree.）。"}
+          ]}
+      ]
+    }]
+  },
+
+  /* ===================== 二、綜合測驗 ===================== */
+  {
+    id:"cloze", label:"二、綜合測驗", score:"12% · 每題 2%",
+    instruction:"點文章裡的空格可直接跳到該題。答案：B A D B D C",
+    groups:[{
+      passage:`The story of silent letters is far more complex than a simple change in pronunciation. During the Renaissance, scholars admired Latin and Greek so deeply that their own language seemed __18__ by comparison. Hoping to elevate its status, they deliberately inserted letters that pointed to a word's classical roots. The b in debt, for example, echoes the Latin debitum, and the p in receipt recalls receptus, yet English speakers have never __19__ the /b/ or /p/ sounds in these words. Unlike the k in knee, which preserves a sound people once pronounced, these letters were mere __20__, meant to be seen rather than heard. Some insertions were even built on pure error. The s in island, for instance, turned out to be the product of a false assumption: scholars wrongly linked the Old English igland to the Latin insula.
+
+__21__, printers copied them into thousands of books, and once in print, the new spellings stuck. Later reformers found them remarkably hard to remove. In the late 18th century, the American lexicographer Noah Webster championed simpler forms such as color and music. His spellings __22__ a warm welcome in the United States, while British English largely held on to colour. Still, the silent letters in debt, receipt, and island survived on both sides of the Atlantic. Today, they continue to perplex learners around the world.
+
+__23__, they are far from useless. The b in debt is clearly pronounced in debit, and the p in receipt comes alive in reception. What began as a display of learning has become a useful clue to how English words are related.`,
+      zh:`不發音字母的故事，遠比單純的發音變化複雜得多。文藝復興時期，學者們對拉丁文與希臘文推崇備至，以致於相較之下，他們自己的語言顯得低人一等。為了提升英文的地位，他們刻意插入一些能指向該字古典字源的字母。舉例來說，debt 裡的 b 呼應著拉丁文的 debitum，receipt 裡的 p 則讓人想起 receptus，然而英語使用者從來就沒有把這些字裡的 /b/ 或 /p/ 音發出來過。不同於 knee 裡的 k 保留了人們曾經真正發過的音，這些字母純粹只是裝飾，是用來看的而不是用來聽的。有些插入甚至建立在純粹的錯誤之上。以 island 裡的 s 為例，它後來被證實是一個錯誤假設的產物：學者誤把古英語的 igland 與拉丁文的 insula 連在一起。
+
+儘管這些字母是人為添加的，印刷商還是把它們抄進了成千上萬本書裡，而一旦付印，新的拼法就固定下來了。後來的改革者發現它們極難去除。十八世紀末，美國辭典編纂家諾亞・韋伯斯特大力提倡 color 與 music 這類較簡潔的拼法。他的拼法在美國大受歡迎，而英式英語則大致保留了 colour。儘管如此，debt、receipt 與 island 裡的不發音字母在大西洋兩岸都存活了下來。時至今日，它們仍持續困擾著世界各地的學習者。
+
+儘管如此，它們絕非毫無用處。debt 裡的 b 在 debit 中清楚地被發了出來，而 receipt 裡的 p 則在 reception 中活了過來。最初作為學問展示而生的東西，如今成了理解英文字詞彼此關聯的有用線索。`,
+      questions:[
+        { n:18, kind:"形容詞",
+          options:{A:"capable 有能力的",B:"inferior 較差的、低一等的",C:"premium 高級的",D:"valid 有效的、站得住腳的"}, answer:"B",
+          translation:"學者們對拉丁文與希臘文推崇備至，以致於相較之下，他們自己的語言顯得低人一等。",
+          explain:{
+            A:"capable 是「有能力的」，用來形容人（a capable leader）或搭配 be capable of；用它形容語言的地位高低不成搭配。",
+            B:"這是 so ... that 句型：因為太過推崇拉丁文與希臘文，相形之下自己的語言就顯得不如。句尾的 by comparison（相較之下）是決定性線索，它必然帶出一個比較的結果；下一句 Hoping to elevate its status（為了提升它的地位）更反證了英文在當時被認為地位較低。",
+            C:"premium 是「高級的、優質的」，方向完全相反——若英文本來就高級，就不需要費心提升地位了。",
+            D:"valid 是「有效的、站得住腳的」，用於論點、證件、理由；語言本身無所謂有效無效。"
+          },
+          notes:[
+            {term:"be inferior / superior to", pos:"phr.", gloss:"劣於／優於。這兩個字已含比較意味，不可加 more，介系詞用 to 不用 than。", ex:"The copy is clearly inferior to the original.", exZh:"這份複製品明顯不如原件。"},
+            {term:"by comparison", pos:"phr.", gloss:"相較之下；出現時必然伴隨一個比較的結論。"}
+          ]},
+
+        { n:19, kind:"動詞",
+          options:{A:"articulated 清楚地發出（音）",B:"confirmed 確認",C:"elevated 提升",D:"inserted 插入"}, answer:"A",
+          translation:"然而英語使用者從來就沒有把這些字裡的 /b/ 或 /p/ 音發出來過。",
+          explain:{
+            A:"受詞是 the /b/ or /p/ sounds（音），需要一個能接「聲音」的動詞。articulate 當動詞意為「清楚地發音、把音發出來」，與本段主題「不發音字母」完全扣合；句首的 yet（然而）也點出轉折：字母寫在那裡，音卻從沒被發出來。",
+            B:"confirm 是「確認（消息、預約）」，受詞是訊息或安排，不能接語音。",
+            C:"elevate 是「提升（地位、水準）」。這個字在前一句才剛出現過（Hoping to elevate its status），是刻意用上文的字設下的陷阱——提升的是地位，不是聲音。",
+            D:"insert 是「插入」，同樣在前文出現過（they deliberately inserted letters）。但被插入的是「字母」不是「聲音」；而且插入的動作主詞是學者，不是 English speakers。"
+          },
+          notes:[
+            {term:"articulate", pos:"vt. / adj.", gloss:"清楚發音、清楚表達；形容詞為「口齒清晰的」。動詞讀 /ɑrˈtɪkjəleɪt/，形容詞讀 /ɑrˈtɪkjələt/。", ex:"He articulated each syllable carefully.", exZh:"他小心地把每個音節都發清楚。"},
+            {term:"用上文出現過的字設陷阱", pos:"技巧", gloss:"本題的 (C)(D) 都是前兩句剛用過的字。眼熟不代表正確，要確認它能不能接這個受詞。"}
+          ]},
+
+        { n:20, kind:"名詞",
+          options:{A:"footprints 足跡",B:"invasions 入侵",C:"legends 傳說",D:"decorations 裝飾"}, answer:"D",
+          translation:"這些字母純粹只是裝飾，是用來看的而不是用來聽的。",
+          explain:{
+            A:"footprints（足跡）是「留下的痕跡」，暗示某物曾經存在過。但這正好是 Unlike 所排除的那一類——knee 的 k 才是真正留下的痕跡，而 debt 的 b 從來就沒有被發音過。方向剛好相反。",
+            B:"invasions 是「入侵」，指外力的侵犯；這些字母是學者自己刻意加上去的，不是外來的侵略。",
+            C:"legends 是「傳說」，指口耳相傳的故事，無法形容字母的性質。",
+            D:"空格後的同位語把答案說死了：meant to be seen rather than heard（用來看的而不是用來聽的）——只有外觀功能、沒有實際作用，正是 decoration（裝飾）。句首的 Unlike the k in knee, which preserves a sound（不同於保留了真實語音的 k）也形成對照。"
+          },
+          notes:[
+            {term:"mere", pos:"adj.", gloss:"僅僅是、只不過（帶貶抑語氣，強調微不足道）", ex:"It was a mere coincidence.", exZh:"那只不過是個巧合。"},
+            {term:"同位語就是提示", pos:"技巧", gloss:"空格後若用逗號接一個解釋性的片語（meant to be seen rather than heard），那通常就是命題者留下的定義。"}
+          ]},
+
+        { n:21, kind:"讓步倒裝",
+          options:{A:"As artificial these letters were",B:"Artificial as these letters were",C:"Artificial although these letters were",D:"However these letters were artificial"}, answer:"B",
+          translation:"儘管這些字母是人為添加的，印刷商還是把它們抄進了成千上萬本書裡。",
+          explain:{
+            A:"語序錯誤。as 當讓步連接詞時，必須是「形容詞 ＋ as ＋ 主詞 ＋ 動詞」，形容詞要放在 as 的前面，不能寫成 As artificial these letters were。",
+            B:"這是「形容詞 ＋ as ＋ S ＋ V」的讓步句型，等於 Although these letters were artificial。語意上也完全吻合：前一段說這些字母是人為加上去的、甚至有的是錯誤的產物（讓步），但印刷商還是把它們抄進書裡並固定下來（主要子句）。",
+            C:"although 是連接詞，後面必須直接接「主詞 ＋ 動詞」的完整子句，不能把形容詞提到它前面。Artificial although... 的語序不存在。",
+            D:"However 當讓步用時，必須緊接形容詞或副詞，寫成 However artificial these letters were。這裡把 artificial 丟到句尾，結構就散了。這是本題最接近的干擾選項，差別只在形容詞的位置。"
+          },
+          notes:[
+            {term:"形容詞 + as + S + V", pos:"讓步倒裝", gloss:"＝Although + S + be + 形容詞。形容詞必須提到 as 之前。", ex:"Young as she is, she runs the whole department.", exZh:"她雖然年輕，卻掌管整個部門。"},
+            {term:"However + adj./adv. + S + V", pos:"讓步", gloss:"無論多麼…；However 後面必須緊接形容詞或副詞，不可拆開。", ex:"However hard he tried, the door would not open.", exZh:"無論他多努力，那扇門就是打不開。"}
+          ]},
+
+        { n:22, kind:"動詞片語",
+          options:{A:"bound to 必定會",B:"ranged from 範圍從…",C:"picked up 撿起；學會",D:"met with 遭遇、受到（某種反應）"}, answer:"D",
+          translation:"他的拼法在美國大受歡迎，而英式英語則大致保留了 colour。",
+          explain:{
+            A:"be bound to 是「必定會」，後面接原形動詞（be bound to fail），且需要 be 動詞；空格處沒有 be 動詞，而且後面接的是名詞片語 a warm welcome，結構不合。",
+            B:"range from 是「範圍從…到…」，必須搭配 to（range from A to B），且主詞須為可量化的範圍。",
+            C:"pick up 是「撿起」或「（無意間）學會」，受詞是物品或語言技能；pick up a welcome 不成搭配。",
+            D:"meet with a warm welcome 是固定用法，意為「受到熱烈歡迎」。meet with 在此指「遭遇、得到（某種反應或結果）」，常搭配 success、approval、resistance、criticism。句中的對比結構 while British English largely held on to colour（而英式英語保留了 colour）也印證美國那邊是接受的一方。"
+          },
+          notes:[
+            {term:"meet with", pos:"phr. v.", gloss:"遭遇、受到（某種反應）：meet with success／approval／resistance／a warm welcome", ex:"The proposal met with strong resistance.", exZh:"這項提案遭遇強烈反對。"},
+            {term:"hold on to", pos:"phr. v.", gloss:"保留、緊抓不放（hold on to tradition／a belief）"}
+          ]},
+
+        { n:23, kind:"轉承語",
+          options:{A:"As a result 因此",B:"In other words 換句話說",C:"Nevertheless 儘管如此",D:"Likewise 同樣地"}, answer:"C",
+          translation:"儘管如此，它們絕非毫無用處。",
+          explain:{
+            A:"As a result 表因果；但「困擾學習者」不會導致「它們很有用」，前後不是因果關係。",
+            B:"In other words 用來把前句換句話說；但這兩句意思相反，不是同一件事的重述。",
+            C:"前一句是負面的：they continue to perplex learners around the world（持續困擾世界各地的學習者）。空格後卻轉為正面：they are far from useless（絕非毫無用處），接著舉出 debt→debit、receipt→reception 兩個例子證明它們有助於看出字詞關聯。前後語意相反，需要表讓步轉折的字。",
+            D:"Likewise 是「同樣地」，表前後相似；但這裡是由負轉正的反差，不是類比。"
+          },
+          notes:[
+            {term:"Nevertheless", pos:"adv.", gloss:"儘管如此（＝Nonetheless／Even so）", ex:"The data is limited; nevertheless, the trend is clear.", exZh:"資料有限，儘管如此，趨勢仍然明確。"},
+            {term:"far from + adj./N", pos:"phr.", gloss:"絕非、遠非（far from useless 絕非無用／far from easy 一點也不容易）。這個片語本身帶強烈否定。"}
+          ]}
+      ]
+    }]
+  },
+
+  /* ===================== 三、文意選填 ===================== */
+  {
+    id:"bank", label:"三、文意選填", score:"20% · 每題 2%",
+    instruction:"十個空格，選項不重複使用。答案：C G A I F　E H B D J",
+    bank:{A:"all along 自始至終",B:"boost 大幅增長",C:"echo 迴盪",D:"fade away 逐漸消逝",E:"gut 直覺的（gut feeling）",F:"hide 獸皮",G:"isolated 偏僻孤立的",H:"merchandise 商品",I:"spirited 偷偷運走",J:"upgrade 升格、提升"},
+    groups:[{
+      passage:`To the Sherpa people of the Himalayas, the Yeti has never been seen as a mere monster. In their stories, it is a guardian spirit of the mountains, and its cries are said to __24__ through the valleys on winter nights. Many villages were so __25__ that outsiders seldom reached them, and such tales were passed down unchanged for generations. In 1921, however, a journalist mistranslated the local term metoh-kangmi as "Abominable Snowman." The frightening label stuck, and a creature that had been a protector __26__ was recast as a beast to be hunted.
+
+The new name, along with later photographs of giant footprints, triggered a wave of Western expeditions. Monastery relics soon caught outsiders' attention. One explorer reportedly __27__ two fingers of Pangboche Monastery's holy hand out of Nepal, tucked inside a film star's luggage. Another team borrowed a "Yeti scalp" from Khumjung, only to find it had been shaped from the __28__ of a serow, a goat-like animal. Decades later, DNA analysis identified one of the stolen fingers as human remains. Still, some enthusiasts follow a(n) __29__ feeling rather than laboratory results, insisting that an unknown ape roams the high valleys.
+
+Today, the Yeti helps promote mountain tours and appears in animated films, while Kathmandu's souvenir shops overflow with Yeti __30__. This fame has brought a huge __31__ in tourist numbers. Yet the more famous the creature grows, the more its sacred meaning seems to __32__. Quinoa, the Inca's sacred "mother of all grains," has followed a similar path. Global health trends helped __33__ the humble seed from a local staple to a global superfood, though rising prices raised fears that Andean families could no longer afford it. Whether creature or crop, a local treasure rarely keeps its original meaning once it attracts global attention.`,
+      zh:`對喜馬拉雅山區的雪巴人而言，雪人從來就不只是一隻怪物。在他們的故事裡，牠是山的守護靈，據說牠的嘶吼會在冬夜裡迴盪於山谷之間。許多村落是如此偏僻孤立，外人鮮少能抵達，因此這些傳說代代相傳而未曾改變。然而在一九二一年，一位記者把當地的詞彙 metoh-kangmi 誤譯成「可憎的雪人」。這個駭人的標籤就此黏了上去，而一個自始至終都是守護者的生靈，被重新塑造成一頭該被獵殺的野獸。
+
+這個新名字，連同後來那些巨大腳印的照片，引發了一波西方探險熱潮。寺院的聖物很快就吸引了外來者的注意。據說有一位探險家把班玻崎寺聖手的兩根手指偷偷帶出尼泊爾，藏在一位電影明星的行李裡。另一支隊伍向昆瓊村借來一塊「雪人頭皮」，結果卻發現那是用鬣羚（一種形似山羊的動物）的獸皮做成的。數十年後，DNA 分析鑑定出其中一根被盜的手指其實是人類遺骸。儘管如此，仍有些狂熱者寧可相信直覺而非實驗室的結果，堅稱有一種未知的猿類在高山谷地間遊走。
+
+今天，雪人協助推廣山區旅遊、出現在動畫電影裡，而加德滿都的紀念品店裡也堆滿了雪人商品。這份名氣為遊客人數帶來了大幅的成長。然而這隻生物越是出名，牠神聖的意義似乎就消逝得越多。藜麥——印加人神聖的「萬穀之母」——也走過了相似的路。全球健康風潮協助把這顆不起眼的種子從地方主食升格為全球超級食物，儘管價格上漲引發了安地斯家庭再也吃不起它的憂慮。無論是生物還是作物，一份地方的珍寶一旦吸引了全球的目光，就鮮少還能保有它原本的意義。`,
+      questions:[
+        { n:24, kind:"動詞", answer:"C", answerText:"echo",
+          why:"are said to ______ 中，to 後面需要原形動詞，且後接介系詞 through（而非受詞），必須是不及物用法。主詞是 its cries（牠的嘶吼聲），而聲音在山谷之間來回傳盪，正是 echo（迴盪）。這個字當名詞是「回音」，當動詞也可引申為「呼應、重複」。",
+          notes:[{term:"echo", pos:"vi. / vt. / n.", gloss:"迴盪、產生回音；也指「呼應（某種說法）」", ex:"Their footsteps echoed down the corridor.", exZh:"他們的腳步聲在走廊上迴盪。"},
+                 {term:"be said to V", pos:"句型", gloss:"據說…；＝It is said that...，用來轉述未經證實的說法。"}]},
+
+        { n:25, kind:"形容詞", answer:"G", answerText:"isolated",
+          why:"so ______ that 是 so ... that 句型，空格需要形容詞。that 子句的結果是 outsiders seldom reached them（外人鮮少抵達），而後半句又說 such tales were passed down unchanged for generations（傳說代代相傳而未曾改變）——與外界隔絕才使故事不受外來影響。isolated 意為「孤立的、偏僻的」。",
+          notes:[{term:"isolated", pos:"adj.", gloss:"孤立的、偏遠的（n. isolation；v. isolate）", ex:"The village is isolated by snow each winter.", exZh:"這座村莊每年冬天都因大雪而與外界隔絕。"},
+                 {term:"pass down", pos:"phr. v.", gloss:"（世代）流傳下去；常用被動 be passed down。"}]},
+
+        { n:26, kind:"副詞片語", answer:"A", answerText:"all along",
+          why:"a creature that had been a protector ______ was recast as a beast——空格夾在關係子句的結尾與主要動詞 was recast 之間，需要一個修飾 had been 的時間副詞。all along 意為「自始至終、一直以來」，與過去完成式 had been 搭配得天衣無縫。語意上，它強化了這個轉變的荒謬：牠本來一直都是守護者，卻因一次誤譯被改寫成野獸。",
+          notes:[{term:"all along", pos:"adv.", gloss:"自始至終、一直（＝from the very beginning）", ex:"She knew the truth all along.", exZh:"她自始至終都知道真相。"},
+                 {term:"recast", pos:"vt.", gloss:"重新塑造、改寫形象（re- 再 ＋ cast 鑄造）"}]},
+
+        { n:27, kind:"動詞", answer:"I", answerText:"spirited",
+          why:"One explorer reportedly ______ two fingers ... out of Nepal 需要及物動詞的過去式，且搭配 out of。spirit 當動詞意為「神祕地、偷偷地帶走」，常用 spirit sb/sth away／out of。決定性線索是句尾的 tucked inside a film star's luggage（藏在電影明星的行李裡）——藏著帶出境，正是偷運。注意這個字的名詞義是「精神、靈魂」，動詞義完全不同，是本題的考點。",
+          notes:[{term:"spirit", pos:"vt.", gloss:"偷偷帶走、神不知鬼不覺地運走（spirit sth away／out of）", ex:"The documents were spirited out of the building.", exZh:"那些文件被偷偷運出了大樓。"},
+                 {term:"tuck", pos:"vt.", gloss:"塞進、藏入（tuck sth inside／into）"}]},
+
+        { n:28, kind:"名詞", answer:"F", answerText:"hide",
+          why:"shaped from the ______ of a serow 中，空格前有定冠詞 the、後接 of a serow，需要名詞。語意上，一塊假的「雪人頭皮」是用某種動物身上的材料做的——hide 當名詞意為「（大型動物的）獸皮」。這個字最常見的意思是動詞「躲藏」，名詞義是本題的考點；同位語 a goat-like animal（一種形似山羊的動物）也提示了材料來源。",
+          notes:[{term:"hide", pos:"n. / vi.", gloss:"獸皮（尤指牛、鹿等大型動物）；當動詞為「躲藏」。n. 用法常見於 leather 製品語境。", ex:"The bag is made from buffalo hide.", exZh:"這個包是用水牛皮做的。"},
+                 {term:"only to + V", pos:"用法", gloss:"結果卻…（表出乎意料的結果）。本句的 only to find 即「結果卻發現」。"}]},
+
+        { n:29, kind:"形容詞", answer:"E", answerText:"gut",
+          why:"a(n) ______ feeling 中，空格修飾名詞 feeling。gut feeling 是固定搭配，意為「直覺、第六感」（gut 本義為「腸子」，中文的「憑直覺」在英文裡是「用腸子感覺」）。語意上，句中用 rather than laboratory results（而非實驗室結果）形成對比——一邊是直覺，一邊是科學數據，正好對立。",
+          notes:[{term:"gut feeling / gut instinct", pos:"phr.", gloss:"直覺、第六感（gut 原意為腸子、內臟）", ex:"My gut feeling says we should wait.", exZh:"我的直覺告訴我應該再等等。"},
+                 {term:"enthusiast", pos:"n.", gloss:"狂熱愛好者（adj. enthusiastic／n. enthusiasm）"}]},
+
+        { n:30, kind:"名詞", answer:"H", answerText:"merchandise",
+          why:"overflow with Yeti ______ 中，空格是介系詞 with 的受詞，需要名詞。語意上，紀念品店裡堆滿的是雪人周邊商品。merchandise 為不可數名詞（不加 s、不加冠詞），指「商品的總稱」，這個特性也是驗證：空格前沒有任何冠詞或數量詞。",
+          notes:[{term:"merchandise", pos:"n.", gloss:"商品（不可數，總稱）；周邊商品常稱 merch", ex:"The store sells official team merchandise.", exZh:"這家店販售球隊的官方周邊商品。"},
+                 {term:"overflow with", pos:"phr. v.", gloss:"充滿、滿到溢出來"}]},
+
+        { n:31, kind:"名詞", answer:"B", answerText:"boost",
+          why:"brought a huge ______ in tourist numbers 中，空格前有冠詞 a 與形容詞 huge，後接 in，需要單數可數名詞。a boost in ＋ 數量 意為「…的大幅成長」。語意上，雪人的名氣帶動了觀光人數上升。注意 boost 當動詞是「提振、促進」，這裡考的是名詞用法。",
+          notes:[{term:"a boost in / to", pos:"phr.", gloss:"…的提升、促進（give a boost to 給予提振）", ex:"The festival gave a huge boost to local business.", exZh:"這場慶典大幅帶動了在地商機。"},
+                 {term:"boost", pos:"vt.", gloss:"提振、促進（boost sales／confidence／the economy）"}]},
+
+        { n:32, kind:"動詞片語", answer:"D", answerText:"fade away",
+          why:"its sacred meaning seems to ______ 中，to 後面需要原形動詞，且後面沒有受詞，必須是不及物用法。fade away 意為「逐漸消逝、淡去」。語意上，這句用 The more ... the more ... 句型：生物越出名，神聖意義就消失得越多——名氣與神聖性成反比，正是全文的主旨。",
+          notes:[{term:"fade away", pos:"phr. v.", gloss:"逐漸消逝、淡去（記憶、聲音、意義）", ex:"The applause slowly faded away.", exZh:"掌聲慢慢地淡去。"},
+                 {term:"The more ..., the more ...", pos:"句型", gloss:"越…就越…；本句是全文主旨所在，值得整句記下來。"}]},
+
+        { n:33, kind:"動詞", answer:"J", answerText:"upgrade",
+          why:"helped ______ the humble seed from a local staple to a global superfood 中，help 後面可接原形動詞（to 省略），且空格後有受詞與 from ... to ... 的結構。upgrade A from B to C 意為「把 A 從 B 升格為 C」。語意上，藜麥從地方主食變成全球超級食物，地位提升，正是 upgrade。",
+          notes:[{term:"upgrade", pos:"vt. / n.", gloss:"升級、升格（反義 downgrade）", ex:"The hotel upgraded us to a suite.", exZh:"飯店把我們升等到套房。"},
+                 {term:"staple", pos:"n.", gloss:"主食、必需品（a staple food 主食）；也指「訂書針」。"}]}
+      ]
+    }]
+  },
+
+  /* ===================== 四、篇章結構 ===================== */
+  {
+    id:"structure", label:"四、篇章結構", score:"8% · 每題 2%",
+    instruction:"五個選項選四個。答案：E D C B（未使用：A）",
+    bankWide:true,
+    bank:{
+      A:"Whether a franchise is profitable or not depends largely on the nature of the business.　一家加盟店是否賺錢，大多取決於該行業的性質。（未使用）",
+      B:"Research has shown that customers tend to choose a brand they recognize over one they don't.　研究顯示，顧客傾向選擇自己認得的品牌，而非不認識的品牌。",
+      C:"A franchise comes with a built-in business formula including products, services, and even employee uniforms.　加盟店附帶一套現成的經營公式，涵蓋產品、服務，甚至員工制服。",
+      D:"The most famous example was Isaac Singer, who created franchises to distribute his sewing machines to larger areas.　最著名的例子是艾薩克・勝家，他建立加盟體系把自己的縫紉機銷往更廣的地區。",
+      E:"A franchise is a license issued by a large, usually well-known company to an individual or a small business owner.　加盟權是一種由大型、通常頗具知名度的公司核發給個人或小企業主的授權。"
+    },
+    groups:[{
+      passage:`Starting a business on one's own can be quite challenging and costly. To reduce the risks involved in starting a business from scratch, many people buy a franchise instead. __34__ Under the license, the individual acquires the right to use the big company's brand name and agrees to sell its products.
+
+The concept of the franchise dates back to the 19th century in the U.S. __35__ Then, in the 1930s, Howard Johnson restaurants skyrocketed in popularity, paving the way for restaurant chains and the subsequent franchises that would define the unprecedented rise of the American fast-food industry.
+
+There are many advantages to investing in a franchise. One of the benefits is the ready-made business operation. __36__ Depending on the franchise, the franchisor company may offer support in training and financial planning. Some even provide assistance with approved suppliers. To new business owners, the most recognized advantage of a franchise is perhaps the well-established brand name of the franchisor such as that of McDonald's. __37__
+
+Disadvantages include heavy start-up costs as well as ongoing royalty costs on the part of the franchisee. To take the McDonald's example further, the estimated minimum cost for a franchisee to start a McDonald's is US$500,000. And it has to pay an annual fee equivalent to 12% of its sales to McDonald's. Other disadvantages include lack of territory control or creativity with one's own business.`,
+      zh:`靠自己創業可能相當艱難且所費不貲。為了降低從零開始創業的風險，許多人轉而選擇購買加盟權。加盟權是一種由大型、通常頗具知名度的公司核發給個人或小企業主的授權。在這份授權之下，個人取得使用該大公司品牌名稱的權利，並同意販售其產品。
+
+加盟的概念可追溯至十九世紀的美國。最著名的例子是艾薩克・勝家，他建立加盟體系把自己的縫紉機銷往更廣的地區。接著在一九三○年代，霍華德・強森餐廳人氣暴增，為連鎖餐廳以及隨後的加盟體系鋪了路，而這些體系後來定義了美國速食產業前所未有的崛起。
+
+投資加盟店有許多優點。其中一項好處是現成的營運模式。加盟店附帶一套現成的經營公式，涵蓋產品、服務，甚至員工制服。視加盟品牌而定，加盟總部可能會在教育訓練與財務規劃上提供協助，有些甚至會協助對接核可的供應商。對新創業主而言，加盟最廣為人知的優勢，或許是總部早已建立的品牌名聲，例如麥當勞的招牌。研究顯示，顧客傾向選擇自己認得的品牌，而非不認識的品牌。
+
+缺點則包括沉重的開辦成本，以及加盟主必須持續支付的權利金。進一步以麥當勞為例，一位加盟主開一家麥當勞的估計最低成本是五十萬美元，而且每年還必須支付相當於其營業額百分之十二的費用給麥當勞。其他缺點還包括無法掌控經營區域，以及在自己的生意上缺乏發揮創意的空間。`,
+      questions:[
+        { n:34, kind:"段落銜接", answer:"E",
+          answerText:"A franchise is a license issued by a large, usually well-known company to an individual or a small business owner.",
+          why:"這題的線索完全在空格「後面」：Under the license, the individual acquires the right...（在這份授權之下，個人取得…的權利）——既然說 the license（這份授權），空格就必須先定義什麼是 license。(E) 正好把 franchise 定義為一種 license，而且句中的 an individual or a small business owner 也與下一句的 the individual 相呼應。前一句剛提到 many people buy a franchise，空格接著下定義，是說明文的標準順序。",
+          notes:[{term:"the + 名詞的回指", pos:"技巧", gloss:"下一句若用 the license／the process／the system 這類帶定冠詞的名詞，空格就必須先引入那樣東西。定冠詞本身就是「前面提過」的信號。"},
+                 {term:"from scratch", pos:"phr.", gloss:"從零開始、白手起家", ex:"She built the company from scratch.", exZh:"她白手起家創立了這家公司。"}]},
+
+        { n:35, kind:"段落銜接", answer:"D",
+          answerText:"The most famous example was Isaac Singer, who created franchises to distribute his sewing machines to larger areas.",
+          why:"空格前說 The concept of the franchise dates back to the 19th century in the U.S.（可追溯至十九世紀的美國），空格後則用 Then, in the 1930s...（接著在一九三○年代）繼續往後推進時間。中間需要的是十九世紀的具體例證——(D) 的 Isaac Singer 正是那個年代的人物，而 The most famous example（最著名的例子）也直接承接前句的概括陳述。時間軸「19 世紀 → 1930 年代」中間不能跳空。",
+          notes:[{term:"date back to", pos:"phr.", gloss:"可追溯到（某時期）；為不及物用法，不用被動。", ex:"The custom dates back to the Ming dynasty.", exZh:"這個習俗可追溯至明朝。"},
+                 {term:"時間軸是最硬的線索", pos:"技巧", gloss:"段落若依年代推進（19th century → 1930s），空格處填的必然是落在那段時間裡的內容。"}]},
+
+        { n:36, kind:"段落銜接", answer:"C",
+          answerText:"A franchise comes with a built-in business formula including products, services, and even employee uniforms.",
+          why:"空格前一句是 One of the benefits is the ready-made business operation（其中一項好處是現成的營運模式），空格處需要把這個抽象說法具體化。(C) 的 a built-in business formula（內建的經營公式）正是 ready-made business operation 的同義改寫，而後面列舉的 products, services, and even employee uniforms（產品、服務甚至員工制服）則是具體內容。空格後接著講總部提供的訓練與財務協助，也是同一條「現成支援」的延伸。",
+          notes:[{term:"ready-made", pos:"adj.", gloss:"現成的、不必自己做的（ready-made meals 即食餐點）"},
+                 {term:"built-in", pos:"adj.", gloss:"內建的、附帶的（built-in storage 內建收納）"}]},
+
+        { n:37, kind:"段落銜接", answer:"B",
+          answerText:"Research has shown that customers tend to choose a brand they recognize over one they don't.",
+          why:"空格在第三段最後。前一句說加盟最廣為人知的優勢是 the well-established brand name of the franchisor such as that of McDonald's（總部早已建立的品牌名聲，例如麥當勞）。空格處需要說明「為什麼品牌名聲是優勢」——(B) 提出研究佐證：顧客傾向選擇認得的品牌。選項中的 a brand they recognize 直接呼應前句的 well-established brand name，是補強論點的收尾句。未使用的 (A) 說「加盟是否賺錢取決於行業性質」，雖然與主題相關，但它是一個總結全局的判斷，而該段談的是「優點」，下一段談的是「缺點」，兩邊都插不進去。",
+          notes:[{term:"tend to V", pos:"phr.", gloss:"傾向於…（n. tendency）"},
+                 {term:"為什麼 (A) 是錯誤選項", pos:"補充", gloss:"(A) 的內容本身合理，也用了 franchise 這個關鍵字，但它的功能是「下總結」。第三段在列優點、第四段在列缺點，中間沒有需要總結的位置。這是「主題相關、功能不合」型的干擾選項。"}]}
+      ]
+    }]
+  },
+
+  /* ===================== 五、閱讀測驗 ===================== */
+  {
+    id:"reading", label:"五、閱讀測驗", score:"6% · 每題 2%",
+    instruction:"展開詳解時，文章中的依據句會被標示出來。答案：C B D",
+    groups:[{
+      passage:`Finland's Onkalo project, the world's first permanent underground repository for high-level nuclear waste, represents an important step toward solving one of nuclear energy's greatest challenges: how to safely store radioactive materials for thousands of years. While this facility addresses the problem of waste after electricity has been produced, scientists are also exploring ways to improve the reactors (the core units that generate nuclear power) themselves. Among the most promising developments in recent years are Small Modular Reactors (SMRs), which many experts believe could reshape the future of nuclear power.
+
+Unlike traditional nuclear power plants, SMRs are much smaller and are designed to be built in factories before being transported to their final locations. This modular design may shorten construction time and reduce overall costs. Because each reactor produces less electricity than a conventional one, communities can install several units as demand grows instead of building one enormous power station. This flexibility makes SMRs especially attractive for remote areas, small cities, or regions where large power plants are impractical.
+
+Supporters also argue that SMRs could improve nuclear safety. Many designs rely on passive safety systems, which use natural forces, such as gravity or air circulation, rather than pumps or external electricity to cool the reactor during emergencies. As a result, the risk of overheating may be reduced even if the power supply is interrupted. In addition, some advanced SMRs are designed to use fuel more efficiently, which supporters say could decrease the amount of radioactive waste produced over time.
+
+Despite these advantages, SMRs are not a "silver bullet." Many designs are still being tested, and only a limited number have begun operation around the world. Building new reactors also involves significant investment and strict government regulations. Furthermore, even if SMRs generate less waste, they still produce spent nuclear fuel that must be stored safely in repositories such as Onkalo. As countries search for cleaner and more reliable energy sources, SMRs may become an important part of the answer, but their long-term success will depend on technological progress, careful management, and public trust.`,
+      zh:`芬蘭的 Onkalo 計畫是世界上第一座高放射性核廢料的永久地下貯存場，它代表著解決核能最大挑戰之一的重要一步：如何讓放射性物質安全地存放數千年。這座設施處理的是發電之後的廢料問題，而科學家同時也在探索改良反應爐（產生核能的核心機組）本身的方法。近年來最具前景的發展之一，是小型模組化反應爐（SMR），許多專家相信它可能重塑核能的未來。
+
+與傳統核電廠不同，SMR 的體積小得多，而且被設計成先在工廠裡製造完成，再運送到最終的所在地。這種模組化設計可能縮短建造時間並降低整體成本。由於每一座反應爐的發電量比傳統機組少，社區可以隨著需求成長逐步加裝數個機組，而不必興建一座龐大的電廠。這樣的彈性使得 SMR 對偏遠地區、小型城市，或是大型電廠不切實際的區域特別有吸引力。
+
+支持者也主張 SMR 能提升核能安全。許多設計仰賴被動式安全系統，這類系統在緊急時刻利用重力或空氣循環等自然力量來冷卻反應爐，而不是靠幫浦或外部電力。因此，即使供電中斷，過熱的風險也可能降低。此外，有些先進的 SMR 被設計成能更有效率地使用燃料，支持者認為這長期下來可減少所產生的放射性廢料量。
+
+儘管有這些優勢，SMR 並不是萬靈丹。許多設計仍在測試階段，全世界也只有少數已開始運轉。興建新的反應爐同樣需要龐大的投資與嚴格的政府法規。再者，即使 SMR 產生的廢料較少，它們仍會製造出必須安全貯存在 Onkalo 這類場所的用過核燃料。隨著各國尋找更潔淨、更可靠的能源，SMR 或許會成為答案的重要一環，但它們長期的成敗，將取決於技術的進展、審慎的管理，以及大眾的信任。`,
+      questions:[
+        { n:38, kind:"資訊判讀",
+          stem:"Which question can the passage answer?",
+          options:{
+            A:"How much does it typically cost to construct a single SMR unit?　建造單一座 SMR 機組通常要花多少錢？",
+            B:"Where are most nuclear waste facilities located worldwide?　全球大多數核廢料設施位於何處？",
+            C:"Why are SMRs considered suitable for remote or smaller communities?　為何 SMR 被認為適合偏遠或較小的社區？",
+            D:"What percentage of the world's electricity currently comes from SMRs?　目前全球電力有多少百分比來自 SMR？"
+          }, answer:"C",
+          translation:"本文能回答下列哪一個問題？",
+          explain:{
+            A:"文中只提到 Building new reactors also involves significant investment（興建新反應爐需要龐大投資），但從未給出任何金額或成本數字，無法回答「多少錢」。",
+            B:"文中只提到芬蘭的 Onkalo 一座設施，完全沒有討論全球核廢料設施的分布位置。",
+            C:"第二段給了完整的因果鏈：因為每座反應爐發電量較少，社區可以依需求逐步加裝（Because each reactor produces less electricity...），而這種彈性使 SMR 對 remote areas, small cities, or regions where large power plants are impractical 特別有吸引力。問「為什麼適合」，文中有明確答案。",
+            D:"文中只說 only a limited number have begun operation（只有少數開始運轉），這是個模糊的描述，並未提供任何百分比數據。"
+          },
+          evidence:"This flexibility makes SMRs especially attractive for remote areas, small cities, or regions where large power plants are impractical.",
+          notes:[
+            {term:"「文中能回答哪個問題」的解法", pos:"技巧", gloss:"把每個選項當成一個待查的問題，逐一回原文找「有沒有具體答案」。文中只給方向性描述（significant investment、a limited number）而沒有數字時，問數量的選項一律排除。"},
+            {term:"impractical", pos:"adj.", gloss:"不切實際的、行不通的（反義 practical）"}
+          ]},
+
+        { n:39, kind:"字義推論",
+          stem:"Which of the following is closest in meaning to \"silver bullet\" in the last paragraph?",
+          options:{
+            A:"A safety system designed to prevent serious accidents.　一種為防止重大事故而設計的安全系統。",
+            B:"A simple solution that can solve a difficult problem.　一個能解決困難問題的簡單方法。",
+            C:"A costly method that requires careful financial planning.　一種需要審慎財務規劃的昂貴方法。",
+            D:"A new invention that attracts worldwide attention quickly.　一項迅速吸引全球目光的新發明。"
+          }, answer:"B",
+          translation:"下列何者與最後一段的 silver bullet 意思最接近？",
+          explain:{
+            A:"這是被同段的 safety 語境誤導。文中第三段確實談過安全系統，但 silver bullet 出現在第四段的轉折處，講的是 SMR 本身「不是」什麼，與安全系統無關。",
+            B:"silver bullet（銀彈）典出歐洲傳說——只有銀製子彈才能一槍殺死狼人，因此引申為「一舉解決難題的萬靈丹」。判斷依據在上下文：Despite these advantages, SMRs are not a \"silver bullet.\" 之後緊接著列出一連串困難（仍在測試、投資龐大、法規嚴格、仍有核廢料）——作者是在說它「沒那麼簡單就能解決問題」。",
+            C:"把 silver 聯想成「貴重、昂貴」是字面陷阱。這個片語的重點在「一擊奏效」，不在價格。",
+            D:"「迅速吸引全球目光」是在講知名度；但 Despite these advantages（儘管有這些優勢）的轉折，談的是能不能解決問題，不是紅不紅。"
+          },
+          evidence:"Despite these advantages, SMRs are not a \"silver bullet.\"",
+          notes:[
+            {term:"silver bullet", pos:"idiom", gloss:"萬靈丹、一舉解決難題的妙方（常用於否定：There is no silver bullet.）", ex:"There is no silver bullet for climate change.", exZh:"氣候變遷沒有萬靈丹。"},
+            {term:"從轉折詞找線索", pos:"技巧", gloss:"Despite these advantages 之後必然是負面內容。既然說它「不是 silver bullet」而後面全是困難，就能反推 silver bullet 是個正面且「一次解決」的東西。"}
+          ]},
+
+        { n:40, kind:"是非判斷",
+          stem:"Which of the following is true about SMRs according to the passage?",
+          options:{
+            A:"They eliminate all risks related to nuclear energy production.　它們消除了核能生產相關的所有風險。",
+            B:"They are mainly used in large cities with high energy demand.　它們主要用於能源需求高的大城市。",
+            C:"They have already replaced most large nuclear power stations.　它們已經取代了大多數的大型核電廠。",
+            D:"Their future depends on continued development and public acceptance.　它們的未來取決於持續的發展與大眾的接受度。"
+          }, answer:"D",
+          translation:"根據本文，下列關於 SMR 的敘述何者為真？",
+          explain:{
+            A:"程度誇大。第三段用的是 the risk of overheating may be reduced（過熱風險可能降低），而第四段更明說它們仍會產生必須貯存的用過核燃料。may be reduced 與 eliminate all risks 之間差距極大——看到 all、always、completely 這類絕對字眼就要提高警覺。",
+            B:"與文章相反。第二段說 SMR 特別適合 remote areas, small cities, or regions where large power plants are impractical（偏遠地區、小城市、大型電廠不可行的區域），正好不是大城市。",
+            C:"與文章相反。第四段說 only a limited number have begun operation around the world（全世界只有少數已開始運轉），連普及都談不上，遑論取代。",
+            D:"直接對應全文最後一句：their long-term success will depend on technological progress, careful management, and public trust。選項中的 continued development 對應 technological progress，public acceptance 對應 public trust，是標準的同義改寫。"
+          },
+          evidence:"their long-term success will depend on technological progress, careful management, and public trust",
+          notes:[
+            {term:"絕對字眼多半是錯的", pos:"技巧", gloss:"選項出現 all／never／completely／most 時，回原文確認作者用的是不是 may／could／some。語氣被放大，就是錯誤選項。"},
+            {term:"最後一句常是答案", pos:"技巧", gloss:"說明文的結尾句往往是全文的總結，也最常被拿來出「何者為真」。讀到最後一段務必放慢。"}
+          ]}
+      ]
+    }]
+  },
+
+  /* ===================== 六、翻譯 ===================== */
+  {
+    id:"translation", label:"六、翻譯", score:"6% · 每題 3%",
+    instruction:"將下列中文句子譯成正確、通順、達意的英文。斜線為評分斷點。",
+    groups:[{
+      questions:[
+        { n:41, kind:"中譯英　第 1 題（3%）",
+          prompt:"為了減少黃牛票（scalped tickets）的販售，人們在買票時可能會被要求登記並出示身分證明。",
+          answerText:"To reduce the sale of scalped tickets, // people may be required to register // and show identification when buying tickets.",
+          why:"評分分三段，每段一分。三個要留意的地方。第一，「為了…」用不定詞片語 To reduce... 置於句首表目的，後面要加逗號；「販售」用名詞 the sale of（不可數，不加 s）。第二，「可能會被要求」是被動語態 may be required to V——主詞 people 是被要求的一方，漏掉 be 就變成「人們可能要求」，主客顛倒；而 require 的被動後面接不定詞，不是動名詞。第三，「登記並出示身分證明」兩個動作要對稱：to register and show——and 後面承接前面的 to，所以用原形 show 不加 to。句尾的 when buying tickets 是省略主詞的副詞子句（＝when they buy tickets），因為主詞與主要子句相同才能省略。",
+          notes:[
+            {term:"be required to V", pos:"句型", gloss:"被要求做…（主動：require sb to V）", ex:"All visitors are required to sign in.", exZh:"所有訪客都必須簽到。"},
+            {term:"to V1 and V2", pos:"用法", gloss:"不定詞並列時，第二個 to 通常省略：to register and show（不是 and to show）。"},
+            {term:"when + V-ing", pos:"文法", gloss:"副詞子句的主詞與主要子句相同時，可省略主詞與 be 動詞：when buying tickets ＝ when they buy tickets。"}
+          ]},
+
+        { n:42, kind:"中譯英　第 2 題（3%）",
+          prompt:"即使從未經授權的賣家購買的票看起來是真的，它們也可能不被視作有效。",
+          answerText:"Even if tickets purchased from unauthorized sellers // appear genuine, // they may still not be considered valid.",
+          why:"同樣分三段計分。第一，「從未經授權的賣家購買的票」用過去分詞片語後位修飾：tickets purchased from unauthorized sellers（＝tickets that are purchased from...），票是「被」購買的，所以用過去分詞。unauthorized 由 un- ＋ authorize（授權）＋ -ed 構成。第二，「看起來是真的」用 appear genuine——appear 是連綴動詞，後面接形容詞不接副詞，寫成 appear genuinely 就錯了；也可用 look genuine／seem authentic。第三，「不被視作有效」用 be considered valid 的否定——consider ＋ 受詞 ＋ 形容詞 的被動形式，形容詞 valid 直接接在後面，不需要 as（這點與 be regarded as 不同，是最容易混淆的地方）。副詞 still 放在 may 與 not 之間。",
+          notes:[
+            {term:"be considered + adj./N", pos:"句型", gloss:"被認為是…；consider 後面不加 as（誤：be considered as valid）。但 regard／see／view 則必須加 as。", ex:"The method is considered reliable.", exZh:"這個方法被認為是可靠的。"},
+            {term:"連綴動詞 + 形容詞", pos:"文法", gloss:"appear／look／seem／sound／taste 後面接形容詞，不接副詞。"},
+            {term:"unauthorized", pos:"adj.", gloss:"未經授權的（un- ＋ authorize ＋ -ed）；本題與第 41 題同屬售票詐騙主題，兩題可一起記。"}
+          ]}
+      ]
+    }]
+  }
+  ]
+};
+
+/* ==========================================================================
+   ②  以下為程式碼，一般情況不需要修改。
+   ========================================================================== */
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const wordOf = q => q.options ? q.options[q.answer] : (q.answerText || '');
+const allQ = [];
+EXAM.sections.forEach(s => s.groups.forEach(g => g.questions.forEach(q => allQ.push(q))));
+const findQ = n => allQ.find(q => String(q.n) === String(n));
+
+document.getElementById('brand').textContent = EXAM.brand;
+document.getElementById('examTitle').textContent = EXAM.title;
+document.getElementById('examMeta').textContent = EXAM.meta;
+
+let noteCount = 0;
+allQ.forEach(q => noteCount += (q.notes || []).length);
+
+const nav = document.getElementById('nav');
+EXAM.sections.forEach(s => {
+  const a = document.createElement('a');
+  a.className = 'chip'; a.href = '#sec-' + s.id; a.textContent = s.label.replace(/^[一二三四五六]、/, m => m);
+  nav.appendChild(a);
+});
+const noteChip = document.createElement('a');
+noteChip.className = 'chip'; noteChip.href = '#side'; noteChip.textContent = '重點表 ' + noteCount;
+nav.appendChild(noteChip);
+const toggleAll = document.createElement('button');
+toggleAll.className = 'chip solid'; toggleAll.textContent = '全部展開';
+nav.appendChild(toggleAll);
+
+function renderPassage(g, i, sid) {
+  let html = esc(g.passage);
+  g.questions.forEach(q => {
+    if (!q.evidence) return;
+    const t = esc(q.evidence);
+    if (html.includes(t)) html = html.replace(t, `<span class="hl ev" data-ev="${q.n}">${t}</span>`);
+  });
+  html = html.replace(/__(\d+)__/g, (m, n) =>
+    `<button class="blank" data-blank="${n}" aria-label="第 ${n} 題空格">${n}</button>`);
+  const body = '<div class="passage">' +
+    html.split(/\n{2,}/).map(p => '<p>' + p.replace(/\n/g, ' ') + '</p>').join('') + '</div>';
+  if (!g.zh) return body;
+  const id = sid + '-' + i;
+  return body +
+    `<button class="zhbtn" data-zh="${id}">全文中譯</button>` +
+    `<div class="zhbox" id="zh-${id}">` +
+      g.zh.split(/\n{2,}/).map(p => '<p>' + esc(p).replace(/\n/g, ' ') + '</p>').join('') +
+    '</div>';
+}
+
+function renderQ(q) {
+  const parts = [];
+  if (q.options) {
+    const ks = Object.keys(q.options);
+    parts.push('<div class="opts">' + ks.map(k =>
+      `<div class="opt"><span class="opt-k">(${k})</span><span>${esc(q.options[k])}</span></div>`).join('') + '</div>');
+  }
+  const head = `<div class="q-tag"><span class="q-n">${String(q.n).padStart(2,'0')}</span><span class="q-kind">${esc(q.kind || '')}</span></div>` +
+    (q.prompt ? `<p class="prompt">${esc(q.prompt)}</p>` : '') +
+    (q.stem ? `<p class="stem">${esc(q.stem).replace(/\n/g,'<br>')}</p>` : '');
+
+  let ans = '';
+  if (q.answers) {
+    ans = '<ul class="fills">' + q.answers.map(a =>
+      `<li class="fill"><span class="fill-k">${esc(a.k)}</span><span class="fill-w hl" data-ansmulti>${esc(a.w)}</span><span class="fill-n">${esc(a.note || '')}</span></li>`).join('') + '</ul>';
+  } else {
+    const label = q.options ? `(${q.answer}) ${esc(wordOf(q))}` :
+      (q.answer ? `(${q.answer}) ${esc(q.answerText)}` : esc(q.answerText));
+    ans = `<p class="ans"><span class="ans-k">答案</span><span class="ans-v hl" data-ans="${q.n}">${label}</span></p>`;
+  }
+
+  let expl = '';
+  if (q.explain) {
+    expl = '<ul class="lines">' + Object.keys(q.options).map(k => {
+      const right = q.multi ? q.multi.includes(k) : k === q.answer;
+      return `<li class="line ${right ? 'right' : 'wrong'}"><span class="line-k">(${k})</span><span>${esc(q.explain[k] || '')}</span></li>`;
+    }).join('') + '</ul>';
+  }
+  const why = q.why ? `<p class="why">${esc(q.why)}</p>` : '';
+  const sample = q.sample ? `<div class="sample"><p class="note-h">參考範文</p>` +
+    q.sample.split(/\n{2,}/).map(p => `<p>${esc(p).replace(/\n/g,' ')}</p>`).join('') + '</div>' : '';
+  const evid = q.evidence ? `<p class="evid"><span>文中依據</span>${esc(q.evidence)}</p>` : '';
+  const notes = (q.notes || []).length ? `<div class="note"><p class="note-h">重點整理</p>` +
+    q.notes.map(nt => `<p class="note-i"><span class="term">${esc(nt.term)}</span><span class="pos">${esc(nt.pos || '')}</span><span class="gloss">${esc(nt.gloss || '')}</span>` +
+      (nt.ex ? `<span class="ex">${esc(nt.ex)}<i>${esc(nt.exZh || '')}</i></span>` : '') + '</p>').join('') + '</div>' : '';
+
+  return `<article class="q" id="q-${q.n}" data-n="${q.n}">
+    <div class="q-top">${head}${parts.join('')}
+      <button class="reveal" aria-expanded="false" aria-controls="body-${q.n}">看詳解</button>
+    </div>
+    <div class="body" id="body-${q.n}">
+      ${ans}${q.translation ? `<p class="zh">${esc(q.translation)}</p>` : ''}${expl}${why}${evid}${sample}${notes}
+    </div>
+  </article>`;
+}
+
+document.getElementById('main').innerHTML = EXAM.sections.map((s, i) => `
+  <section class="sec" id="sec-${s.id}">
+    <div class="sec-head">
+      <span class="sec-num">${String(i+1).padStart(2,'0')}</span>
+      <h2 class="sec-label">${esc(s.label)}</h2>
+      <span class="sec-score">${esc(s.score || '')}</span>
+    </div>
+    ${s.instruction ? `<p class="sec-inst">${esc(s.instruction)}</p>` : ''}
+    ${s.bank ? `<div class="bank${s.bankWide ? ' wide' : ''}">${Object.keys(s.bank).map(k =>
+      `<div class="bank-i" data-bank="${k}"><span>(${k})</span>${esc(s.bank[k])}</div>`).join('')}</div>` : ''}
+    ${s.groups.map((g, gi) => (g.passage ? renderPassage(g, gi, s.id) : '') + g.questions.map(renderQ).join('')).join('')}
+  </section>`).join('');
+
+const items = [];
+allQ.forEach(q => (q.notes || []).forEach(nt => items.push({ ...nt, n: q.n })));
+document.getElementById('side').innerHTML = `
+  <p class="side-h">Notes</p>
+  <p class="side-t">本卷重點 ${items.length} 則</p>
+  <ul class="card-list">${items.map(nt => `
+    <li class="card-item"><a href="#q-${nt.n}">
+      <span class="jump">第 ${nt.n} 題</span>
+      <span class="term">${esc(nt.term)}</span><span class="pos">${esc(nt.pos || '')}</span>
+      <div class="gloss">${esc(nt.gloss || '')}</div>
+    </a></li>`).join('')}</ul>
+  <p class="side-note">點任一則可跳到出處題目。用瀏覽器列印（Ctrl／⌘ + P）會自動展開全部詳解與中譯，可直接印成講義。</p>`;
+
+document.getElementById('foot').textContent = `共 ${allQ.length} 題 · ${EXAM.footer}`;
+
+function setOpen(card, open) {
+  card.classList.toggle('open', open);
+  const btn = card.querySelector('.reveal');
+  btn.setAttribute('aria-expanded', open);
+  btn.firstChild.nodeValue = open ? '收合詳解' : '看詳解';
+  const n = card.dataset.n;
+  card.querySelectorAll('.hl').forEach(h => h.classList.toggle('on', open));
+  const ev = document.querySelector(`[data-ev="${n}"]`);
+  if (ev) ev.classList.toggle('on', open);
+  const q = findQ(n);
+  if (q && q.answer && q.answerText) {
+    const bi = document.querySelector(`[data-bank="${q.answer}"]`);
+    if (bi) bi.classList.toggle('used', open);
+  }
+  const bl = document.querySelector(`[data-blank="${n}"]`);
+  if (bl) {
+    if (open) {
+      bl.classList.add('filled');
+      bl.innerHTML = `<sup>${n}</sup><span class="hl">${esc(wordOf(q))}</span>`;
+      requestAnimationFrame(() => bl.querySelector('.hl').classList.add('on'));
+    } else {
+      bl.classList.remove('filled');
+      bl.textContent = n;
+    }
+  }
+}
+document.addEventListener('click', e => {
+  const rv = e.target.closest('.reveal');
+  if (rv) { const c = rv.closest('.q'); setOpen(c, !c.classList.contains('open')); return; }
+  const zb = e.target.closest('.zhbtn');
+  if (zb) { zb.classList.toggle('on'); document.getElementById('zh-' + zb.dataset.zh).classList.toggle('on'); return; }
+  const bl = e.target.closest('.blank');
+  if (bl) {
+    const c = document.getElementById('q-' + bl.dataset.blank);
+    if (!c.classList.contains('open')) setOpen(c, true);
+    c.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
+toggleAll.addEventListener('click', () => {
+  const open = toggleAll.textContent === '全部展開';
+  document.querySelectorAll('.q').forEach(c => setOpen(c, open));
+  toggleAll.textContent = open ? '全部收合' : '全部展開';
+});
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('.q').forEach(c => setOpen(c, true));
+  document.querySelectorAll('.zhbox').forEach(b => b.classList.add('on'));
+  toggleAll.textContent = '全部收合';
+});
+</script>
+</body>
+</html>

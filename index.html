@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reading Test 詳解｜Week 1+2: Units 1-8 (Nov.)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E7EBEE; --card:#FDFDFC;
+  --ink:#10202F; --ink-2:#56687A; --ink-3:#7C8B99;
+  --rule:#C6D0D8; --pen:#17457E; --hl:#FFE773; --miss:#A34234;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono','Cascadia Mono',Menlo,Consolas,monospace;
+  --read:'Literata',Georgia,'Times New Roman',serif;
+  --han:'PingFang TC','Microsoft JhengHei','Noto Sans TC',system-ui,sans-serif;
+  --maxw:1180px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--han);font-size:16px;line-height:1.75}
+:focus-visible{outline:2px solid var(--pen);outline-offset:3px;border-radius:2px}
+
+.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule)}
+.top-in{max-width:var(--maxw);margin:0 auto;padding:14px 24px 0}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);margin:0 0 4px}
+.title{font-size:23px;font-weight:600;margin:0;line-height:1.3}
+.meta{font-family:var(--mono);font-size:12px;color:var(--ink-2);margin:4px 0 0;letter-spacing:.04em}
+.bar{display:flex;gap:7px;align-items:center;flex-wrap:wrap;padding:12px 0 11px;margin-top:10px;border-top:1px solid var(--rule)}
+.chip{font-family:var(--mono);font-size:12px;letter-spacing:.04em;border:1px solid var(--rule);background:transparent;color:var(--ink-2);padding:5px 10px;border-radius:999px;cursor:pointer;text-decoration:none;transition:border-color .15s,color .15s,background .15s}
+.chip:hover{border-color:var(--pen);color:var(--pen)}
+.chip.solid{margin-left:auto;border-color:var(--ink);color:var(--ink);font-weight:500}
+.chip.solid:hover{background:var(--ink);color:var(--card)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:28px 24px 96px;display:grid;gap:36px;grid-template-columns:minmax(0,1fr) 288px}
+@media (max-width:1020px){.wrap{grid-template-columns:minmax(0,1fr);gap:44px}}
+
+.sec{margin:0 0 48px;scroll-margin-top:136px}
+.sec-head{display:flex;align-items:baseline;gap:12px;padding-bottom:9px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.sec-num{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--ink-3)}
+.sec-label{font-size:18px;font-weight:600;margin:0}
+.sec-score{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-left:auto}
+.sec-inst{font-size:13.5px;color:var(--ink-2);margin:9px 0 0}
+
+.bank{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:16px 0 0}
+@media (max-width:760px){.bank{grid-template-columns:repeat(2,1fr)}}
+.bank-i{background:var(--card);padding:8px 10px;font-family:var(--read);font-size:14.5px}
+.bank-i span{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-right:5px}
+.bank-i.used{background:#F2F5F6;color:var(--ink-3)}
+
+.passage{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--ink);padding:22px 26px;margin:18px 0 0;font-family:var(--read);font-size:16.5px;line-height:1.95;color:#1a2836}
+.passage p{margin:0 0 1em}
+.passage p:last-child{margin-bottom:0}
+.blank{display:inline-block;min-width:70px;text-align:center;border:0;border-bottom:1.5px solid var(--ink);font-family:var(--mono);font-size:13px;color:var(--pen);cursor:pointer;background:none;padding:0 4px;line-height:1.4}
+.blank:hover{background:rgba(23,69,126,.07)}
+.blank.filled{font-family:var(--read);font-size:16.5px;color:var(--ink);border-bottom-color:transparent;min-width:0}
+.blank sup{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-right:2px}
+.zhbtn{display:block;margin:0 0 18px;background:var(--card);border:1px solid var(--rule);border-top:0;width:100%;text-align:left;padding:8px 26px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--pen);cursor:pointer}
+.zhbtn:hover{color:var(--ink)}
+.zhbtn::after{content:' ▾'}
+.zhbtn.on::after{content:' ▴'}
+.zhbox{display:none;background:#F7F9FA;border:1px solid var(--rule);border-top:0;padding:18px 26px;margin:0 0 18px;font-size:15px;line-height:1.95;color:#22323F}
+.zhbox.on{display:block}
+.zhbox p{margin:0 0 .9em}
+.zhbox p:last-child{margin:0}
+
+.q{background:var(--card);border:1px solid var(--rule);margin:14px 0 0;scroll-margin-top:142px}
+.q-top{padding:16px 22px 14px}
+.q-tag{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.q-n{font-family:var(--mono);font-size:13px;font-weight:600}
+.q-kind{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.prompt{font-size:14.5px;line-height:1.85;color:var(--ink-2);margin:0 0 11px;padding-left:11px;border-left:2px solid var(--rule)}
+.stem{font-family:var(--read);font-size:16.5px;line-height:1.85;margin:0 0 13px;color:#1a2836}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:2px 20px}
+@media (max-width:640px){.opts{grid-template-columns:1fr}}
+.opt{display:flex;gap:9px;font-family:var(--read);font-size:15.5px;line-height:1.6;padding:3px 0;color:#243342}
+.opt-k{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);padding-top:2px;flex:none}
+.reveal{display:block;width:100%;text-align:left;margin-top:14px;background:none;border:0;border-top:1px dashed var(--rule);padding:11px 0 0;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--pen);cursor:pointer}
+.reveal:hover{color:var(--ink)}
+.reveal::after{content:' ▾'}
+.q.open .reveal::after{content:' ▴'}
+.q.open .reveal{color:var(--ink-3)}
+
+.body{display:none;border-top:1px solid var(--rule);background:#F7F9FA;padding:18px 22px 20px}
+.q.open .body{display:block}
+.ans{display:flex;align-items:baseline;gap:10px;margin:0 0 13px;flex-wrap:wrap}
+.ans-k{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--ink-3);flex:none;padding-top:2px}
+.ans-v{font-family:var(--read);font-size:18px;font-weight:600}
+.fills{list-style:none;margin:0 0 13px;padding:0}
+.fill{display:flex;gap:11px;align-items:baseline;padding:7px 0;border-bottom:1px dotted var(--rule)}
+.fill-k{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);flex:none;width:26px}
+.fill-w{font-family:var(--read);font-size:17px;font-weight:600;flex:none}
+.fill-n{font-size:13.5px;color:var(--ink-2);line-height:1.7}
+.zh{font-size:15px;line-height:1.85;margin:0 0 14px;color:#22323F}
+.why{font-size:14.5px;line-height:1.85;margin:0 0 4px;color:#22323F;border-top:1px solid var(--rule);padding-top:12px}
+.lines{margin:0;padding:0;list-style:none;border-top:1px solid var(--rule)}
+.line{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--rule);font-size:14.5px;line-height:1.75;color:var(--ink-2)}
+.line-k{font-family:var(--mono);font-size:12.5px;flex:none;width:28px;color:var(--ink-3);padding-top:2px}
+.line.right{color:var(--ink)}
+.line.right .line-k{color:var(--ink);font-weight:600}
+.line.right .line-k::after{content:'✓';display:block;font-size:12px;line-height:1.3}
+.line.wrong .line-k{color:var(--miss);opacity:.85}
+.line.wrong .line-k::after{content:'✗';display:block;font-size:12px;line-height:1.3}
+.evid{margin:15px 0 0;font-family:var(--read);font-size:14.5px;line-height:1.8;color:var(--ink-2);padding-left:13px;border-left:2px solid var(--hl)}
+.evid span{font-family:var(--han);font-size:11px;letter-spacing:.14em;color:var(--ink-3);display:block;margin-bottom:3px}
+
+.hl{background-image:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 90%,transparent 90%);background-repeat:no-repeat;background-size:0% 100%;transition:background-size .55s cubic-bezier(.2,.75,.3,1);border-radius:1px}
+.hl.on{background-size:100% 100%}
+
+.sample{margin:15px 0 0;border:1px solid var(--rule);border-left:3px solid var(--ink);background:var(--card);padding:16px 20px}
+.sample p:not(.note-h){font-family:var(--read);font-size:15.5px;line-height:1.9;color:#1a2836;margin:0 0 1em}
+.sample p:last-child{margin-bottom:0}
+.bank.wide{grid-template-columns:1fr}
+.bank.wide .bank-i{font-size:15px;line-height:1.7;padding:10px 14px}
+.note{margin:15px 0 0;border:1px solid var(--rule);background:var(--card);padding:13px 16px}
+.note-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 9px}
+.note-i{margin:0;padding:9px 0 0;border-top:1px dotted var(--rule)}
+.note-i:first-of-type{border-top:0;padding-top:0}
+.term{font-family:var(--read);font-size:16px;font-weight:600}
+.pos{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin:0 6px}
+.gloss{font-size:14.5px}
+.ex{font-family:var(--read);font-size:14px;color:var(--ink-2);line-height:1.7;margin:3px 0 0;display:block}
+.ex i{font-family:var(--han);font-style:normal;font-size:13px;color:var(--ink-3);display:block}
+
+.side{position:sticky;top:136px;align-self:start;max-height:calc(100vh - 164px);overflow:auto;padding-right:4px}
+@media (max-width:1020px){.side{position:static;max-height:none;scroll-margin-top:136px}}
+.side-h{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin:0 0 3px}
+.side-t{font-size:16px;font-weight:600;margin:0 0 14px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.card-list{margin:0;padding:0;list-style:none}
+.card-item{border-bottom:1px solid var(--rule);padding:11px 0}
+.card-item a{display:block;text-decoration:none;color:inherit}
+.card-item a:hover .term{background:var(--hl)}
+.jump{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);float:right;padding-top:5px}
+.side-note{font-size:12.5px;color:var(--ink-3);line-height:1.7;margin:16px 0 0}
+.foot{max-width:var(--maxw);margin:0 auto;padding:0 24px 48px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+@media print{
+  body{background:#fff;font-size:10.5pt}
+  .top,.side,.reveal,.foot,.zhbtn{display:none!important}
+  .wrap{display:block;max-width:none;padding:0}
+  .q .body{display:block!important}
+  .zhbox{display:block!important}
+  .q{break-inside:avoid;border-color:#999;margin-bottom:9pt}
+  .passage{break-inside:avoid}
+  .hl{background-size:100% 100%!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <p class="eyebrow" id="brand"></p>
+    <h1 class="title" id="examTitle"></h1>
+    <p class="meta" id="examMeta"></p>
+    <nav class="bar" id="nav"></nav>
+  </div>
+</header>
+
+<div class="wrap"><main id="main"></main><aside class="side" id="side"></aside></div>
+<p class="foot" id="foot"></p>
+
+<script>
+/* ==========================================================================
+   ①  題目與詳解全部寫在下面的 EXAM 物件裡。要改題、加題、修字，只動這裡。
+
+   section（大題）：{ id, label, score, instruction, bank?, groups: [...] }
+   group（同一篇文章的題組）：{ passage?, zh?, questions: [...] }
+       passage 裡寫 __7__ 就會變成可點的空格，數字對應題號。
+       zh 是全文中譯，會做成可展開的按鈕。
+
+   question 依題型三選一：
+     選擇題   { n, kind, stem, options:{A..D}, answer:"B", translation, explain:{A..D}, evidence?, notes? }
+     單一填答 { n, kind, stem, answerText:"prejudice", why, notes? }
+     多格填答 { n, kind, prompt, stem, answers:[{k:"①", w:"字", note:"說明"}], notes? }
+   ========================================================================== */
+const EXAM = {
+  brand: "English Digest Weekly Quiz",
+  title: "Reading Test 詳解｜Week 1+2: Units 1-8 (Nov.)",
+  meta: "Instructor: Howard Chang　·　範圍：ED 雜誌 Nov. Week 1+2",
+  footer: "KGHS English Digest Weekly Quiz｜Nov. Week 1+2 (Units 1-8)",
+  sections: [
+  {
+    id:"cl", label:"一、綜合測驗", score:"48%（第 1-24 題，每題 2%）",
+    groups:[{
+      passage:`In February 2026, YouTuber Logan Paul sold his "Pikachu Illustrator" card for an astonishing US$16.5 million, shattering the world record for a trading card. Surprisingly, the hobby behind this record-breaking sale began not with collectors but with __1__. In the late 19th century, American cigarette makers started inserting illustrated baseball cards into their packs as promotional items to win the loyalty of smokers. Sports fans soon grew obsessed with collecting their favorite players, and what had begun as a sales trick quickly became a national __2__. A century later, trading card games such as Magic: The Gathering and Pokémon gave the hobby a new twist. Cards were no longer simply stored away in albums; __3__, players built strategic decks and battled opponents in international tournaments.
+
+The hobby's recent boom, however, owes much to the COVID-19 pandemic. __4__ at home, people searched for hobbies that could provide both entertainment and social connection. Meanwhile, many adults who grew up with cartoons and card games had entered their 30s and 40s, and with greater spending power, they could finally afford the items they once dreamed of owning. This combination of extra free time and financial freedom caused demand for trading cards to __5__. Professional grading has pushed prices even higher. Companies such as PSA examine every card closely, checking the sharpness of its corners, the clarity of its image, and whether the printing is perfectly centered. Since a perfect grade of 10 is extremely difficult to achieve, a PSA 10 card can __6__ ten times the price of an identical card with minor scratches. A few tiny flaws, in other words, can make the difference between ordinary paper and virtual gold.
+
+Yet many collectors share the __7__ that the true value of cards lies elsewhere. Logan Paul, for one, says the best part of the hobby is its strong sense of community; through collecting, he even made lifelong friends who attended his wedding. As tech entrepreneur Ray Chan put it, adults who pay for these cards are __8__ buying back a cherished part of their childhood. It turns out that these small pieces of cardboard can turn grown-ups back into kids and bring complete strangers together.`,
+      zh:`2026 年 2 月，YouTuber Logan Paul 以驚人的一千六百五十萬美元賣出他那張「畫師皮卡丘」卡，打破了交易卡的世界紀錄。令人意外的是，這場破紀錄交易背後的嗜好，最初並不是從收藏家開始，而是從菸草公司開始的。十九世紀末，美國的香菸製造商開始在菸盒裡夾入印有插畫的棒球卡，作為促銷品來鞏固吸菸者的忠誠度。運動迷很快就著迷於收集自己喜愛的球員，原本只是一種銷售手法的東西，迅速成為一項全國性的休閒嗜好。一個世紀後，《魔法風雲會》與《寶可夢》等集換式卡牌遊戲為這個嗜好帶來了新的轉折。卡片不再只是收進收藏冊裡；取而代之的是，玩家開始組建具策略性的牌組，並在國際賽事中與對手對戰。
+
+然而這個嗜好近年的熱潮，很大一部分要歸因於 COVID-19 疫情。被困在家中的人們開始尋找既能提供娛樂、又能帶來社交連結的嗜好。同時，許多從小看卡通、玩卡牌遊戲長大的成年人已進入三、四十歲，消費能力提升，終於買得起他們兒時夢想擁有的東西。空閒時間變多與財務上的自由兩者結合，使得交易卡的需求暴漲。專業鑑級又把價格推得更高。PSA 等公司會仔細檢查每一張卡，查看卡角是否銳利、圖像是否清晰，以及印刷是否完美居中。由於要拿到滿分十級極為困難，一張 PSA 10 的卡片可以賣到同一張卡但有輕微刮痕者的十倍價格。換句話說，幾個微小的瑕疵，就足以造成一張普通紙片與虛擬黃金之間的差別。
+
+不過許多收藏家都有這樣的共同感受：卡片真正的價值在別處。以 Logan Paul 為例，他說這個嗜好最棒的部分是它強烈的社群感；他甚至因為收藏而結交到出席他婚禮的終生好友。正如科技創業家 Ray Chan 所說，願意為這些卡片付錢的成年人，本質上是在買回自己童年中一段珍貴的部分。原來這些小小的紙板，既能讓大人變回孩子，也能把完全陌生的人聚在一起。`,
+      questions:[
+        { n:1, kind:"名詞片語",
+          stem:"the hobby behind this record-breaking sale began not with collectors but with __________.",
+          options:{A:"tobacco companies 菸草公司",B:"baseball players 棒球球員",C:"cartoon artists 卡通畫家",D:"game designers 遊戲設計師"}, answer:"A",
+          translation:"這場破紀錄交易背後的嗜好，最初並不是從收藏家開始，而是從菸草公司開始的。",
+          explain:{A:"✔ 下一句就是答案：American cigarette makers started inserting illustrated baseball cards into their packs（美國香菸製造商開始在菸盒裡夾入棒球卡）。cigarette makers 換個說法就是 tobacco companies。",B:"✘ baseball players 是卡片上「被印出來的人」，不是發起這件事的人；題幹問的是這個嗜好「從誰開始」，主事者是菸商而非球員。這是本題最容易誤選的選項。",C:"✘ cartoon artists 是卡通畫家，文中第二段才提到卡通（many adults who grew up with cartoons），與十九世紀末的起源無關。",D:"✘ game designers 是遊戲設計師，對應的是一個世紀後才出現的 trading card games（A century later），時間點完全不符。"},
+          notes:[{term:"not A but B", pos:"句型", gloss:"不是 A 而是 B（began not with collectors but with tobacco companies）。注意 A、B 詞性與結構必須對等，此處都是 with＋名詞。", ex:"The problem lies not in the plan but in the timing.", exZh:"問題不在計畫，而在時機。"},{term:"win the loyalty of sb", pos:"片語", gloss:"贏得某人的忠誠（win／earn customer loyalty；brand loyalty 品牌忠誠度）。相關：promotional item 促銷品／insert 夾入、插入。"},{term:"shatter a record", pos:"片語", gloss:"打破紀錄（大幅刷新，語氣比 break a record 更強）。注意 shatter 也出現在第 6 題的誘答。"}]},
+
+        { n:2, kind:"名詞",
+          stem:"what had begun as a sales trick quickly became a national __________.",
+          options:{A:"contention 爭論；論點",B:"milestone 里程碑",C:"pastime 休閒嗜好、消遣",D:"ritual 儀式、例行習俗"}, answer:"C",
+          translation:"原本只是一種銷售手法的東西，迅速成為一項全國性的休閒嗜好。",
+          explain:{C:"✔ a national pastime（全國性的休閒嗜好）是固定搭配，棒球就常被稱為 America's national pastime。前文 Sports fans soon grew obsessed with collecting（運動迷很快著迷於收集）說的正是一種全民消遣，而整段的主題詞 the hobby 也在呼應。",A:"✘ contention 是「爭論、紛爭」（a point of contention 爭議點），但文中收集卡片沒有引起爭議。",B:"✘ milestone 是「里程碑」，指發展過程中的重大階段，不能用來指一項「活動」；而且 a national milestone 無法接在 became 之後說明這個嗜好變成了什麼。",D:"✘ ritual 是「儀式、例行習俗」，強調固定重複的程序（a morning ritual），但收集卡片是興趣而非儀式性行為。"},
+          notes:[{term:"pastime", pos:"n.", gloss:"消遣、休閒嗜好（a favorite pastime／a national pastime）。注意拼法是 pas-time（只有一個 s，不是 passtime）。同義：hobby／recreation／leisure activity。", ex:"Fishing remains the nation's most popular pastime.", exZh:"釣魚仍是這個國家最受歡迎的消遣。"},{term:"what had begun as…", pos:"句型", gloss:"what 引導名詞子句當主詞：What had begun as a sales trick became a pastime.（原本只是…的東西後來變成…）。這是描述轉變的常用句型。"},{term:"grow obsessed with", pos:"片語", gloss:"變得著迷於（be／grow obsessed with sth）。n. obsession 執著、迷戀；grow 在此是「變得」（＝become），後接形容詞。"}]},
+
+        { n:3, kind:"連接副詞",
+          stem:"Cards were no longer simply stored away in albums; __________, players built strategic decks and battled opponents in international tournaments.",
+          options:{A:"besides 此外、再者",B:"instead 反而、取而代之",C:"likewise 同樣地",D:"otherwise 否則；在其他方面"}, answer:"B",
+          translation:"卡片不再只是收進收藏冊裡；取而代之的是，玩家開始組建具策略性的牌組，並在國際賽事中與對手對戰。",
+          explain:{B:"✔ 分號前是否定（no longer simply stored away 不再只是收起來），分號後是取而代之的新做法（組牌組、打比賽），這種「不是 X，而是 Y」的替換關係正是 instead。",A:"✘ besides 是「此外」，表additional 的補充，意思會變成「收起來之外還拿來比賽」，但原文明確說 no longer（不再），是取代而非累加。",C:"✘ likewise 是「同樣地」，表前後相同；但收藏與競技對戰是兩種不同的玩法，並非相同。",D:"✘ otherwise 是「否則」，用來說明不照做會有的後果，與此處的對比替換無關。"},
+          notes:[{term:"instead / instead of", pos:"用法", gloss:"instead 是副詞，單獨使用（He didn't complain; instead, he acted.）／instead of 是介系詞片語，後接名詞或動名詞（instead of complaining）。本題空格前後都是完整句，所以要用副詞 instead。", ex:"The meeting was canceled; instead, we met online.", exZh:"會議取消了，我們改成線上碰面。"},{term:"no longer", pos:"片語", gloss:"不再（放在 be 動詞後或一般動詞前：are no longer available／no longer live here）。同義：not…any longer／not…anymore。"},{term:"store away / deck", pos:"字彙", gloss:"store sth away 把某物收起來存放／a deck 一副牌（build a deck 組牌組；也指甲板、露臺）。相關：tournament 錦標賽／opponent 對手。"}]},
+
+        { n:4, kind:"分詞構句（被動）",
+          stem:"__________ at home, people searched for hobbies that could provide both entertainment and social connection.",
+          options:{A:"Stuck 被困住（過去分詞）",B:"Sticking 黏住、堅持（現在分詞）",C:"Having stuck 已經黏住（完成式主動）",D:"To stick 為了黏住（不定詞）"}, answer:"A",
+          translation:"被困在家中的人們開始尋找既能提供娛樂、又能帶來社交連結的嗜好。",
+          explain:{A:"✔ 主詞是 people，而人是「被」疫情困在家裡，屬被動關係，所以分詞構句要用過去分詞（＝Because they were stuck at home）。be stuck at home 本身就是「被困在家」的固定說法。",B:"✘ Sticking 是現在分詞表主動，意思會變成「人們自己黏著某物」，語意不通；stick 當主動是「黏貼、堅持」（stick to a plan）。",C:"✘ Having stuck 是完成式的主動分詞，同樣把 people 當成施動者，而且 stick 在此沒有可接的受詞。",D:"✘ To stick 是不定詞表目的，意思會變成「為了被困在家而尋找嗜好」，因果完全顛倒。"},
+          notes:[{term:"分詞構句的主動與被動", pos:"句型", gloss:"分詞與主詞的關係決定詞形：主動用 V-ing（Seeing the mess, she sighed.）、被動用 p.p.（Stuck at home, people searched…＝Because they were stuck at home）。判斷方法是把主詞拉過來造句，看它是「做」還是「被做」。", ex:"Trapped in the elevator, the pair waited two hours for help.", exZh:"兩人被困在電梯裡，等了兩小時才有人來救。"},{term:"be stuck", pos:"片語", gloss:"被困住、動彈不得（be stuck at home／in traffic／in a rut 一成不變）；也指「卡住」（The door is stuck.）。注意 stick 三態為 stick-stuck-stuck。本卷第 30 題的 stick around 是同一個字。"},{term:"owe much to", pos:"片語", gloss:"很大程度要歸功於（The boom owes much to the pandemic.）。相關：be attributable to／stem from（第 20 題）。"}]},
+
+        { n:5, kind:"原形動詞",
+          stem:"This combination of extra free time and financial freedom caused demand for trading cards to __________.",
+          options:{A:"blur 使模糊、變模糊",B:"qualify 使具備資格；取得資格",C:"retreat 撤退、後退",D:"skyrocket 暴漲、飛漲"}, answer:"D",
+          translation:"空閒時間變多與財務上的自由兩者結合，使得交易卡的需求暴漲。",
+          explain:{D:"✔ 前文說成年人有了 greater spending power（更強的消費力）又 could finally afford（終於買得起），下一段又說 Professional grading has pushed prices even higher（鑑級把價格推得更高），所以需求的走向是急遽上升，正是 skyrocket。",A:"✘ blur 是「使模糊」（blur the line between A and B），受詞是界線或影像，需求不會變模糊。",B:"✘ qualify 是「取得資格」（qualify for a loan），與需求的增減無關。",C:"✘ retreat 是「撤退、後退」，若需求 retreat 就是下降，與整段的漲價脈絡完全相反。注意 retreat 也出現在本卷第 23 題的誘答。"},
+          notes:[{term:"skyrocket", pos:"v.", gloss:"暴漲、飛漲（Prices／Demand／Costs skyrocketed.）。字面是「沖天炮」。同義：soar／surge／shoot up；反義：plummet／plunge／nosedive 暴跌。", ex:"Rents have skyrocketed over the past three years.", exZh:"過去三年租金暴漲。"},{term:"cause sth to V", pos:"句型", gloss:"導致某事發生（cause demand to skyrocket／cause prices to fall）。注意 cause 後接受詞＋不定詞，不可用 that 子句。同型：allow／enable／force／lead sb to V。"},{term:"spending power", pos:"n.", gloss:"消費能力、購買力（＝purchasing power）。相關：disposable income 可支配所得／afford 買得起（第 6 題的誘答）。"}]},
+
+        { n:6, kind:"原形動詞",
+          stem:"a PSA 10 card can __________ ten times the price of an identical card with minor scratches.",
+          options:{A:"afford 買得起、負擔得起",B:"fetch （商品）賣得（某價錢）",C:"shatter 使粉碎；打破（紀錄）",D:"utilize 利用、運用"}, answer:"B",
+          translation:"一張 PSA 10 的卡片可以賣到同一張卡但有輕微刮痕者的十倍價格。",
+          explain:{B:"✔ fetch 除了「去拿」，在買賣語境中正是「（物品）賣得某價錢」，主詞是商品而非人（The painting fetched $2 million at auction.）。本句主詞 a PSA 10 card 是商品，後接價格 ten times the price，完全吻合。",A:"✘ afford 的主詞必須是「買方（人或機構）」，不能是商品本身；卡片不會「負擔得起」價格。這是本題最關鍵的辨析，而且 afford 剛好出現在上一段（they could finally afford the items），學生容易被牽走。",C:"✘ shatter 是「使粉碎」或「打破紀錄」，受詞是玻璃、紀錄或希望，不能接價格表示賣得多少。",D:"✘ utilize 是「利用」（utilize resources），受詞是可被使用的資源，與價格無關。"},
+          notes:[{term:"fetch", pos:"v.", gloss:"① （商品）賣得（某價錢）（fetch a high price／fetch $500 at auction）② 去拿來（fetch a glass of water）。主詞是「被賣的東西」，這是與 afford 最大的差別。", ex:"The first-edition copy fetched over £10,000.", exZh:"那本初版書賣了超過一萬英鎊。"},{term:"ten times the price of", pos:"用法", gloss:"倍數表達法：倍數＋the＋名詞（price／size／length）＋of。例：three times the size of Taiwan。注意不可寫成 ten times of the price。", ex:"The new model costs twice the price of the old one.", exZh:"新型號的價格是舊型號的兩倍。"},{term:"flaw / scratch", pos:"字彙", gloss:"flaw 瑕疵、缺陷（a fatal flaw 致命缺陷；adj. flawless 完美無瑕）／scratch 刮痕（minor scratches 輕微刮痕）。相關：grading 鑑級／centered 居中的。"}]},
+
+        { n:7, kind:"名詞",
+          stem:"Yet many collectors share the __________ that the true value of cards lies elsewhere.",
+          options:{A:"coincidence 巧合",B:"framework 架構、框架",C:"myth 神話；錯誤的迷思",D:"sentiment 情感、看法"}, answer:"D",
+          translation:"不過許多收藏家都有這樣的共同感受：卡片真正的價值在別處。",
+          explain:{D:"✔ share the sentiment that…（有相同的看法或感受）是標準搭配，而後面 Logan Paul 說最棒的是 community、Ray Chan 說是買回童年，說的都是帶情感的價值判斷，正是 sentiment。",A:"✘ coincidence 是「巧合」，指兩件事偶然同時發生，但「價值在別處」是一種想法，不是巧合。",B:"✘ framework 是「架構、框架」（a legal framework），指制度或理論的結構，不能用 share 加 that 子句表達共同感受。",C:"✘ myth 是「迷思、誤信的說法」，帶有「其實不正確」的語氣；但本段接下來用兩位人物的現身說法來支持這個觀點，作者顯然認同它，不是在指出錯誤。這是本題最強的誘答，必須靠段落立場判斷。"},
+          notes:[{term:"sentiment", pos:"n.", gloss:"情感、情懷、（群體的）看法（share the sentiment that…／public sentiment 民意／anti-war sentiment 反戰情緒）。adj. sentimental 感傷的、念舊的。", ex:"I share the sentiment that smaller classes work better.", exZh:"我也認為小班制效果更好。"},{term:"同位語 that 子句", pos:"句型", gloss:"抽象名詞後可接 that 子句說明內容：the sentiment／belief／fact／idea／news that…。注意此處 that 不可換成 which，因為它不是關係代名詞而是同位語連接詞。"},{term:"lie elsewhere", pos:"片語", gloss:"（價值、原因）在別處（The real problem lies elsewhere.）。v. lie 在於（lie in sth）。注意 lie-lay-lain（位於）與 lay-laid-laid（放置）的區別。"}]},
+
+        { n:8, kind:"副詞",
+          stem:"adults who pay for these cards are __________ buying back a cherished part of their childhood.",
+          options:{A:"compactly 緊密地、精簡地",B:"demonstrably 可明確證實地",C:"essentially 本質上、基本上說來",D:"officially 正式地、官方地"}, answer:"C",
+          translation:"願意為這些卡片付錢的成年人，本質上是在買回自己童年中一段珍貴的部分。",
+          explain:{C:"✔ 這句是在「重新詮釋」表面行為：表面上是買卡片，本質上是買回童年。essentially 正是「說到底、本質上」，用來點出事情真正的意義。",A:"✘ compactly 是「緊密地、精簡地」（compactly arranged），描述空間或文字的密度，與行為的本質無關。",B:"✘ demonstrably 是「可明確證實地」，強調有證據可驗證；但買回童年是一種詮釋而非可量測的事實。注意這個字出現在本卷第二篇文意選填的引文（demonstrably performed by humans），可互相對照。",D:"✘ officially 是「正式地、官方地」，指經官方認可（be officially recognized），與個人的心理動機無關。"},
+          notes:[{term:"essentially", pos:"adv.", gloss:"本質上、說到底（It's essentially the same problem.）。同義：in essence／basically／fundamentally／at heart。n. essence 本質（the essence of sth）；adj. essential 必要的、本質的。", ex:"What he's describing is essentially a subscription model.", exZh:"他描述的其實就是一種訂閱制。"},{term:"as sb put it", pos:"片語", gloss:"正如某人所說（As Ray Chan put it, …／to put it another way 換個說法）。v. put 在此是「表達」。"},{term:"cherished", pos:"adj.", gloss:"珍視的、珍貴的（a cherished memory／possession）。v. cherish 珍惜（cherish the moment）。相關：buy back 買回／cardboard 紙板。"}]}
+      ]
+    },
+    {
+      passage:`Deep beneath the surface of the Atlantic Ocean, a vast system of currents quietly shapes the weather of an entire continent. Known as the Atlantic Meridional Overturning Circulation (AMOC), this __9__ system works like a conveyor belt, carrying warm, salty water northwards and helping maintain Europe's mild climate. In the far north, the water cools, grows heavier, and sinks, which keeps the whole belt moving. Freshwater from Greenland's melting ice, however, is lighter than seawater, so it __10__. As more freshwater pours into the ocean, scientists warn that the circulation could weaken and become less stable. Scientists warn that a complete __11__ of the AMOC could raise sea levels, cool Europe, and trigger droughts.
+
+To prevent such a disaster, two Dutch scientists have proposed a drastic solution: sealing off the Bering Strait, the roughly 80-kilometer waterway between Russia and Alaska. Through this narrow gap, relatively fresh water from the Pacific flows into the Arctic and eventually makes its way to the Atlantic. Using computer models, the researchers found that blocking the strait could, under certain conditions, __12__ a more favorable balance of saltwater and freshwater, thereby strengthening the AMOC. Their plan calls for three enormous dams stretching across the gap. __13__ by 2050, the structures could help prevent disaster. Supporters see the plan as a bold way to buy the planet more time.
+
+__14__, many experts urge caution. The strait is a key route for whales, walruses, and seals that travel between the Pacific and the Arctic. Cutting off this route might harm marine life and __15__ ocean patterns in ways nobody fully understands. Any project this large, they warn, demands careful study, or the cure could turn out to be worse than the disease. Not until scientists fully understand these risks __16__. Until then, the Bering Strait dam will remain a bold idea rather than a real solution.`,
+      zh:`在大西洋海面底下深處，一套龐大的洋流系統靜靜地塑造著一整個大陸的天氣。這套被稱為「大西洋經向翻轉環流」（AMOC）的關鍵系統運作起來像一條輸送帶，把溫暖的鹹水帶往北方，幫助維持歐洲溫和的氣候。在極北地區，海水冷卻、變重並且下沉，而這正是讓整條輸送帶持續運轉的動力。然而，來自格陵蘭融冰的淡水比海水輕，所以它會停留在接近表面的位置。隨著更多淡水注入海洋，科學家警告這套環流可能減弱、變得較不穩定。科學家警告，AMOC 若完全崩潰，可能會使海平面上升、讓歐洲變冷，並引發乾旱。
+
+為了防止這樣的災難，兩位荷蘭科學家提出了一個激烈的解方：把白令海峽封起來——那是俄羅斯與阿拉斯加之間大約八十公里寬的水道。太平洋相對較淡的海水會經由這道狹窄的缺口流入北極，最終流向大西洋。研究人員利用電腦模型發現，封堵這道海峽在某些條件下可以恢復一個較有利的鹹水與淡水平衡，從而強化 AMOC。他們的計畫需要三座橫跨這道缺口的巨型水壩。這些建築若能在 2050 年前建成，或許能幫助避免災難。支持者認為這項計畫是為地球爭取更多時間的大膽做法。
+
+儘管如此，許多專家仍呼籲謹慎。這道海峽是鯨魚、海象與海豹往返太平洋與北極的重要路線。切斷這條路線可能傷害海洋生物，並以沒有人完全理解的方式擾亂海洋的運作模式。他們警告，任何這種規模的工程都需要仔細研究，否則解方可能比問題本身更糟。除非科學家完全理解這些風險，這樣的計畫才會被付諸實行。在那之前，白令海峽水壩仍只會是一個大膽的想法，而不是真正的解決方案。`,
+      questions:[
+        { n:9, kind:"形容詞",
+          stem:"Known as the Atlantic Meridional Overturning Circulation (AMOC), this __________ system works like a conveyor belt, carrying warm, salty water northwards and helping maintain Europe's mild climate.",
+          options:{A:"colonial 殖民的",B:"miniature 微型的、小規模的",C:"prestigious 有聲望的、享譽的",D:"vital 至關重要的；生命的"}, answer:"D",
+          translation:"這套被稱為「大西洋經向翻轉環流」（AMOC）的關鍵系統運作起來像一條輸送帶，把溫暖的鹹水帶往北方，幫助維持歐洲溫和的氣候。",
+          explain:{D:"✔ 第一句已說它 shapes the weather of an entire continent（塑造一整個大陸的天氣），本句又說它 helping maintain Europe's mild climate（幫助維持歐洲溫和氣候），重要性極高，正是 vital（至關重要的）。",A:"✘ colonial 是「殖民的」（colonial rule），屬歷史政治範疇，與洋流系統無關。",B:"✘ miniature 是「微型的」，但文章第一句明說 a vast system of currents（龐大的洋流系統），規模上直接矛盾，這是本題最明顯的反向陷阱。",C:"✘ prestigious 是「有聲望的」，修飾獎項、學校或職位（a prestigious award），不能形容自然系統。"},
+          notes:[{term:"vital", pos:"adj.", gloss:"① 至關重要的（a vital role／be vital to sth／of vital importance）② 生命的、維生的（vital organs 重要器官／vital signs 生命徵象）。adv. vitally；n. vitality 活力。", ex:"Mangroves play a vital role in protecting coastlines.", exZh:"紅樹林在保護海岸線上扮演關鍵角色。"},{term:"Known as…, S + V", pos:"句型", gloss:"過去分詞開頭的分詞構句（＝This system, which is known as the AMOC, works…）。be known as 以…為人所知。對照 be known for 以…而聞名。"},{term:"conveyor belt", pos:"n.", gloss:"輸送帶（work like a conveyor belt）。相關：current 洋流／circulation 環流／salinity 鹽度／sink 下沉。"}]},
+
+        { n:10, kind:"子句（邏輯推論）",
+          stem:"Freshwater from Greenland's melting ice, however, is lighter than seawater, so it __________.",
+          options:{A:"freezes into solid ice 凍成固態的冰",B:"remains near the surface 停留在接近表面的位置",C:"sinks even faster 下沉得更快",D:"turns warmer and saltier 變得更溫暖、更鹹"}, answer:"B",
+          translation:"然而，來自格陵蘭融冰的淡水比海水輕，所以它會停留在接近表面的位置。",
+          explain:{B:"✔ so 前面給了物理條件：is lighter than seawater（比海水輕）。比較輕的液體會浮在上面，所以會留在表層，正是 remains near the surface；這也接得上下一句 the circulation could weaken（環流會減弱），因為前文說整條輸送帶靠「冷卻變重而下沉」來驅動，淡水不下沉就會讓這個引擎失效。",A:"✘ freezes into solid ice 是「結冰」，但密度輕並不代表會結冰；而且文中說的是融冰流出的水，方向相反。",C:"✘ sinks even faster 與 lighter（較輕）直接矛盾，較輕的水不會沉得更快。這是本題最需要留意的陷阱：前一句才提到 the water cools, grows heavier, and sinks，學生容易把 sink 慣性套用過來。",D:"✘ turns warmer and saltier 是「變暖變鹹」，但 freshwater 本身就是淡水，流入海中只會稀釋鹽度，不可能變得更鹹。"},
+          notes:[{term:"密度與浮沉的邏輯", pos:"閱讀技巧", gloss:"這類題不考單字而考因果推論：先找出 so／therefore 前面的條件（lighter than seawater），再選出唯一在物理上成立的結果。四個選項中有兩個與「輕」矛盾（C、D），一個與文意方向相反（A）。", ex:"Oil is lighter than water, so it floats on top.", exZh:"油比水輕，所以浮在上面。"},{term:"freshwater / seawater", pos:"字彙", gloss:"freshwater 淡水（a freshwater lake）／seawater 海水／saltwater 鹹水（第 12 題出現）。相關：melting ice 融冰／pour into 大量注入／dilute 稀釋。"},{term:"grow + 形容詞", pos:"用法", gloss:"grow 作「變得」（grow heavier／grow obsessed／grow less stable），後接形容詞或比較級。同義：become／turn／get。本篇出現三次，是貫穿全文的句型。"}]},
+
+        { n:11, kind:"名詞",
+          stem:"Scientists warn that a complete __________ of the AMOC could raise sea levels, cool Europe, and trigger droughts.",
+          options:{A:"boom 蓬勃發展、暴增",B:"collapse 崩潰、瓦解",C:"milestone 里程碑",D:"tension 緊張、張力"}, answer:"B",
+          translation:"科學家警告，AMOC 若完全崩潰，可能會使海平面上升、讓歐洲變冷，並引發乾旱。",
+          explain:{B:"✔ 空格被 complete（完全的）修飾，後面接的三個後果 raise sea levels, cool Europe, trigger droughts（海平面上升、歐洲變冷、引發乾旱）全是災難，而前一句才說 the circulation could weaken（環流可能減弱），減弱到極致就是「完全崩潰」，正是 collapse。",A:"✘ boom 是「暴增、蓬勃發展」，語氣正面；環流 boom 不會造成乾旱與歐洲降溫。注意 boom 剛好出現在第一篇第二段（The hobby's recent boom），語境完全不同。",C:"✘ milestone 是「里程碑」，指值得紀念的進展，與災難性後果矛盾。",D:"✘ tension 是「緊張、張力」，用於人際或政治關係（ease tension），不能用來描述洋流停止運作。"},
+          notes:[{term:"collapse", pos:"n. / v.", gloss:"崩潰、倒塌（the collapse of the system／economic collapse；a building collapsed）；也指人「昏倒」。注意 a complete／total collapse 是常見搭配。", ex:"Economists fear a complete collapse of the housing market.", exZh:"經濟學家擔心房市會完全崩盤。"},{term:"trigger", pos:"v. / n.", gloss:"引發、觸發（trigger droughts／a reaction／an alarm）／n. 扳機、導火線。注意 trigger 也是第 12 題的誘答，在那裡語意不合。"},{term:"三個動詞並列", pos:"句型", gloss:"could raise…, cool…, and trigger… 三個原形動詞共用助動詞 could，必須詞形一致。閱讀時找出並列結構能快速判斷空格的詞性與語氣。"}]},
+
+        { n:12, kind:"原形動詞",
+          stem:"the researchers found that blocking the strait could, under certain conditions, __________ a more favorable balance of saltwater and freshwater, thereby strengthening the AMOC.",
+          options:{A:"restore 恢復、使回復原狀",B:"seize 奪取、抓住",C:"trigger 引發、觸發",D:"unfold （情節）展開、逐漸呈現"}, answer:"A",
+          translation:"研究人員發現，封堵這道海峽在某些條件下可以恢復一個較有利的鹹水與淡水平衡，從而強化 AMOC。",
+          explain:{A:"✔ 關鍵在 a more favorable balance（較有利的平衡）與句尾 thereby strengthening the AMOC（從而強化 AMOC）：這個平衡本來存在、因淡水注入而被破壞，現在要把它「找回來」，正是 restore（恢復原狀）。",B:"✘ seize 是「奪取、抓住」（seize power／an opportunity），帶有強行取得的意味，平衡不是可以被奪取的東西。",C:"✘ trigger 是「引發」，用於引發負面或突發的事（trigger droughts，正是第 11 題句中的用法）；而且 trigger 強調「啟動新事件」，無法表達「回復原有狀態」。",D:"✘ unfold 是「（情節）展開」，多為不及物或主詞是故事、事件，不能接 balance 當受詞。"},
+          notes:[{term:"restore", pos:"v.", gloss:"恢復、修復（restore balance／order／confidence／a painting；restore sth to its original state）。n. restoration 修復、復原。字首 re-（再）＋ store（儲存、建立）。", ex:"The treaty restored trade relations between the two nations.", exZh:"這項條約恢復了兩國之間的貿易關係。"},{term:"thereby + V-ing", pos:"句型", gloss:"從而、藉此（…, thereby strengthening the AMOC＝and in this way it strengthens the AMOC）。thereby 是副詞，後接動名詞表結果。同類：thus／hence／consequently。"},{term:"favorable", pos:"adj.", gloss:"有利的、良好的（favorable conditions／a favorable balance／a favorable review 好評）。反義 unfavorable。相關：seal off 封堵／strait 海峽／waterway 水道。"}]},
+
+        { n:13, kind:"省略的副詞子句",
+          stem:"__________ by 2050, the structures could help prevent disaster.",
+          options:{A:"Building 建造（現在分詞，主動）",B:"Having built 已經建好（完成式主動）",C:"If built 如果被建成（If＋過去分詞）",D:"Unless built 除非被建成"}, answer:"C",
+          translation:"這些建築若能在 2050 年前建成，或許能幫助避免災難。",
+          explain:{C:"✔ 主詞 the structures（這些建築）是「被」建造，屬被動；而主句用 could help（或許能幫助）表示這是一個有條件的假設，所以要用省略的條件子句 If built（＝If they are built by 2050）。",A:"✘ Building 是現在分詞表主動，意思會變成「這些建築自己在蓋東西」，主受詞關係顛倒。",B:"✘ Having built 同樣是主動，而且完成式表示動作已經完成；但 by 2050 指向未來，時間與語態都不合。",D:"✘ Unless built 是「除非被建成」，語意會變成「除非建好，否則這些建築能避免災難」，邏輯完全顛倒——照原文的意思應該是「建好了才可能避免災難」。"},
+          notes:[{term:"連接詞＋分詞的省略結構", pos:"句型", gloss:"當副詞子句的主詞與主句相同時，可省略主詞與 be 動詞，只留連接詞＋分詞：If built by 2050, …／When asked, he refused.／While waiting, she read.／Although tired, he kept going.。被動用 p.p.、主動用 V-ing。", ex:"If approved, the budget will take effect in July.", exZh:"預算若獲通過，將於七月生效。"},{term:"call for", pos:"片語動詞", gloss:"需要、要求（The plan calls for three dams.／call for an investigation 要求調查）；也指「預報」（The forecast calls for rain.）。"},{term:"buy sb time", pos:"片語", gloss:"為某人爭取時間（buy the planet more time／buy us some time）。相關：drastic 激烈的、極端的／enormous 巨大的／stretch across 橫跨。"}]},
+
+        { n:14, kind:"連接副詞",
+          stem:"__________, many experts urge caution.",
+          options:{A:"Likewise 同樣地",B:"Moreover 此外、而且",C:"Otherwise 否則；在其他方面",D:"Still 儘管如此、然而"}, answer:"D",
+          translation:"儘管如此，許多專家仍呼籲謹慎。",
+          explain:{D:"✔ 上一段最後一句是 Supporters see the plan as a bold way to buy the planet more time（支持者認為這是爭取時間的大膽做法），本段卻是 urge caution（呼籲謹慎）並列出生態風險，兩者立場相反，需要轉折語，正是 Still（儘管如此）。",A:"✘ Likewise 是「同樣地」，表前後相同；但支持與警告是對立的立場，不是同類補充。",B:"✘ Moreover 是「此外」，用來追加同向的論點；若用它，意思會變成專家的謹慎是在支持這項計畫，與段落內容矛盾。",C:"✘ Otherwise 是「否則」，用來說明不照做的後果（Hurry, otherwise we'll be late.），但本段不是在講不做會怎樣，而是在提出反對理由。"},
+          notes:[{term:"Still 當轉折副詞", pos:"用法", gloss:"置句首表「儘管如此、話雖如此」（Still, many experts urge caution.＝Nevertheless／Even so）。注意它與「仍然（still waiting）」的副詞用法不同，靠位置與逗號判斷。同義：Nonetheless／Nevertheless／All the same／That said。", ex:"The risks are small. Still, you should read the fine print.", exZh:"風險不大。話雖如此，你還是該看清楚細則。"},{term:"轉折 vs 遞進", pos:"閱讀技巧", gloss:"判斷連接副詞先比對前後段的「立場」：同向用 Moreover／Furthermore／Likewise／In addition；反向用 However／Still／Nevertheless／On the other hand。本題只要看出支持者與專家的立場相反就能作答。"},{term:"urge caution", pos:"片語", gloss:"呼籲謹慎（urge caution／urge sb to V 力勸某人）。n. caution 謹慎（with caution 謹慎地）；adj. cautious。"}]},
+
+        { n:15, kind:"原形動詞",
+          stem:"Cutting off this route might harm marine life and __________ ocean patterns in ways nobody fully understands.",
+          options:{A:"align 使對齊、使一致",B:"commemorate 紀念、追悼",C:"disrupt 擾亂、打斷",D:"encounter 遭遇、碰到"}, answer:"C",
+          translation:"切斷這條路線可能傷害海洋生物，並以沒有人完全理解的方式擾亂海洋的運作模式。",
+          explain:{C:"✔ 空格與前面的 harm（傷害）以 and 並列，共用助動詞 might，所以必須是同樣帶負面意味的及物動詞；而 in ways nobody fully understands（以沒人完全理解的方式）也在強調後果不可預測，正是 disrupt（擾亂）。",A:"✘ align 是「使對齊、使一致」（align with policy），語意偏正面的協調，與 harm 並列會前後矛盾。",B:"✘ commemorate 是「紀念」（commemorate the victims），用於追悼活動，與海洋運作無關。注意這個字也出現在本卷第 23 題的誘答。",D:"✘ encounter 是「遭遇、碰到」，受詞通常是困難或對象（encounter problems／resistance）；說「遭遇海洋模式」語意不通，而且它不帶「破壞」的意思。"},
+          notes:[{term:"disrupt", pos:"v.", gloss:"擾亂、中斷（disrupt traffic／supply chains／sleep patterns）。n. disruption 中斷、擾亂；adj. disruptive 造成干擾的（也指產業上的「顛覆式的」：a disruptive technology）。", ex:"Heavy snow disrupted flights across the region.", exZh:"大雪擾亂了整個地區的航班。"},{term:"and 並列的語氣一致", pos:"閱讀技巧", gloss:"用 and 連接的兩個動詞，語氣與褒貶通常一致（harm and disrupt 都是負面）。若選了語意正面的字，就會與前半句打架。這是綜合測驗最常用的判斷捷徑。"},{term:"the cure could be worse than the disease", pos:"諺語", gloss:"解方可能比問題本身更糟（文中用來警告過度干預的風險）。相關：cut off 切斷／marine life 海洋生物／walrus 海象。"}]},
+
+        { n:16, kind:"倒裝句（被動）",
+          stem:"Not until scientists fully understand these risks __________.",
+          options:{A:"will such a plan be put into action 這樣的計畫才會被付諸實行（倒裝＋被動）",B:"such a plan will be put into action（未倒裝）",C:"such a plan will put into action（未倒裝且語態錯誤）",D:"will such a plan put into action（倒裝但語態錯誤）"}, answer:"A",
+          translation:"除非科學家完全理解這些風險，這樣的計畫才會被付諸實行。",
+          explain:{A:"✔ 兩個條件同時要滿足。第一，否定副詞片語 Not until… 置於句首，主句必須倒裝（助動詞提到主詞前）；第二，計畫是「被」付諸實行，所以要用被動 be put into action。只有 (A) 同時做到倒裝與被動。",B:"✘ 語態正確（be put into action）但沒有倒裝；Not until 置句首時不能用正常語序。若要用正常語序，必須改寫成 It was not until… that… 的分裂句。",C:"✘ 既沒有倒裝，語態也錯：put 是及物動詞，計畫不會「把自己」付諸實行，缺少 be。",D:"✘ 有倒裝但語態錯誤：will such a plan put 是主動，意思會變成「計畫去實行某物」，而且 put 後面沒有受詞。"},
+          notes:[{term:"Not until… 的兩種寫法", pos:"句型", gloss:"① 倒裝：Not until he arrived did we start.（Not until＋子句或片語置首，主句倒裝）② 分裂句：It was not until he arrived that we started.（that 之後用正常語序）。同類否定倒裝：Hardly had he…／No sooner had he…／Under no circumstances will we…／Little did she know…。", ex:"Not until the results came out did she feel relieved.", exZh:"直到結果出來，她才鬆了一口氣。"},{term:"put sth into action / practice", pos:"片語", gloss:"把…付諸實行（put a plan into action／put theory into practice）。被動為 be put into action。相關：implement 實施／carry out 執行。"},{term:"倒裝題的解法", pos:"閱讀技巧", gloss:"看到句首是否定副詞（Not until／Never／Hardly／No sooner／By no means／Under no circumstances），先確認選項有沒有倒裝；再檢查主詞與動詞是主動還是被動。本題四個選項正好是「倒裝×語態」的四種組合，兩步就能鎖定答案。"}]}
+      ]
+    },
+    {
+      passage:`When people think of sports, images of stadiums, professional athletes, and strict training usually spring to mind. A wave of "emerging sports," however, is quietly changing this picture, and Mölkky, a wooden throwing game from Finland, is one charming example. Standing 3.5 meters away, players take turns throwing a wooden stick at twelve numbered pins. Knocking down a single pin earns the number printed on it, __17__ knocking down several pins earns one point for each fallen pin. The goal is to reach exactly fifty points, and anyone whose score exceeds fifty immediately drops back to twenty-five. Success, therefore, depends not on strength but on strategy and __18__.
+
+Many Taiwanese students have painful memories of dodgeball, as being struck by a hard rubber ball can leave a mark not only on the skin but also on the mind. It was exactly this problem __19__ Dodgebee, another popular emerging sport, was designed to solve. Born in Japan, the sport brings together the classic American flying disc and the familiar rules of dodgeball. Even its name __20__ the two words "dodge" and "Frisbee." Made of nylon cloth and sponge-like foam, the disc causes little discomfort even when it hits a player directly in the face. As a result, anyone, __21__ age or athletic talent, can enjoy the game with a much lower risk of injury. The rules will sound familiar to anyone who has played dodgeball: a player hit by the disc must retreat to the outer field, while catching it cleanly keeps a player safe. Unlike a ball, however, the disc curves, floats, and drops without warning, which makes every throw __22__ and every dodge thrilling.
+
+Thanks to its safety, Dodgebee has spread rapidly through schools in Taiwan. In 2025, Dodge Disc, the sport played with these soft flying discs, gained official recognition from the World Flying Disc Federation. At the same time, more and more Taiwanese communities have begun to __23__ Mölkky, setting up pins in parks and backyards so that children, parents, and grandparents can play together. Neither game existed half a century ago, yet both now draw players of all ages. Clearly, a sport needs no __24__ to win people's hearts. Sometimes, all it takes is one fresh idea.`,
+      zh:`當人們想到運動，腦中浮現的通常是體育場、職業運動員與嚴格的訓練。然而一波「新興運動」正悄悄改變這個印象，而來自芬蘭的木製投擲遊戲 Mölkky 就是一個迷人的例子。玩家站在三點五公尺外，輪流把一支木棒擲向十二支標了號碼的木柱。打倒單獨一支木柱可得該柱上所印的數字，而打倒好幾支則是每倒下一支得一分。目標是正好達到五十分，任何人的分數一超過五十就立刻退回二十五分。因此成功與否不取決於力氣，而取決於策略與準確度。
+
+許多台灣學生對躲避球有痛苦的回憶，因為被硬橡膠球打到，留下的痕跡不只在皮膚上，也在心裡。正是這個問題，是另一項熱門新興運動「躲避盤」當初被設計出來要解決的。這項運動誕生於日本，結合了經典的美式飛盤與大家熟悉的躲避球規則。就連它的名字也源自 dodge（躲避）與 Frisbee（飛盤）這兩個字。這種盤子由尼龍布與海綿般的泡棉製成，即使直接打到臉上也幾乎不會造成不適。因此不論年齡或運動天賦，任何人都能在受傷風險低得多的情況下享受這個遊戲。它的規則對打過躲避球的人來說並不陌生：被盤子擊中的人必須退到外場，而乾淨俐落地接住盤子則能讓玩家保持安全。不過與球不同的是，這種盤子會彎、會飄，還會毫無預警地下墜，這讓每一次投擲都難以預測，每一次閃避都令人心跳加速。
+
+由於安全性高，躲避盤在台灣的校園裡迅速普及。2025 年，以這種軟式飛盤進行的運動 Dodge Disc 獲得世界飛盤總會的正式認可。同時，越來越多台灣社區開始接納 Mölkky，在公園和後院架起木柱，讓孩子、父母與祖父母能一起玩。這兩種遊戲在半個世紀前都還不存在，如今卻都吸引了各個年齡層的玩家。顯然，一項運動不需要悠久的歷史也能贏得人心。有時候，需要的只是一個新鮮的想法。`,
+      questions:[
+        { n:17, kind:"連接詞",
+          stem:"Knocking down a single pin earns the number printed on it, __________ knocking down several pins earns one point for each fallen pin.",
+          options:{A:"because 因為",B:"so that 以便、為了",C:"unless 除非",D:"whereas 而、然而（表對比）"}, answer:"D",
+          translation:"打倒單獨一支木柱可得該柱上所印的數字，而打倒好幾支則是每倒下一支得一分。",
+          explain:{D:"✔ 空格前後是兩種不同情況下的兩種不同計分方式（打倒一支算號碼、打倒多支算支數），屬於並列對比而非因果，正是 whereas（而、然而）。",A:"✘ because 表原因，但「打倒多支每支得一分」不是「打倒一支得號碼」的原因，兩者只是規則上的區別。",B:"✘ so that 表目的（以便），但兩種計分規則之間沒有目的關係。",C:"✘ unless 表條件（除非），意思會變成「除非打倒好幾支，否則得該柱號碼」，但原文是兩條並存的規則，不是互斥的條件。"},
+          notes:[{term:"whereas", pos:"conj.", gloss:"而、然而（表對比）（He likes tea, whereas she prefers coffee.）。同義：while（對比義）。注意它連接兩個對等的事實，不是讓步（讓步用 although）。本卷第二篇文意選填的題幹也多次使用對比結構。", ex:"The north is mountainous, whereas the south is flat.", exZh:"北部多山，而南部則是平原。"},{term:"動名詞當主詞", pos:"句型", gloss:"Knocking down a single pin earns…（動名詞片語當主詞，視為單數，動詞用 earns）。本句前後兩個子句都用這個結構，形成整齊的對比。"},{term:"take turns V-ing", pos:"片語", gloss:"輪流做某事（take turns throwing a stick／take turns to V 也可）。相關：pin 木柱、保齡球瓶／knock down 打倒／exceed 超過。"}]},
+
+        { n:18, kind:"名詞",
+          stem:"Success, therefore, depends not on strength but on strategy and __________.",
+          options:{A:"accuracy 準確度、精確",B:"competition 競爭、比賽",C:"literature 文學",D:"tension 緊張、張力"}, answer:"A",
+          translation:"因此成功與否不取決於力氣，而取決於策略與準確度。",
+          explain:{A:"✔ 前文的規則是關鍵：要 reach exactly fifty points（正好達到五十分），超過就退回二十五分，而計分取決於打倒哪幾支木柱。這表示你必須精準地打中特定目標，正是 accuracy；它也與 not on strength（不靠力氣）形成合理對照。",B:"✘ competition 是「競爭、比賽」，是比賽的場合或行為，不是取勝所需的個人能力。",C:"✘ literature 是「文學」，與投擲遊戲完全無關。",D:"✘ tension 是「緊張」，是心理或物理狀態，不是能帶來成功的技能。"},
+          notes:[{term:"accuracy", pos:"n.", gloss:"準確度、精確（with great accuracy／improve accuracy）。adj. accurate 準確的；adv. accurately。相關：precision 精密度（偏重可重複的細微度）。", ex:"The new sensor measures depth with remarkable accuracy.", exZh:"這個新感測器測量深度的準確度相當驚人。"},{term:"depend not on A but on B", pos:"句型", gloss:"不取決於 A 而取決於 B。注意 not…but 連接的兩部分要結構對等，此處都是 on＋名詞；介系詞 on 必須各自保留。", ex:"Progress depends not on luck but on daily practice.", exZh:"進步不靠運氣，而靠每天的練習。"},{term:"exactly / exceed", pos:"字彙", gloss:"reach exactly fifty points 正好達到五十分／exceed 超過（anyone whose score exceeds fifty）。注意 exceed 是及物動詞，不加 than。"}]},
+
+        { n:19, kind:"分裂句的 that",
+          stem:"It was exactly this problem __________ Dodgebee, another popular emerging sport, was designed to solve.",
+          options:{A:"what 什麼；所…的事物",B:"when 當…時候",C:"that （分裂句用）",D:"whose 誰的"}, answer:"C",
+          translation:"正是這個問題，是另一項熱門新興運動「躲避盤」當初被設計出來要解決的。",
+          explain:{C:"✔ 這是強調句（分裂句）It was… that… 的結構，把被強調的部分 exactly this problem 提到 It was 之後，其餘放在 that 之後。注意句尾 to solve 缺受詞，正好由被強調的 this problem 補上。",A:"✘ what 不能用在分裂句的 It was… 之後；what 自己就帶有先行詞的意思（what he said），而這裡先行詞 this problem 已經出現了。",B:"✘ when 用來強調時間（It was in 2019 that…／It was when he arrived that…），但被強調的 this problem 是「事物」而非時間點。",D:"✘ whose 是所有格關係代名詞（the man whose car was stolen），後面必須接名詞，而且句中沒有「屬於某人的」關係。"},
+          notes:[{term:"It is / was ... that ... 分裂句", pos:"句型", gloss:"用來強調句中某一部分：It was this problem that Dodgebee was designed to solve.（強調受詞）／It was Mary who called.（強調人，可用 who）／It was in 2019 that we met.（強調時間）。被強調的部分搬走後，剩下的句子會留下一個「空缺」，這是辨認分裂句最可靠的線索。", ex:"It was the noise that kept me awake all night.", exZh:"害我整晚睡不著的正是那個噪音。"},{term:"be designed to V", pos:"片語", gloss:"被設計用來做某事（be designed to solve a problem／be intended to V）。相關：emerging 新興的（emerging sports／markets）／dodgeball 躲避球。"},{term:"leave a mark", pos:"片語", gloss:"留下痕跡、留下影響（leave a mark on the skin／on the mind）。文中用這個雙重意義玩了身體與心理的對照：not only on the skin but also on the mind。"}]},
+
+        { n:20, kind:"動詞片語",
+          stem:"Even its name __________ the two words \"dodge\" and \"Frisbee.\"",
+          options:{A:"dates back to 追溯到（某個時間）",B:"stems from 源自、起源於",C:"makes up for 彌補",D:"takes root in 在…紮根"}, answer:"B",
+          translation:"就連它的名字也源自 dodge（躲避）與 Frisbee（飛盤）這兩個字。",
+          explain:{B:"✔ Dodgebee 這個名字是由 dodge 與 Frisbee 兩個字組合而來，描述「某物的來源是…」正是 stem from（源自）；前一句才說這項運動 brings together the classic American flying disc and the familiar rules of dodgeball（結合飛盤與躲避球），名字的由來正好呼應。",A:"✘ dates back to 後面必須接「時間」（date back to the 19th century），不能接兩個單字。",C:"✘ makes up for 是「彌補」（make up for lost time 彌補損失的時間），受詞是損失或不足，語意完全不合。",D:"✘ takes root in 是「在…紮根」，主詞通常是觀念或植物（The idea took root in society），受詞是場域而非來源；注意本卷第 46 題的翻譯題考的正是 take root in 的正確用法，可互相對照。"},
+          notes:[{term:"stem from", pos:"片語動詞", gloss:"源自、起因於（Her confidence stems from years of practice.）。n. stem 莖、字幹。同義：originate from／derive from／arise from／spring from。", ex:"Most of these errors stem from a single faulty assumption.", exZh:"這些錯誤大多源自同一個錯誤假設。"},{term:"表「來源」的片語比較", pos:"整理", gloss:"stem from 源自（原因或出處）／date back to 追溯至（時間）／take root in 在…紮根（開始被接受）／be derived from 衍生自／trace sth back to 把…追溯到（本卷第 28 題考這個字）。四個都談「源頭」，但接的受詞類型不同，這是本題的解題關鍵。"},{term:"portmanteau 混合字", pos:"構詞", gloss:"把兩個字合成一個新字：Dodgebee（dodge＋Frisbee）／brunch（breakfast＋lunch）／smog（smoke＋fog）／podcast（iPod＋broadcast）。"}]},
+
+        { n:21, kind:"介系詞片語",
+          stem:"As a result, anyone, __________ age or athletic talent, can enjoy the game with a much lower risk of injury.",
+          options:{A:"regardless of 不論、不管",B:"instead of 而不是、取代",C:"on behalf of 代表",D:"thanks to 由於、多虧"}, answer:"A",
+          translation:"因此不論年齡或運動天賦，任何人都能在受傷風險低得多的情況下享受這個遊戲。",
+          explain:{A:"✔ 主詞是 anyone（任何人），而前文說這種盤子 causes little discomfort even when it hits a player directly in the face（即使打到臉也幾乎不痛），所以年齡與運動能力都不構成門檻，正是 regardless of（不論）。",B:"✘ instead of 是「而不是」，意思會變成「任何人取代年齡或運動天賦」，語意不通。",C:"✘ on behalf of 是「代表」（speak on behalf of the class），受詞須是被代表的人或團體，年齡不能被代表。",D:"✘ thanks to 是「多虧、由於」，表正面原因；但年齡與運動天賦在此是被排除的條件，不是讓人能享受遊戲的原因。"},
+          notes:[{term:"regardless of", pos:"片語", gloss:"不論、不管（regardless of age／cost／whether…）。同義：irrespective of／no matter（＋wh-）。注意 regardless 也可單獨當副詞（He went regardless.）。", ex:"The clinic treats everyone regardless of ability to pay.", exZh:"這間診所不論付款能力都收治。"},{term:"插入語的逗號", pos:"句型", gloss:"anyone, regardless of age or athletic talent, can enjoy… 兩個逗號之間是插入語，拿掉後主幹仍完整（anyone can enjoy the game）。閱讀長句時先刪掉插入語，主詞與動詞就會浮現。"},{term:"Made of…, S + V", pos:"句型", gloss:"Made of nylon cloth and foam, the disc causes little discomfort.（過去分詞開頭的分詞構句，＝Because it is made of…）。本卷第 4、9、13 題都考過同類結構。"}]},
+
+        { n:22, kind:"形容詞",
+          stem:"Unlike a ball, however, the disc curves, floats, and drops without warning, which makes every throw __________ and every dodge thrilling.",
+          options:{A:"comparable 可比較的、不相上下的",B:"flexible 有彈性的、靈活的",C:"passionate 熱情的",D:"unpredictable 難以預測的"}, answer:"D",
+          translation:"不過與球不同的是，這種盤子會彎、會飄，還會毫無預警地下墜，這讓每一次投擲都難以預測，每一次閃避都令人心跳加速。",
+          explain:{D:"✔ 空格前的三個動詞 curves, floats, and drops without warning（會彎、會飄、毫無預警下墜）就是定義：軌跡無法事先掌握，正是 unpredictable；它也與後半句 thrilling（令人興奮）互相呼應。",A:"✘ comparable 是「可比較的、不相上下的」（be comparable to sth），但本句開頭正是 Unlike a ball（與球不同），語意相反。",B:"✘ flexible 是「有彈性的、靈活的」，可以形容材質或安排（a flexible schedule），但盤子的材質在上一句已另外說明，本句談的是飛行軌跡。",C:"✘ passionate 是「熱情的」，形容人或情感，不能形容一次投擲。"},
+          notes:[{term:"unpredictable", pos:"adj.", gloss:"難以預測的（unpredictable weather／behavior）。v. predict 預測；n. prediction；adj. predictable 可預測的（也可指「老套的」）。", ex:"The disc's flight path is wildly unpredictable.", exZh:"這個盤子的飛行軌跡極難預測。"},{term:"which 指整件事", pos:"句型", gloss:"逗號後的 which 指前面「整個子句」而非單一名詞：…drops without warning, which makes every throw unpredictable（這件事使得…）。此時不可改用 that。", ex:"He arrived an hour late, which annoyed everyone.", exZh:"他遲到一小時，這讓大家都很不滿。"},{term:"make + O + adj.", pos:"句型", gloss:"使某物處於某狀態（makes every throw unpredictable and every dodge thrilling）。本句用一個 makes 帶兩組受詞＋補語，是省略重複動詞的簡潔寫法。"}]},
+
+        { n:23, kind:"原形動詞",
+          stem:"At the same time, more and more Taiwanese communities have begun to __________ Mölkky, setting up pins in parks and backyards so that children, parents, and grandparents can play together.",
+          options:{A:"commemorate 紀念、追悼",B:"dodge 躲避、閃避",C:"embrace 接納、擁抱",D:"retreat 撤退、後退"}, answer:"C",
+          translation:"同時，越來越多台灣社區開始接納 Mölkky，在公園和後院架起木柱，讓孩子、父母與祖父母能一起玩。",
+          explain:{C:"✔ 後面的分詞構句 setting up pins in parks and backyards so that…can play together（架起木柱讓三代一起玩）說明社區正在主動採納這項運動，embrace 除了「擁抱」正是「樂於接受、接納」。",A:"✘ commemorate 是「紀念」，用於追悼人物或事件（commemorate the victims），但 Mölkky 是正在流行的新運動，不是被紀念的對象。",B:"✘ dodge 是「躲避」，雖然它在本篇第二段是運動名稱的來源，但說社區「躲避 Mölkky」與架設場地的行為完全矛盾，這是利用上下文字詞設下的陷阱。",D:"✘ retreat 是「撤退」；社區若撤離這項運動就不會設置場地，語意相反。注意 retreat 在第二段正是躲避盤的規則用語（must retreat to the outer field）。"},
+          notes:[{term:"embrace", pos:"v. / n.", gloss:"① 接納、欣然採用（embrace change／new technology／a lifestyle）② 擁抱（embrace sb）／n. 擁抱。同義：adopt／welcome／take up。", ex:"Older readers have embraced audiobooks far faster than expected.", exZh:"年長讀者接受有聲書的速度遠比預期快。"},{term:"so that 表目的", gloss:"以便、為了（set up pins so that everyone can play）。注意 so that 後常搭配 can／could／may／might；與 so…that（如此…以致於）不同。", pos:"句型"},{term:"同篇字詞當誘答", pos:"閱讀技巧", gloss:"本題的 dodge 與 retreat 都是本篇出現過的字（dodgeball／retreat to the outer field）。綜合測驗常把文章裡的字放進誘答，製造「看起來很熟」的錯覺；判斷時仍須回到空格所在句子的邏輯。"}]},
+
+        { n:24, kind:"名詞片語",
+          stem:"Clearly, a sport needs no __________ to win people's hearts. Sometimes, all it takes is one fresh idea.",
+          options:{A:"careful design 精心的設計",B:"long history 悠久的歷史",C:"simple rules 簡單的規則",D:"wide appeal 廣泛的吸引力"}, answer:"B",
+          translation:"顯然，一項運動不需要悠久的歷史也能贏得人心。有時候，需要的只是一個新鮮的想法。",
+          explain:{B:"✔ 前一句是直接依據：Neither game existed half a century ago, yet both now draw players of all ages（這兩種遊戲半世紀前都還不存在，如今卻吸引各年齡層）。「不存在很久」正好對應「不需要悠久的歷史」，而下一句 all it takes is one fresh idea（只需要一個新點子）也與「歷史」形成新舊對比。",A:"✘ careful design 是「精心設計」，但 Dodgebee 文中明說 was designed to solve 這個問題，而且材質經過考量，文章並未否定設計的必要。",C:"✘ simple rules 是「簡單規則」，但本文花了大量篇幅介紹兩種運動的計分與規則，並把它們當成魅力的一部分，不會說運動「不需要簡單規則」。",D:"✘ wide appeal 是「廣泛的吸引力」，但前一句才說兩者 draw players of all ages（吸引各年齡層），正是具有廣泛吸引力；說不需要它會與文意直接衝突。"},
+          notes:[{term:"needs no + N", pos:"句型", gloss:"不需要…（It needs no introduction. 不必多作介紹／This needs no explanation.）。needs no 比 doesn't need any 更簡潔有力，常用於結論句。", ex:"A good story needs no special effects.", exZh:"一個好故事不需要特效。"},{term:"all it takes is…", pos:"句型", gloss:"所需要的只是…（All it takes is one fresh idea.／All it takes is practice.）。由 It takes＋N＋to V（做某事需要…）變化而來，用 all 強調「只要這樣就夠了」。", ex:"All it takes is ten minutes a day.", exZh:"只需要每天十分鐘。"},{term:"結論句的推論題", pos:"閱讀技巧", gloss:"最後一段的空格多半要往前一句找依據。本題的 Neither game existed half a century ago 幾乎是答案的改寫，而 yet both now draw players of all ages 則同時把 (D) 排除掉——文章承認它有廣泛吸引力，只是否認它需要歷史。"}]}
+      ]
+    }
+    ]
+  },
+
+  {
+    id:"fb1", label:"二、文意選填（第一篇：cop 一字的身世）", score:"第 25-32 題（每題 2%）",
+    bank:{A:"backing 支持、依據",B:"convincing 有說服力的、聽來可信的",C:"fit 合適的人或物（a good fit 很合適）",D:"regarded 被視為（be regarded as）",E:"stands for 代表、是…的縮寫",F:"stuck 留著不走（stick around）",G:"took off 爆紅、迅速竄升（take off）",H:"trace 追溯（trace sth back to）"},
+    bankWide:true,
+    groups:[{
+      passage:`Ask people where the word "cop" comes from, and you will probably hear one of two tidy stories. Some claim that it __25__ "Constable on Patrol," as if the word had begun life as an official abbreviation. Others point to the copper badges that early police officers are said to have worn. Both explanations sound __26__, and like many good stories, they blur the line between fact and fiction. Yet linguists dismiss them as myths, since neither has any solid historical __27__.
+
+The real story is less catchy but far older. Most language authorities __28__ the term back to the Latin capere, meaning "to seize." In the early 1700s, "cop" entered English slang as a verb meaning to catch or arrest someone, and anyone who "copped" others came to be called a copper. It was not until the mid-19th century that copper was shortened to cop in street language. Then, from the early 20th century, the word's popularity __29__ as crime novels and Hollywood films carried it to audiences around the world.
+
+Today, the word has __30__ around for so long that it has become familiar to most English speakers. Short and punchy, it sounds natural in dialogue, which makes it a good __31__ for fast-paced storytelling. Police officer, however, remains the formal term in legal and professional contexts. Although cop has long been __32__ as acceptable by most officers, it may still sound disrespectful depending on tone. Next time a character on screen shouts "Cops!" you will know exactly what that little word has been through.`,
+      zh:`去問別人「cop」這個字是怎麼來的，你大概會聽到兩種說得頭頭是道的故事。有些人聲稱它代表「Constable on Patrol（巡邏中的警員）」，彷彿這個字一開始就是個官方縮寫。另一些人則指向早期警察據說佩戴過的銅製徽章。兩種說法聽起來都很有說服力，而且就像許多精采的故事一樣，它們模糊了事實與虛構之間的界線。然而語言學家認為這兩種說法都是迷思，因為兩者都沒有任何紮實的歷史依據。
+
+真正的來歷比較不吸引人，卻古老得多。大多數語言權威把這個詞追溯到拉丁文的 capere，意思是「抓住」。一七○○年代初期，cop 以動詞的身分進入英語俚語，意思是抓住或逮捕某人，而會去「cop」別人的人就被稱為 copper。直到十九世紀中葉，copper 才在街頭用語中被縮短成 cop。接著從二十世紀初開始，隨著犯罪小說與好萊塢電影把它帶給全世界的觀眾，這個字的流行程度一舉竄升。
+
+如今這個字已經存在了這麼久，大多數英語使用者都對它感到熟悉。它簡短有力，放在對話裡聽起來很自然，這使它成為快節奏敘事的好選擇。不過在法律與專業場合，police officer 仍然是正式用語。雖然 cop 長久以來已被大多數警員視為可以接受的說法，但依語氣不同，它聽起來仍可能帶有不敬之意。下次當螢幕上的角色大喊「Cops!」時，你就會清楚知道這個小小的字曾經歷過什麼。`,
+      questions:[
+        { n:25, kind:"動詞（第三人稱單數）", answer:"E", answerText:"stands for 代表、是…的縮寫",
+          stem:"Some claim that it __________ \"Constable on Patrol,\" as if the word had begun life as an official abbreviation.",
+          translation:"有些人聲稱它代表「Constable on Patrol（巡邏中的警員）」，彷彿這個字一開始就是個官方縮寫。",
+          why:"主詞 it（指 cop 這個字）是第三人稱單數，that 子句需要一個單數動詞。關鍵線索是句尾 as if the word had begun life as an official abbreviation（彷彿它本來是個官方縮寫）：既然講的是縮寫與全稱的對應關係，就要用 stand for（代表、是…的縮寫）。選項中 took off 與 stuck 都是過去式，只有 stands for 的詞形與這裡的現在式敘述相符。",
+          notes:[{term:"stand for", pos:"片語動詞", gloss:"① 代表、是…的縮寫（NASA stands for…）② 主張、支持（stand for equality）③ 容忍（I won't stand for it.）。", ex:"In this chart, PM stands for particulate matter.", exZh:"在這張圖表中，PM 代表懸浮微粒。"},{term:"as if + 過去完成式", pos:"句型", gloss:"as if the word had begun life as…：用過去完成式表示與過去事實相反的假設（其實它並非如此起源）。對照 as if＋現在式則表可能為真。"},{term:"begin life as", pos:"片語", gloss:"最初是…（The building began life as a warehouse. 這棟樓最初是倉庫）。用來講某物的原始身分，與本文追溯字源的主題相合。"}]},
+
+        { n:26, kind:"形容詞", answer:"B", answerText:"convincing 有說服力的、聽來可信的",
+          stem:"Both explanations sound __________, and like many good stories, they blur the line between fact and fiction.",
+          translation:"兩種說法聽起來都很有說服力，而且就像許多精采的故事一樣，它們模糊了事實與虛構之間的界線。",
+          why:"sound 是連綴動詞，後面要接形容詞當主詞補語，選項中的形容詞只有 convincing 與 pronounced（在第二篇的字庫裡），本篇可用的形容詞就是 convincing。語意上也完全吻合：下一句說它們 blur the line between fact and fiction（模糊事實與虛構的界線），正因為聽起來可信才會讓人混淆；而 Yet linguists dismiss them as myths（但語言學家視為迷思）的轉折也要先有「聽來可信」才成立。",
+          notes:[{term:"convincing", pos:"adj.", gloss:"有說服力的（a convincing argument／explanation／excuse；sound convincing 聽起來可信）。v. convince 使信服（convince sb of sth／convince sb to V）。本卷第 47 題的翻譯也要用到這個字。", ex:"Her alibi was not entirely convincing.", exZh:"她的不在場證明並不完全令人信服。"},{term:"連綴動詞＋形容詞", pos:"句型", gloss:"sound／look／seem／feel／taste／smell 後接形容詞而非副詞（sound convincing 不是 convincingly）。文意選填遇到這些動詞，先把字庫裡的形容詞挑出來。"},{term:"blur the line between A and B", pos:"片語", gloss:"模糊 A 與 B 之間的界線（blur the line between work and life）。v. blur 使模糊（也出現在本卷第 5 題的誘答與第 45 題的翻譯）。"}]},
+
+        { n:27, kind:"名詞", answer:"A", answerText:"backing 支持、依據",
+          stem:"Yet linguists dismiss them as myths, since neither has any solid historical __________.",
+          translation:"然而語言學家認為這兩種說法都是迷思，因為兩者都沒有任何紮實的歷史依據。",
+          why:"空格前有形容詞 solid historical（紮實的、歷史上的）修飾，所以要填名詞，而且 has any 之後需要不可數名詞。backing 正是「支持、佐證」之義，與 dismiss them as myths（視為迷思）形成因果：之所以被當成迷思，就是因為缺乏歷史依據。字庫中 trace 雖也可作名詞，但它在第 28 題要當動詞用，而且 historical trace 無法表達「佐證」。",
+          notes:[{term:"backing", pos:"n.", gloss:"支持、後援、依據（financial／political backing；have no historical backing）。v. back 支持（back a candidate／back sb up）。同義：support／evidence／corroboration。", ex:"The theory has little scientific backing.", exZh:"這個理論幾乎沒有科學依據。"},{term:"dismiss sth as sth", pos:"片語", gloss:"把…視為（不值一顧的）…（dismiss them as myths／dismiss the idea as nonsense）。n. dismissal。注意這個句型本身就帶有「否定、不予採信」的語氣。"},{term:"neither 的單數動詞", pos:"用法", gloss:"neither 當代名詞時視為單數（neither has any backing）。對照 Neither A nor B＋動詞與 B 一致（Neither he nor they were there.）。"}]},
+
+        { n:28, kind:"原形動詞", answer:"H", answerText:"trace 追溯（trace sth back to）",
+          stem:"Most language authorities __________ the term back to the Latin capere, meaning \"to seize.\"",
+          translation:"大多數語言權威把這個詞追溯到拉丁文的 capere，意思是「抓住」。",
+          why:"主詞 Most language authorities 是複數，動詞用原形；關鍵結構是空格後的 the term back to…，而 trace sth back to sth（把某物追溯到某來源）正是這個搭配，back to 兩字已經把答案鎖死。語意上也呼應段首 The real story is less catchy but far older（真正的來歷古老得多）。",
+          notes:[{term:"trace sth back to", pos:"片語", gloss:"把…追溯到（trace the word back to Latin／trace one's ancestry back to…）。n. trace 痕跡（traces of blood／without a trace 無影無蹤）。同義：date sth back to／attribute sth to。本卷第 20 題也考過表「來源」的片語群。", ex:"Historians trace the custom back to medieval Europe.", exZh:"史學家把這項習俗追溯到中世紀的歐洲。"},{term:"capere / seize", pos:"字源", gloss:"拉丁字根 cap／cept＝抓取：capture 捕獲／captive 俘虜／accept 接受／except 除外／intercept 攔截／perceive 察覺。cop 正是從這個字根來的。"},{term:"meaning…", pos:"句型", gloss:"分詞片語作補充說明（the Latin capere, meaning \"to seize\"＝which means \"to seize\"）。這種用法常見於解釋專有名詞或外語詞。"}]},
+
+        { n:29, kind:"動詞（過去式）", answer:"G", answerText:"took off 爆紅、迅速竄升（take off）",
+          stem:"Then, from the early 20th century, the word's popularity __________ as crime novels and Hollywood films carried it to audiences around the world.",
+          translation:"接著從二十世紀初開始，隨著犯罪小說與好萊塢電影把它帶給全世界的觀眾，這個字的流行程度一舉竄升。",
+          why:"主詞是 the word's popularity（這個字的流行度），而 as 子句說明原因：crime novels and Hollywood films carried it to audiences around the world（小說與電影把它推向全世界）。流行度在這種推力下的走向是急遽上升，take off 正是「爆紅、迅速竄升」；時態上全段用過去式（entered、was shortened），所以要用 took off。",
+          notes:[{term:"take off", pos:"片語動詞", gloss:"① 爆紅、迅速成長（Her career really took off.／Sales took off.）② 起飛（The plane took off.）③ 脫下（take off your coat）④ 請假（take a day off）。一詞多義，靠主詞判斷。", ex:"The app took off after a single viral video.", exZh:"一支爆紅影片之後，這個應用程式人氣就起飛了。"},{term:"as 表「隨著」", pos:"用法", gloss:"as＋子句可表「隨著…」（as technology advances／as the word spread）。本卷第 46 題的翻譯題也要用這個用法（As ideas about marine protection take root…）。"},{term:"It was not until… that…", pos:"句型", gloss:"本段出現的分裂句：It was not until the mid-19th century that copper was shortened to cop.（直到十九世紀中葉才…）。倒裝寫法見本卷第 16 題。"}]},
+
+        { n:30, kind:"過去分詞", answer:"F", answerText:"stuck 留著不走（stick around）",
+          stem:"Today, the word has __________ around for so long that it has become familiar to most English speakers.",
+          translation:"如今這個字已經存在了這麼久，大多數英語使用者都對它感到熟悉。",
+          why:"空格前是 has，空格後是 around，所以要填過去分詞構成現在完成式，而 stick around（留下來、持續存在）的過去分詞正是 stuck。語意上 for so long that it has become familiar（久到大家都熟悉了）說明這個字一直沒有消失。注意 stick 的三態是 stick-stuck-stuck，現在完成式用 has stuck。",
+          notes:[{term:"stick around", pos:"片語動詞", gloss:"留下來不走、持續存在（The word has stuck around.／Stick around, the show's about to start.）。相關：stick with sth 堅持／stick to a plan 照計畫走／be stuck 被困住（本卷第 4 題）。", ex:"Few slang terms stick around for three centuries.", exZh:"很少有俚語能留存三個世紀。"},{term:"so…that… 的呼應", pos:"句型", gloss:"for so long that…（久到…）。看到 so 就要往後找 that 子句，這個結構常把空格的語意限定得很窄：既然結果是「大家都熟悉」，原因就只能是「存在很久」。"},{term:"punchy", pos:"adj.", gloss:"（文字）簡潔有力的（a punchy slogan／punchy dialogue）。文中 Short and punchy 是形容詞片語置句首，等於 Because it is short and punchy。"}]},
+
+        { n:31, kind:"名詞", answer:"C", answerText:"fit 合適的人或物（a good fit）",
+          stem:"Short and punchy, it sounds natural in dialogue, which makes it a good __________ for fast-paced storytelling.",
+          translation:"它簡短有力，放在對話裡聽起來很自然，這使它成為快節奏敘事的好選擇。",
+          why:"空格前有 a good（一個好的）這個冠詞加形容詞，所以必須是單數可數名詞；a good fit for sth（很適合某用途的人或物）是固定搭配。語意上前半句 Short and punchy…sounds natural in dialogue（簡短有力、對話中自然）正是「適合快節奏敘事」的理由。",
+          notes:[{term:"a good fit", pos:"片語", gloss:"很合適的人或物（She's a good fit for the role.／a perfect fit）。n. fit 也指衣服的合身度（a tight fit）；v. fit 適合、合身。注意這裡是名詞而非形容詞。", ex:"This candidate is a better fit for our team.", exZh:"這位人選更適合我們的團隊。"},{term:"形容詞片語置句首", pos:"句型", gloss:"Short and punchy, it sounds natural…（＝Because it is short and punchy, …）。形容詞片語開頭的省略結構，主詞必須與後面主句相同。本卷第 21 題的 Made of… 是其被動版本。"},{term:"fast-paced", pos:"adj.", gloss:"快節奏的（fast-paced storytelling／a fast-paced thriller）。相關：pace 步調／slow-paced／pacing 節奏安排。"}]},
+
+        { n:32, kind:"過去分詞", answer:"D", answerText:"regarded 被視為（be regarded as）",
+          stem:"Although cop has long been __________ as acceptable by most officers, it may still sound disrespectful depending on tone.",
+          translation:"雖然 cop 長久以來已被大多數警員視為可以接受的說法，但依語氣不同，它聽起來仍可能帶有不敬之意。",
+          why:"空格前是 has long been，空格後是 as acceptable by most officers，需要一個能構成被動並搭配 as 的過去分詞；be regarded as（被視為）正是如此，by most officers 也標出了認定者。語意上 Although（雖然）的讓步與後半句 may still sound disrespectful（仍可能聽來不敬）形成對比，前半句必須是正面的「被接受」。",
+          notes:[{term:"be regarded as", pos:"片語", gloss:"被視為（be regarded as a classic／be widely regarded as the best）。v. regard（regard A as B）；n. regard 尊重、關於（with regard to 關於）。同義：be seen／viewed／considered as（注意 consider 可不加 as）。", ex:"He is generally regarded as the finest translator of his generation.", exZh:"他普遍被視為他那一代最出色的譯者。"},{term:"depending on", pos:"片語", gloss:"依…而定（depending on tone／the weather／who you ask）。v. depend on 取決於（本卷第 18 題的句型 depend not on A but on B）。"},{term:"disrespectful", pos:"adj.", gloss:"不敬的、無禮的（be disrespectful to sb）。n. respect／disrespect；adj. respectful 恭敬的／respectable 體面的／respective 各自的（三字極易混淆）。"}]}
+      ]
+    }]
+  },
+
+  {
+    id:"fb2", label:"二、文意選填（第二篇：AI 與人類創作）", score:"第 33-40 題（每題 2%）",
+    bank:{A:"craft 精心製作（動詞）",B:"late 已故的（the late＋人名）",C:"prompts 提示詞（給 AI 的指令）",D:"pronounced 明顯的、顯著的",E:"star 擔任主角、主演（動詞）",F:"strikes 罷工（名詞複數）",G:"surfaced 浮現、浮上檯面",H:"thorny 棘手的、難處理的"},
+    bankWide:true,
+    groups:[{
+      passage:`In May 2026, the Academy of Motion Picture Arts and Sciences announced that only performances "demonstrably performed by humans with their consent" could compete in its acting categories, and that screenplays had to be "human-authored." The Golden Globes soon issued similar restrictions. The decision did not come out of nowhere. Concerns about AI had already __33__ three years earlier, when writers and actors walked off the job across Hollywood. During those __34__, unions demanded stronger protections against technology that could copy a performer's face or voice.
+
+The controversy, however, has done little to slow AI's expansion. In one recent example, the __35__ Val Kilmer was digitally recreated for an upcoming film with the support of his family. Some viewers found the result moving; others found it unsettling. Meanwhile, a London comedian has created an AI-generated actor intended to __36__ in films around the world. Studios, for their part, are tempted by the lower costs. Critics, on the other hand, see such projects as proof that machines could one day reproduce or replace human performers altogether.
+
+Yet a deeper question remains: what counts as human creativity? Imagine a director who writes hundreds of detailed __37__ and controls every line of dialogue an AI system produces. Were that director to __38__ an entire film this way, would the result still be classified as non-human artistry? Translation offers a useful comparison: Lin King's English version of Taiwan Travelogue is built on another writer's words, yet no one doubts that it is a human achievement. Such a __39__ question has no easy answer. As technology advances, the difference between human and machine authorship will only grow less __40__.`,
+      zh:`2026 年 5 月，美國影藝學院宣布，只有「可明確證實是由人類在其同意之下所完成」的表演才能參與其表演類獎項的競逐，而劇本也必須是「由人類撰寫」的。金球獎不久後也發布了類似的限制。這個決定並非毫無來由。對 AI 的憂慮早在三年前就已浮上檯面，當時全好萊塢的編劇與演員紛紛罷工。在那幾波罷工期間，工會要求對能夠複製表演者臉孔或聲音的技術採取更強的防護措施。
+
+然而這場爭議幾乎沒有減緩 AI 的擴張。最近的一個例子是，已故的 Val Kilmer 在家屬的支持下，被以數位方式重建於一部即將上映的電影中。有些觀眾覺得成果動人，也有人覺得令人不安。同時，一位倫敦喜劇演員創造出一個 AI 生成的演員，打算讓它在世界各地的電影中擔任主角。製片公司這一方則被更低的成本所吸引。另一方面，批評者把這類計畫看成是機器終有一天可能複製甚至完全取代人類表演者的證據。
+
+然而更深一層的問題仍然存在：什麼才算是人類的創造力？想像有一位導演寫下數百條詳細的提示詞，並掌控 AI 系統所產出的每一句對白。假如那位導演以這種方式精心打造出一整部電影，其成果仍會被歸類為非人類的藝術嗎？翻譯提供了一個有用的對照：金翎的《臺灣漫遊錄》英文版建立在另一位作者的文字之上，卻沒有人懷疑它是一項人類的成就。這樣棘手的問題沒有簡單的答案。隨著科技進步，人類與機器創作之間的差別只會變得越來越不明顯。`,
+      questions:[
+        { n:33, kind:"過去分詞", answer:"G", answerText:"surfaced 浮現、浮上檯面",
+          stem:"Concerns about AI had already __________ three years earlier, when writers and actors walked off the job across Hollywood.",
+          translation:"對 AI 的憂慮早在三年前就已浮上檯面，當時全好萊塢的編劇與演員紛紛罷工。",
+          why:"空格前是 had already，所以要填過去分詞構成過去完成式（比前面提到的 2026 年更早）。主詞是 Concerns（憂慮），而 surface 當動詞正是「（問題、消息）浮現、浮上檯面」，不及物，空格後沒有受詞也完全吻合。前一句 The decision did not come out of nowhere（這個決定並非毫無來由）正是在為這個「早已浮現」鋪路。",
+          notes:[{term:"surface", pos:"v. / n.", gloss:"v.（問題、傳聞）浮現、曝光（Concerns surfaced.／New evidence has surfaced.）；也指潛水物「浮出水面」／n. 表面（beneath the surface）。注意本卷第 10 題的 remains near the surface 用的是名詞義。", ex:"Doubts about the data surfaced only after publication.", exZh:"對這批數據的疑慮是在發表之後才浮上檯面。"},{term:"walk off the job", pos:"片語", gloss:"罷工、撂下工作（＝go on strike）。本題與第 34 題是一組：這個片語正是第 34 題 strikes 的同義改寫，閱讀時要把它們連起來。"},{term:"come out of nowhere", pos:"片語", gloss:"突然出現、毫無來由（The decision didn't come out of nowhere.）。用否定式時等於「事出有因」，常用來引出背景說明。"}]},
+
+        { n:34, kind:"名詞（複數）", answer:"F", answerText:"strikes 罷工（名詞複數）",
+          stem:"During those __________, unions demanded stronger protections against technology that could copy a performer's face or voice.",
+          translation:"在那幾波罷工期間，工會要求對能夠複製表演者臉孔或聲音的技術採取更強的防護措施。",
+          why:"空格前有 During those（在那些…期間），所以要填複數名詞，而且 those 必須回指前文已提到的事。前一句的 writers and actors walked off the job（編劇與演員撂下工作）就是罷工，名詞正是 strikes；主詞 unions（工會）也與罷工情境完全相合。",
+          notes:[{term:"strike", pos:"n. / v.", gloss:"n. 罷工（go on strike／a general strike 總罷工／during those strikes）／v. 打擊、罷工、（鐘）敲響（strike-struck-struck）。注意名詞的罷工義常用複數指「數波罷工」。", ex:"The strikes shut down production for two months.", exZh:"這幾波罷工讓生產停擺了兩個月。"},{term:"union", pos:"n.", gloss:"工會（a labor／trade union／union members）；也指「聯盟、結合」。相關：collective bargaining 團體協商／negotiate 協商／walkout 罷工行動。"},{term:"protections against", pos:"片語", gloss:"針對…的防護（stronger protections against sth）。v. protect A from／against B。相關：consent 同意（文中 with their consent）／screenplay 劇本。"}]},
+
+        { n:35, kind:"形容詞", answer:"B", answerText:"late 已故的（the late＋人名）",
+          stem:"In one recent example, the __________ Val Kilmer was digitally recreated for an upcoming film with the support of his family.",
+          translation:"最近的一個例子是，已故的 Val Kilmer 在家屬的支持下，被以數位方式重建於一部即將上映的電影中。",
+          why:"空格在定冠詞 the 與人名之間，要填形容詞。決定性線索有兩個：was digitally recreated（被以數位方式重建）與 with the support of his family（在家屬支持下）——需要家屬代為同意，表示本人已不在世，所以用 the late＋人名（已故的某人）。字庫中另一個形容詞 pronounced 與 thorny 在語意上都無法修飾人名。",
+          notes:[{term:"the late + 人名", pos:"用法", gloss:"已故的某人（the late Val Kilmer／her late husband 她已故的丈夫）。注意這個 late 不是「遲到的」，而且必須加 the 或所有格。對照 lately 最近（副詞）／latter 後者。", ex:"The exhibition honors the late architect's final design.", exZh:"這場展覽向這位已故建築師的最後一件設計致敬。"},{term:"recreate", pos:"v.", gloss:"重建、再現（be digitally recreated／recreate a scene）。注意與 recreation（休閒娛樂）的名詞義分屬兩條線：re-create 重新創造／recreation 消遣。"},{term:"unsettling", pos:"adj.", gloss:"令人不安的（found it unsettling／an unsettling thought）。v. unsettle 使不安。文中 Some viewers found the result moving; others found it unsettling 用 find＋O＋adj. 的句型做正反對照。"}]},
+
+        { n:36, kind:"原形動詞", answer:"E", answerText:"star 擔任主角、主演（動詞）",
+          stem:"Meanwhile, a London comedian has created an AI-generated actor intended to __________ in films around the world.",
+          translation:"同時，一位倫敦喜劇演員創造出一個 AI 生成的演員，打算讓它在世界各地的電影中擔任主角。",
+          why:"空格前是 intended to，所以要填原形動詞；空格後是 in films（在電影中），而 star in a film（主演某部電影）正是這個搭配，介系詞 in 把答案鎖定。語意上主詞是 an AI-generated actor（AI 生成的演員），會做的事自然是「演出、擔綱主角」。",
+          notes:[{term:"star", pos:"v. / n.", gloss:"v. 主演（star in a film／a movie starring Tom Hanks 由…主演的電影）／n. 明星、星星。注意 star in sth（演員主演某片）與 feature／star sb（片子以某人為主角）方向相反。", ex:"She is set to star in the director's next thriller.", exZh:"她將主演這位導演的下一部驚悚片。"},{term:"be intended to V", pos:"片語", gloss:"打算用來做某事（an actor intended to star in films＝which is intended to star）。此處是省略關係代名詞的過去分詞片語修飾 actor。相關：be designed to V（本卷第 19 題）。"},{term:"for one's part / on the other hand", pos:"片語", gloss:"Studios, for their part（製片公司這方面）／Critics, on the other hand（批評者則…）。這兩個片語在本段用來並列兩種對立立場，是閱讀時抓對比的信號詞。"}]},
+
+        { n:37, kind:"名詞（複數）", answer:"C", answerText:"prompts 提示詞（給 AI 的指令）",
+          stem:"Imagine a director who writes hundreds of detailed __________ and controls every line of dialogue an AI system produces.",
+          translation:"想像有一位導演寫下數百條詳細的提示詞，並掌控 AI 系統所產出的每一句對白。",
+          why:"空格前有 hundreds of detailed（數百條詳細的），要填複數名詞；而 writes（寫下）與 controls every line of dialogue an AI system produces（掌控 AI 產出的每句對白）兩個線索合起來，指的正是下給 AI 的文字指令，即 prompts（提示詞）。",
+          notes:[{term:"prompt", pos:"n. / v. / adj.", gloss:"n. 提示詞、提示（write prompts／a writing prompt 寫作題目）／v. 促使、提示（prompt sb to V 促使某人做某事／The incident prompted an inquiry.）／adj. 迅速的、準時的（a prompt reply）。adv. promptly。", ex:"A well-written prompt can completely change the output.", exZh:"一條寫得好的提示詞可以徹底改變產出的結果。"},{term:"省略關係代名詞", pos:"句型", gloss:"every line of dialogue an AI system produces＝every line of dialogue (that) an AI system produces。受格關係代名詞可省略，這類「名詞＋主詞＋動詞」的連續排列是長句閱讀的常見卡點。"},{term:"what counts as…", pos:"句型", gloss:"什麼才算得上是…（what counts as human creativity）。v. count 在此是「算作、具重要性」（Every vote counts.）。相關：be classified as 被歸類為。"}]},
+
+        { n:38, kind:"原形動詞", answer:"A", answerText:"craft 精心製作（動詞）",
+          stem:"Were that director to __________ an entire film this way, would the result still be classified as non-human artistry?",
+          translation:"假如那位導演以這種方式精心打造出一整部電影，其成果仍會被歸類為非人類的藝術嗎？",
+          why:"句首 Were that director to…是倒裝的假設語氣（＝If that director were to…），其中 to 之後要接原形動詞。空格後的受詞是 an entire film（一整部電影），而 craft 當動詞正是「精心打造」，與前一句描述導演逐句掌控的用心完全呼應。字庫中 star 是不及物（star in），不能直接接 an entire film。",
+          notes:[{term:"craft", pos:"v. / n.", gloss:"v. 精心製作（craft a film／a speech／a policy）／n. 手藝、技藝（arts and crafts 工藝／the craft of writing）。adj. crafted（beautifully crafted 精心打造的）；n. craftsman 工匠。", ex:"The script was carefully crafted over three years.", exZh:"這個劇本是花了三年精心打磨出來的。"},{term:"Were S to V", pos:"句型", gloss:"倒裝的假設語氣，表對未來的假設（Were that director to craft a film…＝If that director were to craft a film…）。同型：Were I you…／Should you need help…／Had I known…（對過去的假設，見本卷其他倒裝題）。", ex:"Were the plan to fail, we would lose everything.", exZh:"萬一這個計畫失敗，我們將失去一切。"},{term:"be classified as", pos:"片語", gloss:"被歸類為（be classified as non-human artistry／be classified as endangered）。n. classification 分類。同義：be categorized as／be labeled as。"}]},
+
+        { n:39, kind:"形容詞", answer:"H", answerText:"thorny 棘手的、難處理的",
+          stem:"Such a __________ question has no easy answer.",
+          translation:"這樣棘手的問題沒有簡單的答案。",
+          why:"空格在 Such a 與 question 之間，要填形容詞修飾單數名詞。句尾 has no easy answer（沒有簡單的答案）就是最直接的線索，形容一個難以回答的問題正是 thorny（字面是「多刺的」，引申為棘手）。另一個形容詞 pronounced 在第 40 題有更精確的位置，而且 a pronounced question 不成搭配。",
+          notes:[{term:"thorny", pos:"adj.", gloss:"棘手的、麻煩的（a thorny question／issue／problem）；本義是「多刺的」（a thorny bush）。n. thorn 刺（a thorn in sb's side 令人頭痛的人或事）。同義：tricky／knotty／tough／prickly。", ex:"Funding remains the thorniest issue in the negotiations.", exZh:"經費仍是談判中最棘手的問題。"},{term:"Such a + adj. + N", pos:"句型", gloss:"這樣…的（Such a thorny question has no easy answer.）。注意 such＋a(n)＋形容詞＋單數可數名詞；對照 so＋形容詞（So thorny is the question that…，見本卷第 27 題同類倒裝）。"},{term:"no easy answer", pos:"片語", gloss:"沒有簡單的答案（There is no easy answer.／no easy solution）。這類 no＋形容詞＋名詞的結構語氣比 not easy 更果斷，常用於結論段。"}]},
+
+        { n:40, kind:"形容詞", answer:"D", answerText:"pronounced 明顯的、顯著的",
+          stem:"As technology advances, the difference between human and machine authorship will only grow less __________.",
+          translation:"隨著科技進步，人類與機器創作之間的差別只會變得越來越不明顯。",
+          why:"空格前是 grow less（變得比較不…），需要形容詞，而主詞是 the difference（差別）。形容差別「明顯」用 pronounced（＝noticeable、marked），所以 grow less pronounced 就是「越來越不明顯」。語意上也與前文 machines could one day reproduce or replace human performers（機器終有一天可能取代人類）的趨勢一致：界線越來越模糊。",
+          notes:[{term:"pronounced", pos:"adj.", gloss:"明顯的、顯著的（a pronounced difference／accent／effect；grow less pronounced 變得較不明顯）。注意它與動詞 pronounce（發音、宣告）同形不同義，本卷第 5 題的 blur the line 與此處語意相通。", ex:"The seasonal effect is most pronounced in coastal areas.", exZh:"這種季節性影響在沿海地區最為明顯。"},{term:"grow / become + less + adj.", pos:"句型", gloss:"變得越來越不…（grow less pronounced／become less stable，後者正是本卷第 10 題句中的用法）。對照 grow more＋adj. 變得更…。"},{term:"authorship", pos:"n.", gloss:"著作權、作者身分（human authorship／dispute the authorship of a text）。相關：human-authored 由人類撰寫的（文中引文）／artistry 藝術性／creativity 創造力。"}]}
+      ]
+    }]
+  },
+
+  {
+    id:"rd", label:"三、閱讀測驗", score:"6%（第 41-43 題，每題 2%）",
+    groups:[{
+      passage:`The Christmas Truce of 1914 was a rare moment of kindness during World War I. On the Western Front, which stretched from Belgium to Switzerland, about 100,000 British, German, and French soldiers joined in unofficial ceasefires. For a short time, the violence of war gave way to peace and humanity.
+
+To understand how such an extraordinary pause was possible, it helps to look at the days leading up to Christmas. After the First Battle of Ypres in November 1914, opposing trenches lay so close that soldiers could even call out to one another. On December 7, Pope Benedict XV urged the nations at war to stop fighting during Christmas. Although leaders ignored his appeal, many soldiers found hope in the idea that peace, even for a single day, was possible.
+
+When Christmas Day came, moments of humanity emerged across the front. Soldiers left their trenches to meet in the space between the front lines, known as "no man's land." They exchanged greetings, shared small presents, and even played football, though historians debate whether organized matches truly took place. They also held joint burials, honoring the fallen on both sides. In some places, carols carried across the night air. Germans sang "Silent Night" by candlelight, and soon some British soldiers joined in. For a brief moment, the front lines echoed with harmony instead of gunfire.
+
+The peace, however, was short-lived. Military leaders quickly banned such contact, and some officers were punished for allowing it. The truce was reported in newspapers such as The New York Times, but political leaders dismissed it as merely a local event. Although smaller acts of peace continued into 1915, the heavy losses of major battles like Loos, which cost tens of thousands of lives in days, left soldiers far less willing to fraternize.
+
+Still, the Christmas Truce reminds us that even in the darkest times, people can choose peace. It has been remembered in films, songs, and memorials, including a statue in Staffordshire, UK, and a stone marker in Frelinghien, France. Its message continues to speak to us today, offering hope that humanity can shine even in moments of war.`,
+      zh:`1914 年的聖誕節休戰是第一次世界大戰期間難得的一刻善意。在從比利時延伸到瑞士的西方戰線上，約有十萬名英國、德國與法國士兵加入了非官方的停火。在短暫的一段時間裡，戰爭的暴力讓位給了和平與人性。
+
+要理解這樣一次非凡的停頓為何可能發生，看一看聖誕節前那幾天會很有幫助。1914 年 11 月第一次伊普爾戰役之後，敵對雙方的戰壕相距如此之近，士兵甚至可以互相喊話。12 月 7 日，教宗本篤十五世呼籲交戰各國在聖誕節期間停止戰鬥。雖然領導人忽視了他的呼籲，許多士兵卻從「和平，哪怕只有一天，是有可能的」這個念頭中找到了希望。
+
+聖誕節當天，人性的時刻在整條戰線上浮現。士兵離開戰壕，在前線之間那片被稱為「無人之地」的空間裡會面。他們互道問候、分送小禮物，甚至踢起足球——儘管史學家仍爭論是否真的有過有組織的比賽。他們也舉行了聯合葬禮，一同追悼雙方的陣亡者。在某些地方，聖誕頌歌飄盪在夜空中。德軍在燭光下唱起《平安夜》，不久後一些英軍也跟著加入。在短暫的一刻，前線迴盪的是和聲而不是槍聲。
+
+然而這份和平並不長久。軍事領導人迅速禁止這類接觸，一些軍官還因為放任而受到懲處。這場休戰曾被《紐約時報》等報紙報導，但政治領導人把它貶為只是一起地方性事件。雖然較小規模的和平舉動延續到了 1915 年，但像盧斯戰役這樣的大型戰役在數日內就奪走數萬條性命，慘重的傷亡讓士兵遠遠不再願意與敵人友好相處。
+
+儘管如此，聖誕節休戰提醒我們：即使在最黑暗的時刻，人們依然可以選擇和平。它被記錄在電影、歌曲與紀念物之中，包括英國斯塔福郡的一座雕像，以及法國弗雷林吉安的一塊石碑。它的訊息至今仍對我們說話，帶來一份希望——人性即使在戰爭的時刻也能閃耀。`,
+      questions:[
+        { n:41, kind:"細節題",
+          stem:"What happened during the Christmas Truce of 1914?",
+          options:{A:"Soldiers from warring countries stopped fighting. 交戰國的士兵停止了戰鬥。",B:"Leaders of warring countries agreed to a temporary ceasefire. 交戰國的領導人同意了一次暫時停火。",C:"The pope secured long-term peace in Europe through his negotiations. 教宗透過談判為歐洲爭取到長期和平。",D:"All European countries at war agreed to celebrate Christmas together. 所有參戰的歐洲國家都同意一起慶祝聖誕節。"}, answer:"A",
+          translation:"1914 年的聖誕節休戰期間發生了什麼事？",
+          explain:{A:"✔ 第一段明確寫出 about 100,000 British, German, and French soldiers joined in unofficial ceasefires（約十萬名英、德、法士兵加入非官方停火），第三段更具體描述他們離開戰壕互道問候。停止戰鬥的主體是「士兵」，與選項完全一致。",B:"✘ 錯在主體與性質兩處。第一段說這是 unofficial ceasefires（非官方停火），第二段又說 leaders ignored his appeal（領導人忽視教宗呼籲），第四段還說 Military leaders quickly banned such contact（軍事領導人迅速禁止），可見領導人從未同意。",C:"✘ 第二段只說教宗 urged the nations at war to stop fighting（呼籲交戰國停火），緊接著就是 Although leaders ignored his appeal（但領導人忽視了他的呼籲）。他既沒有進行談判，更沒有爭取到長期和平。",D:"✘ All（所有）過於絕對。文中列出的是 British, German, and French soldiers，而且是士兵自發的行為，並非國家層級的共同決定；第四段的 merely a local event（只是地方性事件）也否定了全面性。"},
+          evidence:"第 1 段：about 100,000 British, German, and French soldiers joined in unofficial ceasefires.",
+          notes:[{term:"細節題的刪除法", pos:"閱讀技巧", gloss:"四個選項常只錯在一個關鍵詞：主體（soldiers 還是 leaders）、性質（unofficial 還是 agreed）、範圍（all 還是 some）、結果（long-term 還是 brief）。回原文比對這四個面向，比通讀全文更快。"},{term:"ceasefire / truce", pos:"字彙", gloss:"ceasefire 停火（declare／violate a ceasefire）／truce 休戰（call a truce）。相關：armistice 停戰協定／warring countries 交戰國／the front 前線。"},{term:"give way to", pos:"片語", gloss:"讓位給、被…取代（The violence gave way to peace.）；也指「讓路、屈服」（give way to pressure）。"}]},
+
+        { n:42, kind:"推論題",
+          stem:"Which of the following is implied in the article?",
+          options:{A:"The Christmas Truce was secretly allowed by military leaders. 聖誕節休戰其實得到軍事領導人的暗中允許。",B:"The Christmas Truce has been widely portrayed in pop culture. 聖誕節休戰已被大眾文化廣泛呈現。",C:"The Christmas Truce spread to other battlefields not long afterwards. 聖誕節休戰不久後就擴散到其他戰場。",D:"The Christmas Truce received little coverage until the end of the war. 聖誕節休戰直到戰爭結束才獲得報導。"}, answer:"B",
+          translation:"下列哪一項是本文所暗示的？",
+          explain:{B:"✔ 最後一段說 It has been remembered in films, songs, and memorials（它被記錄在電影、歌曲與紀念物中），並舉出英國的雕像與法國的石碑。電影與歌曲正屬大眾文化，這是文中雖未直說 pop culture 但可合理推得的結論。",A:"✘ 與文意相反。第四段明說 Military leaders quickly banned such contact, and some officers were punished for allowing it（軍事領導人迅速禁止這類接觸，一些軍官因放任而受罰），完全沒有「暗中允許」的意思。",C:"✘ 第四段只說 smaller acts of peace continued into 1915（較小規模的和平舉動延續到 1915 年），指的是規模縮小而非向外擴散；而且同句接著說慘重傷亡讓士兵更不願意與敵方友好，趨勢是減弱而非蔓延。",D:"✘ 第四段明確寫 The truce was reported in newspapers such as The New York Times（曾被《紐約時報》等報紙報導），可見當時就有報導。文中被淡化處理的是「政治領導人的態度」（dismissed it as merely a local event），不是媒體的報導量。"},
+          evidence:"第 5 段：It has been remembered in films, songs, and memorials, including a statue in Staffordshire, UK, and a stone marker in Frelinghien, France.",
+          notes:[{term:"implied 題的範圍", pos:"閱讀技巧", gloss:"推論題的答案必須「以文中敘述為基礎再走一小步」：films, songs, and memorials → pop culture 是合理的歸納。若一個選項需要補進文中沒有的事實（如「暗中允許」），或與文中句子直接衝突（如「直到戰後才被報導」），就一定是錯的。"},{term:"portray", pos:"v.", gloss:"描繪、刻畫（be portrayed in films／portray sb as a hero）。n. portrayal 描繪。相關：memorial 紀念物／statue 雕像／marker 標記石碑。"},{term:"dismiss sth as sth", pos:"片語", gloss:"把…貶為（dismissed it as merely a local event）。本卷第 27 題的文意選填段落也用了這個句型（dismiss them as myths），兩處可互相對照。"}]},
+
+        { n:43, kind:"字義推測題",
+          stem:"What does the bold word \"fraternize\" in the fourth paragraph most likely mean?",
+          options:{A:"To have fun with friends. 與朋友玩樂。",B:"To fight for noble causes. 為崇高的理想而戰。",C:"To work together closely. 緊密地合作共事。",D:"To be friendly with enemies. 與敵人友好相處。"}, answer:"D",
+          translation:"第四段中的粗體字 fraternize 最可能是什麼意思？",
+          explain:{D:"✔ 把這個字放回上下文：慘重傷亡 left soldiers far less willing to fraternize（讓士兵遠遠不再願意 fraternize）。而前面第三段描述的正是雙方士兵互道問候、交換禮物、合辦葬禮、一起唱歌——與敵方友好往來。第四段開頭又說 Military leaders quickly banned such contact（軍事領導人禁止這類接觸），能被軍方禁止的只可能是「與敵人親近」，所以答案是 D。",A:"✘ 範圍太窄也抓錯對象。文中的互動發生在敵對雙方之間，重點不在「朋友」；而且若只是與自己的朋友玩樂，軍方沒有理由下禁令。",B:"✘ 為崇高理想而戰是「作戰」，但本段的脈絡正好相反：士兵因傷亡慘重而更願意作戰、更不願意友好往來。方向完全顛倒。",C:"✘ 緊密合作適用於同一陣營的隊友或同事；文中雙方是敵人，而且 fraternize 的重點在感情上的親近，不在共同完成工作。這是四個選項中最接近的誘答，差別就在「有沒有敵對關係」這一層。"},
+          evidence:"第 3 段的具體行為（exchanged greetings, shared small presents, held joint burials）＋第 4 段 Military leaders quickly banned such contact 與 left soldiers far less willing to fraternize。",
+          notes:[{term:"fraternize", pos:"v.", gloss:"與（敵人或不該親近的對象）友好往來（fraternize with the enemy／fraternize with students）。n. fraternity 兄弟情誼、（美國大學的）兄弟會。字根 frater＝兄弟：fraternal 手足的／fratricide 殺害手足。", ex:"Officers were forbidden to fraternize with enlisted soldiers.", exZh:"軍官被禁止與士兵過從親近。"},{term:"猜字義三步法", pos:"閱讀技巧", gloss:"① 看該字所在句的邏輯（less willing to＋負面轉折）② 往前找同義改寫（such contact 指第三段的互動）③ 用選項代回原句檢查是否通順。本題的 such contact 就是最關鍵的同義線索。"},{term:"short-lived", pos:"adj.", gloss:"短暫的（The peace was short-lived.）。注意 lived 在此讀 /laɪvd/，源自名詞 life。相關：fleeting 短暫的／brief 短暫的。"}]}
+      ]
+    }]
+  },
+
+  {
+    id:"tr", label:"四、翻譯", score:"14%（第 44-47 題）",
+    groups:[{
+      questions:[
+        { n:44, kind:"中譯英 3%",
+          stem:"當人們只是為了仿效而購買奢侈品時，他們可能會忘記自己是否真的需要這些商品。",
+          answerText:"When people buy luxury items just to follow suit, they may forget whether they truly need them.",
+          why:"三個給分段落：When people buy luxury items ／ just to follow suit ／ they may forget whether they truly need them。「為了仿效」用 follow suit（跟著照做、效法），前面加 just to 表「只是為了」；「是否」用 whether 引導名詞子句當 forget 的受詞（口語雖可用 if，但 whether 在書面與正式測驗中更穩）。注意 them 回指 luxury items，不要寫成 these goods 以外的不一致形式。",
+          notes:[{term:"follow suit", pos:"片語", gloss:"跟著照做、效法（Several airlines soon followed suit.）。源自橋牌「跟出同花色」。同義：do likewise／follow sb's example／jump on the bandwagon（趕流行，偏負面）。", ex:"When one store cut prices, the others quickly followed suit.", exZh:"一家店降價後，其他店很快跟著照做。"},{term:"whether 引導名詞子句", pos:"句型", gloss:"forget／wonder／ask／doubt＋whether＋S＋V（是否）。注意 whether 後面接完整子句，不可寫成 whether to need；而介系詞之後只能用 whether 不能用 if。"},{term:"luxury", pos:"n. / adj.", gloss:"奢侈（品）（luxury items／goods／a luxury car；live in luxury）。adj. luxurious 奢華的（注意兩個形容詞的差別：luxury＋名詞是「奢侈品類的」，luxurious 是「感覺奢華的」）。"}]},
+
+        { n:45, kind:"中譯英 3%",
+          stem:"久而久之，隨機的購買決定可能會模糊個人選擇與社會壓力之間的邊界。",
+          answerText:"Over time, random buying decisions may blur the boundary between personal choice and social pressure.",
+          why:"三個給分段落：Over time, random buying decisions ／ may blur the boundary between ／ personal choice and social pressure。「久而久之」用 Over time；「模糊…的邊界」是 blur the boundary（或 line）between A and B，between 後面必須有 A and B 兩者，缺一不可。注意 personal choice 與 social pressure 都是抽象不可數名詞，前面不加冠詞。",
+          notes:[{term:"blur the line / boundary between A and B", pos:"片語", gloss:"模糊 A 與 B 之間的界線（blur the line between work and leisure）。v. blur 使模糊；adj. blurry 模糊的。本卷第 5 題把 blur 放在誘答，第 26 題所在的段落也用了 blur the line between fact and fiction，三處可互相對照。", ex:"Remote work has blurred the boundary between office and home.", exZh:"遠距工作模糊了辦公室與家之間的界線。"},{term:"over time", pos:"片語", gloss:"久而久之、隨著時間（Over time, habits form.）。對照 in time 及時、終究／on time 準時／at a time 一次（若干）。"},{term:"random", pos:"adj.", gloss:"隨機的、沒有特定原因的（random decisions／at random 隨機地）。adv. randomly；n. randomness。"}]},
+
+        { n:46, kind:"中譯英 4%",
+          stem:"隨著海洋保護的觀念在社會中扎根，越來越多人願意減少塑膠垃圾。",
+          answerText:"As ideas about marine protection take root in society, more and more people are willing to reduce plastic waste.",
+          why:"四個給分段落：As ideas about marine protection ／ take root in society, ／ more and more people are willing to ／ reduce plastic waste。「隨著」用 As 引導副詞子句；「扎根」正是 take root in（注意主詞 ideas 是複數，動詞用原形 take，不加 s）。「越來越多人」用 more and more people，動詞用複數 are；「願意」用 be willing to V；plastic waste 為不可數，不加 s。本卷第 20 題的誘答正是 takes root in，當時因為受詞是兩個單字而不適用，這裡才是它的正確用法。",
+          notes:[{term:"take root in", pos:"片語", gloss:"在…扎根、開始被接受（The idea has taken root in society.）。n. root 根（put down roots 定居／the root of the problem 問題的根源）。同義：become established／gain acceptance／catch on。", ex:"Democratic habits took root slowly in the new republic.", exZh:"民主習慣在這個新共和國裡慢慢扎下了根。"},{term:"be willing to V", pos:"片語", gloss:"願意做某事（be willing to help／be more than willing to V 非常樂意）。n. willingness；反義 be reluctant／unwilling to V。"},{term:"marine", pos:"adj.", gloss:"海洋的（marine protection／marine life 海洋生物／a marine biologist）。相關：maritime 海事的／coastal 沿海的／conservation 保育。本卷第 15 題的題幹也出現 marine life。"}]},
+
+        { n:47, kind:"中譯英 4%",
+          stem:"為了讓這樣的改變持續下去，需要可靠的科學證據來使環境警告更有說服力。",
+          answerText:"To keep this change going, solid scientific evidence is needed to make environmental warnings more convincing.",
+          why:"四個給分段落：To keep this change going, ／ solid scientific evidence is needed ／ to make environmental warnings ／ more convincing。「為了讓…持續下去」用 To keep sth going（keep＋受詞＋V-ing 表「使某事持續」）；「需要」用被動 is needed（evidence 不可數，動詞用單數 is）；「使…更有說服力」用 make＋受詞＋形容詞比較級，即 make warnings more convincing。注意 convincing 正是本卷第 26 題的答案，可以互相印證。",
+          notes:[{term:"keep sth going", pos:"片語", gloss:"使某事持續下去（keep this change going／keep the conversation going／keep the engine running）。句型是 keep＋O＋V-ing。對照 keep sb from V-ing 阻止某人做某事。", ex:"Small grants helped keep the project going for another year.", exZh:"幾筆小額補助讓這個計畫又多撐了一年。"},{term:"solid evidence", pos:"片語", gloss:"紮實可靠的證據（solid scientific evidence／solid proof）。adj. solid 在此是「可靠、確實的」（a solid argument）。本卷第 27 題所在的句子也用了 solid historical backing，可互相對照。"},{term:"make + O + adj.", pos:"句型", gloss:"使某物變成某狀態（make warnings more convincing／make it easier to V）。本卷第 22 題的題幹正是同一句型（makes every throw unpredictable），翻譯與閱讀可一起複習。"}]}
+      ]
+    }]
+  }
+  ]
+};
+
+/* ==========================================================================
+   ②  以下為程式碼，一般情況不需要修改。
+   ========================================================================== */
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const wordOf = q => q.options ? q.options[q.answer] : (q.answerText || '');
+const allQ = [];
+EXAM.sections.forEach(s => s.groups.forEach(g => g.questions.forEach(q => { q.__sid = s.id; allQ.push(q); })));
+const findQ = (n, sid) => allQ.find(q => String(q.n) === String(n) && (sid == null || q.__sid === sid));
+
+document.getElementById('brand').textContent = EXAM.brand;
+document.getElementById('examTitle').textContent = EXAM.title;
+document.getElementById('examMeta').textContent = EXAM.meta;
+
+let noteCount = 0;
+allQ.forEach(q => noteCount += (q.notes || []).length);
+
+const nav = document.getElementById('nav');
+EXAM.sections.forEach(s => {
+  const a = document.createElement('a');
+  a.className = 'chip'; a.href = '#sec-' + s.id; a.textContent = s.label.replace(/^[一二三四五六]、/, m => m);
+  nav.appendChild(a);
+});
+const noteChip = document.createElement('a');
+noteChip.className = 'chip'; noteChip.href = '#side'; noteChip.textContent = '重點表 ' + noteCount;
+nav.appendChild(noteChip);
+const toggleAll = document.createElement('button');
+toggleAll.className = 'chip solid'; toggleAll.textContent = '全部展開';
+nav.appendChild(toggleAll);
+
+function renderPassage(g, i, sid) {
+  let html = esc(g.passage);
+  g.questions.forEach(q => {
+    if (!q.evidence) return;
+    const t = esc(q.evidence);
+    if (html.includes(t)) html = html.replace(t, `<span class="hl ev" data-ev="${q.n}">${t}</span>`);
+  });
+  html = html.replace(/__(\d+)__/g, (m, n) =>
+    `<button class="blank" data-blank="${n}" aria-label="第 ${n} 題空格">${n}</button>`);
+  const body = '<div class="passage">' +
+    html.split(/\n{2,}/).map(p => '<p>' + p.replace(/\n/g, ' ') + '</p>').join('') + '</div>';
+  if (!g.zh) return body;
+  const id = sid + '-' + i;
+  return body +
+    `<button class="zhbtn" data-zh="${id}">全文中譯</button>` +
+    `<div class="zhbox" id="zh-${id}">` +
+      g.zh.split(/\n{2,}/).map(p => '<p>' + esc(p).replace(/\n/g, ' ') + '</p>').join('') +
+    '</div>';
+}
+
+function renderQ(q) {
+  const parts = [];
+  if (q.options) {
+    const ks = Object.keys(q.options);
+    parts.push('<div class="opts">' + ks.map(k =>
+      `<div class="opt"><span class="opt-k">(${k})</span><span>${esc(q.options[k])}</span></div>`).join('') + '</div>');
+  }
+  const head = `<div class="q-tag"><span class="q-n">${String(q.n).padStart(2,'0')}</span><span class="q-kind">${esc(q.kind || '')}</span></div>` +
+    (q.prompt ? `<p class="prompt">${esc(q.prompt)}</p>` : '') +
+    (q.stem ? `<p class="stem">${esc(q.stem).replace(/\n/g,'<br>')}</p>` : '');
+
+  let ans = '';
+  if (q.answers) {
+    ans = '<ul class="fills">' + q.answers.map(a =>
+      `<li class="fill"><span class="fill-k">${esc(a.k)}</span><span class="fill-w hl" data-ansmulti>${esc(a.w)}</span><span class="fill-n">${esc(a.note || '')}</span></li>`).join('') + '</ul>';
+  } else {
+    const label = q.options ? `(${q.answer}) ${esc(wordOf(q))}` :
+      (q.answer ? `(${q.answer}) ${esc(q.answerText)}` : esc(q.answerText));
+    ans = `<p class="ans"><span class="ans-k">答案</span><span class="ans-v hl" data-ans="${q.n}">${label}</span></p>`;
+  }
+
+  let expl = '';
+  if (q.explain) {
+    expl = '<ul class="lines">' + Object.keys(q.options).map(k => {
+      const right = q.multi ? q.multi.includes(k) : k === q.answer;
+      return `<li class="line ${right ? 'right' : 'wrong'}"><span class="line-k">(${k})</span><span>${esc(q.explain[k] || '')}</span></li>`;
+    }).join('') + '</ul>';
+  }
+  const why = q.why ? `<p class="why">${esc(q.why)}</p>` : '';
+  const sample = q.sample ? `<div class="sample"><p class="note-h">參考範文</p>` +
+    q.sample.split(/\n{2,}/).map(p => `<p>${esc(p).replace(/\n/g,' ')}</p>`).join('') + '</div>' : '';
+  const evid = q.evidence ? `<p class="evid"><span>文中依據</span>${esc(q.evidence)}</p>` : '';
+  const notes = (q.notes || []).length ? `<div class="note"><p class="note-h">重點整理</p>` +
+    q.notes.map(nt => `<p class="note-i"><span class="term">${esc(nt.term)}</span><span class="pos">${esc(nt.pos || '')}</span><span class="gloss">${esc(nt.gloss || '')}</span>` +
+      (nt.ex ? `<span class="ex">${esc(nt.ex)}<i>${esc(nt.exZh || '')}</i></span>` : '') + '</p>').join('') + '</div>' : '';
+
+  return `<article class="q" id="q-${q.__sid}-${q.n}" data-n="${q.n}" data-sid="${q.__sid}">
+    <div class="q-top">${head}${parts.join('')}
+      <button class="reveal" aria-expanded="false" aria-controls="body-${q.n}">看詳解</button>
+    </div>
+    <div class="body" id="body-${q.n}">
+      ${ans}${q.translation ? `<p class="zh">${esc(q.translation)}</p>` : ''}${expl}${why}${evid}${sample}${notes}
+    </div>
+  </article>`;
+}
+
+document.getElementById('main').innerHTML = EXAM.sections.map((s, i) => `
+  <section class="sec" id="sec-${s.id}">
+    <div class="sec-head">
+      <span class="sec-num">${String(i+1).padStart(2,'0')}</span>
+      <h2 class="sec-label">${esc(s.label)}</h2>
+      <span class="sec-score">${esc(s.score || '')}</span>
+    </div>
+    ${s.instruction ? `<p class="sec-inst">${esc(s.instruction)}</p>` : ''}
+    ${s.bank ? `<div class="bank${s.bankWide ? ' wide' : ''}">${Object.keys(s.bank).map(k =>
+      `<div class="bank-i" data-bank="${k}"><span>(${k})</span>${esc(s.bank[k])}</div>`).join('')}</div>` : ''}
+    ${s.groups.map((g, gi) => (g.passage ? renderPassage(g, gi, s.id) : '') + g.questions.map(renderQ).join('')).join('')}
+  </section>`).join('');
+
+const items = [];
+allQ.forEach(q => (q.notes || []).forEach(nt => items.push({ ...nt, n: q.n, sid: q.__sid })));
+document.getElementById('side').innerHTML = `
+  <p class="side-h">Notes</p>
+  <p class="side-t">本卷重點 ${items.length} 則</p>
+  <ul class="card-list">${items.map(nt => `
+    <li class="card-item"><a href="#q-${nt.sid}-${nt.n}">
+      <span class="jump">第 ${nt.n} 題</span>
+      <span class="term">${esc(nt.term)}</span><span class="pos">${esc(nt.pos || '')}</span>
+      <div class="gloss">${esc(nt.gloss || '')}</div>
+    </a></li>`).join('')}</ul>
+  <p class="side-note">點任一則可跳到出處題目。用瀏覽器列印（Ctrl／⌘ + P）會自動展開全部詳解與中譯，可直接印成講義。</p>`;
+
+document.getElementById('foot').textContent = `共 ${allQ.length} 題 · ${EXAM.footer}`;
+
+function setOpen(card, open) {
+  card.classList.toggle('open', open);
+  const btn = card.querySelector('.reveal');
+  btn.setAttribute('aria-expanded', open);
+  btn.firstChild.nodeValue = open ? '收合詳解' : '看詳解';
+  const n = card.dataset.n;
+  const sec = card.closest('.sec') || document;
+  card.querySelectorAll('.hl').forEach(h => h.classList.toggle('on', open));
+  const ev = sec.querySelector(`[data-ev="${n}"]`);
+  if (ev) ev.classList.toggle('on', open);
+  const q = findQ(n, card.dataset.sid);
+  if (q && q.answer && q.answerText) {
+    const bi = sec.querySelector(`[data-bank="${q.answer}"]`);
+    if (bi) bi.classList.toggle('used', open);
+  }
+  const bl = sec.querySelector(`[data-blank="${n}"]`);
+  if (bl) {
+    if (open) {
+      bl.classList.add('filled');
+      bl.innerHTML = `<sup>${n}</sup><span class="hl">${esc(wordOf(q))}</span>`;
+      requestAnimationFrame(() => bl.querySelector('.hl').classList.add('on'));
+    } else {
+      bl.classList.remove('filled');
+      bl.textContent = n;
+    }
+  }
+}
+document.addEventListener('click', e => {
+  const rv = e.target.closest('.reveal');
+  if (rv) { const c = rv.closest('.q'); setOpen(c, !c.classList.contains('open')); return; }
+  const zb = e.target.closest('.zhbtn');
+  if (zb) { zb.classList.toggle('on'); document.getElementById('zh-' + zb.dataset.zh).classList.toggle('on'); return; }
+  const bl = e.target.closest('.blank');
+  if (bl) {
+    const c = document.getElementById('q-' + bl.dataset.blank);
+    if (!c.classList.contains('open')) setOpen(c, true);
+    c.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
+toggleAll.addEventListener('click', () => {
+  const open = toggleAll.textContent === '全部展開';
+  document.querySelectorAll('.q').forEach(c => setOpen(c, open));
+  toggleAll.textContent = open ? '全部收合' : '全部展開';
+});
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('.q').forEach(c => setOpen(c, true));
+  document.querySelectorAll('.zhbox').forEach(b => b.classList.add('on'));
+  toggleAll.textContent = '全部收合';
+});
+</script>
+</body>
+</html>

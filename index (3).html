@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reading Test 詳解｜Week 3: Units 9-12 (Nov.) (310)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E7EBEE; --card:#FDFDFC;
+  --ink:#10202F; --ink-2:#56687A; --ink-3:#7C8B99;
+  --rule:#C6D0D8; --pen:#17457E; --hl:#FFE773; --miss:#A34234;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono','Cascadia Mono',Menlo,Consolas,monospace;
+  --read:'Literata',Georgia,'Times New Roman',serif;
+  --han:'PingFang TC','Microsoft JhengHei','Noto Sans TC',system-ui,sans-serif;
+  --maxw:1180px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--han);font-size:16px;line-height:1.75}
+:focus-visible{outline:2px solid var(--pen);outline-offset:3px;border-radius:2px}
+
+.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule)}
+.top-in{max-width:var(--maxw);margin:0 auto;padding:14px 24px 0}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);margin:0 0 4px}
+.title{font-size:23px;font-weight:600;margin:0;line-height:1.3}
+.meta{font-family:var(--mono);font-size:12px;color:var(--ink-2);margin:4px 0 0;letter-spacing:.04em}
+.bar{display:flex;gap:7px;align-items:center;flex-wrap:wrap;padding:12px 0 11px;margin-top:10px;border-top:1px solid var(--rule)}
+.chip{font-family:var(--mono);font-size:12px;letter-spacing:.04em;border:1px solid var(--rule);background:transparent;color:var(--ink-2);padding:5px 10px;border-radius:999px;cursor:pointer;text-decoration:none;transition:border-color .15s,color .15s,background .15s}
+.chip:hover{border-color:var(--pen);color:var(--pen)}
+.chip.solid{margin-left:auto;border-color:var(--ink);color:var(--ink);font-weight:500}
+.chip.solid:hover{background:var(--ink);color:var(--card)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:28px 24px 96px;display:grid;gap:36px;grid-template-columns:minmax(0,1fr) 288px}
+@media (max-width:1020px){.wrap{grid-template-columns:minmax(0,1fr);gap:44px}}
+
+.sec{margin:0 0 48px;scroll-margin-top:136px}
+.sec-head{display:flex;align-items:baseline;gap:12px;padding-bottom:9px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.sec-num{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--ink-3)}
+.sec-label{font-size:18px;font-weight:600;margin:0}
+.sec-score{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-left:auto}
+.sec-inst{font-size:13.5px;color:var(--ink-2);margin:9px 0 0}
+
+.bank{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:16px 0 0}
+@media (max-width:760px){.bank{grid-template-columns:repeat(2,1fr)}}
+.bank-i{background:var(--card);padding:8px 10px;font-family:var(--read);font-size:14.5px}
+.bank-i span{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-right:5px}
+.bank-i.used{background:#F2F5F6;color:var(--ink-3)}
+
+.passage{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--ink);padding:22px 26px;margin:18px 0 0;font-family:var(--read);font-size:16.5px;line-height:1.95;color:#1a2836}
+.passage p{margin:0 0 1em}
+.passage p:last-child{margin-bottom:0}
+.blank{display:inline-block;min-width:70px;text-align:center;border:0;border-bottom:1.5px solid var(--ink);font-family:var(--mono);font-size:13px;color:var(--pen);cursor:pointer;background:none;padding:0 4px;line-height:1.4}
+.blank:hover{background:rgba(23,69,126,.07)}
+.blank.filled{font-family:var(--read);font-size:16.5px;color:var(--ink);border-bottom-color:transparent;min-width:0}
+.blank sup{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-right:2px}
+.zhbtn{display:block;margin:0 0 18px;background:var(--card);border:1px solid var(--rule);border-top:0;width:100%;text-align:left;padding:8px 26px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--pen);cursor:pointer}
+.zhbtn:hover{color:var(--ink)}
+.zhbtn::after{content:' ▾'}
+.zhbtn.on::after{content:' ▴'}
+.zhbox{display:none;background:#F7F9FA;border:1px solid var(--rule);border-top:0;padding:18px 26px;margin:0 0 18px;font-size:15px;line-height:1.95;color:#22323F}
+.zhbox.on{display:block}
+.zhbox p{margin:0 0 .9em}
+.zhbox p:last-child{margin:0}
+
+.q{background:var(--card);border:1px solid var(--rule);margin:14px 0 0;scroll-margin-top:142px}
+.q-top{padding:16px 22px 14px}
+.q-tag{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.q-n{font-family:var(--mono);font-size:13px;font-weight:600}
+.q-kind{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.prompt{font-size:14.5px;line-height:1.85;color:var(--ink-2);margin:0 0 11px;padding-left:11px;border-left:2px solid var(--rule)}
+.stem{font-family:var(--read);font-size:16.5px;line-height:1.85;margin:0 0 13px;color:#1a2836}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:2px 20px}
+@media (max-width:640px){.opts{grid-template-columns:1fr}}
+.opt{display:flex;gap:9px;font-family:var(--read);font-size:15.5px;line-height:1.6;padding:3px 0;color:#243342}
+.opt-k{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);padding-top:2px;flex:none}
+.reveal{display:block;width:100%;text-align:left;margin-top:14px;background:none;border:0;border-top:1px dashed var(--rule);padding:11px 0 0;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--pen);cursor:pointer}
+.reveal:hover{color:var(--ink)}
+.reveal::after{content:' ▾'}
+.q.open .reveal::after{content:' ▴'}
+.q.open .reveal{color:var(--ink-3)}
+
+.body{display:none;border-top:1px solid var(--rule);background:#F7F9FA;padding:18px 22px 20px}
+.q.open .body{display:block}
+.ans{display:flex;align-items:baseline;gap:10px;margin:0 0 13px;flex-wrap:wrap}
+.ans-k{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--ink-3);flex:none;padding-top:2px}
+.ans-v{font-family:var(--read);font-size:18px;font-weight:600}
+.fills{list-style:none;margin:0 0 13px;padding:0}
+.fill{display:flex;gap:11px;align-items:baseline;padding:7px 0;border-bottom:1px dotted var(--rule)}
+.fill-k{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);flex:none;width:26px}
+.fill-w{font-family:var(--read);font-size:17px;font-weight:600;flex:none}
+.fill-n{font-size:13.5px;color:var(--ink-2);line-height:1.7}
+.zh{font-size:15px;line-height:1.85;margin:0 0 14px;color:#22323F}
+.why{font-size:14.5px;line-height:1.85;margin:0 0 4px;color:#22323F;border-top:1px solid var(--rule);padding-top:12px}
+.lines{margin:0;padding:0;list-style:none;border-top:1px solid var(--rule)}
+.line{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--rule);font-size:14.5px;line-height:1.75;color:var(--ink-2)}
+.line-k{font-family:var(--mono);font-size:12.5px;flex:none;width:28px;color:var(--ink-3);padding-top:2px}
+.line.right{color:var(--ink)}
+.line.right .line-k{color:var(--ink);font-weight:600}
+.line.right .line-k::after{content:'✓';display:block;font-size:12px;line-height:1.3}
+.line.wrong .line-k{color:var(--miss);opacity:.85}
+.line.wrong .line-k::after{content:'✗';display:block;font-size:12px;line-height:1.3}
+.evid{margin:15px 0 0;font-family:var(--read);font-size:14.5px;line-height:1.8;color:var(--ink-2);padding-left:13px;border-left:2px solid var(--hl)}
+.evid span{font-family:var(--han);font-size:11px;letter-spacing:.14em;color:var(--ink-3);display:block;margin-bottom:3px}
+
+.hl{background-image:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 90%,transparent 90%);background-repeat:no-repeat;background-size:0% 100%;transition:background-size .55s cubic-bezier(.2,.75,.3,1);border-radius:1px}
+.hl.on{background-size:100% 100%}
+
+.sample{margin:15px 0 0;border:1px solid var(--rule);border-left:3px solid var(--ink);background:var(--card);padding:16px 20px}
+.sample p:not(.note-h){font-family:var(--read);font-size:15.5px;line-height:1.9;color:#1a2836;margin:0 0 1em}
+.sample p:last-child{margin-bottom:0}
+.bank.wide{grid-template-columns:1fr}
+.bank.wide .bank-i{font-size:15px;line-height:1.7;padding:10px 14px}
+.note{margin:15px 0 0;border:1px solid var(--rule);background:var(--card);padding:13px 16px}
+.note-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 9px}
+.note-i{margin:0;padding:9px 0 0;border-top:1px dotted var(--rule)}
+.note-i:first-of-type{border-top:0;padding-top:0}
+.term{font-family:var(--read);font-size:16px;font-weight:600}
+.pos{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin:0 6px}
+.gloss{font-size:14.5px}
+.ex{font-family:var(--read);font-size:14px;color:var(--ink-2);line-height:1.7;margin:3px 0 0;display:block}
+.ex i{font-family:var(--han);font-style:normal;font-size:13px;color:var(--ink-3);display:block}
+
+.side{position:sticky;top:136px;align-self:start;max-height:calc(100vh - 164px);overflow:auto;padding-right:4px}
+@media (max-width:1020px){.side{position:static;max-height:none;scroll-margin-top:136px}}
+.side-h{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin:0 0 3px}
+.side-t{font-size:16px;font-weight:600;margin:0 0 14px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.card-list{margin:0;padding:0;list-style:none}
+.card-item{border-bottom:1px solid var(--rule);padding:11px 0}
+.card-item a{display:block;text-decoration:none;color:inherit}
+.card-item a:hover .term{background:var(--hl)}
+.jump{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);float:right;padding-top:5px}
+.side-note{font-size:12.5px;color:var(--ink-3);line-height:1.7;margin:16px 0 0}
+.foot{max-width:var(--maxw);margin:0 auto;padding:0 24px 48px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+@media print{
+  body{background:#fff;font-size:10.5pt}
+  .top,.side,.reveal,.foot,.zhbtn{display:none!important}
+  .wrap{display:block;max-width:none;padding:0}
+  .q .body{display:block!important}
+  .zhbox{display:block!important}
+  .q{break-inside:avoid;border-color:#999;margin-bottom:9pt}
+  .passage{break-inside:avoid}
+  .hl{background-size:100% 100%!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <p class="eyebrow" id="brand"></p>
+    <h1 class="title" id="examTitle"></h1>
+    <p class="meta" id="examMeta"></p>
+    <nav class="bar" id="nav"></nav>
+  </div>
+</header>
+
+<div class="wrap"><main id="main"></main><aside class="side" id="side"></aside></div>
+<p class="foot" id="foot"></p>
+
+<script>
+/* ==========================================================================
+   ①  題目與詳解全部寫在下面的 EXAM 物件裡。要改題、加題、修字，只動這裡。
+
+   section（大題）：{ id, label, score, instruction, bank?, groups: [...] }
+   group（同一篇文章的題組）：{ passage?, zh?, questions: [...] }
+       passage 裡寫 __7__ 就會變成可點的空格，數字對應題號。
+       zh 是全文中譯，會做成可展開的按鈕。
+
+   question 依題型三選一：
+     選擇題   { n, kind, stem, options:{A..D}, answer:"B", translation, explain:{A..D}, evidence?, notes? }
+     單一填答 { n, kind, stem, answerText:"prejudice", why, notes? }
+     多格填答 { n, kind, prompt, stem, answers:[{k:"①", w:"字", note:"說明"}], notes? }
+   ========================================================================== */
+const EXAM = {
+  brand: "English Digest Weekly Quiz",
+  title: "Reading Test 詳解｜Week 3: Units 9-12 (Nov.) (Class 310)",
+  meta: "Instructor: Howard Chang　·　範圍：ED 雜誌 Nov. Week 3",
+  footer: "KGHS English Digest Weekly Quiz｜Nov. Week 3 (Units 9-12) · Class 310",
+  sections: [
+  {
+    id:"cl", label:"一、綜合測驗", score:"48%（第 1-24 題，每題 2%）",
+    groups:[{
+      passage:`Every November 19, the United Nations (UN) marks World Toilet Day, an occasion whose name rarely fails to draw a few giggles. Behind the jokes, however, lies a crisis that is anything but funny: around 3.4 billion people still live without safely managed sanitation, __1__ have no choice but to relieve themselves in the open. For those of us who take a flushing toilet for granted, such a reality is all but impossible to imagine. In fact, so neglected is sanitation that the UN reported in 2013 that more people worldwide had access to mobile phones than __2__. The human cost is staggering: each day, roughly 1,000 children under five die from diseases linked to dirty water and poor sanitation. What makes these deaths all the more tragic is that most of them are __3__ preventable, since soap, clean water, and a working toilet are often all it takes to keep a child alive.
+
+Yet disease is only part of the story. The lack of private and secure toilets __4__ women and girls of their safety and dignity, forcing many to wait until dark to relieve themselves. Untreated waste, meanwhile, seeps into rivers and soil, contaminating the very water that families depend on. The illnesses that follow keep adults from working and children from attending school, and the lost income and learning take a heavy __5__ on entire communities.
+
+Climate change is only making matters worse, as floods and droughts damage sewage systems, pollute water sources, and hit the most vulnerable communities hardest. In response, the UN calls for "future-ready" toilets: facilities that are accessible to everyone and sturdy enough to __6__ extreme weather. Such investment pays off in the long run, as every illness prevented eases the pressure on families and hospitals. As the World Health Organization reminds us, a safe toilet is a basic human right rather than a(n) __7__ reserved for the wealthy. Governments, therefore, cannot afford to wait. __8__, as many as three billion people may still lack safe toilets by 2030. For millions of children, survival may come down to nothing more than a clean, private place to go.`,
+      zh:`每年 11 月 19 日，聯合國都會紀念「世界廁所日」——這個名稱幾乎總能引來幾聲竊笑。然而在這些玩笑背後，存在著一場一點也不好笑的危機：約有三十四億人仍然生活在缺乏安全管理的衛生設施之下，其中三億五千四百萬人別無選擇，只能在野外如廁。對我們這些把沖水馬桶視為理所當然的人來說，這樣的現實幾乎無法想像。事實上，衛生問題被忽視到這種程度：聯合國在 2013 年指出，全球有手機可用的人竟然比有廁所可用的人還多。人命的代價令人震驚：每一天約有一千名五歲以下的兒童死於與不潔飲水和衛生不良相關的疾病。讓這些死亡更加令人悲痛的是，其中大多數是完全可以預防的，因為肥皂、乾淨的水和一間堪用的廁所，往往就足以讓一個孩子活下來。
+
+然而疾病只是故事的一部分。缺乏隱密而安全的廁所，剝奪了婦女與女孩的安全與尊嚴，迫使許多人必須等到天黑才能如廁。同時，未經處理的排泄物滲入河流與土壤，污染了家庭所賴以生存的那同一批水。隨之而來的疾病讓大人無法工作、孩子無法上學，而失去的收入與學習則讓整個社區付出沉重的代價。
+
+氣候變遷只是讓情況更加惡化，因為洪水與乾旱會破壞污水系統、污染水源，並對最脆弱的社區打擊最重。為此，聯合國呼籲建造「未來可承受型」的廁所：這些設施要讓每個人都能使用，也要堅固到足以承受極端天氣。這樣的投資長遠來看是值得的，因為每一次預防下來的疾病都減輕了家庭與醫院的壓力。正如世界衛生組織提醒我們的，一間安全的廁所是基本人權，而不是專屬於富人的奢侈品。因此，各國政府沒有再等下去的餘裕。否則，到 2030 年可能仍有多達三十億人缺乏安全的廁所。對數百萬名兒童來說，能否活下來，可能只取決於一個乾淨、隱密的如廁空間。`,
+      questions:[
+        { n:1, kind:"關係代名詞片語",
+          stem:"around 3.4 billion people still live without safely managed sanitation, __________ have no choice but to relieve themselves in the open.",
+          options:{A:"354 million of whom 其中有三億五千四百萬人",B:"in which 354 million（in which 不可指人）",C:"of them 354 million（造成逗點連綴）",D:"whose 354 million（whose 後須接所屬名詞）"}, answer:"A",
+          translation:"約有三十四億人仍然生活在缺乏安全管理的衛生設施之下，其中三億五千四百萬人別無選擇，只能在野外如廁。",
+          explain:{A:"✔ 逗號後面要接一個關係子句來補充說明前面的 3.4 billion people，而「數量詞＋of whom」正是這個結構（354 million of whom have no choice＝and 354 million of them have no choice）。whom 指人、動詞 have 也與複數主詞一致。",B:"✘ in which 的先行詞必須是地點、情境或抽象範圍，不能指人；指人要用 of whom。而且 in which 之後的 354 million 會變成沒有來源的數量。",C:"✘ of them 354 million 用的是代名詞 them 而不是關係代名詞，逗號之後接一個獨立的句子會造成「逗點連綴」（comma splice），文法上不成立。要這樣寫必須加連接詞：and 354 million of them have…。",D:"✘ whose 是所有格關係代名詞，後面必須緊接它所修飾的名詞（a man whose car was stolen）；whose 354 million 沒有被擁有的對象，結構不成立。"},
+          notes:[{term:"數量詞 + of whom / of which", pos:"句型", gloss:"其中若干（補充說明前面的人或物）：354 million of whom／many of whom／some of which／both of which。注意不可寫成 of them（那是代名詞，需另加連接詞）。ED 雜誌 Nov. Week 1+2 (310) 第 6 題的 some of whom 是同一結構。", ex:"He has three sisters, two of whom live abroad.", exZh:"他有三個姊妹，其中兩個住在國外。"},{term:"anything but / all but", pos:"辨析", gloss:"anything but 一點也不（a crisis that is anything but funny 一點也不好笑）／all but 幾乎（all but impossible to imagine 幾乎無法想像）。兩個片語在本段同時出現，意思卻大不相同，是這一段的隱藏考點。"},{term:"Behind the jokes lies a crisis", pos:"句型", gloss:"地方副詞片語置句首的倒裝（Behind the jokes lies a crisis＝A crisis lies behind the jokes）。這種倒裝常見於描寫性文字的開頭，用來把新資訊放在句尾。"}]},
+
+        { n:2, kind:"子句（語意推論）",
+          stem:"In fact, so neglected is sanitation that the UN reported in 2013 that more people worldwide had access to mobile phones than __________.",
+          options:{A:"knew how to read and write 識字的人",B:"had access to a toilet 有廁所可用的人",C:"lived within reach of a hospital 住在醫院可及範圍內的人",D:"owned a pair of shoes 擁有一雙鞋的人"}, answer:"B",
+          translation:"事實上，衛生問題被忽視到這種程度：聯合國在 2013 年指出，全球有手機可用的人竟然比有廁所可用的人還多。",
+          explain:{B:"✔ 句首的 so neglected is sanitation that…（衛生問題被忽視到…的程度）限定了這個數據必須用來證明「衛生設施被忽視」，所以比較的對象只能是廁所；had access to 也與前半句的 had access to mobile phones 形成完整的平行對比。",A:"✘ knew how to read and write 是識字率，屬教育議題；它無法證明「衛生被忽視」，而且與 had access to 的平行結構也不對稱。",C:"✘ lived within reach of a hospital 是醫療可及性，雖然同屬公共服務，但本段的主題詞是 sanitation（衛生設施），用醫院無法支撐這個論點。",D:"✘ owned a pair of shoes 是貧窮的指標之一，但與衛生設施沒有直接關聯，也無法說明廁所被忽視。"},
+          notes:[{term:"So + adj. + be + S + that…", pos:"句型", gloss:"倒裝的 so…that 句型：So neglected is sanitation that…（＝Sanitation is so neglected that…）。形容詞置句首後主詞與 be 動詞要倒裝。ED 雜誌 Nov. Week 1+2 第 27 題考過同型句。", ex:"So fierce was the storm that flights were grounded for two days.", exZh:"風暴之猛烈，使班機停飛了兩天。"},{term:"have access to", pos:"片語", gloss:"有使用或取得…的管道（have access to mobile phones／to clean water／to education）。n. access（注意動詞 access 是及物，不加 to：access the file）。adj. accessible 容易取得的。", ex:"Half the village still has no access to piped water.", exZh:"村裡有一半的人仍然沒有自來水可用。"},{term:"平行比較的對稱", pos:"閱讀技巧", gloss:"more A than B 的句型中，A 與 B 的結構通常對稱。本題前半是 had access to mobile phones，所以答案應是 had access to＋名詞——光靠這個結構就能先鎖定 (B)，再用主題詞 sanitation 確認。"}]},
+
+        { n:3, kind:"副詞",
+          stem:"What makes these deaths all the more tragic is that most of them are __________ preventable, since soap, clean water, and a working toilet are often all it takes to keep a child alive.",
+          options:{A:"entirely 完全地",B:"merely 僅僅、只不過",C:"rationally 理性地",D:"scarcely 幾乎不"}, answer:"A",
+          translation:"讓這些死亡更加令人悲痛的是，其中大多數是完全可以預防的，因為肥皂、乾淨的水和一間堪用的廁所，往往就足以讓一個孩子活下來。",
+          explain:{A:"✔ since 子句給出理由：soap, clean water, and a working toilet are often all it takes（肥皂、淨水與廁所往往就夠了）——條件如此基本，正說明這些死亡本來完全可以避免，entirely preventable 是標準搭配，也解釋了為何 all the more tragic（更加令人悲痛）。",B:"✘ merely 是「僅僅」，用來縮小範圍（merely a rumor）；說死亡「僅僅可以預防」語意不通，而且它不與 preventable 搭配。",C:"✘ rationally 是「理性地」，修飾思考或決策的方式（think rationally），不能修飾「可預防的程度」。",D:"✘ scarcely 是「幾乎不」，會變成「幾乎無法預防」——那就不會 all the more tragic 了，因為悲痛正來自「明明可以避免卻沒避免」。這是本題最主要的反向陷阱。"},
+          notes:[{term:"all the more", pos:"片語", gloss:"更加（all the more tragic／all the more reason to V 更有理由這麼做）。the＋比較級前加 all 用來加強程度。相關：What makes…is that… 讓…的是…（what 引導的主詞子句）。", ex:"Her calmness made the news all the more shocking.", exZh:"她的冷靜讓這個消息更加令人震驚。"},{term:"entirely", pos:"adv.", gloss:"完全地（entirely preventable／entirely different）。同義：completely／wholly／totally。對照程度較弱的 largely 大部分／partly 部分。一般班版本的第 2 題考的正是同一個字。"},{term:"all it takes", pos:"句型", gloss:"所需要的只是…（soap and clean water are all it takes／All it takes is one phone call.）。由 It takes＋N＋to V 變形而來，強調條件之少。"}]},
+
+        { n:4, kind:"動詞（第三人稱單數）",
+          stem:"The lack of private and secure toilets __________ women and girls of their safety and dignity, forcing many to wait until dark to relieve themselves.",
+          options:{A:"cripples 使癱瘓、使重創（不接 of）",B:"infects 使感染（不接 of）",C:"robs 剝奪（rob sb of sth）",D:"tackles 著手處理（不接 of）"}, answer:"C",
+          translation:"缺乏隱密而安全的廁所，剝奪了婦女與女孩的安全與尊嚴，迫使許多人必須等到天黑才能如廁。",
+          explain:{C:"✔ 決定性線索是受詞之後的介系詞 of：rob sb of sth（剝奪某人的某物）是固定句型，四個選項中只有 rob 能這樣搭配；語意上「安全與尊嚴被剝奪」也完全吻合。",A:"✘ cripples 是「使癱瘓、使重創」，受詞後面不接 of（cripple the economy）；而且它的受詞通常是制度或系統而非人。",B:"✘ infects 是「使感染」，搭配是 be infected with sth，不接 of；而且缺乏廁所不是直接「感染」婦女。",D:"✘ tackles 是「著手處理」，受詞是問題（tackle a problem），不接 of，而且語意正面——是在解決問題而非造成剝奪。"},
+          notes:[{term:"rob sb of sth", pos:"句型", gloss:"剝奪某人的某物（rob people of their dignity／The injury robbed him of his final season.）。注意搭配的是 of 而非 from。同型「剝奪」句型：deprive sb of sth／strip sb of sth。對照 steal sth from sb——rob 的受詞是人或地點，steal 的受詞是物。", ex:"The new rule robs students of any real choice.", exZh:"這項新規定剝奪了學生任何真正的選擇。"},{term:"介系詞定答案", pos:"閱讀技巧", gloss:"綜合測驗常靠空格「後面的介系詞」就能篩掉大半選項。本卷第 4 題（of）、第 5 題（take…on）、第 18 題（rather than＋原形動詞）、第 24 題（beyond）都是這個考法，不必完全讀懂句意也能作答。"},{term:"the very + 名詞", pos:"用法", gloss:"正是那個…（contaminating the very water that families depend on 正是家庭賴以生存的那批水）。very 在此是形容詞，用來強調「同一個」。一般班版本的第 4 題句中也用了這個結構。"}]},
+
+        { n:5, kind:"名詞",
+          stem:"The illnesses that follow keep adults from working and children from attending school, and the lost income and learning take a heavy __________ on entire communities.",
+          options:{A:"burden 負擔（搭配 place／put a burden on）",B:"insight 洞察、深刻見解",C:"strain 壓力（搭配 put a strain on）",D:"toll 代價、損害（搭配 take a toll on）"}, answer:"D",
+          translation:"隨之而來的疾病讓大人無法工作、孩子無法上學，而失去的收入與學習則讓整個社區付出沉重的代價。",
+          explain:{D:"✔ 關鍵在動詞 take：take a heavy toll on sth（對…造成沉重的損害）是固定搭配，四個選項中只有 toll 能與 take 連用。語意上失去的收入與學習正是社區所付出的代價。",A:"✘ burden 的意思雖然接近，但搭配的動詞是 place／put a burden on sb（給某人帶來負擔），不說 take a burden on。",C:"✘ strain 同樣意思接近，但搭配是 put a strain on sth（給…帶來壓力，片語書 Unit 01~05 第 16 題考過）；take a strain on 不成搭配。",B:"✘ insight 是「洞察、深刻見解」，搭配是 offer／gain insight into sth，與「造成損害」完全無關。"},
+          notes:[{term:"take a toll on", pos:"片語", gloss:"對…造成損害、使付出代價（take a heavy toll on sth／Years of stress took its toll.）。n. toll 代價、傷亡人數（the death toll）、通行費。一般班版本的第 1 題考的正是這個名詞的單獨用法，本題則考它的動詞搭配。", ex:"The long commute began to take a toll on her health.", exZh:"漫長的通勤開始對她的健康造成損害。"},{term:"三個「造成壓力」的搭配", pos:"整理", gloss:"take a toll on sth 造成損害／put a strain on sth 帶來壓力／place a burden on sb 增加負擔。三者語意相近但動詞各自固定，本題把三個都放進選項，只能靠動詞 take 判斷——這類題目要背的是「動詞＋名詞」的整組搭配。"},{term:"keep sb from V-ing", pos:"句型", gloss:"使某人無法做某事（keep adults from working and children from attending school）。注意第二個 from 不可省略。同義：prevent／stop sb from V-ing。"}]},
+
+        { n:6, kind:"原形動詞",
+          stem:"the UN calls for \"future-ready\" toilets: facilities that are accessible to everyone and sturdy enough to __________ extreme weather.",
+          options:{A:"inject 注射、挹注",B:"persist 持續（不及物，不可接受詞）",C:"undertake 承擔、著手進行",D:"withstand 承受得住、抵得住"}, answer:"D",
+          translation:"聯合國呼籲建造「未來可承受型」的廁所：這些設施要讓每個人都能使用，也要堅固到足以承受極端天氣。",
+          explain:{D:"✔ sturdy enough to…（堅固到足以…）說明這是在講結構的耐受力，而受詞是 extreme weather（極端天氣），withstand（承受得住）正是此義，也呼應 future-ready（為未來做好準備的）這個引號裡的概念。",A:"✘ inject 是「注射、挹注」，搭配是 inject sth into sth；廁所不會注射天氣。",B:"✘ persist 是不及物動詞（persist in V-ing 堅持做／The pain persists 症狀持續），後面不能直接接受詞 extreme weather。",C:"✘ undertake 是「承擔（任務、工程）」，受詞是計畫或職責（undertake a project），不能接天氣；而且它指的是主動接下工作，與「頂得住」不同。"},
+          notes:[{term:"withstand", pos:"v.", gloss:"承受得住（withstand extreme weather／pressure／scrutiny）。三態 withstand-withstood-withstood。同義：endure／resist／hold up against／weather（v. weather the storm 度過難關）。一般班版本的第 8 題考的是同一個字。", ex:"The roof is designed to withstand winds of 200 km/h.", exZh:"這個屋頂的設計能承受時速兩百公里的強風。"},{term:"sturdy", pos:"adj.", gloss:"堅固的、結實的（sturdy enough to V／a sturdy table）。同義：robust／solid／durable 耐用的。相關：call for 呼籲（本句用的正是這個片語，片語書 Unit 06~10 考過它的四個意思）。"},{term:"pay off", pos:"片語動詞", gloss:"（投資、努力）得到回報（Such investment pays off in the long run.／Her hard work paid off.）；也指「還清債務」。相關：in the long run 長遠來看（片語書 Unit 06~10 第 8 題的答案）。"}]},
+
+        { n:7, kind:"名詞",
+          stem:"a safe toilet is a basic human right rather than a(n) __________ reserved for the wealthy.",
+          options:{A:"insight 洞察、深刻見解",B:"luxury 奢侈品、奢華享受",C:"notion 概念、想法",D:"specialty 招牌菜、專長"}, answer:"B",
+          translation:"一間安全的廁所是基本人權，而不是專屬於富人的奢侈品。",
+          explain:{B:"✔ rather than（而不是）把空格與 a basic human right（基本人權）對立起來，而後位修飾 reserved for the wealthy（專屬於富人的）更確定這是只有有錢人才享有的東西，正是 luxury（奢侈品）。本文第一段的 take a flushing toilet for granted 也在鋪陳這個對比。",A:"✘ insight 是「洞察、深刻見解」，無法與「基本人權」形成對立，也不會被保留給富人。",C:"✘ notion 是「概念、想法」；人權與概念不是對立的兩端，而且 a notion reserved for the wealthy 語意不通。",D:"✘ specialty 是「招牌菜、專長」（片語書 Unit 06~10 第 18 題考過），屬餐飲或專業領域，與人權的對比完全無關。"},
+          notes:[{term:"luxury", pos:"n. / adj.", gloss:"奢侈品、奢華（a luxury rather than a necessity 奢侈品而非必需品／live in luxury／luxury goods）。adj. luxurious 奢華的。注意 luxury＋名詞是「奢侈品類的」，luxurious 才是「感覺奢華的」。片語書進階篇 Unit 01~05 第 14 題的題幹也用過 a designer handbag 的同類語境。", ex:"For many families, air conditioning is still a luxury.", exZh:"對許多家庭來說，空調仍然是一種奢侈。"},{term:"a(n) 的提示", pos:"命題觀察", gloss:"原卷寫 a(n) 而不直接給 a 或 an，是為了不讓冠詞洩漏答案的字首母音（insight 要用 an、luxury 要用 a）。遇到 a(n) 就代表四個選項的字首母音不一致，這本身不是線索，但提醒你別靠冠詞猜。"},{term:"be reserved for", pos:"片語", gloss:"專供…使用、保留給（a luxury reserved for the wealthy／seats reserved for the elderly）。v. reserve 保留、預訂；adj. reserved 拘謹的、已預訂的。"}]},
+
+        { n:8, kind:"連接副詞",
+          stem:"Governments, therefore, cannot afford to wait. __________, as many as three billion people may still lack safe toilets by 2030.",
+          options:{A:"Conversely 相反地（用於對照兩種情況）",B:"Likewise 同樣地",C:"Otherwise 否則、不然的話",D:"Thus 因此"}, answer:"C",
+          translation:"因此，各國政府沒有再等下去的餘裕。否則，到 2030 年可能仍有多達三十億人缺乏安全的廁所。",
+          explain:{C:"✔ 前一句是一個「必須採取的行動」（政府不能再等），本句則是「不照做會有的後果」（2030 年前仍有三十億人沒有安全廁所），這種關係正是 Otherwise（否則）。",A:"✘ Conversely 是「相反地」，用來並列兩個方向相反的事實；但三十億人缺廁所並不是「政府不能等」的反面情況，而是不作為的後果。",B:"✘ Likewise 是「同樣地」，表前後相同；前句談政府的責任、後句談預測的後果，並非同類並列。",D:"✘ Thus 是「因此」，會變成「政府不能等，因此三十億人會缺廁所」——把不作為的假設後果寫成必然結果，因果完全顛倒。這是本題最強的誘答，必須分清 Otherwise（假設的後果）與 Thus（既成的結果）。"},
+          notes:[{term:"Otherwise / Thus", pos:"辨析", gloss:"Otherwise 否則（引出「不照前句做」的假設後果，常與 may／will／would 連用）／Thus 因此（引出前句直接導致的結果）。判斷法：把前一句當成條件，若後句是「不這麼做會怎樣」就用 Otherwise。一般班版本的第 7 題考的是 For this reason（順向因果），兩卷剛好一正一反。", ex:"Book early; otherwise you may not get a seat.", exZh:"早點訂位，否則你可能沒有位子。"},{term:"cannot afford to V", pos:"片語", gloss:"沒有餘裕做某事、負擔不起（cannot afford to wait／to lose）。注意此處不是「買不起」而是「承擔不起後果」。", ex:"We can't afford to ignore the warning signs.", exZh:"我們沒有餘裕去忽視這些警訊。"},{term:"come down to", pos:"片語動詞", gloss:"歸結為、取決於（survival may come down to nothing more than a clean place to go）。相關：as many as 多達／nothing more than 只不過是（片語書 Unit 01~05 第 3 題考過）。"}]}
+      ]
+    },
+    {
+      passage:`Every winter, as the flu season approaches its peak, clinics across Taiwan fill up with patients who have come down with what they insist is "just a cold." Doctors, however, can usually tell the two apart, because the flu __9__: while a cold creeps in over several days, influenza strikes within hours, bringing symptoms like a high fever, chills, and muscle aches that can leave even healthy adults all in. Many patients also feel exhausted long after the fever breaks, a sign that the immune system is still fighting off the virus. To __10__ the diagnosis, the doctor may perform a rapid flu test, which takes fifteen minutes or so. If the result is positive, patients are usually advised to stay home, drink plenty of fluids, and get adequate rest. Those who need time off can also ask for a medical __11__ stating that they are unfit to work.
+
+Yet many employees ignore such advice and drag themselves to work anyway, convinced that taking a sick day will make them look lazy. Researchers call this habit "presenteeism," and its hidden costs are easy to underestimate: a worker who shows up sick __12__. Consider one feverish salesperson who insisted on finishing a report at his desk. __13__, several of his coworkers fell ill over the following week. What began as one person's sense of duty, in other words, ended up costing the company dozens of working days. It is high time that companies __14__ treating attendance as proof of loyalty.
+
+Fortunately, more and more employers are doing just that. Staff with a fever are now encouraged to stay home, and many firms ask them to __15__ a doctor's note only when an absence extends beyond two consecutive working days. Some even offer free flu shots on site, though participation remains voluntary. Such measures cost money at first, but over time they tend to produce a healthier and more __16__ workforce. After all, a fever is by no means a badge of honor; it is the body's way of saying it needs rest.`,
+      zh:`每年冬天，隨著流感季節逼近高峰，台灣各地的診所都擠滿了病人——他們堅持自己得的「只是感冒」。然而醫師通常分辨得出這兩者，因為流感來得突然得多：感冒是在好幾天之內慢慢滲進來的，流感卻在幾小時內就發動攻勢，帶來高燒、發冷與肌肉痠痛等症狀，連健康的成年人都能被它搞得筋疲力盡。許多病人即使退燒很久之後仍感到疲憊，這是免疫系統還在對抗病毒的徵兆。為了確認診斷，醫師可能會做快速流感檢測，大約需要十五分鐘左右。如果結果是陽性，病人通常會被建議待在家裡、多喝水、充分休息。需要請假的人也可以要求一張診斷證明，說明他們不適合工作。
+
+然而許多員工無視這樣的建議，仍然勉強自己去上班，因為他們認定請一天病假會讓自己看起來很懶。研究者把這種習慣稱為「出勤主義」，而它隱藏的代價很容易被低估：一個生病還來上班的員工做得更少，還把同事推入風險之中。想想有位發著燒的業務員，他堅持在自己的座位上把一份報告做完。病毒在辦公室裡擴散開來，接下來的一週有好幾位同事都病倒了。換句話說，起初是一個人的責任感，最後卻讓公司付出了數十個工作日的代價。企業早就該停止把出勤當成忠誠的證明了。
+
+所幸，越來越多僱主正在這麼做。發燒的員工現在被鼓勵待在家裡，而許多公司只在缺勤超過連續兩個工作日時，才要求他們提交醫師證明。有些公司甚至在公司內提供免費的流感疫苗，不過接種仍然是自願的。這些措施一開始要花錢，但長期而言，它們往往能造就一支更健康、生產力也更高的勞動力。畢竟，發燒絕不是一種榮譽勳章，而是身體在告訴你它需要休息。`,
+      questions:[
+        { n:9, kind:"子句（語意推論）",
+          stem:"Doctors, however, can usually tell the two apart, because the flu __________: while a cold creeps in over several days, influenza strikes within hours...",
+          options:{A:"develops at a much gentler pace 以溫和得多的速度發展",B:"rarely causes a fever at all 幾乎完全不會引起發燒",C:"announces itself far more abruptly 來得突然得多",D:"mostly affects the nose and throat 主要影響鼻子與喉嚨"}, answer:"C",
+          translation:"然而醫師通常分辨得出這兩者，因為流感來得突然得多：感冒是在好幾天之內慢慢滲進來的，流感卻在幾小時內就發動攻勢。",
+          explain:{C:"✔ 冒號後面就是說明：while a cold creeps in over several days, influenza strikes within hours（感冒慢慢滲進來、流感幾小時內發動）。creeps in 對 strikes、several days 對 within hours，兩組對比都指向「發作得又快又猛」，正是 announces itself far more abruptly。",A:"✘ develops at a much gentler pace（發展得更溫和）正好是感冒的特徵；用來形容流感會把冒號後的對比寫反，是本題最主要的反向陷阱。",B:"✘ rarely causes a fever at all（幾乎不發燒）與緊接著列出的 a high fever（高燒）直接矛盾。",D:"✘ mostly affects the nose and throat（主要影響鼻喉）描述的是感冒的典型症狀；而本段列出的 chills and muscle aches（發冷與肌肉痠痛）是全身性的，正是流感與感冒的差別之一。"},
+          notes:[{term:"announce itself", pos:"用法", gloss:"（疾病、季節）以明顯的方式出現、顯露（The illness announced itself with a sudden fever.）。這是擬人化的寫法，比 appear 更強調「宣告式的登場」。相關：creep in 悄悄滲入／strike （疾病、災難）襲擊。", ex:"Autumn announced itself with a cold wind overnight.", exZh:"一夜之間一陣冷風宣告了秋天的到來。"},{term:"tell A and B apart", pos:"片語", gloss:"分辨 A 與 B（tell the two apart／tell twins apart；也可說 tell A from B）。相關：come down with sth 染上（較輕的病，片語書 Unit 06~10 的卷子考過）。"},{term:"all in", pos:"片語", gloss:"筋疲力盡（leave even healthy adults all in）。片語書進階篇 Unit 06~10 (310) 第 18 題考的正是這個片語，可互相印證。相關：fight off a virus 擊退病毒／chills 發冷。"}]},
+
+        { n:10, kind:"原形動詞",
+          stem:"To __________ the diagnosis, the doctor may perform a rapid flu test, which takes fifteen minutes or so.",
+          options:{A:"assume 假定、以為",B:"confirm 確認、證實",C:"manipulate 操控；靈巧操作",D:"speculate 推測、揣測"}, answer:"B",
+          translation:"為了確認診斷，醫師可能會做快速流感檢測，大約需要十五分鐘左右。",
+          explain:{B:"✔ 做檢測的目的就是要「證實」初步的判斷，confirm the diagnosis（確認診斷）是標準搭配；下一句的 If the result is positive（如果結果是陽性）也說明這是在等一個確定的答案。",A:"✘ assume 是「假定、以為」，指在沒有證據下先認定；但做檢測的目的正好相反——是要取得證據而不是憑空假定。",C:"✘ manipulate 是「操控」或「靈巧操作」（單字書 10-2~11 兩個版本各考一義），受詞是人、數據或器械；醫師不是在操弄診斷。",D:"✘ speculate 是「推測」，而且它是不及物動詞（speculate about／on sth），不能直接接 the diagnosis；語意上也與「確認」相反。"},
+          notes:[{term:"confirm", pos:"v.", gloss:"確認、證實（confirm the diagnosis／a booking／one's attendance）。n. confirmation；adj. confirmed（a confirmed case 確診病例）。對照 assume 假定／presume 推定／verify 查證。", ex:"A blood test confirmed what the doctor had suspected.", exZh:"血液檢查證實了醫師原先的懷疑。"},{term:"or so", pos:"片語", gloss:"大約、左右（fifteen minutes or so／a week or so）。注意它必須緊接在數量詞之後。片語書進階篇 Unit 01~05 第 20 題把它放在誘答位置，當時因為前面沒有數量詞而被排除。"},{term:"unfit to work", pos:"片語", gloss:"不適合工作（a certificate stating that they are unfit to work）。adj. unfit 不適合的、不健康的（be unfit for sth／be unfit to V）。反義 fit 健康的、適合的。"}]},
+
+        { n:11, kind:"名詞",
+          stem:"Those who need time off can also ask for a medical __________ stating that they are unfit to work.",
+          options:{A:"certificate 證明書、證明文件",B:"prescription 處方（箋）",C:"syndrome 症候群",D:"therapy 治療、療程"}, answer:"A",
+          translation:"需要請假的人也可以要求一張診斷證明，說明他們不適合工作。",
+          explain:{A:"✔ 後位修飾的分詞片語 stating that they are unfit to work（說明他們不適合工作）說明這是一份「寫著內容的文件」，而 a medical certificate（診斷證明）正是請假時用來證明的文件；第三段的 a doctor's note 也是同一樣東西的口語說法。",B:"✘ prescription 是「處方箋」，上面寫的是用藥指示，不會聲明某人不適合工作；本卷第三篇的題幹與本段的語境都不是在領藥。",C:"✘ syndrome 是「症候群」，是病症的分類名稱，不是一份文件，也無法 state（陳述）任何事。",D:"✘ therapy 是「治療、療程」，是一種處置方式而非文件，不能被 ask for 當成證明索取。"},
+          notes:[{term:"a medical certificate", pos:"n.", gloss:"診斷證明、醫師證明（ask for／submit a medical certificate）。同義的口語說法是 a doctor's note（本段第三段用的正是這個）。本卷第 42 題的翻譯題也要用到這個字。相關：time off 休假／sick day 病假。", ex:"The school requires a medical certificate for any absence over three days.", exZh:"學校規定缺席超過三天須附診斷證明。"},{term:"後位修飾的現在分詞", pos:"句型", gloss:"a certificate stating that…（＝a certificate which states that…）。現在分詞片語放在名詞之後表主動的修飾關係；若是被動則用過去分詞（a note signed by a doctor）。"},{term:"ask for", pos:"片語動詞", gloss:"要求、索取（ask for a certificate／for help／for a raise）。對照 ask sb to V 請某人做某事（本卷第 41 題的翻譯題）／ask after sb 問候某人（片語書 Unit 06~10 第 2 題）。"}]},
+
+        { n:12, kind:"子句（語意推論）",
+          stem:"its hidden costs are easy to underestimate: a worker who shows up sick __________.",
+          options:{A:"recovers faster than one who rests at home 比在家休息的人康復得更快",B:"earns the lasting respect of his managers 贏得主管長久的敬重",C:"is unlikely to infect anyone at work 不太可能在職場傳染給任何人",D:"gets less done and puts coworkers at risk 做得更少，還把同事推入風險之中"}, answer:"D",
+          translation:"它隱藏的代價很容易被低估：一個生病還來上班的員工做得更少，還把同事推入風險之中。",
+          explain:{D:"✔ 冒號前的 its hidden costs（它隱藏的代價）要求冒號後列出負面後果，而 (D) 剛好給出兩項：效率下降與傳染風險；緊接的例子（發燒的業務員導致多位同事病倒）也正是後半句的印證。",A:"✘ recovers faster than one who rests at home（比在家休息好得更快）在醫學上不成立，而且它是正面結果，無法作為 hidden costs 的說明。",B:"✘ earns the lasting respect of his managers（贏得主管敬重）同樣是正面的，與「代價」矛盾；本段後面更說這種責任感 ended up costing the company（讓公司付出代價）。",C:"✘ is unlikely to infect anyone at work（不太可能傳染給人）與下一個例子 several of his coworkers fell ill（好幾位同事病倒）直接衝突。"},
+          notes:[{term:"presenteeism", pos:"n.", gloss:"出勤主義（生病或無效率仍堅持上班的現象，與 absenteeism 曠職率相對）。字根 present 在場＋-ism。這是本段的主題詞，也是閱讀時要抓住的概念。", ex:"Presenteeism can cost firms more than absenteeism does.", exZh:"出勤主義對公司的損失可能比曠職更大。"},{term:"show up", pos:"片語動詞", gloss:"出現、到場（show up sick／show up late；also show up for work）。同義：turn up／appear。相關：drag oneself to work 勉強自己去上班。"},{term:"put sb at risk", pos:"片語", gloss:"使某人陷入風險（put coworkers at risk／be at risk of sth）。ED 雜誌 Nov. Week 1+2 (310) 第 11 題的題幹也用過這個片語。"}]},
+
+        { n:13, kind:"獨立分詞構句",
+          stem:"Consider one feverish salesperson who insisted on finishing a report at his desk. __________, several of his coworkers fell ill over the following week.",
+          options:{A:"Spreading through the office（分詞主詞懸空）",B:"The virus having spread through the office 病毒在辦公室裡擴散開來",C:"Having spread through the office（分詞主詞懸空）",D:"Because the virus spreading through the office（缺少限定動詞）"}, answer:"B",
+          translation:"病毒在辦公室裡擴散開來，接下來的一週有好幾位同事都病倒了。",
+          explain:{B:"✔ 主句的主詞是 several of his coworkers（好幾位同事），但「擴散」的執行者是病毒而不是同事。當分詞的主詞與主句主詞不同時，必須把它寫出來，形成「獨立分詞構句」：The virus having spread through the office, several coworkers fell ill.（＝After the virus had spread…）。",A:"✘ Spreading through the office 沒有自己的主詞，依文法規則會被理解為主句的主詞在擴散，變成「同事們在辦公室裡擴散開來」，屬於懸空分詞（dangling participle）。",C:"✘ Having spread through the office 犯的是同一個錯誤——完成式仍然沒有主詞，隱含的主詞還是 coworkers，語意荒謬。",D:"✘ Because 是連接詞，後面必須接完整的子句（Because the virus had spread…）；spreading 是分詞不是限定動詞，整句缺少動詞。"},
+          notes:[{term:"獨立分詞構句（absolute construction）", pos:"句型", gloss:"當分詞的主詞與主句主詞不同時，要在分詞前補上它自己的主詞：The virus having spread, coworkers fell ill.／Weather permitting, we'll leave at dawn.／All things considered, it went well.／There being no bus, we walked.。這是判斷懸空分詞的關鍵規則。", ex:"The deadline having passed, no further entries were accepted.", exZh:"期限已過，不再接受任何報名。"},{term:"懸空分詞的檢查法", pos:"文法重點", gloss:"把分詞的動作拉給主句的主詞試念一次：Spreading through the office, several coworkers fell ill.→「同事們擴散開來」荒謬，所以 (A)(C) 錯。一般班版本的第 6、13 題考的是主詞一致時的分詞，本題則考主詞不一致的情況，難度高一階。"},{term:"insist on V-ing", pos:"片語", gloss:"堅持做某事（insisted on finishing a report）。注意 insist on 後接動名詞；insist that＋S＋（should）＋原形V 則用假設語氣（本卷第 14 題考的 It is high time 也是假設語氣家族）。"}]},
+
+        { n:14, kind:"假設語氣（過去式）",
+          stem:"It is high time that companies __________ treating attendance as proof of loyalty.",
+          options:{A:"are stopping（現在進行式）",B:"have stopped（現在完成式）",C:"stopped 停止（過去式，假設語氣）",D:"would stop（would＋原形）"}, answer:"C",
+          translation:"企業早就該停止把出勤當成忠誠的證明了。",
+          explain:{C:"✔ It is high time that＋S＋過去式 是固定的假設語氣句型，意思是「早就該…了」（語氣帶有「至今仍未做到」的不耐）。因此要用過去式 stopped，雖然講的是現在。",A:"✘ are stopping 是現在進行式，表示「正在停止」；但這個句型要表達的是「還沒做、早該做了」，而且 that 子句在此句型中不用現在式。",B:"✘ have stopped 是現在完成式，表示「已經停止」，與句型所含的「尚未做到」語氣矛盾。",D:"✘ would stop 看似假設語氣，但 It is high time 這個句型固定搭配過去式（或 should＋原形，較少見），不接 would。"},
+          notes:[{term:"It is (high) time that + S + 過去式", pos:"句型", gloss:"早就該…了（It is high time that companies stopped…／It's time you went to bed.）。用過去式表達對現狀的不滿。加 high 或 about 可加強語氣（It's about time…）。也可改寫成 It is time for sb to V（語氣較中性）。", ex:"It is high time that we took the warnings seriously.", exZh:"我們早就該認真對待這些警告了。"},{term:"假設語氣家族", pos:"整理", gloss:"① It is time that＋過去式（早該…）② demand／insist／suggest that＋原形V（要求、建議）③ If I were you（與現在相反）④ Were S to V／Should S V／Had S p.p.（倒裝假設）。本卷第 21 題考的讓步倒裝也屬於需要辨認結構的同類題。"},{term:"treat A as B", pos:"句型", gloss:"把 A 視為 B（treat attendance as proof of loyalty／be treated as a joke）。同義：regard／see／view A as B。注意 consider 可不加 as（consider it a success）。"}]},
+
+        { n:15, kind:"原形動詞",
+          stem:"many firms ask them to __________ a doctor's note only when an absence extends beyond two consecutive working days.",
+          options:{A:"inject 注射、挹注",B:"prescribe 開（處方）藥",C:"recite 背誦、朗誦",D:"submit 提交、送交"}, answer:"D",
+          translation:"許多公司只在缺勤超過連續兩個工作日時，才要求他們提交醫師證明。",
+          explain:{D:"✔ 受詞是 a doctor's note（醫師證明），而情境是公司對請假程序的規定，所以員工要做的是「提交」這份文件，submit a note／a document／an application 是標準搭配。",A:"✘ inject 是「注射、挹注」，受詞是藥劑或資金；員工不會注射一張證明。",B:"✘ prescribe 是「開處方」，主詞必須是醫師而不是請假的員工——本句的 them 指的是發燒的 staff，角色錯了。",C:"✘ recite 是「背誦、朗誦」，受詞是詩文或內容；沒有人會背誦一張請假證明。"},
+          notes:[{term:"submit", pos:"v.", gloss:"提交、送交（submit a note／a report／an application；submit sth to sb）；也指「屈服」（submit to pressure）。n. submission。同義：hand in／turn in／file。", ex:"All forms must be submitted by Friday noon.", exZh:"所有表格必須在週五中午前送交。"},{term:"extend beyond", pos:"片語動詞", gloss:"超出、延伸超過（an absence extends beyond two days／The lesson extends beyond whales，本卷第 24 題考的正是這個片語）。本卷同一份考卷兩次用到它，一次在題幹、一次當答案。"},{term:"consecutive", pos:"adj.", gloss:"連續的（two consecutive working days）。同義：successive／in a row／straight。片語書進階篇 Unit 06~10 兩個版本都整理過這三種說法在句中的位置差異。"}]},
+
+        { n:16, kind:"形容詞",
+          stem:"Such measures cost money at first, but over time they tend to produce a healthier and more __________ workforce.",
+          options:{A:"contagious 傳染力強的",B:"naive 天真的、容易輕信的",C:"productive 有生產力的、效率高的",D:"vulnerable 脆弱的、易受侵害的"}, answer:"C",
+          translation:"這些措施一開始要花錢，但長期而言，它們往往能造就一支更健康、生產力也更高的勞動力。",
+          explain:{C:"✔ 空格與 healthier 以 and 並列，兩者必須是同方向的正面評價；而 but over time（但長期而言）的轉折也要求這是值得投資的好結果。修飾 workforce（勞動力）談的正是產出效率，productive 完全對應。",A:"✘ contagious 是「傳染力強的」，若勞動力更有傳染力就是災難，與整段推崇這些措施的立場完全相反。",B:"✘ naive 是「天真的」，是負面評價，也與健康或工作效率無關。",D:"✘ vulnerable 是「脆弱的」，同樣是負面的，無法與 healthier 並列成為投資的回報。"},
+          notes:[{term:"productive", pos:"adj.", gloss:"有生產力的、富有成效的（a productive workforce／a productive meeting／be productive）。n. productivity 生產力；v. produce。注意 productive 既可形容人也可形容會議或土地。", ex:"Shorter meetings turned out to be far more productive.", exZh:"較短的會議結果反而有效率得多。"},{term:"and 並列的語氣一致", pos:"閱讀技巧", gloss:"用 and 連接的兩個形容詞，褒貶方向通常一致（healthier and more productive 都是正面）。本題三個誘答全是負面形容詞，只要抓住 healthier 這個正面詞就能一次排除。ED 雜誌 Nov. Week 1+2 第 15 題用的也是這個判斷法。"},{term:"a badge of honor", pos:"片語", gloss:"榮譽的象徵、值得炫耀的標記（A fever is by no means a badge of honor.）。相關：by no means 絕不（片語書 Unit 01~05 兩個版本的第 10 題都考過）／on site 在現場、在公司內。"}]}
+      ]
+    },
+    {
+      passage:`When a whale lies stranded on a beach, the urge to help is almost irresistible. Most of us take it for granted that saving an animal is always the right thing to do. Marine biologists, however, warn that towing or lifting a large whale can add to its __17__, since the animal is already worn out from fighting the waves. Out of deep water, its own weight presses on its internal organs, and the stress of being dragged by ropes can prove fatal in itself. In view of these risks, many experts would keep the animal calm and let nature take its course __18__ attempt a long and dangerous rescue. Even when such a giant is refloated, after all, it tends to strand again within days.
+
+In the age of social media, however, such advice is increasingly hard to follow, because __19__. Timmy, a humpback whale stranded in Germany's Baltic Sea in 2026, is a case in point. Many viewers were convinced that moving him to open water would __20__ his suffering, and the scientists who had recommended a peaceful death were accused of giving up. In the face of such pressure, officials changed course and allowed a private team to haul the whale to the North Sea. __21__, the rescue attempt seems only to have added to its suffering, and the whale's body was found in Denmark less than two weeks later.
+
+Many who had cheered the rescue now see it in a different light. __22__, the very attention that was meant to save him may have made his final days far more painful. The experts had predicted exactly this, yet their voices were drowned out by the crowd. Much of his pain, in other words, was __23__, and that is what makes his story so troubling. None of this means that we should stop caring about stranded animals. The lesson, in fact, __24__ whales: it applies to any crisis in which feelings run high and the facts are hard to accept. The real question is not whether we care, but whether we care wisely enough to listen.`,
+      zh:`當一頭鯨魚擱淺在海灘上，想要幫忙的衝動幾乎令人無法抗拒。我們大多數人都理所當然地認為，救一隻動物永遠是對的事。然而海洋生物學家警告，拖拉或吊起一頭大型鯨魚可能會加重牠的疲憊，因為這隻動物早已因為與海浪搏鬥而精疲力竭。離開深水之後，牠自身的體重會壓迫內臟，而被繩索拖拉的壓力本身就可能致命。考慮到這些風險，許多專家寧願讓牠保持平靜、讓自然依其進程發展，而不是嘗試一場漫長而危險的救援。畢竟即使這樣的巨獸被重新浮起，牠往往在幾天內又會再次擱淺。
+
+然而在社群媒體的時代，這樣的建議越來越難被遵循，因為一段爆紅的影片就能左右數百萬人。2026 年擱淺在德國波羅的海的大翅鯨 Timmy 就是一個典型的例子。許多觀眾深信把牠移到開放水域可以減輕牠的痛苦，而那些建議讓牠安然死去的科學家則被指責為放棄。在這樣的壓力之下，官員改變了方針，允許一支民間團隊把這頭鯨魚拖往北海。儘管出於善意，這場救援的嘗試看來只是加重了牠的痛苦，而這頭鯨魚的屍體在不到兩週後被發現於丹麥。
+
+許多原本為這場救援喝采的人，現在用不同的眼光看待它。諷刺的是，那份原本要用來救牠的關注，可能反而讓牠最後的日子痛苦得多。專家早就精準預測到了這一點，然而他們的聲音卻被群眾淹沒。換句話說，牠所承受的痛苦有很大一部分是可以避免的，而這正是牠的故事如此令人不安的原因。這一切並不表示我們應該不再關心擱淺的動物。事實上，這個教訓的意義超出了鯨魚：它適用於任何情緒高漲而事實難以接受的危機。真正的問題不在於我們是否關心，而在於我們是否關心得足夠明智、願意傾聽。`,
+      questions:[
+        { n:17, kind:"名詞",
+          stem:"Marine biologists, however, warn that towing or lifting a large whale can add to its __________, since the animal is already worn out from fighting the waves.",
+          options:{A:"fatigue 疲憊、倦乏",B:"pulse 脈搏",C:"stance 站姿；立場",D:"trait （人格）特質"}, answer:"A",
+          translation:"然而海洋生物學家警告，拖拉或吊起一頭大型鯨魚可能會加重牠的疲憊，因為這隻動物早已因為與海浪搏鬥而精疲力竭。",
+          explain:{A:"✔ since 子句就是答案的改寫：the animal is already worn out from fighting the waves（早已因搏浪而精疲力竭）。add to its fatigue（加重牠的疲憊）正好呼應 already worn out 的 already——本來就累了，再拖拉只會更累。",B:"✘ pulse 是「脈搏」，是生理指標；add to its pulse 不成搭配，而且拖拉造成的問題是體力耗盡而非脈搏增加。",C:"✘ stance 是「站姿」或「立場」（單字書 10-2~11 兩個版本各考一義），鯨魚擱淺時談不上站姿，也沒有立場可被加重。",D:"✘ trait 是「人格特質」，是天生或長期的性格，不會因為被拖拉而增加。"},
+          notes:[{term:"fatigue", pos:"n.", gloss:"疲憊、倦乏（add to one's fatigue／suffer from fatigue／metal fatigue 金屬疲勞）。讀 /fəˈtiːɡ/，重音在後。adj. fatigued；同義：exhaustion／weariness／tiredness。", ex:"Weeks of night shifts left her with constant fatigue.", exZh:"數週的夜班讓她持續感到疲憊。"},{term:"add to", pos:"片語動詞", gloss:"增加、加劇（add to its fatigue／to the confusion／to his stress）。注意 add to sth（使某事更多）與 add sth to sth（把 A 加到 B 上）結構不同。一般班版本的第 24 題也考過這個片語。"},{term:"be worn out", pos:"片語", gloss:"精疲力竭、磨壞（be worn out from sth／worn-out shoes）。v. wear out。相關：prove fatal 結果致命（prove 在此是「結果證明是」，不用被動）／in itself 本身就。"}]},
+
+        { n:18, kind:"片語（對比結構）",
+          stem:"In view of these risks, many experts would keep the animal calm and let nature take its course __________ attempt a long and dangerous rescue.",
+          options:{A:"for fear of 害怕、以免（後接名詞或動名詞）",B:"in the hope of 希望能（後接動名詞）",C:"rather than 而不是（可接原形動詞）",D:"let alone 更不用說（須用於否定句之後）"}, answer:"C",
+          translation:"許多專家寧願讓牠保持平靜、讓自然依其進程發展，而不是嘗試一場漫長而危險的救援。",
+          explain:{C:"✔ 兩個線索同時指向 (C)。語意上，專家主張的是「保持平靜、讓自然發展」，與「嘗試漫長危險的救援」是兩個互斥的選項，需要表「而不是」的對比詞；文法上，空格後是原形動詞 attempt，而 rather than 正可接原形動詞與前面的 keep、let 形成對稱（would keep…and let…rather than attempt…）。",A:"✘ for fear of 後面必須接名詞或動名詞（for fear of making things worse），不能接原形動詞 attempt。",B:"✘ in the hope of 同樣接動名詞（in the hope of saving it），而且語意是「希望能」——專家並不希望進行這場救援。",D:"✘ let alone 是「更不用說」，必須用在否定句之後才成立（He can't walk, let alone run.）；本句前半是肯定的 would keep…and let…，結構不符。"},
+          notes:[{term:"rather than", pos:"片語", gloss:"而不是（would keep it calm rather than attempt a rescue／choose A rather than B）。接在 would／助動詞之後時可接原形動詞；其他情況下前後結構要對等（動名詞對動名詞、名詞對名詞）。同義：instead of（後接動名詞）。", ex:"She would walk rather than wait for the bus.", exZh:"她寧願走路也不要等公車。"},{term:"would rather / would…rather than", pos:"辨析", gloss:"would rather V than V（寧願…而不…）／would V rather than V（同義，rather than 置於第二個動作之前）。兩種寫法都接原形動詞，是本題的文法核心。", ex:"I would rather stay than go.／I would stay rather than go.", exZh:"我寧願留下也不要走。"},{term:"in view of", pos:"片語", gloss:"考慮到、鑑於（In view of these risks, …）。片語書進階篇 Unit 01~05 (310) 第 9 題把它放在誘答位置，當時因為語意是「不顧」而被排除；本句才是它的正確用法。相關：take sth for granted 視為理所當然。"}]},
+
+        { n:19, kind:"子句（語意推論）",
+          stem:"In the age of social media, however, such advice is increasingly hard to follow, because __________.",
+          options:{A:"most whales can now be saved 現在大多數鯨魚都能被救活",B:"one viral clip can sway millions 一段爆紅的影片就能左右數百萬人",C:"few people care about whales anymore 已經很少有人在意鯨魚了",D:"experts now favor risky rescues 專家現在偏好有風險的救援"}, answer:"B",
+          translation:"然而在社群媒體的時代，這樣的建議越來越難被遵循，因為一段爆紅的影片就能左右數百萬人。",
+          explain:{B:"✔ 句首的 In the age of social media（在社群媒體的時代）是關鍵限定語，而後面的 Timmy 案例正是具體說明：輿論壓力使官員 changed course（改變方針）推翻了科學家的建議。社群媒體讓少數影像能動員大量民意，正是 one viral clip can sway millions。",A:"✘ most whales can now be saved（大多數鯨魚都能被救）與第一段的 it tends to strand again within days（往往幾天內又擱淺）矛盾，而且這無法解釋為何「專家的建議難以被遵循」。",C:"✘ few people care about whales anymore（很少人在意鯨魚了）與整段描述的輿論沸騰、觀眾深信、科學家被指責完全相反。",D:"✘ experts now favor risky rescues（專家偏好有風險的救援）與上一段的 many experts would…let nature take its course（專家主張讓自然發展）以及本段的 the scientists who had recommended a peaceful death（建議讓牠安然死去的科學家）直接衝突。"},
+          notes:[{term:"go viral / a viral clip", pos:"片語", gloss:"在網路上瘋傳（go viral／a viral video／a viral clip）。adj. viral 病毒式的、瘋傳的（n. virus）。片語書進階篇 Unit 06~10 (310) 第 23 題把 went viral 放在誘答位置，當時因為主詞是學校而被排除。", ex:"A thirty-second clip went viral and changed the whole debate.", exZh:"一段三十秒的影片瘋傳開來，改變了整場論戰的走向。"},{term:"sway", pos:"v. / n.", gloss:"v. 左右、影響（sway millions／sway public opinion）；也指「搖晃」／n. 影響力（hold sway over sth 支配）。同義：influence／persuade。"},{term:"a case in point", pos:"片語", gloss:"一個恰當的例子、典型的例證（Timmy is a case in point.）。用來引出印證前述論點的實例。同義：a prime example。"}]},
+
+        { n:20, kind:"原形動詞",
+          stem:"Many viewers were convinced that moving him to open water would __________ his suffering, and the scientists who had recommended a peaceful death were accused of giving up.",
+          options:{A:"justify 使…顯得正當、說得過去",B:"relieve 減輕、緩解",C:"strain 使緊繃、拉傷",D:"undertake 承擔、著手進行"}, answer:"B",
+          translation:"許多觀眾深信把牠移到開放水域可以減輕牠的痛苦，而那些建議讓牠安然死去的科學家則被指責為放棄。",
+          explain:{B:"✔ 主詞是 moving him to open water（把牠移到開放水域），受詞是 his suffering（牠的痛苦），而觀眾之所以 convinced（深信）並進而指責科學家放棄，正是因為他們相信這樣做能「減輕」痛苦，relieve suffering／pain 是標準搭配。",A:"✘ justify 是「使顯得正當」，受詞是行為或決定（justify one's actions）；觀眾不是在替痛苦找理由。",C:"✘ strain 是「使緊繃、拉傷」，受詞是肌肉或關係（strain a muscle／relations）；若說移動牠能 strain his suffering 語意不通，而且方向是加重而非減輕。",D:"✘ undertake 是「承擔、著手進行」，受詞是任務或計畫（undertake a rescue）；痛苦不是被承擔的工作。"},
+          notes:[{term:"relieve", pos:"v.", gloss:"減輕、緩解（relieve suffering／pain／pressure／the fever）；也指「使寬慰」（be relieved to hear sth）與「接替」（relieve sb of duty）。n. relief 緩解、寬慰（to my relief 令我寬慰的是）。一般班版本第 11 題的題幹也用了 relieve the fever。", ex:"A short walk can relieve a surprising amount of tension.", exZh:"短短的散步就能緩解相當多的緊繃感。"},{term:"be accused of", pos:"片語", gloss:"被指責、被控（be accused of giving up／of fraud）。注意後接名詞或動名詞。n. accusation 指控；相關：be convinced that… 深信（adj. convinced）。"},{term:"change course", pos:"片語", gloss:"改變方針、轉向（officials changed course／The government changed course on the policy.）。ED 雜誌 Nov. Week 1+2 第 39 題的註解也提過這個片語，當時用於颱風轉向。"}]},
+
+        { n:21, kind:"讓步倒裝",
+          stem:"__________, the rescue attempt seems only to have added to its suffering, and the whale's body was found in Denmark less than two weeks later.",
+          options:{A:"As well-meaning it was（語序錯誤，缺第二個 as）",B:"However it was well-meaning（However 後須緊接形容詞）",C:"Despite well-meaning（Despite 後須接名詞或動名詞）",D:"Well-meaning as it was 儘管出於善意"}, answer:"D",
+          translation:"儘管出於善意，這場救援的嘗試看來只是加重了牠的痛苦，而這頭鯨魚的屍體在不到兩週後被發現於丹麥。",
+          explain:{D:"✔ 這是「形容詞＋as／though＋主詞＋動詞」的讓步倒裝句型，意思是「儘管…」。語意上，善意（well-meaning）與結果（加重痛苦、鯨魚死亡）形成強烈反差，正需要這個讓步轉折。",A:"✘ 語序不完整。用 as 開頭時必須寫成 As well-meaning as it was（兩個 as），或把形容詞提前成 Well-meaning as it was；只留一個 as 又把形容詞放在後面是錯的。",B:"✘ However 的固定語序是 However＋形容詞／副詞＋主詞＋動詞，也就是 However well-meaning it was；把 well-meaning 丟到句尾不合文法。",C:"✘ Despite 是介系詞，後面必須接名詞或動名詞（Despite its good intentions／Despite being well-meaning）；well-meaning 是形容詞，不能直接接在 Despite 之後。"},
+          notes:[{term:"adj. + as / though + S + V", pos:"句型", gloss:"儘管…（Well-meaning as it was／Young as he is, he is wise.／Strange though it may sound, …）。只能用 as 或 though，不能用 although；形容詞一定放句首。等義寫法：Although it was well-meaning。ED 雜誌 Nov. Week 1+2 (310) 第 18 題與片語書 Unit 06~10 (310) 第 2 題都考過這組句型的不同版本。", ex:"Tempting as the offer was, she turned it down.", exZh:"儘管這個提議很誘人，她還是拒絕了。"},{term:"三種「儘管」的接法", pos:"整理", gloss:"① adj.＋as／though＋S＋V（形容詞前置）② However＋adj.＋S＋V（形容詞緊跟 However）③ Despite／In spite of＋名詞或動名詞 ④ Although／Though＋完整子句（形容詞留原位）。本題四個選項正好測這四種接法的差異。"},{term:"well-meaning", pos:"adj.", gloss:"出於善意的、好意的（a well-meaning gesture／well-meaning advice）。注意它常帶「善意但結果不佳」的言外之意，正是本段的主旨。相關：haul 拖拉／refloat 使重新浮起。"}]},
+
+        { n:22, kind:"連接副詞",
+          stem:"__________, the very attention that was meant to save him may have made his final days far more painful.",
+          options:{A:"Ironically 諷刺的是",B:"Generally speaking 一般而言",C:"Likewise 同樣地",D:"On the contrary 相反地"}, answer:"A",
+          translation:"諷刺的是，那份原本要用來救牠的關注，可能反而讓牠最後的日子痛苦得多。",
+          explain:{A:"✔ 句中的核心矛盾是：the very attention that was meant to save him（原本要救牠的關注）卻 made his final days far more painful（讓牠最後的日子更痛苦）——意圖與結果完全背道而馳，這正是 Ironically（諷刺的是）。",B:"✘ Generally speaking 是「一般而言」，用來概括通則；但本句講的是 Timmy 這個具體案例中的意外反轉，不是普遍現象。",C:"✘ Likewise 是「同樣地」，表前後相同；前一句說人們 see it in a different light（用不同眼光看待），本句則揭露反轉的事實，並非同類並列。",D:"✘ On the contrary 是「相反地」，用來否定前面的說法再提出正解；但前一句並沒有一個需要被否認的錯誤陳述，本句是在補充說明為何大家改變看法。"},
+          notes:[{term:"Ironically", pos:"adv.", gloss:"諷刺的是（Ironically, the safety device caused the accident.）。n. irony 反諷、諷刺性的反轉；adj. ironic。用於「意圖與結果相反」或「期待與現實相反」的情境，正是本段的主軸。", ex:"Ironically, the diet left him hungrier than before.", exZh:"諷刺的是，這套飲食法讓他比以前更餓。"},{term:"the very + 名詞", pos:"用法", gloss:"正是那個…（the very attention that was meant to save him／the very water that families depend on，本卷第一篇也用過）。very 在此是形容詞，用來強調「正是這個、同一個」，常用於製造反諷效果。"},{term:"be drowned out", pos:"片語", gloss:"（聲音）被淹沒、被蓋過（their voices were drowned out by the crowd）。v. drown out 蓋過聲音；相關：see sth in a different light 用不同眼光看待／cheer 為…喝采。"}]},
+
+        { n:23, kind:"形容詞",
+          stem:"Much of his pain, in other words, was __________, and that is what makes his story so troubling.",
+          options:{A:"preventable 可預防的、本可避免的",B:"rational 理性的",C:"sober 沒喝酒的；嚴肅冷靜的",D:"vicious 惡毒的；猛烈的"}, answer:"A",
+          translation:"換句話說，牠所承受的痛苦有很大一部分是可以避免的，而這正是牠的故事如此令人不安的原因。",
+          explain:{A:"✔ 前一句是決定性線索：The experts had predicted exactly this, yet their voices were drowned out（專家早就精準預測到了，卻被淹沒）。既然事前已被預見卻未被採納，這份痛苦本來就是可以避免的，正是 preventable；而這也正好解釋了為何 so troubling（如此令人不安）——令人不安的不是意外，而是明知卻仍發生。",B:"✘ rational 是「理性的」，用來形容思考或決定；痛苦本身談不上理性與否。",C:"✘ sober 是「沒喝酒的」或「嚴肅冷靜的」（單字書 10-2~11 兩個版本各考一義），兩義都無法形容痛苦。",D:"✘ vicious 是「惡毒的」或「猛烈的」；雖然 pain 可以很劇烈，但這無法解釋 that is what makes his story so troubling——痛苦劇烈並不特別令人「不安」，令人不安的是它原本可以避免。"},
+          notes:[{term:"preventable", pos:"adj.", gloss:"可預防的、本可避免的（preventable deaths／a preventable tragedy）。v. prevent（prevent sb from V-ing）；n. prevention。本卷第一篇第 3 題的題幹用的正是同一個字，兩處可互相印證。", ex:"Most of these injuries are entirely preventable.", exZh:"這些傷害大多完全可以預防。"},{term:"that is what makes…", pos:"句型", gloss:"那正是使…的原因（that is what makes his story so troubling）。what 引導名詞子句當 is 的補語，make＋O＋adj. 則是「使…變成某狀態」。這個句型常用來在段末點出論點的要害。"},{term:"troubling", pos:"adj.", gloss:"令人不安的、令人憂心的（a troubling question／troubling news）。v. trouble 使煩惱；對照 troubled 感到困擾的（a troubled expression）——分詞形容詞的主動與被動之分。"}]},
+
+        { n:24, kind:"片語動詞",
+          stem:"The lesson, in fact, __________ whales: it applies to any crisis in which feelings run high and the facts are hard to accept.",
+          options:{A:"accounts for 解釋、是…的原因；佔（比例）",B:"comes close to 差一點就…（後接動名詞）",C:"dawns on 使（某人）突然領悟",D:"extends beyond 超出…的範圍、不只限於"}, answer:"D",
+          translation:"事實上，這個教訓的意義超出了鯨魚：它適用於任何情緒高漲而事實難以接受的危機。",
+          explain:{D:"✔ 冒號後面就是說明：it applies to any crisis in which feelings run high（它適用於任何情緒高漲的危機）——適用範圍不限於鯨魚，正是 extends beyond whales（超出鯨魚的範圍）。本卷第 15 題的題幹也用過這個片語（an absence extends beyond two days）。",A:"✘ accounts for 是「解釋、是…的原因」；這個教訓不是用來解釋鯨魚，而是其適用範圍更廣。",B:"✘ comes close to 是「差一點就…」，後面必須接動名詞（come close to winning），接不上 whales 這個名詞，而且語意是「幾乎做到」而非「超出範圍」。",C:"✘ dawns on 是「使某人突然領悟」，句型固定為 It dawns on sb that…（片語書 Unit 06~10 第 9 題考過），受詞必須是人；鯨魚不是在領悟這個教訓。"},
+          notes:[{term:"extend beyond", pos:"片語動詞", gloss:"超出…的範圍、不只限於（The lesson extends beyond whales.／extend beyond the deadline）。同義：go beyond（一般班版本第 5 題的答案 goes far beyond the individual 用的正是這個）／reach beyond／be not limited to。", ex:"The impact extends well beyond the local economy.", exZh:"其影響遠遠超出當地經濟的範圍。"},{term:"feelings run high", pos:"片語", gloss:"情緒高漲、群情激動（in a crisis in which feelings run high／Tempers ran high.）。v. run 在此是「處於某種狀態」（run deep 根深／run dry 乾涸）。"},{term:"not whether…but whether…", pos:"句型", gloss:"不在於是否…而在於是否…（The real question is not whether we care, but whether we care wisely enough.）。這是全文的結論句，用 not A but B 的對比收尾；本卷第一篇第 1 題的註解也整理過這個句型。"}]}
+      ]
+    }
+    ]
+  },
+
+  {
+    id:"fb", label:"二、文意選填（冬眠）", score:"16%（第 25-32 題，每題 2%）",
+    bank:{A:"coats 覆蓋（動詞，第三人稱單數）",B:"deadly 致命的（形容詞）",C:"hits 襲來、來襲（動詞，第三人稱單數）",D:"lack 缺乏（名詞）",E:"released 被釋放出來的（過去分詞）",F:"stored 被儲存的（過去分詞）",G:"test 考驗（名詞）",H:"vital 維生所必需的（形容詞）"},
+    bankWide:true,
+    groups:[{
+      passage:`For many animals, winter is less a season than a battle for survival. In the face of plunging temperatures and food that is all but impossible to find, countless species turn to hibernation, a prolonged state of inactivity that enables them to conserve energy. Not only do their pulse and breathing slow, but their body temperature also falls close to freezing. Fat __25__ in their bodies during autumn becomes their only source of nutrients. As this fat is slowly burned, the energy __26__ in the process keeps them alive. Their __27__ organs, such as the heart and brain, depend entirely on this fuel.
+
+Arctic ground squirrels are among the most extreme hibernators. Every October they retreat into their burrows, and only after six months underground do they emerge, almost all at once. What makes this timing so precise is a biological clock that keeps ticking despite a total __28__ of light. Larger mammals, by contrast, rarely sleep so deeply. A bear, whose thick fur __29__ its body like a heavy blanket, can stay warm without shutting down. Were it to attempt true hibernation, it would burn huge amounts of energy simply warming back up, leaving it vulnerable to predators.
+
+Hibernation also comes in lighter versions. Hummingbirds, for instance, slip into torpor on chilly nights, because their tiny bodies lose heat so quickly that every cold night puts them to the __30__. Reptiles in brumation still wake up every now and then to drink, but whenever a cold snap __31__, they retreat underground again. Aestivation, meanwhile, protects reptiles, fish, and invertebrates from a different threat: summer heat that can turn __32__ within days. Whether facing bitter cold or scorching heat, these creatures prove that sometimes the smartest way to survive is to do almost nothing at all.`,
+      zh:`對許多動物來說，冬天與其說是一個季節，不如說是一場生存之戰。面對驟降的氣溫與幾乎找不到的食物，無數物種轉而採取冬眠——一種長時間不活動的狀態，讓牠們能夠節省能量。牠們的脈搏與呼吸不僅變慢，體溫也降到接近冰點。秋天期間儲存在體內的脂肪成為牠們唯一的養分來源。隨著這些脂肪被緩慢燃燒，過程中釋放出來的能量維持著牠們的生命。牠們維生所必需的器官，例如心臟與大腦，完全依賴這份燃料。
+
+北極地松鼠是最極端的冬眠動物之一。每年十月牠們退回自己的洞穴，要在地底待滿六個月之後才出來，而且幾乎是同時全部現身。讓這個時間點如此精準的，是一座即使在完全沒有光線的情況下仍持續運轉的生理時鐘。相較之下，體型較大的哺乳類很少睡得這麼深。一隻熊，牠厚厚的毛皮像一條厚毯子一樣覆蓋著身體，可以不必停機就保持溫暖。萬一牠嘗試真冬眠，光是回暖就會燒掉大量能量，讓牠容易受到捕食者的攻擊。
+
+冬眠也有較輕度的版本。以蜂鳥為例，牠們在寒冷的夜晚會進入蟄伏，因為牠們微小的身體散熱太快，使得每一個寒夜都是對牠們的一次考驗。進入冬蟄的爬蟲類偶爾還會醒來喝水，但每當寒流來襲，牠們就又退回地底。至於夏蟄，它保護爬蟲類、魚類與無脊椎動物免於另一種威脅：可能在幾天之內就變得致命的夏季高溫。不論面對刺骨的寒冷或炙人的酷熱，這些生物都證明了有時候最聰明的生存之道，就是幾乎什麼都不做。`,
+      questions:[
+        { n:25, kind:"過去分詞（後位修飾）", answer:"F", answerText:"stored 被儲存的（過去分詞）",
+          stem:"Fat __________ in their bodies during autumn becomes their only source of nutrients.",
+          translation:"秋天期間儲存在體內的脂肪成為牠們唯一的養分來源。",
+          why:"主要動詞是 becomes，所以空格不是本句的動詞，而是修飾主詞 Fat 的後位分詞。脂肪是「被」儲存在體內，屬被動，要用過去分詞 stored（＝Fat that is stored in their bodies）。during autumn（在秋天期間）也點明這是先前累積起來的存量。注意主詞 Fat 是不可數名詞，所以動詞用 becomes。",
+          notes:[{term:"過去分詞的後位修飾", pos:"句型", gloss:"Fat stored in their bodies（＝Fat that is stored in their bodies）。名詞與分詞是被動關係時用 p.p.；主動則用 V-ing（the energy releasing heat）。本篇第 25、26 題連續考這個結構，第 29 題則改考動詞本身。", ex:"Documents kept in the basement were damaged by the flood.", exZh:"存放在地下室的文件被洪水損壞了。"},{term:"less A than B", pos:"句型", gloss:"與其說是 A，不如說是 B（winter is less a season than a battle for survival）。用來修正或強化說法。同義：not so much A as B。", ex:"It was less a request than an order.", exZh:"那與其說是請求，不如說是命令。"},{term:"Not only do…, but…also…", pos:"句型", gloss:"不僅…而且…（Not only do their pulse and breathing slow, but their body temperature also falls…）。Not only 置句首時主句要倒裝（do their pulse and breathing slow），but 之後則用正常語序。"}]},
+
+        { n:26, kind:"過去分詞（後位修飾）", answer:"E", answerText:"released 被釋放出來的（過去分詞）",
+          stem:"As this fat is slowly burned, the energy __________ in the process keeps them alive.",
+          translation:"隨著這些脂肪被緩慢燃燒，過程中釋放出來的能量維持著牠們的生命。",
+          why:"主要動詞是 keeps，所以空格同樣是修飾主詞 the energy 的後位分詞。能量是在燃燒過程中「被」釋放出來的，屬被動，用過去分詞 released（＝the energy that is released in the process）。前半句的 As this fat is slowly burned（隨著脂肪被緩慢燃燒）正是這個「過程」。",
+          notes:[{term:"release", pos:"v. / n.", gloss:"釋放、發布（release energy／heat／a report；be released from prison 獲釋）／n. 釋放、發行。本卷第三大題的文章也用了 after his release（在牠被放回海中之後）。", ex:"Burning one gram of fat releases about nine calories.", exZh:"燃燒一公克脂肪約釋放九大卡的熱量。"},{term:"in the process", pos:"片語", gloss:"在這個過程中（the energy released in the process／He fixed the bike and got oil on his shirt in the process.）。相關：As＋子句 表「隨著」（As this fat is burned…）。"},{term:"keep sb alive", pos:"句型", gloss:"使某人（某物）維持存活（keeps them alive／keep the animal alive）。keep＋O＋形容詞是本卷反覆出現的句型，一般班版本第 20 題的題幹也用過同一組搭配。"}]},
+
+        { n:27, kind:"形容詞", answer:"H", answerText:"vital 維生所必需的（形容詞）",
+          stem:"Their __________ organs, such as the heart and brain, depend entirely on this fuel.",
+          translation:"牠們維生所必需的器官，例如心臟與大腦，完全依賴這份燃料。",
+          why:"空格在所有格 Their 與名詞 organs 之間，要填形容詞。such as the heart and brain（例如心臟與大腦）點出這些是維持生命不可或缺的器官，而 vital organs（維生器官）正是固定的醫學用語；depend entirely on this fuel（完全依賴這份燃料）也強調了它們的關鍵性。字庫中另一個形容詞 deadly 在第 32 題有更精確的位置，而且器官不會「致命」。",
+          notes:[{term:"vital", pos:"adj.", gloss:"① 維生的、生命的（vital organs 維生器官／vital signs 生命徵象）② 至關重要的（be vital to sth／play a vital role）。adv. vitally；n. vitality 活力。ED 雜誌 Nov. Week 1+2 第 9 題考的是第二個意思，本題考的是第一個。", ex:"Blood loss can quickly starve the vital organs of oxygen.", exZh:"失血會迅速使維生器官缺氧。"},{term:"depend on", pos:"片語動詞", gloss:"依賴、取決於（depend entirely on this fuel／It depends on the weather.）。adj. dependent（be dependent on sth）；反義 independent。"},{term:"such as", pos:"片語", gloss:"例如（vital organs, such as the heart and brain）。用來舉例說明前面的類別，所以空格所填的形容詞必須能涵蓋 heart 與 brain——這是文意選填常見的「以例定義」線索。"}]},
+
+        { n:28, kind:"名詞", answer:"D", answerText:"lack 缺乏（名詞）",
+          stem:"What makes this timing so precise is a biological clock that keeps ticking despite a total __________ of light.",
+          translation:"讓這個時間點如此精準的，是一座即使在完全沒有光線的情況下仍持續運轉的生理時鐘。",
+          why:"空格前有冠詞 a 與形容詞 total（完全的）、後接 of light，所以要填名詞，而 a total lack of sth（完全缺乏某物）是標準搭配。語意上，地松鼠在地底待六個月，自然見不到光，而生理時鐘仍能精準運轉——despite（儘管）正是在強調這個對比。",
+          notes:[{term:"a lack of", pos:"n.", gloss:"缺乏（a total lack of light／a lack of evidence／for lack of sth 因缺乏某物）。v. lack 缺少（及物，不加 of：lack experience／lack safe toilets，本卷第一篇第 8 題的題幹用的正是動詞）。名詞加 of、動詞不加 of，是最常見的錯誤點。", ex:"The project failed for a total lack of funding.", exZh:"這個計畫因為完全沒有經費而失敗。"},{term:"only after… do they…", pos:"句型", gloss:"only＋副詞片語置句首時主句要倒裝：only after six months underground do they emerge（要待滿六個月之後才出來）。同型：Only then did I realize…／Only in this way can we…。這是本段附帶的句型重點。"},{term:"keep V-ing", pos:"句型", gloss:"持續不斷地（a clock that keeps ticking／keep trying）。對照 keep on V-ing（語氣更強調堅持）與 keep sb from V-ing（阻止某人做某事）。"}]},
+
+        { n:29, kind:"動詞（第三人稱單數）", answer:"A", answerText:"coats 覆蓋（動詞，第三人稱單數）",
+          stem:"A bear, whose thick fur __________ its body like a heavy blanket, can stay warm without shutting down.",
+          translation:"一隻熊，牠厚厚的毛皮像一條厚毯子一樣覆蓋著身體，可以不必停機就保持溫暖。",
+          why:"這是 whose 引導的關係子句，主詞是 thick fur（厚毛皮，單數），所以需要第三人稱單數的動詞，而空格後有受詞 its body。coat 當動詞正是「覆蓋、裹住」，而 like a heavy blanket（像一條厚毯子）的比喻也完全對應。字庫中另一個第三人稱單數動詞 hits 在第 31 題有更精確的位置，而且毛皮不會「襲擊」身體。",
+          notes:[{term:"coat", pos:"v. / n.", gloss:"v. 覆蓋、裹上一層（coat its body／coat the pan with oil／chocolate-coated 裹著巧克力的）／n. 外套、（動物的）毛皮、塗層（a coat of paint 一層漆）。本題同時用到名詞義（fur 毛皮）與動詞義（coats 覆蓋），是一題兩用的設計。", ex:"A thin layer of ice coated every branch.", exZh:"薄薄的一層冰覆蓋了每一根枝條。"},{term:"whose 引導關係子句", pos:"句型", gloss:"A bear, whose thick fur coats its body…（＝A bear whose fur coats its body）。whose 是所有格關係代名詞，後面必須緊接它所修飾的名詞（fur），而該名詞就是子句的主詞，動詞要與它一致。本卷第一篇第 1 題的誘答 (D) 正是用 whose 的錯誤寫法設陷阱。"},{term:"Were it to V", pos:"句型", gloss:"倒裝的假設語氣（Were it to attempt true hibernation＝If it were to attempt…），用於對未來的假設。倒裝假設的三種開頭：Were／Should／Had。片語書 Unit 06~10 (310) 第 32 題與本卷都考過這個結構。"}]},
+
+        { n:30, kind:"名詞", answer:"G", answerText:"test 考驗（名詞）",
+          stem:"their tiny bodies lose heat so quickly that every cold night puts them to the __________.",
+          translation:"牠們微小的身體散熱太快，使得每一個寒夜都是對牠們的一次考驗。",
+          why:"空格前是 puts them to the，而 put sb to the test（考驗某人、使某人受到檢驗）是固定片語，定冠詞 the 已經把答案限定住。語意上，蜂鳥身體太小、散熱太快，所以每個寒夜都在考驗牠們能否存活，與下文 slip into torpor（進入蟄伏）的因應方式正好銜接。",
+          notes:[{term:"put sb/sth to the test", pos:"片語", gloss:"考驗、使受到檢驗（Every cold night puts them to the test.／This will put our patience to the test.）。注意 the 不可省略。相關：stand the test of time 禁得起時間的考驗。", ex:"The storm put the new seawall to the test.", exZh:"這場風暴考驗了新建的海堤。"},{term:"so…that… 的呼應", pos:"句型", gloss:"lose heat so quickly that…（散熱如此快以致於…）。看到 so 就要往後找 that 子句；修飾動詞用副詞（so quickly），修飾名詞則用 such（such a cold night that…）。"},{term:"slip into", pos:"片語動詞", gloss:"（不知不覺地）進入某種狀態（slip into torpor／slip into a coma／slip into bad habits）；也指「迅速穿上」（slip into a jacket）。相關：chilly 微寒的／hummingbird 蜂鳥。"}]},
+
+        { n:31, kind:"動詞（第三人稱單數）", answer:"C", answerText:"hits 襲來、來襲（動詞，第三人稱單數）",
+          stem:"Reptiles in brumation still wake up every now and then to drink, but whenever a cold snap __________, they retreat underground again.",
+          translation:"進入冬蟄的爬蟲類偶爾還會醒來喝水，但每當寒流來襲，牠們就又退回地底。",
+          why:"whenever 引導的時間子句主詞是 a cold snap（一波寒流，單數），所以要填第三人稱單數動詞，而空格後沒有受詞，屬不及物用法。hit 可以不及物地表示「（災害、天氣）襲來」（When the storm hits…），與主詞 cold snap 以及主句 they retreat underground again（牠們又退回地底）的反應完全吻合。",
+          notes:[{term:"hit", pos:"v.", gloss:"（災害、天氣、危機）襲擊、來襲（when the typhoon hits／The recession hit hard.）；及物時接受詞（hit the coast 侵襲海岸）。三態同形 hit-hit-hit。本卷第一篇的 hit the most vulnerable communities hardest 用的是及物用法。", ex:"Shops boarded up their windows before the storm hit.", exZh:"商店在風暴來襲前把窗戶釘上木板。"},{term:"a cold snap", pos:"n.", gloss:"一波寒流、驟冷（a cold snap hits／a sudden cold snap）。n. snap 突然的一段（天氣）、啪一聲、搶拍。相關：every now and then 偶爾（＝occasionally）／retreat 退回、撤退。"},{term:"whenever", pos:"conj.", gloss:"每當、無論何時（whenever a cold snap hits）。屬時間子句，動詞用現在式表反覆發生的情況，不可用 will。同類：wherever／whoever／whatever。"}]},
+
+        { n:32, kind:"形容詞", answer:"B", answerText:"deadly 致命的（形容詞）",
+          stem:"Aestivation, meanwhile, protects reptiles, fish, and invertebrates from a different threat: summer heat that can turn __________ within days.",
+          translation:"至於夏蟄，它保護爬蟲類、魚類與無脊椎動物免於另一種威脅：可能在幾天之內就變得致命的夏季高溫。",
+          why:"turn 在此是連綴動詞「變得」，後面要接形容詞當補語，而冒號前的 a different threat（另一種威脅）已經把語意定調為危險。summer heat that can turn deadly within days（幾天內就可能變得致命的夏季高溫）正是這個威脅的具體內容。字庫中另一個形容詞 vital 已用於第 27 題，而且高溫不會「變得維生所必需」。",
+          notes:[{term:"deadly", pos:"adj. / adv.", gloss:"致命的（a deadly virus／turn deadly／the deadliest day）。注意它是形容詞不是副詞（雖然 deadly accurate 當副詞是例外）。同義：fatal／lethal／life-threatening。ED 雜誌 Nov. Week 1+2 的卷子也考過 deadly serious 這個搭配。", ex:"What began as a mild outbreak turned deadly within weeks.", exZh:"原本輕微的疫情在數週之內變得致命。"},{term:"turn + 形容詞", pos:"句型", gloss:"變得（turn deadly／turn pale 臉色發白／turn sober 神色轉為嚴肅）。turn 當連綴動詞時後接形容詞，強調狀態的轉變；同類連綴動詞：become／grow／go／get。", ex:"The sky turned dark in a matter of minutes.", exZh:"天空在幾分鐘內就暗了下來。"},{term:"protect A from B", pos:"句型", gloss:"保護 A 免於 B（protects reptiles from a different threat）。同義：shield／shelter／guard A from B。注意介系詞可用 from 或 against。相關：invertebrate 無脊椎動物／aestivation 夏蟄。"}]}
+      ]
+    }]
+  },
+
+  {
+    id:"ps", label:"三、篇章結構（鯨落）", score:"8%（第 33-36 題，每題 2%）",
+    bank:{A:"It does not immediately return to the atmosphere. 它不會立刻回到大氣中。",B:"Scientists are still uncertain about how many whale falls occur naturally each year. 科學家對每年自然發生多少鯨落仍不確定。（本大題未使用）",C:"Sometimes, the most responsible choice may be to respect expert consensus and allow nature to take its course. 有時候，最負責的選擇可能是尊重專家的共識，讓自然依其自身的進程發展。",D:"This moment, which might seem like the end, can actually mark the beginning of a new ecosystem. 這一刻看似終結，實際上卻可能標誌著一個新生態系的開始。",E:"In this dark environment, a whale fall is like an oasis in a barren landscape. 在這片黑暗的環境裡，一處鯨落就像荒蕪地景中的一片綠洲。"},
+    bankWide:true,
+    groups:[{
+      passage:`The vast ocean stages countless miracles of life, but few are as remarkable as the phenomenon of a whale fall. When a giant whale reaches the end of its life, its immense body descends through the dark water and eventually lands on the ocean floor. __33__ A whale's death provides food and shelter for many marine organisms, turning one of nature's endings into an unexpected source of life.
+
+Deep beneath the ocean's surface, sunlight cannot reach. Nutrients are also scarce. __34__ The remains of a single whale can support thousands of organisms for decades or even centuries. These include bacteria, worms, and larger marine creatures. As different species feed on the whale's body, they gradually break it down and return nutrients to the surrounding environment. In this way, whale falls support complex food webs and increase biodiversity in the deep sea.
+
+Whales also play an important role in the movement of carbon through the ocean. During their lives, large whales store substantial amounts of carbon in their bodies. When a whale perishes and sinks to the ocean floor, some of the material stored in its body is carried into the deep sea. __35__ If the remains are left undisturbed, some carbon may remain there for a long time. This natural process is one reason why protecting whales matters not only for individual animals but also for marine ecosystems and the global climate.
+
+Yet protecting whales is not always as simple as deciding whether to rescue one. In 2026, a humpback whale nicknamed "Timmy" became stranded three times along Germany's coastline after entering the Baltic Sea. Although marine scientists advised against intervention, public pressure eventually led officials to approve an attempt to transport him to the North Sea. Timmy was found dead 12 days after his release, raising difficult questions about whether human actions truly help wildlife. His story is a reminder that conservation requires more than good intentions. __36__`,
+      zh:`浩瀚的海洋上演著無數生命的奇蹟，但很少有哪一個像「鯨落」這個現象一樣引人注目。當一頭巨鯨走到生命的盡頭，牠龐大的身軀會穿過幽暗的海水下沉，最終落在海床上。這一刻看似終結，實際上卻可能標誌著一個新生態系的開始。一頭鯨魚的死亡為許多海洋生物提供了食物與棲所，把自然界的一個結局轉化為意料之外的生命泉源。
+
+在海面之下的深處，陽光無法抵達，養分也很稀少。在這片黑暗的環境裡，一處鯨落就像荒蕪地景中的一片綠洲。單單一頭鯨魚的遺骸，就能供養數千個生物數十年甚至數世紀之久。這些生物包括細菌、蠕蟲與體型較大的海洋生物。隨著不同物種啃食鯨魚的身體，牠們逐漸將牠分解，並把養分歸還給周圍的環境。如此一來，鯨落支撐了複雜的食物網，也提升了深海的生物多樣性。
+
+鯨魚在碳於海洋中的移動上也扮演重要角色。在牠們的一生中，大型鯨魚會在體內儲存相當大量的碳。當一頭鯨魚死去並沉入海床，牠體內儲存的部分物質就被帶進了深海。它不會立刻回到大氣中。如果這些遺骸未被擾動，有些碳可能會在那裡留存很長一段時間。這個自然的過程正是保護鯨魚之所以重要的原因之一——不只是為了單一的動物，也是為了海洋生態系與全球氣候。
+
+然而保護鯨魚並不總是像「決定是否要救一頭鯨魚」那麼簡單。2026 年，一頭綽號「Timmy」的大翅鯨在進入波羅的海之後，沿著德國海岸線三度擱淺。儘管海洋科學家建議不要介入，輿論壓力最終還是促使官員批准了一項把牠運往北海的嘗試。Timmy 在被放回海中十二天後被發現死亡，這引發了關於人類行動是否真能幫助野生動物的難題。牠的故事提醒我們：保育所需要的不只是善意。有時候，最負責的選擇可能是尊重專家的共識，讓自然依其自身的進程發展。`,
+      questions:[
+        { n:33, kind:"段落銜接", answer:"D", answerText:"This moment, which might seem like the end, can actually mark the beginning of a new ecosystem.",
+          stem:"…its immense body descends through the dark water and eventually lands on the ocean floor. __________ A whale's death provides food and shelter for many marine organisms, turning one of nature's endings into an unexpected source of life.",
+          translation:"（空格前）牠龐大的身軀穿過幽暗的海水下沉，最終落在海床上。（空格後）一頭鯨魚的死亡為許多海洋生物提供了食物與棲所，把自然界的一個結局轉化為意料之外的生命泉源。",
+          why:"前後兩句的關鍵詞替 (D) 做了雙重定位。前一句以 lands on the ocean floor（落在海床上）結束，而 (D) 開頭的 This moment（這一刻）正好回指這個瞬間；後一句的 turning one of nature's endings into an unexpected source of life（把結局轉化為生命泉源）則與 (D) 的 might seem like the end…mark the beginning（看似終結卻是開始）完全同義改寫。選項中只有 (D) 同時承接「這一刻」與「終結對開始」這組對照。",
+          notes:[{term:"篇章結構的解題步驟", pos:"閱讀技巧", gloss:"① 先看空格前一句的「結尾詞」，找出能被指示詞（This moment／this dark environment／It）回指的對象 ② 再看空格後一句，確認所選句子能自然導出它 ③ 最後檢查全段的邏輯方向。代名詞與指示詞是最可靠的線索。"},{term:"mark the beginning of", pos:"片語", gloss:"標誌…的開始（mark the beginning／the end of sth）。本卷第 28 題考的正是 mark 這個動詞，兩處可互相印證。"},{term:"stage", pos:"v.", gloss:"此處是「上演、舉行」（The ocean stages countless miracles.／stage a protest 舉行抗議）。n. stage 舞台、階段。相關：phenomenon 現象（複數 phenomena）／immense 龐大的／descend 下沉。"}]},
+
+        { n:34, kind:"段落銜接", answer:"E", answerText:"In this dark environment, a whale fall is like an oasis in a barren landscape.",
+          stem:"Deep beneath the ocean's surface, sunlight cannot reach. Nutrients are also scarce. __________ The remains of a single whale can support thousands of organisms for decades or even centuries.",
+          translation:"（空格前）在海面之下的深處，陽光無法抵達，養分也很稀少。（空格後）單單一頭鯨魚的遺骸，就能供養數千個生物數十年甚至數世紀之久。",
+          why:"空格前兩句建立了兩個條件：sunlight cannot reach（無光）與 Nutrients are also scarce（養分稀少）。(E) 開頭的 In this dark environment（在這片黑暗的環境裡）正好回指前者，而 an oasis in a barren landscape（荒蕪地景中的綠洲）則精準呼應後者——沙漠中的綠洲就是「貧瘠之中的豐饒」。接著後一句用 thousands of organisms（數千個生物）把這個比喻具體化。",
+          notes:[{term:"an oasis in a barren landscape", pos:"比喻", gloss:"荒蕪地景中的綠洲（用來形容貧瘠環境中難得的豐饒之地）。n. oasis 綠洲（複數 oases）；adj. barren 貧瘠的（ED 雜誌 Nov. Week 1+2 的卷子也考過這個字）。相關：a food desert 食物荒漠。"},{term:"scarce", pos:"adj.", gloss:"稀少的、不足的（Nutrients are scarce.／scarce resources）。adv. scarcely 幾乎不；n. scarcity 稀缺（片語書 Unit 06~10 (310) 第 28 題也用過 scarce）。"},{term:"remains", pos:"n.", gloss:"遺骸、殘餘（the remains of a whale／human remains）。恆用複數且動詞用複數（the remains are left undisturbed，見第 35 題）。注意與動詞 remain（仍然是）同形不同義——本文兩種用法都出現。"}]},
+
+        { n:35, kind:"段落銜接", answer:"A", answerText:"It does not immediately return to the atmosphere.",
+          stem:"When a whale perishes and sinks to the ocean floor, some of the material stored in its body is carried into the deep sea. __________ If the remains are left undisturbed, some carbon may remain there for a long time.",
+          translation:"（空格前）當一頭鯨魚死去並沉入海床，牠體內儲存的部分物質就被帶進了深海。（空格後）如果這些遺骸未被擾動，有些碳可能會在那裡留存很長一段時間。",
+          why:"(A) 開頭的 It（它）需要一個單數的先行詞，而前一句結尾正是 some of the material stored in its body（體內儲存的部分物質，即碳），剛好接得上。語意上，前一句說碳被帶進深海、後一句說碳可能長期留在那裡，(A) 的 does not immediately return to the atmosphere（不會立刻回到大氣中）正是把這兩句串起來的關鍵環節——整段談的是 the movement of carbon（碳的移動），而碳封存在深海而非回到大氣，才解釋了為何保護鯨魚對全球氣候有意義。",
+          notes:[{term:"代名詞 It 的回指", pos:"閱讀技巧", gloss:"以代名詞開頭的選項，必須在空格前找到單複數與語意都吻合的先行詞。本題的 It 指 the material（carbon），而 (E) 的 this dark environment、(D) 的 This moment 也都是同一種回指設計。遇到篇章結構題，先把每個選項的指示詞圈出來。"},{term:"carbon sink", pos:"概念", gloss:"碳匯（能長期吸存二氧化碳的系統）。本段描述的正是鯨魚作為碳匯的機制：store carbon in their bodies → sink to the ocean floor → carbon stays in the deep sea。相關：carbon sequestration 碳封存／the atmosphere 大氣。"},{term:"perish", pos:"v.", gloss:"死亡、喪生（正式或文學用語）（When a whale perishes…）。adj. perishable 易腐壞的（perishable goods 生鮮食品）。同義：die／pass away。"}]},
+
+        { n:36, kind:"段落銜接", answer:"C", answerText:"Sometimes, the most responsible choice may be to respect expert consensus and allow nature to take its course.",
+          stem:"Timmy was found dead 12 days after his release, raising difficult questions about whether human actions truly help wildlife. His story is a reminder that conservation requires more than good intentions. __________",
+          translation:"（空格前）Timmy 在被放回海中十二天後被發現死亡，這引發了關於人類行動是否真能幫助野生動物的難題。牠的故事提醒我們：保育所需要的不只是善意。",
+          why:"空格位於全文最後，必須是能收束整篇的結論句。前一句 conservation requires more than good intentions（保育所需要的不只是善意）留下一個問題：那還需要什麼？(C) 正好給出答案——respect expert consensus（尊重專家共識），這也直接回應了段中的 marine scientists advised against intervention（科學家建議不要介入）卻被 public pressure（輿論壓力）推翻這組對比。allow nature to take its course（讓自然發展）則與第一大題第 22 題的 let the animal die in peace 是同一個立場。",
+          notes:[{term:"let / allow nature to take its course", pos:"片語", gloss:"讓事情依自然的進程發展、不加干預（allow nature to take its course／let the law take its course）。n. course 進程、路線（in the course of sth 在…過程中／off course 偏離航道）。"},{term:"consensus", pos:"n.", gloss:"共識（expert consensus／reach a consensus／There is no consensus on sth）。注意拼法只有一個 c 在中間（con-sen-sus）。ED 雜誌 Nov. Week 1+2 (310) 第 14 題考過這個字。"},{term:"未使用的選項 (B)", pos:"備註", gloss:"(B) Scientists are still uncertain about how many whale falls occur naturally each year.（科學家對每年自然發生多少鯨落仍不確定）。它談的是「數量統計上的不確定」，但全文四個空格分別需要：轉折的定位句（33）、環境的比喻句（34）、碳流向的銜接句（35）與全文的結論句（36），沒有一處在討論鯨落的數量，因此這個選項無處可放。"}]}
+      ]
+    }]
+  },
+
+  {
+    id:"rd", label:"四、閱讀測驗（糖的歷史）", score:"8%（第 37-40 題，每題 2%）",
+    groups:[{
+      passage:`Sweet treats are a part of daily life for many people, but few stop to think about how sugar became such an important part of our diets. From a rare luxury to a common kitchen item, sugar has a long and surprising history that spans thousands of years and many continents.
+
+The story of sugar begins in New Guinea, where people began growing sugarcane as far back as 10,000 years ago. They would chew on the cane's stalks to enjoy its sweet juice. Over time, sugarcane spread across nearby islands and eventually reached India. There, around the 7th century, people figured out how to turn sugarcane juice into solid crystals, which made it much easier to store and transport. When the Chinese emperor tasted sugar for the first time, he was so impressed that he asked Indian farmers to teach the Chinese how to grow sugarcane.
+
+From India and China, sugar moved along trade routes into the Middle East. During the 11th century, European knights on their journeys to the Middle East—the Crusades—discovered sugar and brought it home. In Europe, sugar became a luxury for the rich and was even called "white gold." It was so rare that only the wealthy could afford it. Queen Elizabeth I of England, for example, reportedly consumed so much sugar that her teeth turned black. Possibly because of this, black teeth became fashionable, and some poor people even painted their teeth to mimic the wealthy.
+
+Eventually, Europeans wanted to grow sugar for themselves. In 1493, Christopher Columbus brought sugarcane to the Americas. Plantations were set up in the Caribbean and South America, and African slaves were forced to work on them. This was a dark chapter in history that helped make sugar cheaper and more available to everyone.
+
+Today, sugar is easy to find and enjoyed by people all over the world. However, it's worth remembering the long—and sometimes bitter—journey that brought sweetness to our tables.`,
+      zh:`甜食是許多人日常生活的一部分，但很少有人停下來想一想，糖是怎麼變成我們飲食中如此重要的一部分的。從罕見的奢侈品到廚房裡的尋常用品，糖擁有一段漫長而令人意外的歷史，橫跨數千年與多個大洲。
+
+糖的故事始於新幾內亞，那裡的人在遠至一萬年前就開始種植甘蔗。他們會嚼甘蔗的莖桿來享受裡面的甜汁。隨著時間推移，甘蔗擴散到附近的島嶼，最終傳到了印度。在那裡，大約七世紀時，人們想出了如何把甘蔗汁變成固體結晶的方法，這使它的儲存與運輸都容易得多。當中國皇帝第一次嚐到糖時，他印象深刻到請印度農民來教中國人如何種甘蔗。
+
+糖從印度與中國沿著貿易路線進入中東。十一世紀期間，前往中東的歐洲騎士——也就是十字軍——發現了糖，並把它帶回家鄉。在歐洲，糖成為富人的奢侈品，甚至被稱為「白色黃金」。它稀有到只有富人才負擔得起。舉例來說，據說英格蘭的伊莉莎白一世女王吃糖吃得太多，以致於牙齒變黑。可能正因為如此，黑牙變成了一種時尚，有些窮人甚至把自己的牙齒塗黑來模仿富人。
+
+最終，歐洲人想要自己種糖。1493 年，哥倫布把甘蔗帶到了美洲。加勒比海與南美洲設立了種植園，非洲奴隸被迫在那裡工作。這是歷史上黑暗的一章，卻也使糖變得更便宜、更容易為每個人所取得。
+
+如今，糖隨處可得，為全世界的人所享用。然而，那段把甜味帶上我們餐桌的漫長——有時也苦澀——的旅程，仍然值得我們記住。`,
+      questions:[
+        { n:37, kind:"主旨題（標題）",
+          stem:"What is the best title for this passage?",
+          options:{A:"From Luxury to Everyday Staple: The Global History of Sugar 從奢侈品到日常必需：糖的全球史",B:"The Supposed Health Benefits of Sugar Consumption in Daily Life 日常攝取糖所謂的健康益處",C:"The Spread of Crops Across Continents: A Case Study of Sugar 作物的跨洲傳播：以糖為個案研究",D:"Sugar: A Hidden Ingredient in Medicine, Religion, and Daily Life 糖：醫藥、宗教與日常生活中隱藏的成分"}, answer:"A",
+          translation:"這篇文章最適合的標題是什麼？",
+          explain:{A:"✔ 第一段就把全文的架構說清楚了：From a rare luxury to a common kitchen item（從罕見的奢侈品到廚房裡的尋常用品）加上 spans thousands of years and many continents（橫跨數千年與多個大洲）。前者對應 From Luxury to Everyday Staple，後者對應 The Global History，兩個部分都涵蓋到了。",B:"✘ 全文完全沒有討論糖的健康益處；唯一與健康有關的只有伊莉莎白一世牙齒變黑，而那是負面的例子。",C:"✘ 範圍與重點都偏了。文章談的是糖在人類社會中的身分變化（奢侈品→日用品）與其中的歷史代價，而不是把糖當成「作物傳播」的學術個案；而且 A Case Study 的框架也與這篇敘事性的科普文調性不合。",D:"✘ medicine（醫藥）與 religion（宗教）在全文中完全沒有出現，是憑空添加的範圍。"},
+          evidence:"第 1 段：From a rare luxury to a common kitchen item, sugar has a long and surprising history that spans thousands of years and many continents.",
+          notes:[{term:"標題題的兩個檢驗", pos:"閱讀技巧", gloss:"① 涵蓋度：標題必須蓋住全文主軸，不能只涵蓋一段（如 (C) 只抓到傳播）② 不超範圍：標題不能加入文中沒提到的主題（如 (D) 的醫藥與宗教、(B) 的健康益處）。最佳標題通常是第一段或最後一段的改寫。"},{term:"staple", pos:"n. / adj.", gloss:"主食、必需品（a staple food／rice is a staple in Asia）；adj. 主要的（a staple ingredient）。注意另有「釘書針」之義。相關：luxury 奢侈品／commodity 大宗商品。"},{term:"span", pos:"v. / n.", gloss:"橫跨、持續（a history that spans thousands of years／a bridge spanning the river）／n. 期間、跨距（a lifespan 壽命／an attention span 注意力持續時間）。"}]},
+
+        { n:38, kind:"寫作意圖題",
+          stem:"Why did the author mention that some poor people painted their teeth black?",
+          options:{A:"To prove that sugar was cheap enough for all social classes to enjoy freely. 為了證明糖便宜到各個社會階層都能自由享用。",B:"To highlight the role of sugar in medicine during the Renaissance. 為了強調文藝復興時期糖在醫藥上的角色。",C:"To explain why Queen Elizabeth I suffered from poor dental health. 為了解釋伊莉莎白一世為何牙齒健康不佳。",D:"To show that fashion trends sometimes reflected wealth-related habits. 為了說明時尚潮流有時反映了與財富相關的習慣。"}, answer:"D",
+          translation:"作者為什麼要提到有些窮人把自己的牙齒塗黑？",
+          explain:{D:"✔ 第三段的因果鏈是：糖貴到只有富人吃得起 → 女王吃太多糖導致牙齒變黑 → black teeth became fashionable（黑牙變成時尚）→ 窮人 painted their teeth to mimic the wealthy（塗黑牙齒來模仿富人）。窮人模仿的其實是「有錢的象徵」，所以這個細節正是用來說明流行風潮如何反映財富習慣。",A:"✘ 與文意正好相反。同一段明說 It was so rare that only the wealthy could afford it（稀有到只有富人買得起）——窮人買不到糖，才需要用「塗黑」來假裝，正好證明糖並不便宜。",B:"✘ medicine（醫藥）與 Renaissance（文藝復興）在全文中都沒有出現，是憑空添加的內容。",C:"✘ 因果方向顛倒。女王牙齒變黑的原因是 consumed so much sugar（吃太多糖），而窮人塗牙是這件事的「後續結果」，不是它的解釋。"},
+          evidence:"第 3 段：black teeth became fashionable, and some poor people even painted their teeth to mimic the wealthy.",
+          notes:[{term:"寫作意圖題的解法", pos:"閱讀技巧", gloss:"問 Why did the author mention…? 時，答案不在那個細節本身，而在它「服務於哪個論點」。做法是往前讀一到兩句找出該段的主張（此處是糖作為財富象徵），再看這個細節如何支撐它。"},{term:"mimic", pos:"v.", gloss:"模仿（mimic the wealthy／mimic an accent）。n. mimicry 模仿、擬態（生物學上的保護性擬態）。同義：imitate／copy／emulate（偏正面的效法）。", ex:"Street vendors quickly mimicked the luxury brand's packaging.", exZh:"街頭攤販很快就模仿了這個奢侈品牌的包裝。"},{term:"reportedly", pos:"adv.", gloss:"據報導、據說（Queen Elizabeth I reportedly consumed so much sugar…）。用來標示這是未經完全證實的說法。同類：allegedly／supposedly／apparently。ED 雜誌 Nov. Week 1+2 第 34 題考過這個字。"}]},
+
+        { n:39, kind:"推論題（段落）",
+          stem:"Which conclusion can best be drawn from the information in the 4th paragraph?",
+          options:{A:"Columbus's voyages allowed sugar to grow in Europe's colder climate. 哥倫布的航行讓糖能在歐洲較冷的氣候中生長。",B:"Sugar farming in the Americas helped lower costs, making it widely available. 美洲的糖業種植有助於降低成本，使糖得以普及。",C:"Sugar lost its luxury value in Europe when plantations failed to produce large amounts. 當種植園無法大量生產時，糖在歐洲失去了它的奢侈價值。",D:"The demand for sugar stayed local because Europe had little interest in sweeteners. 由於歐洲對甜味劑興趣不大，糖的需求始終停留在地方性的層次。"}, answer:"B",
+          translation:"從第四段的訊息可以得出下列哪一個結論？",
+          explain:{B:"✔ 第四段的最後一句就是依據：This was a dark chapter in history that helped make sugar cheaper and more available to everyone（這是歷史上黑暗的一章，卻也使糖變得更便宜、更容易為每個人所取得）。而前面交代了機制：哥倫布把甘蔗帶到美洲、設立種植園、奴隸被迫勞動——這正是 Sugar farming in the Americas helped lower costs 的改寫。",A:"✘ 段落說的是把甘蔗帶到 the Americas（美洲）並在 the Caribbean and South America（加勒比海與南美洲）設立種植園，正因為歐洲本身的氣候不適合，才要到熱帶殖民地去種。選項把種植地點說成歐洲，與文意相反。",C:"✘ 兩處都錯：種植園並沒有 failed to produce（生產失敗），反而產量大到讓糖變便宜；而糖之所以不再是奢侈品，原因是供給增加而非生產失敗。",D:"✘ 與整段的前提矛盾。段落開頭就說 Europeans wanted to grow sugar for themselves（歐洲人想自己種糖），顯示需求強烈；而第三段的 white gold（白色黃金）更證明歐洲極為渴求。"},
+          evidence:"第 4 段：Plantations were set up in the Caribbean and South America… This was a dark chapter in history that helped make sugar cheaper and more available to everyone.",
+          notes:[{term:"段落推論題的範圍", pos:"閱讀技巧", gloss:"題目指定 the 4th paragraph 時，答案必須完全出自該段，不能靠別段補足，也不能超出該段所說的範圍。本題四個選項分別犯了「地點弄錯」「因果弄反」「前提矛盾」三種錯誤，只有 (B) 是段末句的忠實改寫。"},{term:"plantation", pos:"n.", gloss:"（熱帶作物的）大型種植園（a sugar／coffee plantation）。v. plant 種植。相關：slave 奴隸（n. slavery 奴隸制）／be forced to V 被迫做某事／a dark chapter 黑暗的一章。"},{term:"available", pos:"adj.", gloss:"可取得的、買得到的（make sugar more available／be widely available）。n. availability。對照 accessible 容易接觸到的（本卷第一篇與第二篇都用過）。"}]},
+
+        { n:40, kind:"排序題",
+          stem:"Which sequence shows the correct chronological order of sugar's development and spread? (a. Europeans discovered sugar during the Crusades. / b. People in New Guinea chewed sugarcane stalks. / c. Columbus brought sugarcane to the Americas. / d. Indians learned to crystallize sugarcane juice.)",
+          options:{A:"a → b → c → d",B:"a → c → d → b",C:"b → d → a → c",D:"b → c → d → a"}, answer:"C",
+          translation:"下列哪一個順序正確呈現了糖的發展與傳播的時間先後？（a. 歐洲人在十字軍東征期間發現糖。／b. 新幾內亞人嚼甘蔗莖桿。／c. 哥倫布把甘蔗帶到美洲。／d. 印度人學會把甘蔗汁結晶化。）",
+          explain:{C:"✔ 把文章中的四個時間點抓出來排序即可：b 是 as far back as 10,000 years ago（遠至一萬年前，新幾內亞）→ d 是 around the 7th century（約七世紀，印度結晶化）→ a 是 During the 11th century（十一世紀，十字軍）→ c 是 In 1493（哥倫布）。所以順序是 b → d → a → c。",A:"✘ 把 a（十一世紀）放在最前面，但新幾內亞嚼甘蔗（b）早了約一萬年；而且 c（1493 年）排在 d（七世紀）之前，也與文章的時間完全相反。",B:"✘ 同樣以 a 開頭，而且把 b（最早的一萬年前）放到最後，是四個選項中順序錯得最徹底的一個。",D:"✘ 開頭的 b 是對的，但接著把 c（1493 年）排在 d（七世紀）與 a（十一世紀）之前，順序顛倒。這是最容易誤選的選項——只要記得哥倫布是 1493 年、必定最晚，就能排除。"},
+          evidence:"第 2 段：as far back as 10,000 years ago（b）／around the 7th century（d）；第 3 段：During the 11th century（a）；第 4 段：In 1493（c）。",
+          notes:[{term:"排序題的解法", pos:"閱讀技巧", gloss:"① 先回文章把每個選項對應的「時間詞」圈出來（10,000 years ago／the 7th century／the 11th century／1493）② 不必讀懂全文，只需比對這幾個時間點 ③ 先確定「最早」與「最晚」通常就能刪掉一半選項——本題只要認出 b 最早、c 最晚，四選項立刻只剩 (C)。"},{term:"as far back as", pos:"片語", gloss:"遠至（某個久遠的時間）（as far back as 10,000 years ago／as far back as the 1960s）。相關：date back to 追溯至（本卷第 17 題的誘答）／trace sth back to 把…追溯到。"},{term:"crystallize", pos:"v.", gloss:"使結晶、（想法）具體成形（crystallize sugarcane juice／My ideas began to crystallize.）。n. crystal 結晶、水晶（solid crystals 固體結晶）。相關：stalk 莖桿／chew on sth 嚼／trade routes 貿易路線。"}]}
+      ]
+    }]
+  },
+
+  {
+    id:"tr", label:"五、翻譯", score:"7%（第 41-42 題）",
+    groups:[{
+      questions:[
+        { n:41, kind:"中譯英 3%",
+          stem:"公司應請人力資源部清楚解釋請病假的規定。",
+          answerText:"Companies should ask human resources to clearly explain the rules for taking sick leave.",
+          why:"三個給分段落：Companies should ask human resources ／ to clearly explain ／ the rules for taking sick leave。「請某人做某事」用 ask sb to V；「人力資源部」用 human resources（常作不可數，亦可寫 the human resources department 或縮寫 HR）。「清楚解釋」把副詞放在 to 與 explain 之間（to clearly explain）是現代英文接受的分裂不定詞，也可寫成 to explain…clearly。「請病假的規定」用 the rules for taking sick leave，介系詞用 for 表「關於…的規定」，動名詞 taking 不可漏。",
+          notes:[{term:"ask sb to V", pos:"句型", gloss:"請某人做某事（ask human resources to explain…）。對照 ask sb for sth 向某人要某物／ask after sb 問候某人（片語書 Unit 06~10 第 2 題考過）。注意 ask 後面接受詞＋不定詞，不可用 that 子句。", ex:"They asked the committee to review the policy.", exZh:"他們請委員會重新檢討這項政策。"},{term:"take sick leave", pos:"片語", gloss:"請病假（take sick leave／be on sick leave 正在請病假／paid sick leave 有薪病假，本卷第二篇出現過）。n. leave 休假（on leave 休假中／maternity leave 產假）。注意 leave 當此義是不可數。"},{term:"the rules for / on", pos:"用法", gloss:"關於…的規定（the rules for taking sick leave／the rules on overtime）。相關：human resources (HR) 人力資源部／regulations 法規／guidelines 準則。"}]},
+
+        { n:42, kind:"中譯英 4%",
+          stem:"在流感季節，病情嚴重的員工可能需要提供診斷證明，而其他人則會被鼓勵接種流感疫苗。",
+          answerText:"During flu season, employees who are seriously ill may need to provide a medical certificate, while others are encouraged to get a flu shot.",
+          why:"四個給分段落：During flu season ／ employees who are seriously ill ／ may need to provide a medical certificate ／ while others are encouraged to get a flu shot。「在流感季節」用 During flu season（flu season 慣用不加冠詞）。「病情嚴重的員工」用關係子句 employees who are seriously ill 修飾，注意主詞是複數所以用 are，動詞 may need 也要配合複數。「而其他人則…」用 while 表對比（不是「當…時」），others 泛指其他人不加 the。「被鼓勵」用被動 are encouraged to V，「接種流感疫苗」用 get a flu shot（本卷第二篇正是用這個說法）。",
+          notes:[{term:"while 表對比", pos:"用法", gloss:"而、然而（…may need a certificate, while others are encouraged to…）。此義與 whereas 同義，用來並列兩種不同的情況，不是「當…的時候」。本卷第二篇也用 while others fear that…（第 12 題的題幹）表同樣的對比。", ex:"Some staff work on site, while others work remotely.", exZh:"有些員工在現場工作，其他人則遠距工作。"},{term:"a medical certificate / a doctor's note", pos:"字彙", gloss:"診斷證明、醫師證明（submit a medical certificate／a doctor's note，後者較口語，本卷第二篇第 15 題的題幹用的正是 a doctor's note）。相關：a diagnosis 診斷／sick leave 病假。"},{term:"get a flu shot", pos:"片語", gloss:"接種流感疫苗（get／have a flu shot；英式多用 a flu jab）。相關：be vaccinated against sth 接種疫苗防某病／roll up one's sleeves 捲起袖子打針（本卷第 16 題考過）。注意「被鼓勵」是 be encouraged to V，介系詞不可誤加。"}]}
+      ]
+    }]
+  }
+  ]
+};
+
+/* ==========================================================================
+   ②  以下為程式碼，一般情況不需要修改。
+   ========================================================================== */
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const wordOf = q => q.options ? q.options[q.answer] : (q.answerText || '');
+const allQ = [];
+EXAM.sections.forEach(s => s.groups.forEach(g => g.questions.forEach(q => { q.__sid = s.id; allQ.push(q); })));
+const findQ = (n, sid) => allQ.find(q => String(q.n) === String(n) && (sid == null || q.__sid === sid));
+
+document.getElementById('brand').textContent = EXAM.brand;
+document.getElementById('examTitle').textContent = EXAM.title;
+document.getElementById('examMeta').textContent = EXAM.meta;
+
+let noteCount = 0;
+allQ.forEach(q => noteCount += (q.notes || []).length);
+
+const nav = document.getElementById('nav');
+EXAM.sections.forEach(s => {
+  const a = document.createElement('a');
+  a.className = 'chip'; a.href = '#sec-' + s.id; a.textContent = s.label.replace(/^[一二三四五六]、/, m => m);
+  nav.appendChild(a);
+});
+const noteChip = document.createElement('a');
+noteChip.className = 'chip'; noteChip.href = '#side'; noteChip.textContent = '重點表 ' + noteCount;
+nav.appendChild(noteChip);
+const toggleAll = document.createElement('button');
+toggleAll.className = 'chip solid'; toggleAll.textContent = '全部展開';
+nav.appendChild(toggleAll);
+
+function renderPassage(g, i, sid) {
+  let html = esc(g.passage);
+  g.questions.forEach(q => {
+    if (!q.evidence) return;
+    const t = esc(q.evidence);
+    if (html.includes(t)) html = html.replace(t, `<span class="hl ev" data-ev="${q.n}">${t}</span>`);
+  });
+  html = html.replace(/__(\d+)__/g, (m, n) =>
+    `<button class="blank" data-blank="${n}" aria-label="第 ${n} 題空格">${n}</button>`);
+  const body = '<div class="passage">' +
+    html.split(/\n{2,}/).map(p => '<p>' + p.replace(/\n/g, ' ') + '</p>').join('') + '</div>';
+  if (!g.zh) return body;
+  const id = sid + '-' + i;
+  return body +
+    `<button class="zhbtn" data-zh="${id}">全文中譯</button>` +
+    `<div class="zhbox" id="zh-${id}">` +
+      g.zh.split(/\n{2,}/).map(p => '<p>' + esc(p).replace(/\n/g, ' ') + '</p>').join('') +
+    '</div>';
+}
+
+function renderQ(q) {
+  const parts = [];
+  if (q.options) {
+    const ks = Object.keys(q.options);
+    parts.push('<div class="opts">' + ks.map(k =>
+      `<div class="opt"><span class="opt-k">(${k})</span><span>${esc(q.options[k])}</span></div>`).join('') + '</div>');
+  }
+  const head = `<div class="q-tag"><span class="q-n">${String(q.n).padStart(2,'0')}</span><span class="q-kind">${esc(q.kind || '')}</span></div>` +
+    (q.prompt ? `<p class="prompt">${esc(q.prompt)}</p>` : '') +
+    (q.stem ? `<p class="stem">${esc(q.stem).replace(/\n/g,'<br>')}</p>` : '');
+
+  let ans = '';
+  if (q.answers) {
+    ans = '<ul class="fills">' + q.answers.map(a =>
+      `<li class="fill"><span class="fill-k">${esc(a.k)}</span><span class="fill-w hl" data-ansmulti>${esc(a.w)}</span><span class="fill-n">${esc(a.note || '')}</span></li>`).join('') + '</ul>';
+  } else {
+    const label = q.options ? `(${q.answer}) ${esc(wordOf(q))}` :
+      (q.answer ? `(${q.answer}) ${esc(q.answerText)}` : esc(q.answerText));
+    ans = `<p class="ans"><span class="ans-k">答案</span><span class="ans-v hl" data-ans="${q.n}">${label}</span></p>`;
+  }
+
+  let expl = '';
+  if (q.explain) {
+    expl = '<ul class="lines">' + Object.keys(q.options).map(k => {
+      const right = q.multi ? q.multi.includes(k) : k === q.answer;
+      return `<li class="line ${right ? 'right' : 'wrong'}"><span class="line-k">(${k})</span><span>${esc(q.explain[k] || '')}</span></li>`;
+    }).join('') + '</ul>';
+  }
+  const why = q.why ? `<p class="why">${esc(q.why)}</p>` : '';
+  const sample = q.sample ? `<div class="sample"><p class="note-h">參考範文</p>` +
+    q.sample.split(/\n{2,}/).map(p => `<p>${esc(p).replace(/\n/g,' ')}</p>`).join('') + '</div>' : '';
+  const evid = q.evidence ? `<p class="evid"><span>文中依據</span>${esc(q.evidence)}</p>` : '';
+  const notes = (q.notes || []).length ? `<div class="note"><p class="note-h">重點整理</p>` +
+    q.notes.map(nt => `<p class="note-i"><span class="term">${esc(nt.term)}</span><span class="pos">${esc(nt.pos || '')}</span><span class="gloss">${esc(nt.gloss || '')}</span>` +
+      (nt.ex ? `<span class="ex">${esc(nt.ex)}<i>${esc(nt.exZh || '')}</i></span>` : '') + '</p>').join('') + '</div>' : '';
+
+  return `<article class="q" id="q-${q.__sid}-${q.n}" data-n="${q.n}" data-sid="${q.__sid}">
+    <div class="q-top">${head}${parts.join('')}
+      <button class="reveal" aria-expanded="false" aria-controls="body-${q.n}">看詳解</button>
+    </div>
+    <div class="body" id="body-${q.n}">
+      ${ans}${q.translation ? `<p class="zh">${esc(q.translation)}</p>` : ''}${expl}${why}${evid}${sample}${notes}
+    </div>
+  </article>`;
+}
+
+document.getElementById('main').innerHTML = EXAM.sections.map((s, i) => `
+  <section class="sec" id="sec-${s.id}">
+    <div class="sec-head">
+      <span class="sec-num">${String(i+1).padStart(2,'0')}</span>
+      <h2 class="sec-label">${esc(s.label)}</h2>
+      <span class="sec-score">${esc(s.score || '')}</span>
+    </div>
+    ${s.instruction ? `<p class="sec-inst">${esc(s.instruction)}</p>` : ''}
+    ${s.bank ? `<div class="bank${s.bankWide ? ' wide' : ''}">${Object.keys(s.bank).map(k =>
+      `<div class="bank-i" data-bank="${k}"><span>(${k})</span>${esc(s.bank[k])}</div>`).join('')}</div>` : ''}
+    ${s.groups.map((g, gi) => (g.passage ? renderPassage(g, gi, s.id) : '') + g.questions.map(renderQ).join('')).join('')}
+  </section>`).join('');
+
+const items = [];
+allQ.forEach(q => (q.notes || []).forEach(nt => items.push({ ...nt, n: q.n, sid: q.__sid })));
+document.getElementById('side').innerHTML = `
+  <p class="side-h">Notes</p>
+  <p class="side-t">本卷重點 ${items.length} 則</p>
+  <ul class="card-list">${items.map(nt => `
+    <li class="card-item"><a href="#q-${nt.sid}-${nt.n}">
+      <span class="jump">第 ${nt.n} 題</span>
+      <span class="term">${esc(nt.term)}</span><span class="pos">${esc(nt.pos || '')}</span>
+      <div class="gloss">${esc(nt.gloss || '')}</div>
+    </a></li>`).join('')}</ul>
+  <p class="side-note">點任一則可跳到出處題目。用瀏覽器列印（Ctrl／⌘ + P）會自動展開全部詳解與中譯，可直接印成講義。</p>`;
+
+document.getElementById('foot').textContent = `共 ${allQ.length} 題 · ${EXAM.footer}`;
+
+function setOpen(card, open) {
+  card.classList.toggle('open', open);
+  const btn = card.querySelector('.reveal');
+  btn.setAttribute('aria-expanded', open);
+  btn.firstChild.nodeValue = open ? '收合詳解' : '看詳解';
+  const n = card.dataset.n;
+  const sec = card.closest('.sec') || document;
+  card.querySelectorAll('.hl').forEach(h => h.classList.toggle('on', open));
+  const ev = sec.querySelector(`[data-ev="${n}"]`);
+  if (ev) ev.classList.toggle('on', open);
+  const q = findQ(n, card.dataset.sid);
+  if (q && q.answer && q.answerText) {
+    const bi = sec.querySelector(`[data-bank="${q.answer}"]`);
+    if (bi) bi.classList.toggle('used', open);
+  }
+  const bl = sec.querySelector(`[data-blank="${n}"]`);
+  if (bl) {
+    if (open) {
+      bl.classList.add('filled');
+      bl.innerHTML = `<sup>${n}</sup><span class="hl">${esc(wordOf(q))}</span>`;
+      requestAnimationFrame(() => bl.querySelector('.hl').classList.add('on'));
+    } else {
+      bl.classList.remove('filled');
+      bl.textContent = n;
+    }
+  }
+}
+document.addEventListener('click', e => {
+  const rv = e.target.closest('.reveal');
+  if (rv) { const c = rv.closest('.q'); setOpen(c, !c.classList.contains('open')); return; }
+  const zb = e.target.closest('.zhbtn');
+  if (zb) { zb.classList.toggle('on'); document.getElementById('zh-' + zb.dataset.zh).classList.toggle('on'); return; }
+  const bl = e.target.closest('.blank');
+  if (bl) {
+    const n = bl.dataset.blank;
+    const sec = bl.closest('.sec');
+    const c = (sec && sec.querySelector('.q[data-n="' + n + '"]'))
+           || document.querySelector('.q[data-n="' + n + '"]');
+    if (!c) return;
+    if (!c.classList.contains('open')) setOpen(c, true);
+    c.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
+toggleAll.addEventListener('click', () => {
+  const open = toggleAll.textContent === '全部展開';
+  document.querySelectorAll('.q').forEach(c => setOpen(c, open));
+  toggleAll.textContent = open ? '全部收合' : '全部展開';
+});
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('.q').forEach(c => setOpen(c, true));
+  document.querySelectorAll('.zhbox').forEach(b => b.classList.add('on'));
+  toggleAll.textContent = '全部收合';
+});
+</script>
+</body>
+</html>

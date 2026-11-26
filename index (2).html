@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reading Test 詳解｜Week 4: Units 13-16 (Nov.)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E7EBEE; --card:#FDFDFC;
+  --ink:#10202F; --ink-2:#56687A; --ink-3:#7C8B99;
+  --rule:#C6D0D8; --pen:#17457E; --hl:#FFE773; --miss:#A34234;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono','Cascadia Mono',Menlo,Consolas,monospace;
+  --read:'Literata',Georgia,'Times New Roman',serif;
+  --han:'PingFang TC','Microsoft JhengHei','Noto Sans TC',system-ui,sans-serif;
+  --maxw:1180px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--han);font-size:16px;line-height:1.75}
+:focus-visible{outline:2px solid var(--pen);outline-offset:3px;border-radius:2px}
+
+.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule)}
+.top-in{max-width:var(--maxw);margin:0 auto;padding:14px 24px 0}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);margin:0 0 4px}
+.title{font-size:23px;font-weight:600;margin:0;line-height:1.3}
+.meta{font-family:var(--mono);font-size:12px;color:var(--ink-2);margin:4px 0 0;letter-spacing:.04em}
+.bar{display:flex;gap:7px;align-items:center;flex-wrap:wrap;padding:12px 0 11px;margin-top:10px;border-top:1px solid var(--rule)}
+.chip{font-family:var(--mono);font-size:12px;letter-spacing:.04em;border:1px solid var(--rule);background:transparent;color:var(--ink-2);padding:5px 10px;border-radius:999px;cursor:pointer;text-decoration:none;transition:border-color .15s,color .15s,background .15s}
+.chip:hover{border-color:var(--pen);color:var(--pen)}
+.chip.solid{margin-left:auto;border-color:var(--ink);color:var(--ink);font-weight:500}
+.chip.solid:hover{background:var(--ink);color:var(--card)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:28px 24px 96px;display:grid;gap:36px;grid-template-columns:minmax(0,1fr) 288px}
+@media (max-width:1020px){.wrap{grid-template-columns:minmax(0,1fr);gap:44px}}
+
+.sec{margin:0 0 48px;scroll-margin-top:136px}
+.sec-head{display:flex;align-items:baseline;gap:12px;padding-bottom:9px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.sec-num{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--ink-3)}
+.sec-label{font-size:18px;font-weight:600;margin:0}
+.sec-score{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-left:auto}
+.sec-inst{font-size:13.5px;color:var(--ink-2);margin:9px 0 0}
+
+.bank{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:16px 0 0}
+@media (max-width:760px){.bank{grid-template-columns:repeat(2,1fr)}}
+.bank-i{background:var(--card);padding:8px 10px;font-family:var(--read);font-size:14.5px}
+.bank-i span{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-right:5px}
+.bank-i.used{background:#F2F5F6;color:var(--ink-3)}
+
+.passage{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--ink);padding:22px 26px;margin:18px 0 0;font-family:var(--read);font-size:16.5px;line-height:1.95;color:#1a2836}
+.passage p{margin:0 0 1em}
+.passage p:last-child{margin-bottom:0}
+.blank{display:inline-block;min-width:70px;text-align:center;border:0;border-bottom:1.5px solid var(--ink);font-family:var(--mono);font-size:13px;color:var(--pen);cursor:pointer;background:none;padding:0 4px;line-height:1.4}
+.blank:hover{background:rgba(23,69,126,.07)}
+.blank.filled{font-family:var(--read);font-size:16.5px;color:var(--ink);border-bottom-color:transparent;min-width:0}
+.blank sup{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-right:2px}
+.zhbtn{display:block;margin:0 0 18px;background:var(--card);border:1px solid var(--rule);border-top:0;width:100%;text-align:left;padding:8px 26px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--pen);cursor:pointer}
+.zhbtn:hover{color:var(--ink)}
+.zhbtn::after{content:' ▾'}
+.zhbtn.on::after{content:' ▴'}
+.zhbox{display:none;background:#F7F9FA;border:1px solid var(--rule);border-top:0;padding:18px 26px;margin:0 0 18px;font-size:15px;line-height:1.95;color:#22323F}
+.zhbox.on{display:block}
+.zhbox p{margin:0 0 .9em}
+.zhbox p:last-child{margin:0}
+
+.q{background:var(--card);border:1px solid var(--rule);margin:14px 0 0;scroll-margin-top:142px}
+.q-top{padding:16px 22px 14px}
+.q-tag{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.q-n{font-family:var(--mono);font-size:13px;font-weight:600}
+.q-kind{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.prompt{font-size:14.5px;line-height:1.85;color:var(--ink-2);margin:0 0 11px;padding-left:11px;border-left:2px solid var(--rule)}
+.stem{font-family:var(--read);font-size:16.5px;line-height:1.85;margin:0 0 13px;color:#1a2836}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:2px 20px}
+@media (max-width:640px){.opts{grid-template-columns:1fr}}
+.opt{display:flex;gap:9px;font-family:var(--read);font-size:15.5px;line-height:1.6;padding:3px 0;color:#243342}
+.opt-k{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);padding-top:2px;flex:none}
+.reveal{display:block;width:100%;text-align:left;margin-top:14px;background:none;border:0;border-top:1px dashed var(--rule);padding:11px 0 0;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--pen);cursor:pointer}
+.reveal:hover{color:var(--ink)}
+.reveal::after{content:' ▾'}
+.q.open .reveal::after{content:' ▴'}
+.q.open .reveal{color:var(--ink-3)}
+
+.body{display:none;border-top:1px solid var(--rule);background:#F7F9FA;padding:18px 22px 20px}
+.q.open .body{display:block}
+.ans{display:flex;align-items:baseline;gap:10px;margin:0 0 13px;flex-wrap:wrap}
+.ans-k{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--ink-3);flex:none;padding-top:2px}
+.ans-v{font-family:var(--read);font-size:18px;font-weight:600}
+.fills{list-style:none;margin:0 0 13px;padding:0}
+.fill{display:flex;gap:11px;align-items:baseline;padding:7px 0;border-bottom:1px dotted var(--rule)}
+.fill-k{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);flex:none;width:26px}
+.fill-w{font-family:var(--read);font-size:17px;font-weight:600;flex:none}
+.fill-n{font-size:13.5px;color:var(--ink-2);line-height:1.7}
+.zh{font-size:15px;line-height:1.85;margin:0 0 14px;color:#22323F}
+.why{font-size:14.5px;line-height:1.85;margin:0 0 4px;color:#22323F;border-top:1px solid var(--rule);padding-top:12px}
+.lines{margin:0;padding:0;list-style:none;border-top:1px solid var(--rule)}
+.line{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--rule);font-size:14.5px;line-height:1.75;color:var(--ink-2)}
+.line-k{font-family:var(--mono);font-size:12.5px;flex:none;width:28px;color:var(--ink-3);padding-top:2px}
+.line.right{color:var(--ink)}
+.line.right .line-k{color:var(--ink);font-weight:600}
+.line.right .line-k::after{content:'✓';display:block;font-size:12px;line-height:1.3}
+.line.wrong .line-k{color:var(--miss);opacity:.85}
+.line.wrong .line-k::after{content:'✗';display:block;font-size:12px;line-height:1.3}
+.evid{margin:15px 0 0;font-family:var(--read);font-size:14.5px;line-height:1.8;color:var(--ink-2);padding-left:13px;border-left:2px solid var(--hl)}
+.evid span{font-family:var(--han);font-size:11px;letter-spacing:.14em;color:var(--ink-3);display:block;margin-bottom:3px}
+
+.hl{background-image:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 90%,transparent 90%);background-repeat:no-repeat;background-size:0% 100%;transition:background-size .55s cubic-bezier(.2,.75,.3,1);border-radius:1px}
+.hl.on{background-size:100% 100%}
+
+.sample{margin:15px 0 0;border:1px solid var(--rule);border-left:3px solid var(--ink);background:var(--card);padding:16px 20px}
+.sample p:not(.note-h){font-family:var(--read);font-size:15.5px;line-height:1.9;color:#1a2836;margin:0 0 1em}
+.sample p:last-child{margin-bottom:0}
+.bank.wide{grid-template-columns:1fr}
+.bank.wide .bank-i{font-size:15px;line-height:1.7;padding:10px 14px}
+.note{margin:15px 0 0;border:1px solid var(--rule);background:var(--card);padding:13px 16px}
+.note-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 9px}
+.note-i{margin:0;padding:9px 0 0;border-top:1px dotted var(--rule)}
+.note-i:first-of-type{border-top:0;padding-top:0}
+.term{font-family:var(--read);font-size:16px;font-weight:600}
+.pos{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin:0 6px}
+.gloss{font-size:14.5px}
+.ex{font-family:var(--read);font-size:14px;color:var(--ink-2);line-height:1.7;margin:3px 0 0;display:block}
+.ex i{font-family:var(--han);font-style:normal;font-size:13px;color:var(--ink-3);display:block}
+
+.side{position:sticky;top:136px;align-self:start;max-height:calc(100vh - 164px);overflow:auto;padding-right:4px}
+@media (max-width:1020px){.side{position:static;max-height:none;scroll-margin-top:136px}}
+.side-h{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin:0 0 3px}
+.side-t{font-size:16px;font-weight:600;margin:0 0 14px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.card-list{margin:0;padding:0;list-style:none}
+.card-item{border-bottom:1px solid var(--rule);padding:11px 0}
+.card-item a{display:block;text-decoration:none;color:inherit}
+.card-item a:hover .term{background:var(--hl)}
+.jump{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);float:right;padding-top:5px}
+.side-note{font-size:12.5px;color:var(--ink-3);line-height:1.7;margin:16px 0 0}
+.foot{max-width:var(--maxw);margin:0 auto;padding:0 24px 48px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+@media print{
+  body{background:#fff;font-size:10.5pt}
+  .top,.side,.reveal,.foot,.zhbtn{display:none!important}
+  .wrap{display:block;max-width:none;padding:0}
+  .q .body{display:block!important}
+  .zhbox{display:block!important}
+  .q{break-inside:avoid;border-color:#999;margin-bottom:9pt}
+  .passage{break-inside:avoid}
+  .hl{background-size:100% 100%!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <p class="eyebrow" id="brand"></p>
+    <h1 class="title" id="examTitle"></h1>
+    <p class="meta" id="examMeta"></p>
+    <nav class="bar" id="nav"></nav>
+  </div>
+</header>
+
+<div class="wrap"><main id="main"></main><aside class="side" id="side"></aside></div>
+<p class="foot" id="foot"></p>
+
+<script>
+/* ==========================================================================
+   ①  題目與詳解全部寫在下面的 EXAM 物件裡。要改題、加題、修字，只動這裡。
+
+   section（大題）：{ id, label, score, instruction, bank?, groups: [...] }
+   group（同一篇文章的題組）：{ passage?, zh?, questions: [...] }
+       passage 裡寫 __7__ 就會變成可點的空格，數字對應題號。
+       zh 是全文中譯，會做成可展開的按鈕。
+
+   question 依題型三選一：
+     選擇題   { n, kind, stem, options:{A..D}, answer:"B", translation, explain:{A..D}, evidence?, notes? }
+     單一填答 { n, kind, stem, answerText:"prejudice", why, notes? }
+     多格填答 { n, kind, prompt, stem, answers:[{k:"①", w:"字", note:"說明"}], notes? }
+   ========================================================================== */
+const EXAM = {
+  brand: "English Digest Weekly Quiz",
+  title: "Reading Test 詳解｜Week 4: Units 13-16 (Nov.)",
+  meta: "Instructor: Howard Chang　·　範圍：ED 雜誌 Nov. Week 4",
+  footer: "ED 雜誌 Nov. Week 4 Reading Test",
+  sections: [
+  {
+    id:"cl", label:"綜合測驗",
+    groups:[{
+      passage:`For many students, the hardest part of Lunar New Year is not the long trip home but the dinner table. Before the soup is even served, an aunt asks about your grades, an uncle questions your choice of school, and someone brings up a cousin who has just been admitted to a top university. No one means any harm, and each remark seems __1__ harmless on its own. Yet by the time the fruit plate arrives, you feel strangely drained. Psychologists would say that it is repeated __2__ to such comments, not any single one of them, that wears you down. They even have a name for the people who make them: "hasslers."
+
+The word may sound amusing. __3__, the science behind it is deadly serious. According to a recent study, each additional hassler in a person's life is associated with a roughly 1.5% faster rate of biological aging and a biological age about nine months older. One possible explanation is that low-level stress, repeated day after day, can trigger inflammation and place extra __4__ on the body. Like a persistent cough that never quite clears up, it rarely seems serious enough to worry about until the damage is done.
+
+Since family gatherings __5__ us to so many of these minor stressors, it helps to have a plan. Setting clear boundaries is a good start. Changing the subject when a question becomes overly personal keeps a harmless chat from __6__ into a heated argument. Brief, neutral replies such as "I'll think about it" or "Maybe" also work well. They __7__ you from endless follow-up questions without sounding rude. Equally important is what happens after the dinner is over. Spending time with __8__ can relieve much of the stress that a single evening of questions creates. Just as a balanced diet keeps the body healthy, a balanced circle of people keeps the mind young.`,
+      zh:`對許多學生來說，農曆新年最難熬的部分不是漫長的返鄉路程，而是餐桌。湯還沒上桌，姑姑就問起你的成績，叔叔質疑你選的學校，還有人提起某個剛考上頂尖大學的表親。沒有人有惡意，而每一句話單獨來看似乎都完全無害。然而等到水果盤端上來時，你卻感到一種說不出的疲憊。心理學家會說，真正把你磨耗掉的，是反覆暴露在這類評論之下，而不是其中任何單獨的一句。他們甚至替說這些話的人取了一個名字：「hasslers（騷擾者）」。
+
+這個詞聽起來或許有點好笑。事實上，它背後的科學非常嚴肅。根據最近一項研究，一個人生活中每多一位 hassler，就與生理老化速度約快百分之一點五、生理年齡大約老九個月有關。一種可能的解釋是，日復一日反覆出現的低強度壓力會引發發炎反應，並對身體造成額外的負擔。就像一陣始終好不了的久咳，它很少嚴重到讓人擔心，直到傷害已經造成。
+
+既然家族聚會讓我們暴露在這麼多微小的壓力源之下，事先有個計畫會很有幫助。設立清楚的界線是個好的開始。當問題變得過於私人時轉換話題，可以避免一場無害的閒聊演變成激烈的爭執。簡短、中性的回答，例如「我會考慮看看」或「也許吧」，效果也很好。它們能保護你免於沒完沒了的追問，又不會顯得無禮。同樣重要的是晚餐結束之後發生的事。花時間和那些如實接納你的朋友相處，可以紓解單單一個晚上的盤問所製造出來的大部分壓力。正如均衡的飲食能讓身體健康，一個均衡的人際圈能讓心靈保持年輕。`,
+      questions:[
+        { n:1, kind:"副詞（搭配）",
+          options:{A:"faithfully 忠實地、忠誠地",B:"deliberately 故意地、刻意地",C:"perfectly 完全地、十分地",D:"solely 僅僅、唯一地"}, answer:"C",
+          translation:"沒有人有惡意，而每一句話單獨來看似乎都完全無害。",
+          explain:{C:"✔ perfectly 在這裡不是「完美地」，而是當強調用的副詞「完全、十分」，perfectly harmless（完全無害）是固定搭配。整句的邏輯是：單獨一句話看起來完全沒問題（on its own），但累積起來就有殺傷力，下一句的 Yet…you feel strangely drained 正是這個轉折。",A:"✘ faithfully 是「忠實地」，用於 serve faithfully（忠心服務）或信件結尾 Yours faithfully；它不能修飾 harmless。",B:"✘ deliberately 是「故意地」，deliberately harmless 會變成「刻意做到無害」，語意很奇怪，而且與前面 No one means any harm（沒有人有惡意）重複又矛盾。",D:"✘ solely 是「僅僅、唯一地」（solely responsible 唯一要負責的）；它強調排他性，無法表達「完全無害」的程度。"},
+          notes:[{term:"perfectly", pos:"adv.", gloss:"① 完全地、十分（當強調用）：perfectly harmless／perfectly clear／perfectly normal／perfectly capable ② 完美地：perform perfectly。考試常考第一義，因為學生容易只記得「完美地」而選錯。", ex:"It is perfectly normal to feel nervous before a speech.", exZh:"演講前會緊張是完全正常的。"},{term:"on its own", pos:"片語", gloss:"單獨來看、本身（each remark seems harmless on its own）；也指「獨自、靠自己」（She did it on her own）。對照 by itself 單獨地／in itself 本身而言（The idea is not bad in itself.）。本卷第 8 題筆記的 a balanced circle 也與這段的論點相關。"},{term:"mean harm", pos:"片語", gloss:"有惡意（No one means any harm.＝沒有人是故意的）。相關：mean well 出於好意／do harm to sb 傷害某人／There's no harm in V-ing 做…沒什麼壞處。注意 harm 是不可數名詞。", ex:"He meant no harm; he was just curious.", exZh:"他沒有惡意，只是好奇而已。"}]},
+
+        { n:2, kind:"名詞（搭配 to）",
+          options:{A:"attachment 依戀、附件",B:"exposure 暴露、接觸",C:"certainty 確定性、必然",D:"obstacle 障礙"}, answer:"B",
+          translation:"心理學家會說，真正把你磨耗掉的，是反覆暴露在這類評論之下，而不是其中任何單獨的一句。",
+          explain:{B:"✔ 兩個線索鎖定答案。結構上空格後面是 to such comments，而 exposure to sth 正是「暴露於、接觸到」的固定搭配；語意上 repeated（反覆的）加上 not any single one of them（而不是單獨的任何一句）說明重點在於「累積接觸」。",A:"✘ attachment 雖然也接 to（an attachment to sb 對某人的依戀），但語意是情感上的依附，與被評論磨耗的負面效果相反。",C:"✘ certainty 的搭配是 with certainty（確定地）或 the certainty that…，不接 to sth，而且「反覆的確定性」語意不通。",D:"✘ obstacle 的搭配是 an obstacle to sth（阻礙…的障礙），文法上雖然可以接 to，但語意是阻擋前進的東西，無法表達「反覆接觸」這個過程。"},
+          notes:[{term:"exposure to", pos:"n. + 搭配", gloss:"暴露於、接觸到（exposure to sunlight／to radiation／to criticism／to a new culture）。v. expose（expose sb to sth；本卷第 5 題的 subject 與它同義）。可以是負面的風險，也可以是正面的接觸機會（exposure to English 接觸英文的機會）。", ex:"Long exposure to loud noise can damage hearing.", exZh:"長時間暴露在噪音中會損害聽力。"},{term:"It is…that…（分裂句）", pos:"句型", gloss:"it is repeated exposure to such comments, not any single one of them, that wears you down。這是強調句（分裂句），把要強調的部分放在 It is 與 that 之間。注意動詞 wears 要與被強調的主詞 exposure（單數）一致。這個句型在本卷第 24 題（it is love, not fear, that…）又出現一次，兩題可以並看。", ex:"It was her tone, not her words, that upset me.", exZh:"讓我不舒服的是她的語氣，而不是她說的話。"},{term:"wear sb down", pos:"片語動詞", gloss:"把某人磨耗、使人疲憊屈服（The constant pressure wore her down.）。對照 wear off 效果消退／wear out 穿壞、使累垮／wear away 磨損侵蝕。片語書進階篇 Unit 11~15 把這一整組 wear 家族完整考過一輪，可以回頭對照。"}]},
+
+        { n:3, kind:"轉折語（連接副詞）",
+          options:{A:"In fact 事實上",B:"To conclude 總結來說",C:"In addition 此外",D:"All in all 總而言之"}, answer:"A",
+          translation:"這個詞聽起來或許有點好笑。事實上，它背後的科學非常嚴肅。",
+          explain:{A:"✔ 前句 The word may sound amusing（這個詞聽起來好笑）與後句 the science behind it is deadly serious（背後的科學非常嚴肅）形成明顯的對比，前輕後重。In fact 正是用來修正或推翻前面的印象，點出真實情況。",B:"✘ To conclude 是「總結來說」，用於文章或演說的結尾；而這裡才剛進入第二段，後面還有三段，位置不對。",C:"✘ In addition 是「此外」，用於補充同方向的資訊；但前後兩句是「好笑」對「嚴肅」的對立關係，不是累加。",D:"✘ All in all 是「總而言之」，同樣是總結用語，與 (B) 犯同樣的位置錯誤。"},
+          notes:[{term:"In fact", pos:"片語", gloss:"事實上（用來修正前面的說法或提出更強的事實）。同義：as a matter of fact／actually／in reality（本段後面的 In reality 在第二篇文章第 9 題附近也出現）。注意 In fact 常帶「其實不然」的轉折語氣，不只是補充。", ex:"The task looked easy. In fact, it took us three days.", exZh:"這工作看起來很簡單。事實上，它花了我們三天。"},{term:"連接副詞分類", pos:"整理", gloss:"轉折：however／nevertheless／in fact／on the contrary／instead（本卷第 20 題的答案）。累加：in addition／furthermore／moreover／besides。總結：in conclusion／to conclude／all in all／in short。因果：therefore／thus／consequently／as a result。本題與第 20 題都在考這組的分類，看清前後兩句是「對立、累加還是總結」就能解決。"},{term:"deadly", pos:"adj. / adv.", gloss:"adj. 致命的（a deadly virus）／adv. 極度地（deadly serious 極其嚴肅／deadly dull 無聊到極點）。本題取副詞的強調用法。相關：amusing 好笑的、有趣的（v. amuse 使發笑；adj. amused 感到好笑的）。"}]},
+
+        { n:4, kind:"名詞（搭配 place…on）",
+          options:{A:"dread 恐懼、畏懼",B:"emphasis 強調、重視",C:"label 標籤",D:"strain 負擔、緊繃"}, answer:"D",
+          translation:"一種可能的解釋是，日復一日反覆出現的低強度壓力會引發發炎反應，並對身體造成額外的負擔。",
+          explain:{D:"✔ 與 trigger inflammation（引發發炎）並列，而受詞是 on the body（對身體），說明這是生理上的負面壓力。place a strain on sth 正是「對…造成負擔」的固定搭配，extra strain（額外的負擔）也與前面 low-level stress, repeated day after day（日復一日的低強度壓力）呼應。",B:"✘ emphasis 雖然也能說 place emphasis on sth（強調、重視某事），搭配在文法上完全成立，但語意是「把重點放在某處」，與 trigger inflammation（引發發炎）這個生理傷害完全接不上。這是本題設計得最好的誘答，必須靠語意而不是搭配來排除。",A:"✘ dread 是「恐懼」，是心理感受，而且它不搭配 place…on（恐懼要用 be filled with dread／dread of sth）。",C:"✘ label 是「標籤」，雖然有 place a label on sth（貼標籤）的說法，但那是比喻性的歸類，與身體發炎無關。"},
+          notes:[{term:"place/put a strain on", pos:"片語", gloss:"對…造成負擔、壓力（place a strain on the body／on the system／on a relationship）。n. strain 負擔、緊繃、拉傷（muscle strains 肌肉拉傷）；v. strain 使緊繃、扭傷（strain one's eyes）。同義：put pressure on／take a toll on（ED 雜誌 Nov. Week 3 第 5 題考的正是 take a heavy toll on，兩題可以並看）。", ex:"Caring for both parents placed a huge strain on her.", exZh:"同時照顧雙親對她造成了極大的負擔。"},{term:"place…on 的三種搭配", pos:"整理", gloss:"place a strain on 造成負擔（本題的答案）／place emphasis on 強調、重視（本題的誘答）／place a burden on 加重負擔／place blame on 歸咎於／place value on 重視。同一個動詞 place 配上不同的名詞，意思從正面到負面都有，必須靠語意判斷。"},{term:"trigger", pos:"v. / n.", gloss:"v. 引發、觸發（trigger inflammation／trigger a reaction／trigger an alarm）；n. 扳機、導火線。同義：set off／spark／bring on。本卷第 5 題也把 trigger 放在誘答位置。相關：inflammation 發炎（adj. inflammatory）／low-level 低強度的。"}]},
+
+        { n:5, kind:"動詞（搭配 to）",
+          options:{A:"subject 使遭受、使暴露於",B:"grant 給予、准予",C:"refer 提及；轉介",D:"trigger 引發、觸發"}, answer:"A",
+          translation:"既然家族聚會讓我們暴露在這麼多微小的壓力源之下，事先有個計畫會很有幫助。",
+          explain:{A:"✔ 空格後面是 us to so many of these minor stressors，而 subject sb to sth 正是「使某人遭受、使某人暴露於」的固定搭配。語意上它與第 2 題的 exposure to 完全呼應，都是在講反覆接觸壓力源。注意 subject 當動詞時重音在後（/səbˈdʒekt/），與名詞「主題」（/ˈsʌbdʒɪkt/）不同。",B:"✘ grant 的句型是 grant sb sth（grant him permission）或 grant sth to sb，意思是「給予」；它不能用 grant us to sth 這個結構，而且語意是正面的授予。",C:"✘ refer 雖然可以說 refer sb to sb（把某人轉介給另一人，refer a patient to a specialist），但語意是「轉介、介紹去找」，而壓力源不是被轉介的對象。",D:"✘ trigger 是「引發」，它的句型是 trigger sth（trigger a reaction），直接接受詞而不接 sb to sth；寫成 trigger us to stressors 文法不成立。"},
+          notes:[{term:"subject sb to sth", pos:"v. + 搭配", gloss:"使某人遭受、使某人暴露於（subject us to stressors／be subjected to criticism／subject sth to a test 對…進行檢驗）。注意動詞的重音在第二音節 /səbˈdʒekt/，名詞「主題、科目」的重音在第一音節 /ˈsʌbdʒɪkt/。adj. subject to 須取決於、易受…影響（Prices are subject to change. 價格可能變動）。", ex:"The prisoners were subjected to harsh treatment.", exZh:"這些囚犯遭受了嚴苛的對待。"},{term:"動詞 + sb + to sth 的家族", pos:"整理", gloss:"subject sb to sth 使遭受／expose sb to sth 使接觸（本卷第 2 題的名詞 exposure）／introduce sb to sth 讓某人接觸、認識／refer sb to sb 轉介／attribute sth to sth 歸因於／prefer A to B 偏好。這一組都用 to，是選擇題常考的搭配區塊。"},{term:"stressor", pos:"n.", gloss:"壓力源（minor stressors 微小的壓力源／identify the stressor）。字尾 -or 表「造成…的東西或人」：stressor 壓力源／detector 偵測器／conductor 導體、指揮。相關：Since 既然（此處是連接詞表原因，不是「自從」）／it helps to V 做某事會有幫助。"}]},
+
+        { n:6, kind:"文法（keep…from V-ing）",
+          options:{A:"to turn 轉變（不定詞）",B:"turning 轉變（動名詞）",C:"turned 轉變（過去式／過去分詞）",D:"turn 轉變（原形）"}, answer:"B",
+          translation:"當問題變得過於私人時轉換話題，可以避免一場無害的閒聊演變成激烈的爭執。",
+          explain:{B:"✔ 本題純考文法。keep sb/sth from V-ing 是「避免、阻止…做某事」的固定句型，from 是介系詞，後面只能接動名詞，所以是 turning。整句的主詞是 Changing the subject（動名詞片語），受詞是 a harmless chat，意思是「轉換話題可以避免閒聊變成爭吵」。",A:"✘ to turn 是不定詞；介系詞 from 後面不能接不定詞，文法不成立。",C:"✘ turned 是過去式或過去分詞；介系詞後面不能接過去式動詞，而且這裡沒有被動的語意。",D:"✘ turn 是原形動詞；介系詞 from 後面不能直接接原形動詞，這是中文語感最容易造成的錯誤。"},
+          notes:[{term:"keep sb/sth from V-ing", pos:"句型", gloss:"阻止、避免…做某事（keep a chat from turning into an argument／keep him from leaving）。同類「動詞 + sb + from + V-ing」：prevent sb from V-ing／stop sb from V-ing／discourage sb from V-ing（本卷第 7 題的誘答）／ban sb from V-ing／protect sb from sth／shield sb from sth（本卷第 7 題的答案）。這一整組的 from 後面都接動名詞或名詞。", ex:"Nothing could keep her from pursuing her dream.", exZh:"沒有什麼能阻止她追求夢想。"},{term:"turn into", pos:"片語動詞", gloss:"變成、演變為（turn into an argument／Water turns into ice.）。對照 turn to sb 求助於／turn out 結果是／turn down 拒絕、調小／turn over 翻轉、移交。片語書進階篇 Unit 11~15 (310) 第 7 題考的正是 turn 家族的介系詞辨析。"},{term:"介系詞後接動名詞", pos:"整理", gloss:"from turning／without sounding（本卷第 7 題的題幹）／by imagining（本卷第 21 題的答案）／instead of saving（本卷第 16 題的選項）。凡是介系詞後面要接動作，一律用 V-ing，不能用原形或不定詞。這是本卷重複出現三次以上的核心文法，值得整組整理。"}]},
+
+        { n:7, kind:"動詞（搭配 from）",
+          options:{A:"combat 對抗、搏鬥",B:"discourage 勸阻、使沮喪",C:"obtain 獲得、取得",D:"shield 保護、遮擋"}, answer:"D",
+          translation:"它們能保護你免於沒完沒了的追問，又不會顯得無禮。",
+          explain:{D:"✔ 空格後面是 you from endless follow-up questions，而 shield sb from sth 正是「保護某人免受…」的固定搭配。語意上前一句說簡短中性的回答很有效，所以它們的作用是替你擋掉追問，而 without sounding rude（又不顯得無禮）也說明這是溫和的防護而非正面衝突。",B:"✘ discourage 的搭配是 discourage sb from V-ing（勸阻某人做某事），後面要接動名詞；本句 from 後面接的是名詞片語 endless follow-up questions，而且語意是「勸阻你去追問」，主客顛倒（被追問的是你）。這是本題最需要留意的誘答。",A:"✘ combat 是「對抗」，它是及物動詞直接接受詞（combat crime／combat inflation），不搭配 sb from sth；而且正面對抗的語氣與 without sounding rude 矛盾。",C:"✘ obtain 是「獲得」，語意正好相反：它是把東西拿到手，而本句要的是把追問擋在外面。"},
+          notes:[{term:"shield sb from sth", pos:"v. + 搭配", gloss:"保護某人免受…（shield you from questions／shield children from harmful content）。n. shield 盾牌、防護物（a heat shield）。同義：protect sb from／guard sb against／insulate sb from。片語書進階篇 Unit 11~15 第 40 題考的 ward off（擋開）與它語意相近，但 ward off 的受詞是威脅本身（ward off disease），shield 的受詞是被保護的人，兩者的受詞角色不同。", ex:"A row of trees shields the house from the wind.", exZh:"一排樹替這棟房子擋住了風。"},{term:"follow-up", pos:"adj. / n.", gloss:"後續的、追蹤的（follow-up questions 追問／a follow-up visit 回診／a follow-up email）。v. follow up on sth 追蹤、後續處理。相關：endless 沒完沒了的（adj.；n. end）／rude 無禮的（反義 polite）。"},{term:"without + V-ing", pos:"句型", gloss:"沒有做某事（without sounding rude 不顯得無禮／without being asked）。注意 sound 是感官動詞，後面接形容詞 rude 不是副詞。本卷第 6 題的 from turning 與此處的 without sounding 都是「介系詞 + 動名詞」，是本篇重複出現的結構。", ex:"She left without saying goodbye.", exZh:"她沒有說再見就離開了。"}]},
+
+        { n:8, kind:"句意填空（段落結論）",
+          options:{A:"relatives who compare you with others 會把你和別人比較的親戚",B:"classmates who question your choices 質疑你選擇的同學",C:"friends who accept you as you are 如實接納你的朋友",D:"people who constantly demand attention 不斷索求關注的人"}, answer:"C",
+          translation:"花時間和那些如實接納你的朋友相處，可以紓解單單一個晚上的盤問所製造出來的大部分壓力。",
+          explain:{C:"✔ 兩個線索鎖定答案。空格所在的句子說 can relieve much of the stress（可以紓解大部分壓力），所以空格必須是正面的、能帶來支持的人；而下一句 a balanced circle of people keeps the mind young（均衡的人際圈能讓心靈保持年輕）更確認了這是全文的正面結論。friends who accept you as you are（如實接納你的朋友）正好與全篇的 hasslers（愛評論的人）形成對照。",A:"✘ relatives who compare you with others 正是文章第一段描述的 hasslers 本身（姑姑問成績、叔叔質疑學校、有人提起考上名校的表親）；和他們相處只會增加壓力，不會 relieve（紓解）。",B:"✘ classmates who question your choices 同樣是在質疑你，與 an uncle questions your choice of school 是同一類人，方向錯誤。",D:"✘ people who constantly demand attention 是不斷索求關注的人，相處起來更耗神，與「紓解壓力」的功能相反。"},
+          notes:[{term:"accept sb as they are", pos:"片語", gloss:"如實接納某人（accept you as you are／love sb for who they are）。這個 as 是「照著…的樣子」。相關：take sb as they come 接受某人的本來面目。", ex:"True friends accept you as you are, flaws included.", exZh:"真正的朋友會如實接納你，包括你的缺點。"},{term:"Just as…, so…", pos:"句型", gloss:"正如…，…也是如此（Just as a balanced diet keeps the body healthy, a balanced circle of people keeps the mind young.）。這是類比句型，寫作時非常好用，可以把抽象的道理用具體的比喻帶出來。本篇第二段的 Like a persistent cough that never quite clears up 也是同一種類比手法。", ex:"Just as plants need sunlight, children need encouragement.", exZh:"正如植物需要陽光，孩子需要鼓勵。"},{term:"relieve", pos:"v.", gloss:"紓解、減輕（relieve stress／relieve pain／relieve pressure）。n. relief 緩解、寬慰（a sense of relief／to my relief 令我寬慰的是）。同義：ease／alleviate／mitigate。相關：a balanced circle of people 均衡的人際圈（balanced 均衡的，本段用 a balanced diet 作類比）。"}]}
+      ]
+    },
+    {
+      passage:`In ancient Greece, olive trees held such great cultural significance that Olympic champions were crowned with wreaths made of olive branches. Today it sits on supermarket shelves next to soy sauce, and over the centuries it has collected a few myths. These widely repeated claims may sound convincing, but they have little scientific evidence to support them. The first is that olive oil is __9__. In reality, olive oil is rich in unsaturated fats that can help lower levels of "bad cholesterol," which can contribute to the buildup of plaque in the arteries and increase the risk of heart attacks. When people __10__ butter or animal fat in their cooking with olive oil, their hearts are among the first to benefit. Its natural antioxidants, meanwhile, help the body fight inflammation and protect cells from everyday wear and tear. No wonder scientists give the olive-rich Mediterranean diet much of the __11__ for the region's low rates of heart disease.
+
+A second myth holds that all olive oil is the same. Just as trading cards are graded by condition, olive oil is sold in grades. The highest grade, labeled "extra virgin," is extracted from fresh olives using mechanical methods, without chemical solvents or excessive heat. Because it goes through __12__ processing, it generally retains more antioxidants and a richer flavor than refined olive oils. Many cheaper oils, on the other hand, are refined in factories. This industrial process __13__ many of the precious compounds that make olive oil worth buying.
+
+The third myth may be the most widespread: olive oil should never be heated. Actually, extra virgin oil holds up well at __14__ cooking temperatures. Problems are more likely to arise when the oil is exposed to excessive heat or heated for too long. Many home cooks have never been told this, __15__ so many expensive bottles end up reserved for salad dressing. Homer, who called olive oil "liquid gold" nearly three thousand years ago, would surely be disappointed. After all, the oil that once lit lamps, treated wounds, and fed whole civilizations was meant to be __16__. So go ahead and cook dinner with your liquid gold.`,
+      zh:`在古希臘，橄欖樹具有如此重大的文化意義，以致於奧運冠軍是用橄欖枝編成的花冠加冕的。今天它擺在超市貨架上、緊鄰著醬油，而幾個世紀以來它也累積了一些迷思。這些被廣泛複述的說法聽起來或許很有說服力，但它們幾乎沒有科學證據支持。第一個是橄欖油只是另一種沒有特殊益處的油脂。實際上，橄欖油富含不飽和脂肪，能幫助降低「壞膽固醇」的濃度，而壞膽固醇會促成動脈中斑塊的堆積，並增加心臟病發作的風險。當人們在烹調時用橄欖油取代奶油或動物脂肪，他們的心臟是最先受益的部位之一。同時，它天然的抗氧化物有助於身體對抗發炎，並保護細胞免於日常的損耗。難怪科學家把這個地區心臟病發生率低的功勞，大部分歸給富含橄欖的地中海飲食。
+
+第二個迷思認為所有橄欖油都一樣。正如交換卡片會依品相分級，橄欖油也是分級販售的。最高等級標示為「extra virgin（特級初榨）」，是用機械方式從新鮮橄欖中萃取的，不使用化學溶劑或過度的高溫。因為它經過的加工如此溫和，它通常比精煉橄欖油保留更多抗氧化物，風味也更濃厚。另一方面，許多較便宜的油是在工廠裡精煉的。這種工業製程會去除許多讓橄欖油值得購買的珍貴化合物。
+
+第三個迷思可能是流傳最廣的：橄欖油絕對不能加熱。實際上，特級初榨油在中等的烹調溫度下表現良好。問題比較可能發生在油被暴露於過高的熱度，或加熱太久的時候。許多家庭廚師從來沒有人告訴他們這件事，這就解釋了為什麼這麼多昂貴的瓶裝油最後只能留著做沙拉醬。荷馬在將近三千年前稱橄欖油為「液體黃金」，他一定會很失望。畢竟，這種曾經點亮油燈、治療傷口、養活整個文明的油，本來就是要天天使用的，而不是留待特殊場合。所以放手用你的液體黃金來煮晚餐吧。`,
+      questions:[
+        { n:9, kind:"句意填空（迷思內容）",
+          options:{A:"a gift from the goddess Athena 雅典娜女神的贈禮",B:"the secret behind the region's long lives 該地區長壽的祕密",C:"safe only when eaten cold 只有冷食才安全",D:"just another fat with no special benefits 只是另一種沒有特殊益處的油脂"}, answer:"D",
+          translation:"第一個是橄欖油只是另一種沒有特殊益處的油脂。",
+          explain:{D:"✔ 關鍵在於這一句的身分：它是作者要「推翻」的迷思（The first is that…，前面才說 These widely repeated claims…have little scientific evidence）。緊接著的 In reality, olive oil is rich in unsaturated fats…（實際上它富含不飽和脂肪）列出一連串好處，所以被推翻的迷思必須是「它沒有特殊好處」。",A:"✘ a gift from the goddess Athena 是希臘神話的典故，雖然與第一段的古希臘背景有關，但它不是一個會被科學證據推翻的健康主張，而且後面的 In reality 接的是營養成分而不是神話考證。",B:"✘ the secret behind the region's long lives 是正面的說法，而且與後面 In reality 所列的好處「同方向」；迷思必須與事實相反才需要被 In reality 糾正。這是本題最需要留意的陷阱。",C:"✘ safe only when eaten cold 其實是文章第三個迷思（olive oil should never be heated）的內容，被放到第一個迷思的位置就錯了。這種「選項內容正確但位置錯誤」的設計是段落填空題最常見的手法。"},
+          notes:[{term:"myth", pos:"n.", gloss:"① 迷思、謬誤的普遍看法（debunk a myth 破除迷思／a common myth）② 神話（Greek myths）。adj. mythical 神話的。本篇用的是第一義，整篇文章的結構就是「三個迷思 + 逐一反駁」。相關：claim 說法、主張（widely repeated claims）／evidence 證據（不可數）。", ex:"It is a myth that we only use ten percent of our brains.", exZh:"我們只用了大腦百分之十是個迷思。"},{term:"In reality", pos:"片語", gloss:"實際上（用來推翻前面的錯誤印象）。同義：in fact（本卷第 3 題的答案）／actually（本段第三段用的正是 Actually）／contrary to popular belief 與一般看法相反。本篇三個迷思分別用 In reality、on the other hand、Actually 來轉折，是議論文的標準寫法。"},{term:"迷思型文章的解題步驟", pos:"閱讀技巧", gloss:"① 先確認這一句是「迷思」還是「事實」：出現在 The myth is that…／Some people believe… 之後的是迷思，出現在 In reality／Actually／In fact 之後的是事實。② 迷思與緊接的事實必須「方向相反」。③ 留意選項是否把後面段落的內容搬到前面（本題的 (C) 就是這樣）。本卷第 16 題也用同一個邏輯。"}]},
+
+        { n:10, kind:"動詞（搭配 with）",
+          options:{A:"assume 假定、認為；承擔",B:"provide 提供",C:"replace 取代、更換",D:"mirror 反映、映照"}, answer:"C",
+          translation:"當人們在烹調時用橄欖油取代奶油或動物脂肪，他們的心臟是最先受益的部位之一。",
+          explain:{C:"✔ 空格後面是 butter or animal fat in their cooking with olive oil，而 replace A with B 正是「用 B 取代 A」的固定搭配，with 這個介系詞直接鎖定答案。語意上 their hearts are among the first to benefit（心臟最先受益）也說明這是把壞油換成好油的健康改變。",A:"✘ assume 是「假定」或「承擔（責任）」，它不搭配 with；而且假定奶油語意不通。",B:"✘ provide 的搭配是 provide sb with sth（提供某人某物）或 provide sth for sb，受詞順序要求的是「人 + with + 物」；本句 with 後面的 olive oil 才是用來替換的東西，順序不符，而且語意是提供而非取代。",D:"✘ mirror 是「反映」，受詞是情況或趨勢（The results mirror our findings.）；它不搭配 with，而且油脂之間不是反映關係。"},
+          notes:[{term:"replace A with B", pos:"v. + 搭配", gloss:"用 B 取代 A（replace butter with olive oil／replace the old windows with new ones）。n. replacement 替換、代替者。被動時可用 be replaced by（A is replaced by B）。注意主動時搭配 with，不用 by。", ex:"We replaced all the bulbs with LED ones.", exZh:"我們把所有燈泡都換成了 LED 的。"},{term:"A 取代 B 的三種說法", pos:"整理", gloss:"replace A with B（用 B 取代 A）／substitute B for A（用 B 代替 A，注意 for 後面是被取代的）／take the place of A（取代 A）／A gives way to B（A 讓位給 B）。四種說法的介系詞與前後順序都不同，最容易搞混，建議整組對照著背。"},{term:"be among the first to V", pos:"句型", gloss:"是最早做某事的其中之一（their hearts are among the first to benefit／She was among the first to arrive.）。among + 複數，表示「屬於…之中」。相關：benefit 受益（v. benefit from sth／adj. beneficial 有益的）／unsaturated fats 不飽和脂肪／cholesterol 膽固醇。"}]},
+
+        { n:11, kind:"名詞（搭配 give…credit for）",
+          options:{A:"fuel 燃料；助長",B:"pattern 模式、花樣",C:"blame 責任、過錯（負面）",D:"credit 功勞、讚譽（正面）"}, answer:"D",
+          translation:"難怪科學家把這個地區心臟病發生率低的功勞，大部分歸給富含橄欖的地中海飲食。",
+          explain:{D:"✔ 本題考正負語意。句子是 give the Mediterranean diet much of the __11__ for the region's low rates of heart disease（把…歸給地中海飲食），而 low rates of heart disease（心臟病發生率低）是好事，所以要歸的是「功勞」。give sb credit for sth 正是「把…的功勞歸給某人」的固定搭配，句首的 No wonder（難怪）也呼應前文所列的種種好處。",C:"✘ blame 的搭配同樣成立（give sb the blame for sth＝把過錯歸咎於），文法完全正確，但它是負面的；心臟病發生率「低」不是需要怪罪的壞事。這是本題唯一的考點，也是最容易錯的選項。",A:"✘ fuel 是「燃料」或「助長」，不搭配 give…for 這個結構。",B:"✘ pattern 是「模式」，give the pattern for 不是這個意思的搭配，而且語意與歸功無關。本卷第 32 題的答案正是 patterns，但那是另一種用法。"},
+          notes:[{term:"give sb credit for sth", pos:"片語", gloss:"把…的功勞歸給某人、肯定某人（give her credit for the idea／be credited with sth 被認為是…的功勞者／take credit for sth 把功勞歸於自己／to sb's credit 值得讚許的是）。n. credit 也指「學分、信用、賒帳」（buy on credit 賒帳，本卷第 30 題的題幹用的正是這個意思）。本卷第 33 題考的就是把文章裡的 credited（動詞）改回 credit（名詞），兩題可以並看。", ex:"The director gave the whole team credit for the success.", exZh:"導演把成功的功勞歸給了整個團隊。"},{term:"credit / blame 對照", pos:"整理", gloss:"正面：give sb credit for／credit sb with／praise sb for。負面：give sb the blame for／blame sb for／hold sb responsible for／attribute sth to sb（中性）。兩組的句型幾乎一模一樣，差別只在好事還是壞事，所以必須先判斷句中的結果是正面或負面。"},{term:"No wonder", pos:"片語", gloss:"難怪（No wonder scientists give…＝It is no wonder that…）。後面直接接子句，that 與 It is 常省略。相關：rates of heart disease 心臟病發生率／the Mediterranean diet 地中海飲食／olive-rich 富含橄欖的（名詞 + rich 構成的複合形容詞，同類：protein-rich 高蛋白的）。", ex:"You skipped breakfast. No wonder you feel dizzy.", exZh:"你沒吃早餐，難怪你覺得頭暈。"}]},
+
+        { n:12, kind:"文法（such + 不可數名詞）",
+          options:{A:"so gentle 如此溫和（so + 形容詞）",B:"such gentle 如此溫和的（such + 形容詞 + 不可數名詞）",C:"such a gentle 如此溫和的一個（such + a + 形容詞 + 單數可數名詞）",D:"so gentle a 如此溫和的一個（so + 形容詞 + a + 單數可數名詞）"}, answer:"B",
+          translation:"因為它經過的加工如此溫和，它通常比精煉橄欖油保留更多抗氧化物，風味也更濃厚。",
+          explain:{B:"✔ 本題純考文法，關鍵在空格後面的 processing 是「不可數名詞」。such + 形容詞 + 不可數名詞（或複數名詞）是正確結構，所以 such gentle processing 成立。注意這裡沒有 that 子句，such 單純當「如此」的強調語。",A:"✘ so 是副詞，只能修飾形容詞或副詞，不能直接修飾名詞；so gentle processing 文法不成立（要說 The processing is so gentle that…）。",C:"✘ such a gentle 的 a 要求後面是「單數可數名詞」，但 processing 在此是不可數名詞，不能加 a。這是本題最主要的陷阱，因為中文沒有可數不可數的概念。",D:"✘ so gentle a 是 so + 形容詞 + a + 單數可數名詞的倒裝結構（so gentle a process 才對），同樣因為 processing 不可數而出局。注意若把 processing 換成可數的 process，(C) 與 (D) 就都會成立。"},
+          notes:[{term:"such / so 的四種結構", pos:"文法整理", gloss:"① such + a/an + adj. + 單數可數名詞（such a gentle process）② such + adj. + 複數或不可數名詞（such gentle processing／such kind people）③ so + adj./adv.（so gentle／so quickly）④ so + adj. + a/an + 單數可數名詞（so gentle a process，較正式）。解題步驟：先看空格後面是名詞還是形容詞，若是名詞再判斷可數或不可數、單數或複數。本題考的正是第②種。", ex:"It was such heavy rain that the game was called off.", exZh:"雨勢如此大，以致於比賽被取消了。"},{term:"常考的不可數名詞", pos:"整理", gloss:"processing 加工／information 資訊／advice 建議／equipment 設備／furniture 家具／luggage 行李／progress 進步／evidence 證據（本篇第一段用過）／research 研究／damage 損害。這些字都不加 s、不加 a/an，所以只能配 such + adj.，不能配 such a。"},{term:"extract / refine", pos:"v.", gloss:"extract 萃取、提煉（be extracted from fresh olives；n. extract 萃取物）／refine 精煉、改良（refined olive oil 精煉橄欖油；adj. refined 精製的、優雅的；n. refinement）。相關：solvent 溶劑／antioxidant 抗氧化物／retain 保留（本卷第 13 題的誘答）。"}]},
+
+        { n:13, kind:"動詞（正負方向）",
+          options:{A:"eliminates 去除、消除",B:"generates 產生、生成",C:"penetrates 穿透、滲入",D:"retains 保留、留住"}, answer:"A",
+          translation:"這種工業製程會去除許多讓橄欖油值得購買的珍貴化合物。",
+          explain:{A:"✔ 本題考方向。主詞是 This industrial process（工業製程），而前一段剛說特級初榨油因為加工溫和所以 retains more antioxidants（保留更多抗氧化物）；Many cheaper oils, on the other hand, are refined in factories（相對地，便宜的油在工廠精煉）的 on the other hand 要求後面講相反的結果，所以工業製程是把珍貴成分「去掉」。eliminates 正是此義。",D:"✘ retains 正是前一段用來描述特級初榨油的動詞（it generally retains more antioxidants）。把它放在這裡會讓工廠精煉油和特級初榨油的效果變成一樣，直接推翻了 on the other hand 的對比，也推翻了整個「第二個迷思：所有橄欖油都一樣」的論點。這是本題設計得最精巧的誘答。",B:"✘ generates 是「產生」，方向相反：若工業製程能產生更多珍貴化合物，那便宜的油反而更好，與文意完全衝突。",C:"✘ penetrates 是「穿透、滲入」，受詞通常是表面或市場（penetrate the skin／penetrate the market）；化合物不是被穿透的對象。"},
+          notes:[{term:"eliminate", pos:"v.", gloss:"去除、消除、淘汰（eliminate waste／eliminate the risk／be eliminated from a tournament 被淘汰）。n. elimination。同義：remove／get rid of／do away with。反義：retain 保留／preserve 保存。", ex:"The new filter eliminates almost all impurities.", exZh:"這款新濾網能去除幾乎所有雜質。"},{term:"on the other hand", pos:"片語", gloss:"另一方面、相對地（用來引出對比的另一面）。常與 on the one hand 成對出現，但也可單獨使用。同義：by contrast／conversely／whereas（連接詞）。看到 on the other hand 就要預期後面的敘述與前面「方向相反」，這是本題的解題鑰匙。", ex:"Flying is fast; driving, on the other hand, is cheaper.", exZh:"搭飛機很快；開車相對地比較便宜。"},{term:"compound", pos:"n. / adj. / v.", gloss:"n. 化合物（precious compounds／a chemical compound）、複合物、園區／adj. 複合的（a compound word 複合字）／v. 加劇、使惡化（compound the problem）。相關：precious 珍貴的／worth buying 值得購買（be worth + V-ing，注意接動名詞不接不定詞）。", ex:"Heavy rain compounded the traffic problems.", exZh:"大雨使交通問題更加惡化。"}]},
+
+        { n:14, kind:"形容詞（程度）",
+          options:{A:"excessive 過度的、過量的",B:"renowned 著名的",C:"moderate 中等的、適度的",D:"supreme 至高的、最高的"}, answer:"C",
+          translation:"實際上，特級初榨油在中等的烹調溫度下表現良好。",
+          explain:{C:"✔ 下一句 Problems are more likely to arise when the oil is exposed to excessive heat or heated for too long（問題比較可能發生在過高的熱度或加熱太久時）明確指出問題出在「過度」，所以本句的溫度必須是相對的「適度」。moderate 正是此義，與下一句的 excessive 形成對照。",A:"✘ excessive 正是下一句用來描述「出問題」的那個詞；若本句說特級初榨油在過高溫下也表現良好，就與下一句直接自相矛盾。這是本題最主要的陷阱，也是本篇最明顯的前後呼應。",B:"✘ renowned 是「著名的」，形容人或地方的名聲（a renowned chef），不能形容溫度。",D:"✘ supreme 是「至高的」（the Supreme Court 最高法院／supreme quality），它描述等級或地位而不是溫度的高低，而且若指最高溫同樣與下一句矛盾。"},
+          notes:[{term:"moderate", pos:"adj. / v.", gloss:"adj. 中等的、適度的、溫和的（moderate temperatures／moderate exercise／a moderate view 溫和的立場）／v. 緩和、主持（討論）（moderate a debate）。adv. moderately；n. moderation（in moderation 適量地）。反義：excessive 過度的／extreme 極端的。", ex:"Drinking coffee in moderation is generally fine.", exZh:"適量喝咖啡一般來說沒問題。"},{term:"hold up", pos:"片語動詞", gloss:"此處是「撐得住、站得住腳」（The oil holds up well at moderate temperatures.／Does the theory hold up?）；也指「阻塞、延誤」（be held up in traffic）、「舉起」、「持械搶劫」。片語書進階篇 Unit 11~15 第 26 題考的正是「阻塞」的那個意思，兩題可以並看。"},{term:"arise", pos:"v.", gloss:"（問題、情況）出現、發生（Problems arise when…／if the need arises）。三態 arise-arose-arisen，不及物，不接受詞。注意區別 arise（出現，抽象）／rise（上升，不及物，rise-rose-risen）／raise（提高，及物，raise-raised-raised）／arouse（引起情緒，及物）。這四個字是高中最常混淆的一組。", ex:"New difficulties arose as the project went on.", exZh:"隨著專案進行，新的困難出現了。"}]},
+
+        { n:15, kind:"文法（關係代名詞 which）",
+          options:{A:"that explains why 那解釋了為什麼（that 不可引導非限定子句）",B:"which explains why 這就解釋了為什麼",C:"what explains why 什麼解釋了為什麼",D:"it explains why 它解釋了為什麼（缺連接詞）"}, answer:"B",
+          translation:"許多家庭廚師從來沒有人告訴他們這件事，這就解釋了為什麼這麼多昂貴的瓶裝油最後只能留著做沙拉醬。",
+          explain:{B:"✔ 本題純考文法。逗號前是一個完整的句子（Many home cooks have never been told this），逗號後需要一個能夠承接「前面整件事」的結構。which 可以引導非限定關係子句，並以前面「整個子句」為先行詞，所以 which explains why… 正確，意思是「這件事解釋了為什麼…」。",A:"✘ that 不能引導非限定關係子句（逗號後面不能用 that），也不能以整個子句當先行詞。這是關係代名詞最基本的限制，也是本題最主要的陷阱。",C:"✘ what 本身就含有先行詞（＝the thing which），用在這裡會缺少與前句的連接，而且 what explains why… 會變成一個名詞子句，無法接在逗號後面當補述。",D:"✘ it explains why 是一個獨立的句子；兩個完整句子之間只用逗號連接會造成逗號謬誤（comma splice），必須改用分號、句號，或加上連接詞 and。"},
+          notes:[{term:"which 引導非限定子句（先行詞是整個句子）", pos:"文法", gloss:"He arrived late, which annoyed everyone.（他遲到了，這讓大家不高興）。這裡的 which 不指某個名詞，而是指前面「整件事」。重點：① 一定要有逗號 ② 只能用 which，不能用 that ③ 動詞用單數（explains）。常見句式：…, which explains why…／…, which is why…／…, which means that…。", ex:"She studied abroad for years, which explains her fluent English.", exZh:"她在國外念了好幾年書，這就解釋了她流利的英文。"},{term:"that 不能用的三種場合", pos:"整理", gloss:"① 非限定子句（逗號之後）② 介系詞之後（the house in which he lived，不可用 that）③ 先行詞是整個句子時。反過來，只能用 that 的場合：先行詞被 the only／the very／the first／all／最高級修飾時。這組規則是學測文法題的常客。"},{term:"end up + V-ing / adj. / p.p.", pos:"句型", gloss:"最後變成、結果落得（end up reserved for salad dressing／end up paying twice／end up in hospital）。後面可接動名詞、形容詞、過去分詞或介系詞片語。相關：be reserved for sth 被留作…之用／salad dressing 沙拉醬。", ex:"If you keep delaying, you'll end up rushing everything.", exZh:"如果你一直拖，最後所有事都會變成趕工。"}]},
+
+        { n:16, kind:"句意填空（全文結論）",
+          options:{A:"used every day, not saved for special occasions 天天使用，而不是留待特殊場合",B:"kept away from heat at all times 隨時遠離熱源",C:"offered only to Olympic champions 只獻給奧運冠軍",D:"replaced by cheaper oils whenever possible 盡可能用更便宜的油取代"}, answer:"A",
+          translation:"畢竟，這種曾經點亮油燈、治療傷口、養活整個文明的油，本來就是要天天使用的，而不是留待特殊場合。",
+          explain:{A:"✔ 三個線索鎖定答案。空格前的 the oil that once lit lamps, treated wounds, and fed whole civilizations（曾經點燈、療傷、養活文明的油）強調它的日常實用性；前兩句說 Homer…would surely be disappointed（荷馬一定會很失望），因為大家把好油鎖在櫃子裡只做沙拉醬；而最後一句 So go ahead and cook dinner with your liquid gold（放手用你的液體黃金煮晚餐吧）正是「天天用」的呼籲。",B:"✘ kept away from heat at all times 正是全文第三個迷思（olive oil should never be heated）的內容，而這一段從頭到尾都在推翻這個迷思，更與最後一句叫人拿去煮晚餐直接矛盾。",C:"✘ offered only to Olympic champions 把第一段的古希臘典故搬到結論來；而且 only（只獻給）與全文鼓勵日常使用的立場相反。這是「選項內容在文章裡出現過但位置錯誤」的典型陷阱，與本卷第 9 題的 (C) 是同一種手法。",D:"✘ replaced by cheaper oils 與全文的立場完全相反：文章第二個迷思正是在說明便宜的精煉油去除了珍貴成分，所以不該用它取代好油。"},
+          notes:[{term:"After all", pos:"片語", gloss:"① 畢竟（用來補上一個支持前面說法的理由）：After all, the oil…was meant to be used every day. ② 終究、結果還是（She came after all. 她終究還是來了）。注意第一義放句首，第二義放句尾。同義（第一義）：in the end 不可互換，要用 after all 或 anyway。", ex:"Don't be too hard on him. After all, he is only ten.", exZh:"別對他太嚴厲，畢竟他才十歲。"},{term:"be meant to V", pos:"句型", gloss:"本來就該、原本的用意是（was meant to be used every day／This button is meant to reset the device.）；也指「註定」（They were meant to be together.）。相關：mean to V 有意要做（I didn't mean to hurt you.）／be supposed to V 應該。", ex:"These shoes are meant to be worn without socks.", exZh:"這雙鞋本來就是設計成不穿襪子穿的。"},{term:"結論型填空的解題步驟", pos:"閱讀技巧", gloss:"① 空格若在最後一段，答案幾乎一定是「全文主旨的收束」，而不是某個細節。② 先找空格後面那一句：本題的 So go ahead and cook dinner 就直接點出方向。③ 刪掉與全文立場相反的選項（本題的 (B) 與 (D)）。④ 刪掉「文章裡出現過但不屬於這一段」的選項（本題的 (C)）。本卷第 9、24 題都適用同一套步驟。"}]}
+      ]
+    },
+    {
+      passage:`When the late Val Kilmer appeared on the big screen again after his death, digitally recreated by artificial intelligence, some fans were moved while others felt uneasy. The dream of escaping death is as old as humanity, and technology seems to bring a dream closer to reality every year. Yet a society __17__ staying alive at all costs may forget to ask whether endless life is actually worth having. The Portuguese writer José Saramago asked exactly that question in his novel Death with Interruptions.
+
+In the story, something __18__ happens on New Year's Day: in one small country, no one dies. At first, people celebrate. But as hospitals overflow with patients who can neither recover nor die, eternal life begins to look less like a gift than a __19__. Families, businesses, and even churches struggle to cope. Saramago does not follow a single hero through these events. __20__, he examines how governments, religious leaders, and ordinary citizens respond. What he finds is not a kinder society but a more selfish one. __21__ a world without death, Saramago reminds readers that it is death that gives life its shape.
+
+Later in the novel, Death returns and begins sending letters that announce each person's death one week ahead. If you knew the date of your own death __22__, would you live differently? In the book, the answer is rarely comforting: some people fall into despair, while others indulge in every desire before their final day. The most surprising turn comes when Death meets a cellist whose music __23__ feelings she has never known. Instead of taking his life, she burns the letter that would have ended it. In a story about the end of life, it is love, not fear, that __24__. Perhaps that is Saramago's quiet reply to our dream of living forever: what makes life precious is not its length but the people we share it with.`,
+      zh:`當已故的 Val Kilmer 在他死後再度出現在大銀幕上，由人工智慧以數位方式重建時，有些影迷感動不已，另一些人則感到不安。逃離死亡的夢想和人類一樣古老，而科技似乎每一年都讓這個夢想更接近現實。然而一個執著於不惜一切代價活下去的社會，可能會忘記問一個問題：無盡的生命究竟是否值得擁有。葡萄牙作家喬賽．薩拉馬戈在他的小說《死亡間歇》中問的正是這個問題。
+
+在故事裡，元旦那天發生了一件前所未有的事：在一個小國裡，沒有人死去。起初，人們歡慶。但隨著醫院擠滿了既無法康復也無法死去的病人，永生開始顯得不像是一份禮物，而更像是一種負擔。家庭、企業，甚至教會都難以應付。薩拉馬戈並沒有跟著某一位主角走過這些事件。相反地，他檢視政府、宗教領袖與一般市民如何反應。他所發現的不是一個更善良的社會，而是一個更自私的社會。藉著想像一個沒有死亡的世界，薩拉馬戈提醒讀者：正是死亡賦予了生命形狀。
+
+在小說的後半，死神回來了，並開始寄出提前一週宣告每個人死期的信。如果你事先就知道自己死亡的日期，你會活得不一樣嗎？在書中，答案很少令人安慰：有些人陷入絕望，另一些人則在最後一天來臨前縱情於每一種慾望。最令人驚訝的轉折發生在死神遇見一位大提琴家的時候，他的音樂喚醒了她從未體會過的種種感受。她沒有取走他的性命，而是燒掉了那封本來會結束他生命的信。在一個關於生命終點的故事裡，擁有最後決定權的是愛，而不是恐懼。也許那就是薩拉馬戈對我們永生之夢的靜靜回答：讓生命珍貴的不是它的長度，而是我們與之共度的人。`,
+      questions:[
+        { n:17, kind:"形容詞片語（搭配）",
+          options:{A:"capable of 有能力做…的",B:"preoccupied with 全神貫注於、執著於",C:"rich in 富含…的",D:"wary of 對…警惕的、提防的"}, answer:"B",
+          translation:"然而一個執著於不惜一切代價活下去的社會，可能會忘記問一個問題：無盡的生命究竟是否值得擁有。",
+          explain:{B:"✔ 空格後面是 staying alive at all costs（不惜一切代價活下去），而主句說這樣的社會 may forget to ask whether endless life is actually worth having（可能忘了問永生是否值得）。只有「全神貫注、執著於」某件事，才會因此忽略其他問題。be preoccupied with sth 正是此義，帶有「心思被佔滿」的意味。",D:"✘ wary of 是「對…警惕、提防」，方向正好相反：一個對「不惜代價活下去」有所警惕的社會，正是會去問這個問題的社會，而不會 forget to ask。這是本題最主要的反向陷阱。",A:"✘ capable of 是「有能力做」，它陳述能力而非心態；一個「有能力活下去」的社會不會因此忘記提問，兩者沒有因果關係。",C:"✘ rich in 是「富含」，後面接的是資源或成分（rich in vitamins／rich in history，本卷第 9 題附近的 rich in unsaturated fats 正是此用法）；它不能接一個動作來描述社會的心態。"},
+          notes:[{term:"be preoccupied with", pos:"片語", gloss:"全神貫注於、滿腦子想著（be preoccupied with work／with appearances）。v. preoccupy；n. preoccupation（a preoccupation with money）。注意這個片語常帶負面語氣，暗示「因為太專注於此而忽略了其他事」，正是本題的關鍵。同義：be obsessed with／be absorbed in／be caught up in。", ex:"He was so preoccupied with his phone that he missed the stop.", exZh:"他全神貫注在手機上，結果坐過站了。"},{term:"形容詞 + 固定介系詞", pos:"整理", gloss:"of：capable of／wary of／aware of／guilty of／worthy of。with：preoccupied with／obsessed with／familiar with／content with。in：rich in／interested in／involved in／skilled in。to：similar to／opposed to／sensitive to／subject to。看到空格後面的介系詞，就可以先用它來刷掉一半選項，但本題四個選項的介系詞都已附在片語裡，所以必須靠語意判斷。"},{term:"at all costs", pos:"片語", gloss:"不惜一切代價（staying alive at all costs／avoid conflict at all costs）。同義：at any cost／by all means（但 by all means 另有「當然可以」之意）。相關：worth having 值得擁有（be worth + V-ing）／endless 無盡的／escape death 逃離死亡。", ex:"They were determined to finish the project at all costs.", exZh:"他們決心不惜一切代價完成這個專案。"}]},
+
+        { n:18, kind:"形容詞（語意）",
+          options:{A:"compassionate 有同情心的、慈悲的",B:"familiar 熟悉的",C:"predictable 可預測的",D:"unprecedented 前所未有的"}, answer:"D",
+          translation:"在故事裡，元旦那天發生了一件前所未有的事：在一個小國裡，沒有人死去。",
+          explain:{D:"✔ 冒號後面的 in one small country, no one dies（在一個小國裡，沒有人死去）直接解釋了空格的內容，而這顯然是歷史上從未發生過的事。unprecedented 正是「前所未有的」。",B:"✘ familiar 是「熟悉的」，方向正好相反：沒有人死去這件事正是最陌生、最反常的，而且若它很熟悉，人們就不會 At first, people celebrate（起初歡慶）。",C:"✘ predictable 是「可預測的」，同樣與這件事的突發性矛盾；可預測的事不會讓整個國家的制度 struggle to cope（難以應付）。",A:"✘ compassionate 是「有同情心的」，用來形容人或行為；一個「事件」不會有同情心，而且它也無法解釋冒號後面的內容。"},
+          notes:[{term:"unprecedented", pos:"adj.", gloss:"前所未有的、空前的（an unprecedented event／unprecedented growth／on an unprecedented scale）。字根拆解：un-（否定）+ pre-（之前）+ cedent（走、來）＝「之前沒有來過的」。n. precedent 先例（set a precedent 立下先例／without precedent）。", ex:"The country faced an unprecedented shortage of water.", exZh:"這個國家面臨前所未有的缺水問題。"},{term:"冒號的用法", pos:"句型", gloss:"something unprecedented happens on New Year's Day: in one small country, no one dies. 冒號用來「展開說明」前面提到的概念，所以冒號前後必須語意一致。這在克漏字裡是最可靠的線索：空格的答案往往就寫在冒號後面。本篇最後一句的冒號（Saramago's quiet reply…: what makes life precious…）也是同樣的用法。"},{term:"neither…nor…", pos:"句型", gloss:"既不…也不…（patients who can neither recover nor die）。注意連接的兩個部分詞性要對等（此處都是原形動詞），而且本身已是否定，不可再加 not。當它當主詞時動詞隨「後者」決定（Neither he nor his friends are coming.）。", ex:"The plan was neither practical nor affordable.", exZh:"這個計畫既不實際也負擔不起。"}]},
+
+        { n:19, kind:"名詞（正負對比）",
+          options:{A:"burden 負擔、重擔",B:"miracle 奇蹟",C:"remedy 療法、解決辦法",D:"status 地位、身分"}, answer:"A",
+          translation:"但隨著醫院擠滿了既無法康復也無法死去的病人，永生開始顯得不像是一份禮物，而更像是一種負擔。",
+          explain:{A:"✔ 關鍵是 less like a gift than a __19__ 這個比較結構：既然「不像禮物」，空格就必須是與 gift（禮物，正面）相反的負面概念。而前面 hospitals overflow with patients who can neither recover nor die（醫院擠滿既不能康復也不能死去的病人）正是沉重的負擔。burden 正是此義。",B:"✘ miracle 是「奇蹟」，與 gift 同為正面；放進 less like a gift than a miracle 會變成「不像禮物而更像奇蹟」，兩個都是好事，無法呈現轉折，也與醫院爆滿的慘況矛盾。這是本題最主要的陷阱。",C:"✘ remedy 是「療法、解決辦法」，也是正面的；而且永生正是問題本身而不是解方。",D:"✘ status 是「地位」，它是中性的分類概念，與 gift 不構成正負對比，語意也與醫院的困境無關。"},
+          notes:[{term:"less like A than B", pos:"句型", gloss:"不像 A，而更像 B（look less like a gift than a burden）。這是 less…than… 的比較結構，重點在「than 後面的 B 才是真正的描述」。同類：more A than B（A 的程度勝於 B）／not so much A as B（與其說是 A，不如說是 B）。解題關鍵：A 與 B 必須是對立的，所以看到 gift 就要找負面詞。", ex:"His speech sounded less like an apology than an excuse.", exZh:"他的發言聽起來不像道歉，更像是藉口。"},{term:"burden", pos:"n. / v.", gloss:"n. 負擔、重擔（a financial burden／ease the burden／the burden of proof 舉證責任）／v. 使負擔（be burdened with debt）。同義：load／strain（本卷第 4 題的答案）／weight。片語：place a burden on sb（與本卷第 4 題的 place a strain on 同一組搭配）。", ex:"Caring for her parents became a heavy burden.", exZh:"照顧雙親成了一項沉重的負擔。"},{term:"overflow with", pos:"片語動詞", gloss:"擠滿、滿溢（hospitals overflow with patients／overflow with gratitude 充滿感激）。n. overflow 溢出、過剩。相關：struggle to cope 難以應付（cope with sth 應付、處理）／eternal 永恆的（eternal life 永生；n. eternity）。", ex:"The small café overflowed with students during exam week.", exZh:"考試週期間，這家小咖啡館擠滿了學生。"}]},
+
+        { n:20, kind:"轉折語（連接副詞）",
+          options:{A:"Equally 同樣地",B:"Furthermore 此外、而且",C:"Instead 相反地、反而",D:"Meanwhile 同時、在此期間"}, answer:"C",
+          translation:"薩拉馬戈並沒有跟著某一位主角走過這些事件。相反地，他檢視政府、宗教領袖與一般市民如何反應。",
+          explain:{C:"✔ 前句是否定句 Saramago does not follow a single hero（他沒有跟隨單一主角），後句說明他「改做了什麼」（檢視政府、宗教領袖與市民的反應）。這正是「不做 A，而是做 B」的替代關係，Instead 正是此義。看到前句有 not，後句提出替代做法，答案幾乎一定是 Instead。",A:"✘ Equally 是「同樣地」，用於並列兩個同等重要的事項（本卷第 8 題附近的 Equally important is… 正是此用法）；但前後兩句是替代關係而不是並列。",B:"✘ Furthermore 是「此外」，用於補充同方向的資訊；但前句是否定、後句是肯定，兩者不是累加關係。",D:"✘ Meanwhile 是「同時」，強調時間上的同步發生；但這兩句講的是作者「寫作手法的選擇」，沒有時間先後或同時的問題。"},
+          notes:[{term:"Instead / instead of", pos:"辨析", gloss:"Instead 是副詞，單獨使用，放句首或句尾（He didn't walk. Instead, he ran.／He stayed home instead.）／instead of 是介系詞片語，後接名詞或動名詞（Instead of taking his life, she burns the letter. 正是本篇下一段的句子）。本篇在同一篇文章裡兩種用法都出現了，可以對照著看。注意 Instead 後面要加逗號。", ex:"The meeting was canceled. Instead, we had a quick phone call.", exZh:"會議取消了。我們改成快速講了通電話。"},{term:"not A but B 的三種寫法", pos:"整理", gloss:"① not A but B（What he finds is not a kinder society but a more selfish one. 正是本篇下一句）② …does not A. Instead, …B.（本題）③ rather than A, B。三種都在表達「不是 A 而是 B」，寫作時可以輪流使用避免單調。本篇在連續三句裡用了兩種，是很好的寫作示範。"},{term:"examine", pos:"v.", gloss:"檢視、審查、檢查（examine how they respond／examine a patient／examine the evidence）。n. examination 檢查、考試（＝exam）。同義：investigate／look into／scrutinize（仔細檢查）。相關：ordinary citizens 一般市民／religious leaders 宗教領袖／selfish 自私的（反義 selfless 無私的）。"}]},
+
+        { n:21, kind:"文法（介系詞 + 動名詞）",
+          options:{A:"To imagine 為了想像（不定詞表目的）",B:"By imagining 藉著想像（介系詞 + 動名詞）",C:"Imagined 被想像（過去分詞）",D:"With imagining 以想像（with 不這樣用）"}, answer:"B",
+          translation:"藉著想像一個沒有死亡的世界，薩拉馬戈提醒讀者：正是死亡賦予了生命形狀。",
+          explain:{B:"✔ 本題考「手段」的表達。主句是 Saramago reminds readers that…（薩拉馬戈提醒讀者…），而「想像一個沒有死亡的世界」正是他用來達到這個提醒效果的方法。by + V-ing 正是表示「藉由、透過某種方法」的標準結構。",A:"✘ To imagine 是不定詞表目的，意思會變成「為了想像一個沒有死亡的世界，他提醒讀者…」，因果顛倒：想像不是他的目的，而是他的手段。",C:"✘ Imagined 是過去分詞，分詞構句的過去分詞表被動，意思會變成「薩拉馬戈被想像…」，與主詞 Saramago 的主動角色不符，文法與語意都不成立。",D:"✘ With imagining 文法上雖然是「介系詞 + 動名詞」，但 with 不用來表達「以某種方法達成某事」；表手段的介系詞是 by（或 through）。with 可以接工具名詞（write with a pen），但不接動名詞表方法。"},
+          notes:[{term:"by + V-ing", pos:"句型", gloss:"藉由、透過（By imagining a world without death, …／She improved by practicing daily.）。表「方法、手段」。對照 through + N（through hard work）／by means of + N（較正式）。本卷第 16 題的 celebrate…by setting off fireworks 概念相同。注意 by 後面只能接動名詞，不能接原形或不定詞。", ex:"You can save money by cooking at home.", exZh:"在家煮飯可以省錢。"},{term:"表目的與表手段的差別", pos:"整理", gloss:"目的：to V／in order to V／so as to V／for + N（為了…）。手段：by V-ing／through + N／with + 工具。中文的「藉著」與「為了」很容易混淆，解題時問自己：這個動作是「想達成的結果」還是「用來達成的方法」。本題的想像是方法，所以用 by。", ex:"To lose weight, she exercises daily. / She lost weight by exercising daily.", exZh:"為了減重，她每天運動（表目的）。／她靠每天運動減了重（表手段）。"},{term:"give sth its shape", pos:"片語", gloss:"賦予…形狀、使…成形（it is death that gives life its shape）。這是本篇的主旨句，也是 give sb/sth sth 雙受詞結構。相關：remind sb that… 提醒某人（remind sb of sth 使某人想起）。注意這一句同時用了 It is…that… 的分裂句（本卷第 2 題考過同一個句型）來強調 death。"}]},
+
+        { n:22, kind:"片語（語意）",
+          options:{A:"by contrast 相較之下、對比而言",B:"in other words 換句話說",C:"in advance 事先、提前",D:"with a twist 帶有轉折、有個花樣"}, answer:"C",
+          translation:"如果你事先就知道自己死亡的日期，你會活得不一樣嗎？",
+          explain:{C:"✔ 前一句說 Death…begins sending letters that announce each person's death one week ahead（死神開始寄出提前一週宣告死期的信），而 one week ahead 與 in advance 正是同義。所以「事先知道自己的死期」完全對應上文的設定。in advance 正是「事先、提前」。",A:"✘ by contrast 是「相較之下」，用來對比兩件事；但本句是一個假設問句，沒有在比較兩個對象。",B:"✘ in other words 是「換句話說」，用來改寫前面說過的話；但本句是提出一個「新的假設問題」（would you live differently?），不是在重述。",D:"✘ with a twist 是「帶有轉折、有個花樣」，常用於故事或食譜（a classic recipe with a twist）；它無法表達「提前得知」這個時間概念。"},
+          notes:[{term:"in advance", pos:"片語", gloss:"事先、提前（know in advance／book in advance／pay in advance／two weeks in advance）。同義：beforehand／ahead of time／in anticipation。本卷第 36 題的翻譯題答案正是 in advance（提前安排時間表），兩題剛好一題考閱讀一題考翻譯，可以並看。", ex:"Please let us know at least three days in advance.", exZh:"請至少提前三天通知我們。"},{term:"ahead / ahead of", pos:"辨析", gloss:"one week ahead 提前一週（ahead 當副詞放在時間後面）／ahead of schedule 比進度提前／ahead of time 提前／go ahead 進行、去做吧（本篇最後一句 So go ahead and cook dinner 正是此用法）／get ahead 出頭、成功。本篇同時出現 one week ahead 與 go ahead，意思完全不同。"},{term:"indulge in", pos:"片語動詞", gloss:"縱情於、沉溺於（indulge in every desire／indulge in luxury）；indulge sb 寵溺某人；adj. indulgent 縱容的；n. indulgence。本卷第 37 題的翻譯題答案正是 indulge in，而本篇這一段的 others indulge in every desire 就是現成的例句，兩題可以並看。", ex:"On weekends he indulges in long afternoon naps.", exZh:"週末他會縱情於長長的午睡。"}]},
+
+        { n:23, kind:"動詞（語意）",
+          options:{A:"awakens 喚醒、喚起",B:"resumes 恢復、繼續",C:"merges 合併、融合",D:"undergoes 經歷、接受（手術、改變）"}, answer:"A",
+          translation:"最令人驚訝的轉折發生在死神遇見一位大提琴家的時候，他的音樂喚醒了她從未體會過的種種感受。",
+          explain:{A:"✔ 受詞是 feelings she has never known（她從未體會過的感受），而「從未有過」的感受被音樂帶了出來，正是「喚起、喚醒」。awaken 常與 feelings／memories／interest 搭配，而且後面 she burns the letter（她燒掉那封信）也說明她確實被觸動而改變了行動。",B:"✘ resumes 是「恢復、繼續」，前提是那件事「原本存在、中斷後再繼續」；但題目明說 she has never known（她從未體會過），所以不可能是「恢復」。這是本題最主要的邏輯陷阱。",C:"✘ merges 是「合併、融合」，需要兩個對象合在一起（merge two companies／merge with sth）；音樂把感受「合併」語意不通。",D:"✘ undergoes 是「經歷、接受」，主詞必須是「經歷那件事的人或物」（undergo surgery／undergo changes）；本句的主詞是 music（音樂），音樂不會去經歷她的感受，主客顛倒。"},
+          notes:[{term:"awaken", pos:"v.", gloss:"① 喚起（情感、記憶、興趣）（awaken feelings／awaken memories／awaken interest in sth）② 喚醒、醒來（be awakened by a noise）。同義（喚起）：arouse／stir／evoke／kindle。注意 awake 可當形容詞（be awake 醒著的）與動詞，awaken 只當動詞且較正式。", ex:"The old photograph awakened memories of her childhood.", exZh:"那張舊照片喚起了她童年的記憶。"},{term:"whose 引導的關係子句", pos:"句型", gloss:"a cellist whose music awakens feelings…（一位其音樂喚起…的大提琴家）。whose 表「所屬關係」，後面直接接名詞（whose music），不需要冠詞。注意 whose 可以指人也可以指物（a house whose roof was damaged）。本篇第 15 題考的 which 與這裡的 whose 都屬關係詞用法，可以一起整理。", ex:"I met a writer whose novels have been translated into ten languages.", exZh:"我遇到一位小說被翻譯成十種語言的作家。"},{term:"would have + p.p.", pos:"句型", gloss:"the letter that would have ended it（那封本來會結束他生命的信）。這是與過去事實相反的假設語氣，表示「本來會…（但沒有發生）」，因為她把信燒了。相關：take sb's life 取走某人性命／turn 轉折（the most surprising turn）／cellist 大提琴家。", ex:"One more goal would have won them the match.", exZh:"再多一球他們本來就會贏下那場比賽。"}]},
+
+        { n:24, kind:"句意填空（全文結論）",
+          options:{A:"proves powerless against Death 證明對死神無能為力",B:"drives people across the border 驅使人們越過邊境",C:"causes the country's collapse 導致國家崩潰",D:"has the final word 擁有最後的決定權"}, answer:"D",
+          translation:"在一個關於生命終點的故事裡，擁有最後決定權的是愛，而不是恐懼。",
+          explain:{D:"✔ 兩個線索鎖定答案。前一句 Instead of taking his life, she burns the letter that would have ended it（她沒有取走他的性命，而是燒掉那封信）說明愛改變了結局，死神讓步了；而最後一句 what makes life precious is not its length but the people we share it with（讓生命珍貴的不是長度，而是共度的人）更確認愛是全文的結論。have the final word 正是「擁有最後決定權」。",A:"✘ proves powerless against Death（對死神無能為力）方向完全相反：死神燒信、放棄取命，正說明愛贏了而非無能為力。這是本題最主要的反向陷阱。",B:"✘ drives people across the border 把文章其他部分可能提到的情節搬到結論位置；而且它與「愛或恐懼誰說了最後一句話」這個對比無關。",C:"✘ causes the country's collapse（導致國家崩潰）語氣是負面的災難；而本句的主詞是 love（愛），把愛說成造成國家崩潰的原因，與全文溫暖的收尾完全衝突。"},
+          notes:[{term:"have the final word", pos:"片語", gloss:"擁有最後決定權、說了最後一句話（Love has the final word.／The boss has the final word on hiring.）。同義：have the last say／have the final say。相關：get a word in 插上話／take sb's word for it 相信某人的話。", ex:"The committee discussed it, but the director had the final word.", exZh:"委員會討論過，但最後由主任定案。"},{term:"It is A, not B, that…（分裂句）", pos:"句型", gloss:"it is love, not fear, that has the final word。把要強調的 love 放在 It is 與 that 之間，並用 not fear 作對照。本卷第 2 題（it is repeated exposure…, not any single one of them, that wears you down）用的是完全相同的結構，兩題可以並看。注意 that 後面的動詞要與被強調的主詞一致（love 單數，所以用 has）。", ex:"It was the timing, not the price, that bothered them.", exZh:"困擾他們的是時機，而不是價格。"},{term:"not A but B", pos:"句型", gloss:"what makes life precious is not its length but the people we share it with（讓生命珍貴的不是長度，而是我們與之共度的人）。本篇這一句同時用了 what 引導的名詞子句當主詞與 not A but B 的對比，是寫作上很值得模仿的收尾句。本卷第 20 題的筆記已整理 not A but B 的三種寫法。"}]}
+      ]
+    }
+    ]
+  },
+  {
+    id:"fb", label:"文意選填",
+    bank:{A:"assume",B:"facing",C:"form",D:"lent",E:"operating",F:"patterns",G:"returns",H:"valued"},
+    groups:[{
+      passage:`Often regarded as one of the earliest recorded economic bubbles, tulip mania swept through the Netherlands in the 1630s. Brought from the Ottoman Empire, the flowers were rare luxury items, and varieties like the Semper Augustus were especially __25__ for their "flamed" colors. As the Dutch economy grew during its Golden Age, wealthy merchants had more money to invest, and many began looking for new opportunities to increase their fortunes. Many invested heavily in tulip bulbs, expecting __26__ far greater than ordinary trade could bring. By early 1637, rare bulbs were reportedly fetching several times the annual salary of a skilled worker.
+
+What began with wealthy merchants soon attracted some artisans, shopkeepers, and other traders. Much of the trading took place in taverns rather than in an official exchange __27__ under standardized rules. There, informal agreements allowed buyers to trade bulbs without immediately paying for them. Tales of quick fortune __28__ the trade an air of glamour, and the excitement proved contagious. Soon people from all walks of life were buying bulbs they had never seen, in hopes of reselling them within weeks. Caught up in the frenzy, even rational people began to __29__ that prices could only go up.
+
+Not until February 1637 did buyers realize how much debt they had taken on by purchasing bulbs on credit. As bulb prices collapsed, some traders were left __30__ financial losses and disputes over unpaid contracts. The craze can be understood through what economists call the "greater fool theory": the belief that, however high the price, someone else will be willing to pay even more. Bubbles __31__ whenever enough people believe this. Nearly four centuries later, they still do. The same __32__ of soaring prices, borrowed money, and sudden panic resurfaced during the 2021--2022 booms in cryptocurrency, NFTs, and meme stocks. The tulips have long since faded; the optimism that drove them has not.`,
+      zh:`鬱金香狂熱常被視為有紀錄以來最早的經濟泡沫之一，它在一六三○年代席捲了荷蘭。這些花是從鄂圖曼帝國引進的，屬於稀有的奢侈品，而像 Semper Augustus 這樣的品種更因為它們「火焰狀」的花色而特別受到珍視。隨著荷蘭經濟在黃金時代成長，富有的商人有更多錢可以投資，許多人開始尋找增加財富的新機會。許多人大量投資鬱金香球根，期待遠高於一般貿易所能帶來的報酬。到了一六三七年初，據報導稀有球根的價格已經達到一名熟練工人年薪的數倍。
+
+這場從富商開始的熱潮，很快吸引了一些工匠、店主和其他交易者。大部分的交易發生在酒館裡，而不是在依照標準化規則運作的官方交易所。在那裡，非正式的協議讓買家可以在不立即付款的情況下交易球根。快速致富的傳聞賦予了這樁買賣一層迷人的光環，而這股興奮之情證明是會傳染的。很快地，各行各業的人都在買他們從未見過的球根，希望能在幾週內轉手賣出。在這股狂熱的席捲之下，就連理性的人也開始認定價格只會上漲。
+
+直到一六三七年二月，買家才意識到自己靠賒帳購買球根究竟背了多少債。隨著球根價格崩盤，有些交易者只能面對財務虧損，以及未付款合約所引起的糾紛。這股狂熱可以透過經濟學家所稱的「更大的傻瓜理論」來理解：也就是相信不管價格多高，總會有別人願意付得更多。只要有足夠多的人相信這一點，泡沫就會形成。將近四個世紀之後，人們依然如此。價格飆漲、借來的錢、突如其來的恐慌，同樣的模式在二○二一到二○二二年加密貨幣、NFT 與迷因股的熱潮中再度浮現。鬱金香早已凋零；當年驅動它們的那股樂觀卻沒有。`,
+      questions:[
+        { n:25, kind:"過去分詞（be valued for）", answer:"H", answerText:"valued 受到珍視的、被看重的",
+          translation:"像 Semper Augustus 這樣的品種更因為它們「火焰狀」的花色而特別受到珍視。",
+          why:"空格前面是 were especially，所以要填一個能構成被動或形容詞用法的過去分詞；空格後面是 for their \"flamed\" colors，而 be valued for sth 正是「因…而受到珍視」的固定搭配。語意上前一句才說這些花是 rare luxury items（稀有奢侈品），所以珍視的語意完全吻合。選項中另一個過去分詞 lent（D）與 facing（B）都無法接 for 表原因。",
+          notes:[{term:"be valued for", pos:"片語", gloss:"因…而受到珍視（be valued for its rarity／be highly valued）。v. value 重視（value your opinion）；n. value 價值；adj. valuable 珍貴的／invaluable 無價的（注意 in- 在這裡不是否定，而是「無法估價的」，意思是極珍貴）。對照 be prized for／be treasured for／be sought after 受追捧的。", ex:"The region is valued for its rich volcanic soil.", exZh:"這個地區因為肥沃的火山土壤而受到重視。"},{term:"Often regarded as…, S + V", pos:"句型", gloss:"過去分詞開頭的分詞構句（Often regarded as one of the earliest bubbles, tulip mania swept through…＝Tulip mania, which is often regarded as…, swept through…）。因為主詞 tulip mania 是「被視為」的，所以用過去分詞 regarded。本篇第二段的 Brought from the Ottoman Empire 與 Caught up in the frenzy 都是同一種結構，一篇文章出現三次，值得整組標出來給學生看。", ex:"Built in 1920, the theater still hosts weekly concerts.", exZh:"這座劇院建於一九二○年，至今仍每週舉辦音樂會。"},{term:"variety", pos:"n.", gloss:"① 品種（varieties like the Semper Augustus／a new variety of rice）② 多樣性（a variety of 各種各樣的／for a variety of reasons）。adj. various 各種的；v. vary 不同、變化（vary from region to region）。相關：luxury items 奢侈品／flamed colors 火焰狀的花色。"}]},
+
+        { n:26, kind:"名詞（投資報酬）", answer:"G", answerText:"returns 報酬、收益",
+          translation:"許多人大量投資鬱金香球根，期待遠高於一般貿易所能帶來的報酬。",
+          why:"空格前面是 expecting（期待），後面是 far greater than ordinary trade could bring（遠高於一般貿易所能帶來的），所以空格必須是一個「可以比較大小、而且是投資期待得到的東西」的名詞。returns 在金融語境中正是「報酬、收益」（a return on investment 投資報酬）。語意上前一句 wealthy merchants had more money to invest（富商有更多錢可投資）也確認了這是投資報酬。注意這裡用複數 returns，是財經慣用的形式。",
+          notes:[{term:"return", pos:"n.", gloss:"① 報酬、收益（high returns／a return on investment 投資報酬率／diminishing returns 報酬遞減）② 歸還、返回（on my return 我回來時／in return 作為回報）。財經語境幾乎都用複數 returns。v. return 返回、歸還。注意本題考的是最容易被忽略的第一義。", ex:"Investors were promised annual returns of eight percent.", exZh:"投資人被承諾每年有百分之八的報酬。"},{term:"invest in", pos:"片語動詞", gloss:"投資於（invest heavily in tulip bulbs／invest in education）。n. investment 投資；n. investor 投資人（本篇第三段用過）。注意介系詞是 in 不是 on。相關：fortune 財富、運氣（increase their fortunes／make a fortune 發財／Tales of quick fortune 快速致富的傳聞）。", ex:"The company invested millions in new equipment.", exZh:"這家公司投入了數百萬在新設備上。"},{term:"fetch", pos:"v.", gloss:"① （商品）賣得（某價格）（rare bulbs were fetching several times the annual salary／The painting fetched $2 million at auction.）② 去拿來（fetch a glass of water）。本篇用的是第一義，是拍賣與交易新聞常見的動詞。相關：reportedly 據報導／annual salary 年薪／a skilled worker 熟練工人。", ex:"The first-edition novel fetched a record price.", exZh:"這本初版小說賣出了破紀錄的價格。"}]},
+
+        { n:27, kind:"現在分詞（後位修飾）", answer:"E", answerText:"operating 運作的、營運的",
+          translation:"大部分的交易發生在酒館裡，而不是在依照標準化規則運作的官方交易所。",
+          why:"空格前面是名詞 an official exchange，後面是 under standardized rules（依照標準化規則），所以空格要填一個能後位修飾這個名詞的現在分詞，等於省略的關係子句（an official exchange that operates under standardized rules）。operating 正是此義。語意上這一句用 rather than 對比「酒館」與「有規則的正式交易所」，正是在強調當時交易缺乏監管。",
+          notes:[{term:"operate", pos:"v.", gloss:"① 運作、營運（operate under strict rules／The company operates in 30 countries.）② 操作（operate a machine）③ 動手術（operate on a patient）。n. operation 運作、手術、行動；n. operator 操作員、業者。本題取第一義的現在分詞形式。", ex:"The clinic operates on a first-come, first-served basis.", exZh:"這家診所採先到先看的方式運作。"},{term:"現在分詞後位修飾", pos:"句型", gloss:"an official exchange operating under standardized rules（＝an exchange that operates under…）。當名詞「主動進行」某動作時，用現在分詞後位修飾；若是「被動被做」則用過去分詞（本卷第 25 題的 Often regarded as）。本篇一篇之內兩種分詞都出現，是辨析這組文法的好材料。", ex:"Students living far from school may apply for the bus.", exZh:"住得離學校遠的學生可以申請校車。"},{term:"take place / rather than", pos:"片語", gloss:"take place 發生、舉行（The trading took place in taverns.；注意沒有被動語態，不說 be taken place）／rather than 而不是（in taverns rather than in an official exchange；前後結構要對等，此處兩邊都是 in + 地點）。相關：tavern 酒館／standardized 標準化的／artisan 工匠。"}]},
+
+        { n:28, kind:"動詞（雙受詞）", answer:"D", answerText:"lent 賦予（lend sth an air of…）",
+          translation:"快速致富的傳聞賦予了這樁買賣一層迷人的光環，而這股興奮之情證明是會傳染的。",
+          why:"空格是本段唯一缺動詞的位置，主詞是 Tales of quick fortune（快速致富的傳聞），後面接了兩個受詞 the trade（這樁買賣）與 an air of glamour（一層迷人的光環），所以需要一個可以帶雙受詞的過去式動詞。lend sth an air of sth 正是「賦予…一種氣息、增添…色彩」的慣用語，lent 同時滿足雙受詞結構與過去式時態。選項中其他字沒有一個能同時做到這兩件事。",
+          notes:[{term:"lend sth an air of sth", pos:"片語", gloss:"賦予、增添（lend the trade an air of glamour／lend credibility to a claim／lend support to sth）。lend 的本義是「借出」，但在這個用法裡是「把某種性質給予某物」，是書面語常見的高階表達。同義：give／add／impart。三態 lend-lent-lent。", ex:"The candlelight lent the room an air of mystery.", exZh:"燭光為這個房間增添了一股神祕感。"},{term:"雙受詞動詞", pos:"整理", gloss:"lend／give／send／offer／show／teach／tell／bring 都可以接「人 + 物」兩個受詞（lent the trade an air of glamour）。改寫成 to 的句型：lend sth to sb。注意 buy 與 make 改寫時用 for（buy a book for her）。本題的解題關鍵就是先確認空格後面有兩個名詞，立刻鎖定雙受詞動詞。"},{term:"prove + 形容詞", pos:"句型", gloss:"證明是、結果是（the excitement proved contagious／The plan proved successful.）。此處 prove 是不完全不及物動詞，後面接形容詞當主詞補語，不加 to be 也可以。同類：turn out／seem／appear／remain。相關：contagious 會傳染的／an air of glamour 迷人的光環／all walks of life 各行各業。", ex:"The new policy proved unpopular with staff.", exZh:"這項新政策結果不受員工歡迎。"}]},
+
+        { n:29, kind:"動詞（原形）", answer:"A", answerText:"assume 認定、想當然地以為",
+          translation:"在這股狂熱的席捲之下，就連理性的人也開始認定價格只會上漲。",
+          why:"空格前面是 began to，所以要填原形動詞；後面接 that 子句（that prices could only go up），所以需要一個可以接 that 子句的認知動詞。assume 正是「（未經證實就）認定、想當然地以為」，而且它帶有「缺乏根據」的語氣，與 Caught up in the frenzy（被狂熱席捲）和 even rational people（就連理性的人）的對比完全吻合。",
+          notes:[{term:"assume", pos:"v.", gloss:"① 認定、想當然地以為（assume that…／assume sb to be…）② 承擔（assume responsibility／assume office 就職）。n. assumption 假設、臆測（make an assumption／on the assumption that…）。注意 assume 的第一義帶有「沒有證據就這麼認為」的隱含批評，與 believe（相信）、conclude（推論出）語氣不同，這正是本題選它的理由。", ex:"Don't assume the data is correct just because it looks neat.", exZh:"不要因為數據看起來整齊就認定它是正確的。"},{term:"Caught up in…, S + V", pos:"句型", gloss:"過去分詞構句（Caught up in the frenzy, even rational people began to…＝Because they were caught up in the frenzy, …）。be caught up in sth 是「被捲入、沉迷於」。本篇第一段的 Often regarded as 與 Brought from 也是過去分詞構句，一篇出現三次。", ex:"Caught up in the argument, they forgot the time.", exZh:"他們陷入爭論，忘了時間。"},{term:"in hopes of V-ing", pos:"片語", gloss:"希望能…（in hopes of reselling them within weeks）。同義：in the hope of V-ing／with the hope of V-ing／hoping to V。相關：resell 轉售（re- 再次）／frenzy 狂熱、瘋狂（a buying frenzy）／rational 理性的（反義 irrational）。", ex:"She applied early in hopes of getting a scholarship.", exZh:"她提早申請，希望能拿到獎學金。"}]},
+
+        { n:30, kind:"現在分詞（be left V-ing）", answer:"B", answerText:"facing 面對（be left facing sth）",
+          translation:"隨著球根價格崩盤，有些交易者只能面對財務虧損，以及未付款合約所引起的糾紛。",
+          why:"空格前面是 were left，而 be left + V-ing 是「落得只能…、被留下來面對…」的結構；空格後面是 financial losses and disputes（財務虧損與糾紛）這兩個受詞，所以需要一個及物動詞的現在分詞。facing 正是此義。語意上 As bulb prices collapsed（價格崩盤）是原因，交易者被迫承擔後果。",
+          notes:[{term:"be left + V-ing / adj. / p.p.", pos:"句型", gloss:"落得、被留下（be left facing huge losses／be left wondering 不禁納悶／be left behind 被拋在後面／be left alone 被單獨留下）。這個結構常帶有「無可奈何、只能承擔」的語氣。相關：leave sb with sth 讓某人只剩下（The crash left them with nothing.）。", ex:"When the company folded, staff were left facing unpaid wages.", exZh:"公司倒閉後，員工只能面對未付的工資。"},{term:"on credit", pos:"片語", gloss:"賒帳、以信用交易（purchase bulbs on credit／buy a car on credit）。本卷第 11 題考的 give sb credit for（歸功於）與第 33 題的 credit（功勞）是同一個字的不同意思，這一份考卷把 credit 的三種用法都考到了，值得整組整理：① 功勞、讚譽 ② 信用、賒帳 ③ 學分。", ex:"Most of the furniture was bought on credit.", exZh:"大部分家具都是賒帳買的。"},{term:"Not until…did S + V（倒裝）", pos:"句型", gloss:"Not until February 1637 did buyers realize…（直到一六三七年二月買家才意識到…）。否定副詞片語 Not until 置於句首時，主詞與助動詞要倒裝（did buyers realize，而不是 buyers realized）。另一種寫法是分裂句 It was not until February 1637 that buyers realized…。相關：take on debt 背債／collapse 崩盤。", ex:"Not until the lights went out did we notice the storm.", exZh:"直到燈熄了，我們才注意到暴風雨。"}]},
+
+        { n:31, kind:"動詞（現在式）", answer:"C", answerText:"form 形成",
+          translation:"只要有足夠多的人相信這一點，泡沫就會形成。",
+          why:"主詞是 Bubbles（泡沫，複數），後面接 whenever 引導的時間副詞子句，所以空格需要一個「複數主詞用的現在式動詞」。form 當不及物動詞正是「形成」，而且它不加 s 正好符合複數主詞。語意上前一句解釋了「更大的傻瓜理論」，接著說只要足夠多人相信這套邏輯，泡沫就會成形，而下一句 Nearly four centuries later, they still do（四個世紀後人們依然如此）用 do 來代替 believe，更確認本句是現在式的普遍真理。",
+          notes:[{term:"form", pos:"v. / n.", gloss:"v. 形成（Bubbles form.；可及物可不及物：form a habit／form a committee）／n. 形式、表格（fill in a form／in the form of）。adj. formal 正式的；n. formation 形成。注意本題考的是不及物用法，主詞自己「成形」。", ex:"Ice crystals form when the temperature drops sharply.", exZh:"氣溫急遽下降時冰晶就會形成。"},{term:"whenever", pos:"conj.", gloss:"每當、只要（Bubbles form whenever enough people believe this.）。表「無論何時」，引導時間副詞子句，用現在式表普遍情況。同類複合關係詞：wherever／whoever／whatever／however（本卷此段的 however high the price 正是此用法）。", ex:"Call me whenever you need help.", exZh:"你需要幫忙時隨時打電話給我。"},{term:"however + adj. + S + V", pos:"句型", gloss:"however high the price（不管價格多高）。注意形容詞要緊跟在 however 之後，不可寫成 however the price is high。等於 no matter how high the price is。片語書進階篇 Unit 11~15 (310) 第 17 題考的 No matter how many times I studied 是同一組句型的另一種寫法。", ex:"However difficult the task may be, we will finish it.", exZh:"不管這項任務多困難，我們都會完成它。"}]},
+
+        { n:32, kind:"名詞（複數）", answer:"F", answerText:"patterns 模式、型態",
+          translation:"價格飆漲、借來的錢、突如其來的恐慌，同樣的模式在二○二一到二○二二年加密貨幣、NFT 與迷因股的熱潮中再度浮現。",
+          why:"空格前面是 The same（同樣的），後面是 of soaring prices, borrowed money, and sudden panic（飆漲的價格、借來的錢、突如其來的恐慌），而動詞是 resurfaced（再度浮現）。所以空格要填一個能被 the same 修飾、又能用 of 帶出三項內容的名詞。patterns 正是「模式、型態」，指這三個要素反覆出現的組合。這也是全文的收束：四百年前的鬱金香與今天的加密貨幣走的是同一套模式。",
+          notes:[{term:"pattern", pos:"n.", gloss:"① 模式、型態（the same pattern of behavior／follow a pattern／a weather pattern）② 花樣、圖案（a floral pattern）③ 版型、範本。v. 相關：patterned 有圖案的。本卷第 11 題也把 pattern 放在誘答位置，兩題可以對照。", ex:"Researchers noticed a clear pattern in the data.", exZh:"研究人員在數據中注意到一個明顯的模式。"},{term:"resurface", pos:"v.", gloss:"再度浮現、重新出現（The same patterns resurfaced.／Old rumors resurfaced online.）。字首 re-（再次）+ surface（浮上表面）。同類 re- 開頭的字：resell 轉售（本篇第二段）／rebuild／reconsider／resume（本卷第 23 題的誘答）。相關：soaring prices 飆漲的價格（v. soar 飆升）／cryptocurrency 加密貨幣／meme stocks 迷因股。", ex:"The issue resurfaced during the election campaign.", exZh:"這個議題在選戰期間再度浮上檯面。"},{term:"全文收尾句賞析", pos:"寫作技巧", gloss:"The tulips have long since faded; the optimism that drove them has not.（鬱金香早已凋零；當年驅動它們的那股樂觀卻沒有。）用分號連接兩個對比的句子，後半句用 has not 省略了 faded，簡潔又有力。long since 是「很久以前就」。這種「具體物消失，抽象概念留存」的收尾手法很值得學生模仿。", ex:"The factory has long since closed; the smell of it has not.", exZh:"那座工廠早已關閉；它的氣味卻沒有散去。"}]}
+      ]
+    }]
+  },
+  {
+    id:"mix", label:"混合題",
+    groups:[{
+      passage:`Whether you enjoy the rich taste of coffee or the striking appearance of a colorful cake, tiramisu and red velvet cake are two beloved desserts that have gained fans all over the world. Though they come from different countries, both treats have unique histories, eye-catching looks, and rich flavors that make them stand out on menus everywhere.
+
+【Tiramisu】Tiramisu is a classic Italian dessert that features alternating layers of espresso-soaked ladyfingers and a creamy mascarpone mixture, with a dusting of cocoa powder on top. Some versions also include a splash of sweet liqueur for an added kick. The modern version of this dessert is believed to have originated in the city of Treviso around the late 1960s or early 1970s. Its name means "pick me up" in the local dialect, possibly in reference to the energizing effects of its ingredients. Le Beccherie, a restaurant in Treviso, is often credited with creating the original recipe. Over the years, tiramisu has appeared not only in Italian restaurants but also in cafés and bakeries around the globe. Creative versions like matcha tiramisu in Japan and mango tiramisu in India have added to its worldwide fame. It even has a special day dedicated to it, World Tiramisu Day, and a special version was once prepared for an Italian astronaut to enjoy in space.
+
+【Red Velvet Cake】Red velvet cake, on the other hand, is a colorful and visually appealing dessert from the United States, with roots dating back to the early twentieth century. Its name comes from its deep red color and soft, velvety texture. Early recipes got their reddish tint from a natural reaction between cocoa powder and acidic ingredients such as buttermilk, but many modern versions use red food coloring for a brighter look. The cake became especially popular in the 1940s and 1950s, then faded for a while before returning to the spotlight thanks to movies, TV shows, and social media. Red velvet cake is strongly associated with Valentine's Day and celebrations of love, thanks to its rich red color, which symbolizes passion and joy. It's commonly served on Valentine's Day, Christmas, and even at weddings, making it a timeless favorite for romantic occasions. Its sweet, slightly tangy flavor and smooth cream cheese frosting have helped make it a lasting dessert classic.`,
+      zh:`不論你喜愛的是咖啡濃郁的滋味，還是一塊色彩繽紛蛋糕的亮眼外型，提拉米蘇和紅絲絨蛋糕都是兩款在全世界擁有擁護者的受歡迎甜點。雖然它們來自不同的國家，兩款甜點都有獨特的歷史、吸睛的外觀，以及濃厚的風味，讓它們在各地的菜單上格外突出。
+
+【提拉米蘇】提拉米蘇是一款經典的義大利甜點，特色是浸過濃縮咖啡的手指餅乾與綿密的馬斯卡彭乳酪餡交錯疊層，上面再撒上一層可可粉。有些版本還會加入少量甜味香甜酒增添一點勁道。這款甜點的現代版本一般認為起源於特雷維索市，大約在一九六○年代末或一九七○年代初。它的名字在當地方言中意思是「把我提起來」，可能是在指它的食材所帶來的提振效果。特雷維索的一家餐廳 Le Beccherie 常被認為是創造出原始配方的功勞者。多年來，提拉米蘇不只出現在義大利餐廳，也出現在全球各地的咖啡館與烘焙坊。像日本的抹茶提拉米蘇、印度的芒果提拉米蘇這類創意版本，更增添了它在全世界的名氣。它甚至有一個專屬的紀念日，世界提拉米蘇日，而且還曾經有特製的版本被準備給一位義大利太空人在太空中享用。
+
+【紅絲絨蛋糕】另一方面，紅絲絨蛋糕是一款來自美國、色彩繽紛且視覺上十分吸引人的甜點，其根源可追溯到二十世紀初。它的名字來自它深紅的顏色與柔軟如絲絨的質地。早期的配方是靠可可粉與白脫牛奶等酸性食材之間的天然反應來取得偏紅的色調，但許多現代版本為了更明亮的外觀而使用紅色食用色素。這款蛋糕在一九四○與一九五○年代特別受歡迎，之後沉寂了一段時間，後來靠著電影、電視節目與社群媒體重回聚光燈下。紅絲絨蛋糕與情人節以及各種愛的慶典有強烈的連結，這要歸功於它濃郁的紅色，象徵著熱情與喜悅。它常在情人節、聖誕節，甚至婚禮上供應，使它成為浪漫場合歷久不衰的最愛。它甜中帶微酸的風味與滑順的奶油乳酪糖霜，讓它成為一款經久不墜的甜點經典。`,
+      questions:[
+        { n:33, kind:"混合題（選詞填空＋字形變化）",
+          prompt:"請根據選文內容，從文章中選出兩個單詞，分別填入下列句子空格，並視句型結構需要作適當的字形變化，使句子語意完整、語法正確，且符合全文文意。每格限填一個單詞(word)。",
+          stem:"A restaurant in Italy is often given ____(1)____ for creating tiramisu with its rich layers and perfect balance of coffee and cream. Meanwhile, the American red velvet cake has become a(n) ____(2)____ of celebration and romance. Both desserts hold cultural significance and continue to delight people with their unique textures and flavors.",
+          answers:[
+            {k:"(1)", w:"credit", note:"原文 credited（動詞）→ 名詞 credit"},
+            {k:"(2)", w:"symbol", note:"原文 symbolizes（動詞）→ 名詞 symbol"}
+          ],
+          evidence:"is often credited with creating the original recipe",
+          translation:"義大利的一家餐廳常被歸予創造出提拉米蘇的功勞，這款甜點有著濃厚的層次與咖啡與奶香的完美平衡。同時，美國的紅絲絨蛋糕已經成為慶祝與浪漫的象徵。兩款甜點都具有文化意義，並持續以它們獨特的口感與風味取悅人們。",
+          why:"第 (1) 格：題目句是 is often given ______ for creating tiramisu，對應原文 Le Beccherie…is often credited with creating the original recipe（常被認為是創造原始配方的功勞者）。原文的 credited 是動詞，但題目句已經有動詞 is given，所以空格要填名詞受詞，必須把 credited 改成名詞 credit（give sb credit for sth 把…的功勞歸給某人）。第 (2) 格：題目句是 has become a(n) ______ of celebration and romance，對應原文 its rich red color, which symbolizes passion and joy（象徵熱情與喜悅）。原文的 symbolizes 是動詞，但空格前面有冠詞 a(n)、後面接 of，所以要填名詞 symbol（a symbol of sth）。兩格考的都是「動詞改名詞」，而且冠詞 a(n) 與介系詞 of 就是最明確的提示。",
+          notes:[{term:"give sb credit for sth", pos:"片語", gloss:"把…的功勞歸給某人（be given credit for sth／be credited with sth／take credit for sth 把功勞歸於自己／to sb's credit 值得讚許的是）。本卷第 11 題考的正是 give…the credit for 這個搭配，第 30 題的題幹則用了 on credit（賒帳），一份考卷把 credit 的三種用法都用上了，建議整組整理：① 功勞、讚譽 ② 信用、賒帳 ③ 學分。", ex:"She was finally given credit for the discovery.", exZh:"她終於因這項發現而獲得肯定。"},{term:"a symbol of sth", pos:"片語", gloss:"…的象徵（a symbol of celebration／a symbol of peace／a status symbol 身分象徵）。v. symbolize 象徵（which symbolizes passion and joy）；adj. symbolic 象徵性的。混合題的字形變化最常考的就是這種「動詞↔名詞」的轉換，判斷依據是空格前後的冠詞與介系詞。", ex:"The olive branch has long been a symbol of peace.", exZh:"橄欖枝長久以來一直是和平的象徵。"},{term:"混合題字形變化的解題步驟", pos:"解題技巧", gloss:"① 先找出題目句與原文對應的那一句，鎖定「同一個字根」的字。② 看空格「前後的文法線索」決定詞性：前面有 a/an/the 或後面接 of → 填名詞；前面有 be 動詞或助動詞 → 填動詞或分詞；前面有 very／副詞，或後面接名詞 → 填形容詞；修飾動詞 → 填副詞。③ 最後檢查單複數與時態。本題兩格都是靠冠詞與介系詞判斷出要填名詞。"}]},
+
+        { n:34, kind:"混合題（找出同義片語）",
+          prompt:"Which phrase in the above passage carries the meaning of \"to be noticeably different or easy to see because of being special or impressive\"?",
+          answerText:"stand out",
+          evidence:"make them stand out on menus everywhere",
+          translation:"上文中哪一個片語帶有「因為特別或令人印象深刻而明顯不同、容易被看見」的意思？",
+          why:"題目給的英文定義 to be noticeably different or easy to see because of being special or impressive（因為特別或令人印象深刻而顯得明顯不同、容易被看見）正是 stand out（突出、脫穎而出）的意思。原文出現在第一段的最後：both treats have unique histories, eye-catching looks, and rich flavors that make them stand out on menus everywhere（兩款甜點都有獨特的歷史、吸睛的外觀與濃厚的風味，讓它們在各地菜單上格外突出）。注意題目問的是 phrase（片語），所以答案要寫兩個字的 stand out，不能只寫 stand，也不要把題幹的 make them 一起抄進去。",
+          notes:[{term:"stand out", pos:"片語動詞", gloss:"突出、顯眼、脫穎而出（stand out from the crowd／stand out on menus／stand out as the best candidate）。adj. outstanding 傑出的；n. standout 出色的人或物。同義：be conspicuous／catch the eye／be noticeable。片語書進階篇 Unit 11~15 第 14 題考的正是 stand out，兩份考卷可以互相對照。", ex:"Her essay stood out among hundreds of entries.", exZh:"她的文章在數百份作品中格外突出。"},{term:"找同義字詞題的解題步驟", pos:"解題技巧", gloss:"① 先把題目給的英文定義「翻成中文」，抓出核心概念（本題：明顯、容易被看見、因為很特別）。② 注意題目問的是 word 還是 phrase：問 phrase 就要找兩個字以上的片語，問 word 就只能填一個字。③ 回文章掃描語意相符的位置，優先找形容整體特色的句子（通常在第一段或結論）。④ 答案要照原文抄寫，但要調整成題目要求的形式（本題原文是 make them stand out，只取 stand out）。"},{term:"stand 家族", pos:"整理", gloss:"stand out 突出／stand up for 捍衛／stand up to 抵抗、經得起／stand up against 挺身對抗／stand by 支持、待命／stand for 代表、容忍／stand a chance 有機會。片語書進階篇 Unit 11~15 把這一組考了好幾次，可以合併複習。"}]},
+
+        { n:35, kind:"混合題（多選．比較異同）",
+          prompt:"Which of the following statements correctly compare tiramisu and red velvet cake?（複選，共兩個答案）",
+          options:{
+            A:"Tiramisu is usually served cold, while red velvet cake is often served warm. 提拉米蘇通常冷食，而紅絲絨蛋糕常溫熱供應。",
+            B:"Tiramisu has inspired variations in other countries, while red velvet cake has regained popularity through media exposure. 提拉米蘇在其他國家激發了變化版本，而紅絲絨蛋糕則透過媒體曝光重獲人氣。",
+            C:"Tiramisu is for romantic occasions, while red velvet cake is more associated with everyday dining. 提拉米蘇適用於浪漫場合，而紅絲絨蛋糕較常與日常用餐連結。",
+            D:"Tiramisu has been around longer than red velvet cake. 提拉米蘇存在的時間比紅絲絨蛋糕更久。",
+            E:"Both originated in Europe and are linked to traditional celebrations. 兩者都源自歐洲，並與傳統慶典有關。",
+            F:"Both desserts have distinctive flavors and visually appealing appearances. 兩款甜點都有獨特的風味與吸引人的外觀。"
+          },
+          multi:["B","F"],
+          answers:[
+            {k:"(B)", w:"Tiramisu has inspired variations in other countries, while red velvet cake has regained popularity through media exposure.", note:"日本抹茶、印度芒果版本 ↔ 電影、電視、社群媒體"},
+            {k:"(F)", w:"Both desserts have distinctive flavors and visually appealing appearances.", note:"第一段即點出 rich flavors 與 eye-catching looks"}
+          ],
+          evidence:"both treats have unique histories, eye-catching looks, and rich flavors",
+          translation:"下列哪些敘述正確地比較了提拉米蘇與紅絲絨蛋糕？",
+          explain:{
+            B:"✔ 兩半都有明確依據。前半對應 Creative versions like matcha tiramisu in Japan and mango tiramisu in India have added to its worldwide fame（日本的抹茶提拉米蘇、印度的芒果提拉米蘇這類創意版本增添了它的世界名氣）；後半對應 then faded for a while before returning to the spotlight thanks to movies, TV shows, and social media（沉寂一段時間後靠電影、電視與社群媒體重回聚光燈下），media exposure 正是 movies, TV shows, and social media 的概括。",
+            F:"✔ 文章第一段就直接寫明 both treats have unique histories, eye-catching looks, and rich flavors（兩款甜點都有獨特的歷史、吸睛的外觀與濃厚的風味）。distinctive flavors 對應 rich flavors，visually appealing appearances 對應 eye-catching looks，而紅絲絨那段也用了 visually appealing 這個詞。",
+            A:"✘ 文章從頭到尾沒有提到任何一款甜點的供應溫度。提拉米蘇段落只說它有浸咖啡的手指餅乾與馬斯卡彭餡，紅絲絨段落只說它的顏色、質地與糖霜，兩段都沒有 cold 或 warm 的資訊。這是典型的「文章未提及」陷阱，不能用生活常識補上。",
+            C:"✘ 正好說反了。文章說的是紅絲絨蛋糕 is strongly associated with Valentine's Day and celebrations of love…a timeless favorite for romantic occasions（與情人節和愛的慶典強烈連結，是浪漫場合歷久不衰的最愛），所以浪漫場合是紅絲絨而不是提拉米蘇；而文章也沒有說紅絲絨與日常用餐有關。這是「把兩個對象的特徵互換」的陷阱。",
+            D:"✘ 時間資訊剛好相反。提拉米蘇的現代版本 is believed to have originated…around the late 1960s or early 1970s（一九六○年代末或一九七○年代初），而紅絲絨蛋糕 with roots dating back to the early twentieth century（根源可追溯到二十世紀初）。所以紅絲絨比提拉米蘇更早，不是更晚。",
+            E:"✘ 前半就錯了：提拉米蘇來自義大利（歐洲），但紅絲絨蛋糕明確寫著 a…dessert from the United States（來自美國），不是歐洲。只要有一半不符，整個選項就不能選，這是複選題最常見的失分點。"
+          },
+          notes:[{term:"比較異同型複選題的解題步驟", pos:"解題技巧", gloss:"① 先把兩欄的特徵分別列成筆記（來源國、年代、外觀、風味、場合、流行軌跡）。② 逐一檢查選項時，把每個選項「切成兩半」分別驗證，因為命題者最常在其中一半動手腳（本題的 (E) 就是前半錯、後半看似合理）。③ 注意三種典型陷阱：文章未提及（本題的 (A)）、特徵互換（本題的 (C)）、時間或數據方向相反（本題的 (D)）。④ 複選題要選到題目指定的數量才算完整，本題配分 4%、每個答案 2%，所以是兩個答案。"},{term:"date back to", pos:"片語", gloss:"追溯到、始於（roots dating back to the early twentieth century／The custom dates back to the Ming Dynasty.）。注意沒有被動語態，不說 be dated back to。同義：go back to／originate in／have its origins in。", ex:"The temple dates back to the twelfth century.", exZh:"這座寺廟可追溯到十二世紀。"},{term:"be credited with / be associated with", pos:"整理", gloss:"be credited with sth 被認為是…的功勞者（Le Beccherie is often credited with creating the original recipe.）／be associated with sth 與…有連結（Red velvet cake is strongly associated with Valentine's Day.）。兩個都是本篇出現的被動片語，而且都是閱讀題考細節時最常被改寫的句子，值得畫記。相關：be dedicated to sth 專門獻給／be reserved for sth 留作…之用。"}]}
+      ]
+    }]
+  },
+
+  {
+    id:"tr", label:"翻譯",
+    groups:[{
+      questions:[
+        { n:36, kind:"中譯英",
+          stem:"為了避免精疲力竭，人們應該提前安排自己的時間表。",
+          answerText:"To avoid exhaustion, people should arrange / plan their schedules in advance.",
+          why:"全句分三個計分段落。① 為了避免精疲力竭 → To avoid exhaustion（不定詞表目的；「精疲力竭」用名詞 exhaustion，也可寫 burnout）。注意 avoid 後面若接動作要用動名詞（avoid being exhausted），但這裡接名詞最簡潔。② 人們應該安排自己的時間表 → people should arrange / plan their schedules（schedule 是可數名詞，主詞是複數 people 所以用複數 schedules；動詞 arrange 與 plan 都可接受）。③ 提前 → in advance（置於句尾）。常見錯誤：寫成 For avoid exhaustion（for 後面不能接原形動詞）、advance 前面漏掉 in、或把 schedule 寫成不可數而漏掉 s。",
+          notes:[{term:"to avoid + N / V-ing", pos:"句型", gloss:"為了避免（To avoid exhaustion／To avoid being late, she set two alarms.）。avoid 後面接名詞或動名詞，不接不定詞（不說 avoid to be late）。同義表目的：in order to V／so as to V／so that + 子句。常見同類動詞也接動名詞：enjoy／mind／finish／quit／suggest／consider。", ex:"To avoid delays, submit the form online.", exZh:"為了避免延誤，請線上提交表單。"},{term:"in advance", pos:"片語", gloss:"事先、提前（arrange their schedules in advance／book in advance／two weeks in advance）。同義：beforehand／ahead of time。本卷第 22 題的克漏字答案正是 in advance，一題考閱讀一題考翻譯，剛好可以並看。注意 in 不可省略。", ex:"Please confirm your attendance in advance.", exZh:"請事先確認您是否出席。"},{term:"exhaustion", pos:"n.", gloss:"精疲力竭、耗盡（physical exhaustion／suffer from exhaustion）。adj. exhausted 感到精疲力竭的（主詞是人）／exhausting 令人精疲力竭的（主詞是事）；v. exhaust 耗盡、使疲憊。相關：burnout 身心俱疲、過勞（職場語境常用）／schedule 時間表（v. 安排；美式發音 /ˈskedʒuːl/，英式 /ˈʃedjuːl/）。", ex:"After the marathon she collapsed from sheer exhaustion.", exZh:"馬拉松結束後她因為極度疲憊而倒下。"}]},
+
+        { n:37, kind:"中譯英",
+          stem:"相反地，許多人縱情於不必要的活動，並把重要工作拖到深夜才做。",
+          answerText:"Instead, many people indulge in unnecessary activities and leave / put off important tasks until late at night.",
+          why:"全句分五個計分段落。① 相反地 → Instead（句首加逗號；此處是「不這樣做，反而那樣做」的替代關係，所以用 Instead 而不是 On the contrary）。② 許多人縱情於 → many people indulge in（indulge in sth 縱情於、沉溺於，介系詞 in 不可省略）。③ 不必要的活動 → unnecessary activities（複數）。④ 並把重要工作拖到 → and leave / put off important tasks（put off 拖延，受詞若是代名詞要放中間：put it off）。⑤ 深夜才做 → until late at night（用 until 表「一直拖到…」）。常見錯誤：indulge 後面漏掉 in、把 Instead 寫成 On the contrary（語氣不同）、或把 until 寫成 to。",
+          notes:[{term:"indulge in", pos:"片語動詞", gloss:"縱情於、沉溺於（indulge in unnecessary activities／indulge in luxury／indulge in self-pity）；indulge sb 寵溺某人；adj. indulgent 縱容的；n. indulgence。本卷第 22 題所在的那段文章就有現成例句：others indulge in every desire before their final day，可以直接拿給學生看。", ex:"On weekends he indulges in long afternoon naps.", exZh:"週末他會縱情於長長的午睡。"},{term:"put off / leave sth until…", pos:"片語動詞", gloss:"put off 拖延、延期（put off important tasks／put off the meeting until next week；受詞是代名詞時要放中間：put it off）／leave sth until… 把某事留到…（leave it until the last minute 拖到最後一刻）。同義：delay／postpone／procrastinate（v. 拖延，n. procrastination）。注意 postpone 與 put off 後面接名詞或動名詞，不接不定詞。", ex:"Don't put off seeing a doctor if the pain continues.", exZh:"如果疼痛持續，不要拖延去看醫生。"},{term:"Instead / On the contrary", pos:"辨析", gloss:"Instead 是「不做 A 而改做 B」的替代（He didn't rest. Instead, he kept working.）／On the contrary 是「事實正好相反」，用來否認前面的說法（You think it's easy? On the contrary, it's very hard.）。本題的中文「相反地」描述的是人們「該做的沒做，反而去做別的」，屬於替代關係，所以用 Instead。本卷第 20 題的克漏字答案正是 Instead，兩題可以並看。", ex:"She didn't apologize. Instead, she changed the subject.", exZh:"她沒有道歉，反而轉移了話題。"}]}
+      ]
+    }]
+  }
+  ]
+};
+
+/* ==========================================================================
+   ②  以下為程式碼，一般情況不需要修改。
+   ========================================================================== */
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const wordOf = q => q.options ? q.options[q.answer] : (q.answerText || '');
+const allQ = [];
+EXAM.sections.forEach(s => s.groups.forEach(g => g.questions.forEach(q => { q.__sid = s.id; allQ.push(q); })));
+const findQ = (n, sid) => allQ.find(q => String(q.n) === String(n) && (sid == null || q.__sid === sid));
+
+document.getElementById('brand').textContent = EXAM.brand;
+document.getElementById('examTitle').textContent = EXAM.title;
+document.getElementById('examMeta').textContent = EXAM.meta;
+
+let noteCount = 0;
+allQ.forEach(q => noteCount += (q.notes || []).length);
+
+const nav = document.getElementById('nav');
+EXAM.sections.forEach(s => {
+  const a = document.createElement('a');
+  a.className = 'chip'; a.href = '#sec-' + s.id; a.textContent = s.label.replace(/^[一二三四五六]、/, m => m);
+  nav.appendChild(a);
+});
+const noteChip = document.createElement('a');
+noteChip.className = 'chip'; noteChip.href = '#side'; noteChip.textContent = '重點表 ' + noteCount;
+nav.appendChild(noteChip);
+const toggleAll = document.createElement('button');
+toggleAll.className = 'chip solid'; toggleAll.textContent = '全部展開';
+nav.appendChild(toggleAll);
+
+function renderPassage(g, i, sid) {
+  let html = esc(g.passage);
+  g.questions.forEach(q => {
+    if (!q.evidence) return;
+    const t = esc(q.evidence);
+    if (html.includes(t)) html = html.replace(t, `<span class="hl ev" data-ev="${q.n}">${t}</span>`);
+  });
+  html = html.replace(/__(\d+)__/g, (m, n) =>
+    `<button class="blank" data-blank="${n}" aria-label="第 ${n} 題空格">${n}</button>`);
+  const body = '<div class="passage">' +
+    html.split(/\n{2,}/).map(p => '<p>' + p.replace(/\n/g, ' ') + '</p>').join('') + '</div>';
+  if (!g.zh) return body;
+  const id = sid + '-' + i;
+  return body +
+    `<button class="zhbtn" data-zh="${id}">全文中譯</button>` +
+    `<div class="zhbox" id="zh-${id}">` +
+      g.zh.split(/\n{2,}/).map(p => '<p>' + esc(p).replace(/\n/g, ' ') + '</p>').join('') +
+    '</div>';
+}
+
+function renderQ(q) {
+  const parts = [];
+  if (q.options) {
+    const ks = Object.keys(q.options);
+    parts.push('<div class="opts">' + ks.map(k =>
+      `<div class="opt"><span class="opt-k">(${k})</span><span>${esc(q.options[k])}</span></div>`).join('') + '</div>');
+  }
+  const head = `<div class="q-tag"><span class="q-n">${String(q.n).padStart(2,'0')}</span><span class="q-kind">${esc(q.kind || '')}</span></div>` +
+    (q.prompt ? `<p class="prompt">${esc(q.prompt)}</p>` : '') +
+    (q.stem ? `<p class="stem">${esc(q.stem).replace(/\n/g,'<br>')}</p>` : '');
+
+  let ans = '';
+  if (q.answers) {
+    ans = '<ul class="fills">' + q.answers.map(a =>
+      `<li class="fill"><span class="fill-k">${esc(a.k)}</span><span class="fill-w hl" data-ansmulti>${esc(a.w)}</span><span class="fill-n">${esc(a.note || '')}</span></li>`).join('') + '</ul>';
+  } else {
+    const label = q.options ? `(${q.answer}) ${esc(wordOf(q))}` :
+      (q.answer ? `(${q.answer}) ${esc(q.answerText)}` : esc(q.answerText));
+    ans = `<p class="ans"><span class="ans-k">答案</span><span class="ans-v hl" data-ans="${q.n}">${label}</span></p>`;
+  }
+
+  let expl = '';
+  if (q.explain) {
+    expl = '<ul class="lines">' + Object.keys(q.options).map(k => {
+      const right = q.multi ? q.multi.includes(k) : k === q.answer;
+      return `<li class="line ${right ? 'right' : 'wrong'}"><span class="line-k">(${k})</span><span>${esc(q.explain[k] || '')}</span></li>`;
+    }).join('') + '</ul>';
+  }
+  const why = q.why ? `<p class="why">${esc(q.why)}</p>` : '';
+  const sample = q.sample ? `<div class="sample"><p class="note-h">參考範文</p>` +
+    q.sample.split(/\n{2,}/).map(p => `<p>${esc(p).replace(/\n/g,' ')}</p>`).join('') + '</div>' : '';
+  const evid = q.evidence ? `<p class="evid"><span>文中依據</span>${esc(q.evidence)}</p>` : '';
+  const notes = (q.notes || []).length ? `<div class="note"><p class="note-h">重點整理</p>` +
+    q.notes.map(nt => `<p class="note-i"><span class="term">${esc(nt.term)}</span><span class="pos">${esc(nt.pos || '')}</span><span class="gloss">${esc(nt.gloss || '')}</span>` +
+      (nt.ex ? `<span class="ex">${esc(nt.ex)}<i>${esc(nt.exZh || '')}</i></span>` : '') + '</p>').join('') + '</div>' : '';
+
+  return `<article class="q" id="q-${q.__sid}-${q.n}" data-n="${q.n}" data-sid="${q.__sid}">
+    <div class="q-top">${head}${parts.join('')}
+      <button class="reveal" aria-expanded="false" aria-controls="body-${q.n}">看詳解</button>
+    </div>
+    <div class="body" id="body-${q.n}">
+      ${ans}${q.translation ? `<p class="zh">${esc(q.translation)}</p>` : ''}${expl}${why}${evid}${sample}${notes}
+    </div>
+  </article>`;
+}
+
+document.getElementById('main').innerHTML = EXAM.sections.map((s, i) => `
+  <section class="sec" id="sec-${s.id}">
+    <div class="sec-head">
+      <span class="sec-num">${String(i+1).padStart(2,'0')}</span>
+      <h2 class="sec-label">${esc(s.label)}</h2>
+      <span class="sec-score">${esc(s.score || '')}</span>
+    </div>
+    ${s.instruction ? `<p class="sec-inst">${esc(s.instruction)}</p>` : ''}
+    ${s.bank ? `<div class="bank${s.bankWide ? ' wide' : ''}">${Object.keys(s.bank).map(k =>
+      `<div class="bank-i" data-bank="${k}"><span>(${k})</span>${esc(s.bank[k])}</div>`).join('')}</div>` : ''}
+    ${s.groups.map((g, gi) => (g.passage ? renderPassage(g, gi, s.id) : '') + g.questions.map(renderQ).join('')).join('')}
+  </section>`).join('');
+
+const items = [];
+allQ.forEach(q => (q.notes || []).forEach(nt => items.push({ ...nt, n: q.n, sid: q.__sid })));
+document.getElementById('side').innerHTML = `
+  <p class="side-h">Notes</p>
+  <p class="side-t">本卷重點 ${items.length} 則</p>
+  <ul class="card-list">${items.map(nt => `
+    <li class="card-item"><a href="#q-${nt.sid}-${nt.n}">
+      <span class="jump">第 ${nt.n} 題</span>
+      <span class="term">${esc(nt.term)}</span><span class="pos">${esc(nt.pos || '')}</span>
+      <div class="gloss">${esc(nt.gloss || '')}</div>
+    </a></li>`).join('')}</ul>
+  <p class="side-note">點任一則可跳到出處題目。用瀏覽器列印（Ctrl／⌘ + P）會自動展開全部詳解與中譯，可直接印成講義。</p>`;
+
+document.getElementById('foot').textContent = `共 ${allQ.length} 題 · ${EXAM.footer}`;
+
+function setOpen(card, open) {
+  card.classList.toggle('open', open);
+  const btn = card.querySelector('.reveal');
+  btn.setAttribute('aria-expanded', open);
+  btn.firstChild.nodeValue = open ? '收合詳解' : '看詳解';
+  const n = card.dataset.n;
+  const sec = card.closest('.sec') || document;
+  card.querySelectorAll('.hl').forEach(h => h.classList.toggle('on', open));
+  const ev = sec.querySelector(`[data-ev="${n}"]`);
+  if (ev) ev.classList.toggle('on', open);
+  const q = findQ(n, card.dataset.sid);
+  if (q && q.answer && q.answerText) {
+    const bi = sec.querySelector(`[data-bank="${q.answer}"]`);
+    if (bi) bi.classList.toggle('used', open);
+  }
+  const bl = sec.querySelector(`[data-blank="${n}"]`);
+  if (bl) {
+    if (open) {
+      bl.classList.add('filled');
+      bl.innerHTML = `<sup>${n}</sup><span class="hl">${esc(wordOf(q))}</span>`;
+      requestAnimationFrame(() => bl.querySelector('.hl').classList.add('on'));
+    } else {
+      bl.classList.remove('filled');
+      bl.textContent = n;
+    }
+  }
+}
+document.addEventListener('click', e => {
+  const rv = e.target.closest('.reveal');
+  if (rv) { const c = rv.closest('.q'); setOpen(c, !c.classList.contains('open')); return; }
+  const zb = e.target.closest('.zhbtn');
+  if (zb) { zb.classList.toggle('on'); document.getElementById('zh-' + zb.dataset.zh).classList.toggle('on'); return; }
+  const bl = e.target.closest('.blank');
+  if (bl) {
+    const n = bl.dataset.blank;
+    const sec = bl.closest('.sec');
+    const c = (sec && sec.querySelector('.q[data-n="' + n + '"]'))
+           || document.querySelector('.q[data-n="' + n + '"]');
+    if (!c) return;
+    if (!c.classList.contains('open')) setOpen(c, true);
+    c.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
+toggleAll.addEventListener('click', () => {
+  const open = toggleAll.textContent === '全部展開';
+  document.querySelectorAll('.q').forEach(c => setOpen(c, open));
+  toggleAll.textContent = open ? '全部收合' : '全部展開';
+});
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('.q').forEach(c => setOpen(c, true));
+  document.querySelectorAll('.zhbox').forEach(b => b.classList.add('on'));
+  toggleAll.textContent = '全部收合';
+});
+</script>
+</body>
+</html>
